@@ -4,7 +4,6 @@
 
 
 
-
 // Test adding and retrieving StockData
 TEST(MarketDataTests, StockData) {
     MarketData marketData;

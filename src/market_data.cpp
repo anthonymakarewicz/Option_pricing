@@ -14,6 +14,7 @@ StockData::StockData(const double& S, const double& sigma, const std::optional<d
     : S_(S), sigma_(sigma), c_(c) {
     validate();
 }
+
 // Prefix common guetters with nodiscard C++17
 [[nodiscard]] double StockData::getPrice() const {
     return S_;
@@ -100,7 +101,7 @@ void MarketData::removeObserver(const std::shared_ptr<MarketDataObserver>& obser
  * poin to Option objects.
  *
  */
-void MarketData::notifyObservers(const std::string& ticker) const {
+void MarketData::notifyObserver(const std::string& ticker) const {
     for (const auto& observer : observers_) {
         if (auto obs = observer.lock()) {
             if (auto opt = std::dynamic_pointer_cast<Option>(obs)) {
@@ -125,21 +126,27 @@ void MarketData::updateStockPrice(const std::string& ticker, double S) {
     // If statement with initializer C++17
     if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
         it->second->setPrice(S);
-        notifyObservers(ticker);
+        notifyObserver(ticker);
+    } else {
+        throw std::invalid_argument(ticker + ' is no present in the MarketData object');
     }
 }
 
 void MarketData::updateStockSigma(const std::string& ticker, double sigma) {
     if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
         it->second->setSigma(sigma);
-        notifyObservers(ticker);
+        notifyObserver(ticker);
+    } else {
+        throw std::invalid_argument(ticker + ' is no present in the MarketData object');
     }
 }
 
 void MarketData::updateStockCoupon(const std::string& ticker, std::optional<double> c) {
     if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
         it->second->setCoupon(c);
-        notifyObservers(ticker);
+        notifyObserver(ticker);
+    } else {
+        throw std::invalid_argument(ticker + ' is no present in the MarketData object');
     }
 }
 
@@ -154,7 +161,7 @@ std::shared_ptr<StockData> MarketData::getStockData(const std::string& ticker) c
     return r_;
 }
 
-void MarketData::setR(double r) {
+void MarketData::setR(const double& r) {
     r_ = r;
     notifyObservers();
 }

@@ -35,7 +35,7 @@ Option::Option(const std::string& ticker,
 
     // Get the MarketData instance and try to retrieve StockData
     marketData_ = MarketData::getInstance();
-    auto stockData =marketData_->getStockData(ticker); // If not found it throws an exception
+    auto stockData = marketData_->getStockData(ticker); // If not found it throws an exception
 
     // Safely move the payoff and pass the observer to MarketData
     payoff_ = std::move(payoff);

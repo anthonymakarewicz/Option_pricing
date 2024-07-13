@@ -60,7 +60,7 @@ public:
     void addObserver(const std::shared_ptr<MarketDataObserver>& observer);
     void removeObserver(const std::shared_ptr<MarketDataObserver>& observer);
     void notifyObservers() const;
-    void notifyObservers(const std::string& ticker) const; // Overloaded method to notify specific observers
+    void notifyObserver(const std::string& ticker) const; // Notify specific observers
 
     // Template methods need to be declared inside the header
     template<typename... Args>
@@ -76,7 +76,7 @@ public:
     [[nodiscard]] std::shared_ptr<StockData> getStockData(const std::string& ticker) const;
     
     [[nodiscard]] double getR() const;
-    void setR(double r);
+    void setR(const double& r);
 
 private:
     MarketData(); // Declare the constructor as private (common in Singleton pattern)
