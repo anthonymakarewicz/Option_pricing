@@ -157,7 +157,7 @@ std::shared_ptr<StockData> MarketData::getStockData(const std::string& ticker) c
     throw std::invalid_argument("Stock data not found for ticker: " + ticker);
 }
 
-[[nodiscard]] double MarketData::getR() const {
+double MarketData::getR() const {
     return r_;
 }
 

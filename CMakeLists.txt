@@ -10,7 +10,7 @@ set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems
 # Specify where to look for header files
 include_directories(include)
 
-add_executable(Option_pricer main.cpp) #src/option.cpp src/payoff.cpp src/market_data.cpp)
+add_executable(Option_pricer main.cpp src/option.cpp src/payoff.cpp src/market_data.cpp)
 
 enable_testing()
 add_subdirectory(tests)

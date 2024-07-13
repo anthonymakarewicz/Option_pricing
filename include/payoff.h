@@ -24,67 +24,67 @@ public:
 
 class PayoffCall : public Payoff {
 public:
-    explicit PayoffCall(const double& _K); // Explicit constructor to avoid implicit conversion
-    virtual ~PayoffCall();
+    explicit PayoffCall(const double& K); // Explicit constructor to avoid implicit conversion
+    ~PayoffCall() override;
 
-    std::unique_ptr<Payoff> clone() const override;
+    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
     double operator()(const double& S) const override;
 
 private:
-    double K;
+    double K_;
 };
 
 
 class PayoffPut : public Payoff {
 public:
-    explicit PayoffPut(const double& _K); // Explicit parameter constructor
-    virtual ~PayoffPut();
+    explicit PayoffPut(const double& K); // Explicit parameter constructor
+    ~PayoffPut() override;
 
-    std::unique_ptr<Payoff> clone() const override;
+    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
     double operator()(const double& S) const override;
 
 private:
-    double K;
+    double K_;
 };
 
 
 class PayoffDigitalCall : public Payoff {
 public:
-    explicit PayoffDigitalCall(const double& _K);
-    virtual ~PayoffDigitalCall();
+    explicit PayoffDigitalCall(const double& K);
+    ~PayoffDigitalCall() override;
 
-    std::unique_ptr<Payoff> clone() const override;
+    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
     double operator()(const double& S) const override;
 
 private:
-    double K;
+    double K_;
 };
 
 
 class PayoffDigitalPut : public Payoff {
 public:
-    explicit PayoffDigitalPut(const double& _K); // Explicit parameter constructor
-    virtual ~PayoffDigitalPut();
+    explicit PayoffDigitalPut(const double& K); // Explicit parameter constructor
+    ~PayoffDigitalPut() override;
 
-    std::unique_ptr<Payoff> clone() const override;
+    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
     double operator()(const double& S) const override;
 
 private:
-    double K;
+    double K_;
 };
 
 // DoubleDigital options are both call and put
 class PayoffDoubleDigital : public Payoff {
 public:
-    explicit PayoffDoubleDigital(const double& _K_L, const double& _K_U);
-    virtual ~PayoffDoubleDigital();
+    explicit PayoffDoubleDigital(const double& K_L, const double& K_U);
+    ~PayoffDoubleDigital() override;
 
-    std::unique_ptr<Payoff> clone() const override;
+    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
     double operator()(const double& S) const override;
 
 private:
-    double K_L;
-    double K_U;
+    double K_L_;
+    double K_U_;
 };
 
 
