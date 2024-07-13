@@ -128,7 +128,7 @@ void MarketData::updateStockPrice(const std::string& ticker, double S) {
         it->second->setPrice(S);
         notifyObserver(ticker);
     } else {
-        throw std::invalid_argument(ticker + ' is no present in the MarketData object');
+        throw std::invalid_argument(ticker + " is no present in the MarketData object");
     }
 }
 
@@ -137,7 +137,7 @@ void MarketData::updateStockSigma(const std::string& ticker, double sigma) {
         it->second->setSigma(sigma);
         notifyObserver(ticker);
     } else {
-        throw std::invalid_argument(ticker + ' is no present in the MarketData object');
+        throw std::invalid_argument(ticker + " is no present in the MarketData object");
     }
 }
 
@@ -146,7 +146,7 @@ void MarketData::updateStockCoupon(const std::string& ticker, std::optional<doub
         it->second->setCoupon(c);
         notifyObserver(ticker);
     } else {
-        throw std::invalid_argument(ticker + ' is no present in the MarketData object');
+        throw std::invalid_argument(ticker + " is no present in the MarketData object.");
     }
 }
 
@@ -154,7 +154,7 @@ std::shared_ptr<StockData> MarketData::getStockData(const std::string& ticker) c
     if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
         return it->second;
     }
-    throw std::invalid_argument("Stock data not found for ticker: " + ticker);
+    throw std::invalid_argument(ticker + " Stock data not found.");
 }
 
 double MarketData::getR() const {

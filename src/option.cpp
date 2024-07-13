@@ -39,7 +39,7 @@ Option::Option(const std::string& ticker,
 
     // Safely move the payoff and pass the observer to MarketData
     payoff_ = std::move(payoff);
-    marketData_->addObserver(shared_from_this());
+    marketData_->addObserver(shared_from_this()); // Implicit casting from Option to MarketDataObserver
 }
 
 Option::Option(const Option& other)
@@ -96,7 +96,7 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
 
     os << "Ticker: " << option.ticker_ << ", Expiration: " << option.T_;
     if (option.payoff_) {
-        os << ", Strike: " << option.payoff_->getK();
+        //os << ", Strike: " << option.payoff_->getK();
     } else {
         throw std::runtime_error("Payoff object is missing");
     }

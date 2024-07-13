@@ -82,6 +82,7 @@ class VanillaOption : public Option {
 public:
     // Implementation of pure virtual method
     double calc_price() const override;
+    ~VanillaOption() override = default;
 
 protected:
     // Protected parameterized constructor

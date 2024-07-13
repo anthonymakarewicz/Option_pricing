@@ -9,3 +9,4 @@
 17	2810	1720760397333746825	CMakeFiles/Option_pricer.dir/main.cpp.o	c61305de29959cd9
 13	2585	1720696067167413862	CMakeFiles/Option_pricer.dir/src/option.cpp.o	933112ed1944bd4a
 9	259	1720875302740809792	build.ninja	e3219aea2288c68
+41	2941	1720878787643648324	CMakeFiles/Option_pricer.dir/src/payoff.cpp.o	68205bc60a65ab4
