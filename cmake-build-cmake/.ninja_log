@@ -1,7 +1,7 @@
 # ninja log v6
 5	1170	1720955557087634788	tests/CMakeFiles/Option_tester.dir/test.cpp.o	c8c1f7b23ef8a20f
 26	2883	1720943657939370594	CMakeFiles/Option_pricer.dir/src/option.cpp.o	933112ed1944bd4a
-4372	4525	1720974105006599737	tests/Option_tester	3289c3d1aa3b7bc6
+3819	4306	1720977947635111863	tests/Option_tester	a399b3c952654d45
 30	3535	1720973491849219071	tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o	830d0f35bdb7ff04
 2990	3102	1720944837787796727	Option_pricer	8068c323144f72c1
 25	2337	1720932839486844153	CMakeFiles/Option_pricer.dir/src/payoff.cpp.o	68205bc60a65ab4
@@ -9,12 +9,9 @@
 19	2990	1720944834815940014	CMakeFiles/Option_pricer.dir/main.cpp.o	c61305de29959cd9
 16	3082	1720973760775147276	tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o	34ab1b1b04cc3c19
 29	3963	1720973491848647329	tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o	a13b5b3a0fa6e0a2
-10	285	1720977616822751943	build.ninja	e3219aea2288c68
+10	285	1720978847926716054	build.ninja	e3219aea2288c68
 27	3113	1720943657940005448	CMakeFiles/Option_pricer.dir/src/market_data.cpp.o	c7da0c58039d7906
 35	4372	1720974100669728067	tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o	7392fc35dd320ee6
 12	3626	1720977585125398367	tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o	26e1b0b0724822b2
 11	3693	1720977585124966227	tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o	cb69be9d437779f7
-8	2620	1720977636565267207	tests/CMakeFiles/Option_tester.dir/test_main.cpp.o	ec958ccd8a58631e
-2620	3242	1720977639177063056	tests/Option_tester	a399b3c952654d45
 37	3819	1720977943853354873	tests/CMakeFiles/Option_tester.dir/test_main.cpp.o	ec958ccd8a58631e
-3819	4306	1720977947635111863	tests/Option_tester	a399b3c952654d45
