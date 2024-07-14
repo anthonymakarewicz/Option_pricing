@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <utility>
 #include <vector>
 #include <optional>
 #include <mutex>
@@ -36,8 +37,13 @@ private:
 // Declare MarketDataObserver using Observer design pattern
 class MarketDataObserver {
 public:
+    explicit MarketDataObserver(std::string id) : id_(std::move(id)) {}
     virtual ~MarketDataObserver() = default;
     virtual void update() = 0;
+    [[nodiscard]] std::string getID() const { return id_; } // More efficient than virtual/final due to vtable usage
+
+protected:
+    std::string id_;
 };
 
 
@@ -60,11 +66,11 @@ public:
     void addObserver(const std::shared_ptr<MarketDataObserver>& observer);
     void removeObserver(const std::shared_ptr<MarketDataObserver>& observer);
     void notifyObservers() const;
-    void notifyObserver(const std::string& ticker) const; // Notify specific observers
+    void notifyObserver(const std::string& id) const; // Notify specific observers
 
     // Template methods need to be declared inside the header
     template<typename... Args>
-     void addStock(const std::string& ticker, Args&&... args) {
+    void addStock(const std::string& ticker, Args&&... args) {
         // Perfect forwarding C++17 to preserve rvalue/lvalue ness
         stockDataMap_[ticker] = std::make_shared<StockData>(std::forward<Args>(args)...);
     }

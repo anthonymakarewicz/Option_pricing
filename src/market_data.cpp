@@ -5,7 +5,7 @@
 #include "market_data.h"
 #include "option.h"
 
-// Static member initialization
+// Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketData::instance_ = nullptr;
 std::mutex MarketData::mutex_;
 
@@ -66,10 +66,20 @@ std::ostream& operator<<(std::ostream& os, const StockData& stockData) {
 }
 
 // MarketData implementation
+/** @brief
+ * Here we cannot use make_shared because constructor is private
+ * and the call to the constructor is made outside of the class.
+ * Whereas here using new we are explicitly calling the constructor
+ * within the scope of the class.
+ *
+ * The mutex ensures that only one thread can access the creation of
+ * the singleton instance at a time so as to prevent race conditions.
+ *
+ */
 std::shared_ptr<MarketData> MarketData::getInstance() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_); // Ensure thread safety
     if (!instance_) {
-        instance_ = std::make_shared<MarketData>();
+        instance_ = std::shared_ptr<MarketData>(new MarketData());
     }
     return instance_;
 }
@@ -99,15 +109,13 @@ void MarketData::removeObserver(const std::shared_ptr<MarketDataObserver>& obser
  * succeed. In fact, the observers_ being a std::vector<std::weak_ptr<MarketDataObserver>>
  * and as MarketDataObserver is an asbtarct class, at run time observers_ will actually
  * poin to Option objects.
- *
+ *if (auto opt = std::dynamic_pointer_cast<Option>(obs))
  */
-void MarketData::notifyObserver(const std::string& ticker) const {
+void MarketData::notifyObserver(const std::string& id) const {
     for (const auto& observer : observers_) {
         if (auto obs = observer.lock()) {
-            if (auto opt = std::dynamic_pointer_cast<Option>(obs)) {
-                if (opt->getTicker() == ticker) {
-                    opt->update();
-                }
+            if (obs->getID() == id) {
+                obs->update();
             }
         }
     }

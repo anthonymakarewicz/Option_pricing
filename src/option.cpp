@@ -27,10 +27,10 @@
  * After, move the payoff unique_ptr to the payoff_ attribute and add a shared_ptr to the current
  * object being created when the constructor is called to the list of observers
  **/
-Option::Option(const std::string& ticker,
+Option::Option(std::string ticker,
                std::unique_ptr<Payoff>&& payoff,
                const double& T)
-    : T_(T), ticker_(ticker) {
+    : MarketDataObserver(std::move(ticker)), T_(T) {
     if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
 
     // Get the MarketData instance and try to retrieve StockData
@@ -43,14 +43,14 @@ Option::Option(const std::string& ticker,
 }
 
 Option::Option(const Option& other)
-    : MarketDataObserver(),
+    : MarketDataObserver(other.id_),
       std::enable_shared_from_this<Option>(other),
       T_(0.0), payoff_(nullptr), marketData_(nullptr) {
     copyFrom(other);
 }
 
 Option::Option(Option&& other) noexcept
-    : T_(0.0), payoff_(nullptr), marketData_(nullptr) {
+    : MarketDataObserver(std::move(other.id_)), T_(0.0), payoff_(nullptr), marketData_(nullptr) {
     moveFrom(std::move(other));
 }
 
@@ -73,14 +73,14 @@ Option& Option::operator=(Option&& other) noexcept {
 }
 
 void Option::update() {
-    std::cout << "StockData " << ticker_ << " updated!";
+    std::cout << "StockData " << id_ << " updated!";
     std::cout << "The new Option price is: "<< calc_price() << '\n';
 }
-
+/*
 std::string Option::getTicker() const {
     return ticker_;
 }
-
+*/
 std::ostream& operator<<(std::ostream& os, const Option& option) {
     if (!option.marketData_) {
         throw std::runtime_error("MarketData object is missing");
@@ -94,13 +94,13 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
     std::free(demangledName);
     os << "Type: " << typeName << ", ";
 
-    os << "Ticker: " << option.ticker_ << ", Expiration: " << option.T_;
+    os << "Ticker: " << option.id_ << ", Expiration: " << option.T_;
     if (option.payoff_) {
         //os << ", Strike: " << option.payoff_->getK();
     } else {
         throw std::runtime_error("Payoff object is missing");
     }
-    auto stockData = option.marketData_->getStockData(option.ticker_);
+    auto stockData = option.marketData_->getStockData(option.id_);
     os << ", StockData: " << stockData;
     os << ", Risk Free interest rate" << option.marketData_->getR();
 
@@ -109,7 +109,7 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
 
 void Option::copyFrom(const Option& other) {
     T_ = other.T_;
-    ticker_ = other.ticker_;
+    id_ = other.id_;
     // Make a deep copy of the Payoff object
     if (other.payoff_) {
         payoff_ = other.payoff_->clone();
@@ -120,22 +120,25 @@ void Option::copyFrom(const Option& other) {
     marketData_->addObserver(shared_from_this()); // Register as an observer
 }
 
-void Option::moveFrom(Option&& other) noexcept {
+void Option::moveFrom(Option&& other) {
+    /*
     // Remove the other Option from the observer list if it's registered
     if (other.marketData_) {
         other.marketData_->removeObserver(other.shared_from_this());
     } else {
         throw std::runtime_error("MarketData object missing");
     }
+    */
+    other.marketData_->removeObserver(other.shared_from_this());
     // Move the attributes from other to *this
     T_ = other.T_;
-    ticker_ = other.ticker_;
+    id_ = other.id_;
     payoff_ = std::move(other.payoff_);
     marketData_ = std::move(other.marketData_);
 
     // Ensure the source object is left in a valid state
     other.T_ = 0.0;
-    other.ticker_.clear();
+    other.id_.clear();
     other.payoff_ = nullptr;
     other.marketData_ = nullptr;
 
@@ -146,12 +149,14 @@ void Option::moveFrom(Option&& other) noexcept {
 }
 
 
-VanillaOption::VanillaOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
-    : Option(ticker, std::move(payoff), T) {}
+
+VanillaOption::VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
+    : Option(std::move(ticker), std::move(payoff), T) {}
 
 double VanillaOption::calc_price() const {
     // Implementation of price calculation for VanillaOption
     return 0.0;
 }
+
 
 #endif //OPTION_PRICER_OPTION_CPP

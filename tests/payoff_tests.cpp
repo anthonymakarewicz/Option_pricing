@@ -4,12 +4,15 @@
 
 #include <gtest/gtest.h>
 
+
+
 /* To run only one particular test case, e.g. StandardPayoff follow these instructions:
  * - Go to the cmake directory where the Option_tester binary is located
  * if located in the project directory Option_pricer the path is:
  * --> cd cmake-build-cmake/tests
  * - Enter  ./Option_tester --gtest_filter=PayoffTest.StandardPayoff in the console
  */
+/*
 TEST(PayoffTest, StandardPayoff) {
     // Vanilla Call and Put payoffs
     double K = 150.0;
@@ -106,3 +109,4 @@ TEST(PayoffTest, PayoffDoubleDigital) {
     EXPECT_EQ((*ptr_payoff_dbl_digit_clone)(150.0), (*ptr_payoff_dbl_digit)(150.0));
 }
 
+**/

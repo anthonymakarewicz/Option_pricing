@@ -7,7 +7,7 @@
 #include "payoff.h"
 #include "market_data.h"
 
-// Option base class where *this must be managed by a shared_ptr
+// Option asbtract base class where *this must be managed by a shared_ptr
 class Option : public MarketDataObserver, std::enable_shared_from_this<Option> {
 public:
     /** @brief Option base class
@@ -41,63 +41,52 @@ public:
     Option& operator=(const Option& other); // Copy assignment operator
     Option& operator=(Option&& other) noexcept; // Move assignment operator
 
-    // Guetter specific to the Option
-    [[nodiscard]] std::string getTicker() const;
-
-    // Update method called when MarketData changes
-    void update() override;
-
-    // External overload of the stream insertion operator
-    friend std::ostream& operator<<(std::ostream& os, const Option& option);
-
-    // Force all subclasses to deifne this method
-    virtual double calc_price() const = 0;
+    void update() override; // Update method called when MarketData changes
+    friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
+    virtual double calc_price() const = 0; // Force all subclasses to deifne this method
 
 protected:
-    Option(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
+    Option(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
 
     // Utility functions for the copy & move semantics
     void copyFrom(const Option& other);
-    void moveFrom(Option&& other) noexcept;
+    void moveFrom(Option&& other);
 
     double T_; // Maturity of the Option
-    std::string ticker_; // Ticker symbol of the StockData
     std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
     std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
 };
 
 
-// Factory interface for Option
+// Factory asbtract interface for Option
 class OptionFactory {
 public:
     virtual ~OptionFactory() = default;
     // Factory method to create specific Option instances
-    virtual std::shared_ptr<Option> createOption(const std::string& ticker,
+    virtual std::shared_ptr<Option> createOption(std::string ticker,
                                                  std::unique_ptr<Payoff>&& payoff,
                                                  const double& T) = 0;
 };
 
-
-class VanillaOption : public Option {
+// Concrete class declared as final for devirtualization
+class VanillaOption final : public Option {
 public:
-    // Implementation of pure virtual method
-    double calc_price() const override;
     ~VanillaOption() override = default;
+    double calc_price() const override;// Implementation of the pure virtual method
 
 protected:
-    // Protected parameterized constructor
-    VanillaOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    // Protected parameterized constructor to enforce creation through factory method
+    VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
     friend class VanillaOptionFactory;
 };
 
 
-class VanillaOptionFactory : public OptionFactory {
+class VanillaOptionFactory final : public OptionFactory {
 public:
-    // Implementation of factory method
-    std::shared_ptr<Option> createOption(const std::string& ticker,
+    std::shared_ptr<Option> createOption(std::string ticker,
                                          std::unique_ptr<Payoff>&& payoff,
                                          const double& T) override {
-        return std::make_shared<VanillaOption>(ticker, std::move(payoff), T);
+        return std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
     }
 };
 

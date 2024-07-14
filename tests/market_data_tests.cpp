@@ -2,24 +2,21 @@
 #include "market_data.h"
 #include <memory>
 
-// TestNamespace to avoid conflict name with Option class from option.h
-namespace TestNamespace {
+// TestOption to avoid conflict name with Option class from option.h
+namespace TestOption {
     // Minimal MockOption class
-    class Option : public MarketDataObserver, std::enable_shared_from_this<Option> {
+    class Option final : public MarketDataObserver, std::enable_shared_from_this<Option> {
     public:
-        explicit Option(const std::string& ticker) : ticker_(ticker), updated_(false) {}
+        explicit Option(std::string ticker) : MarketDataObserver(std::move(ticker)), updated_(false) {}
 
-        [[nodiscard]] std::string getTicker() const { return ticker_; }
         void update() override { updated_ = true; }
         bool wasUpdated() const { return updated_; }
         void resetUpdated() { updated_ = false; }
 
     private:
-        std::string ticker_;
         bool updated_;
     };
 }
-
 
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
@@ -27,13 +24,14 @@ protected:
     static void SetUpTestSuite() {
         marketData = MarketData::getInstance();
         marketData->addStock("AAPL", 150.0, 0.2, 0.01);
-        observer = std::make_shared<TestNamespace::Option>("AAPL");
+        observer = std::make_shared<TestOption::Option>("AAPL");
         marketData->addObserver(observer);
     }
 
     static void TearDownTestSuite() {
         // Reset the state if necessary
         marketData.reset();
+        observer.reset();
         //MarketData::instance_ = nullptr; // Assuming this is allowed in your implementation to reset the singleton
     }
 
@@ -42,12 +40,13 @@ protected:
     }
 
     static std::shared_ptr<MarketData> marketData;
-    static std::shared_ptr<TestNamespace::Option> observer;
+    static std::shared_ptr<TestOption::Option> observer;
+    //std::string ticker;
 };
 
-// Static member initialization
+// Static member initialization to avoid u
 std::shared_ptr<MarketData> MarketDataTest::marketData = nullptr;
-std::shared_ptr<TestNamespace::Option> MarketDataTest::observer = nullptr;
+std::shared_ptr<TestOption::Option> MarketDataTest::observer = nullptr;
 
 
 TEST_F(MarketDataTest, SingletonInstance) {
@@ -62,7 +61,7 @@ TEST_F(MarketDataTest, NotifyObserver) {
 }
 
 TEST_F(MarketDataTest, NotifyAllObservers) {
-    auto observer2 = std::make_shared<TestNamespace::Option>("AAPL");
+    auto observer2 = std::make_shared<TestOption::Option>("AAPL");
     marketData->addObserver(observer2);
 
     marketData->notifyObservers();
@@ -70,6 +69,11 @@ TEST_F(MarketDataTest, NotifyAllObservers) {
     EXPECT_TRUE(observer2->wasUpdated());
 
     marketData->removeObserver(observer2);
+    observer->resetUpdated();
+    observer2->resetUpdated();
+
+    marketData->notifyObservers();
+    EXPECT_FALSE(observer2->wasUpdated());
 }
 
 TEST_F(MarketDataTest, AddAndUpdateStockData) {
