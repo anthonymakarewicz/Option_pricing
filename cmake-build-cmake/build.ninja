@@ -177,12 +177,12 @@ build tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o: CXX_COMPILER_
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir/__/src
 
-build tests/CMakeFiles/Option_tester.dir/test_option.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/tests/test_option.cpp || cmake_object_order_depends_target_Option_tester
-  DEP_FILE = tests/CMakeFiles/Option_tester.dir/test_option.cpp.o.d
+build tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option.cpp || cmake_object_order_depends_target_Option_tester
+  DEP_FILE = tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o.d
   FLAGS = -g -std=gnu++2b -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/include
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir/__/src
 
 
 # =============================================================================
@@ -192,7 +192,7 @@ build tests/CMakeFiles/Option_tester.dir/test_option.cpp.o: CXX_COMPILER__Option
 #############################################
 # Link the executable tests/Option_tester
 
-build tests/Option_tester: CXX_EXECUTABLE_LINKER__Option_tester_Debug tests/CMakeFiles/Option_tester.dir/test_main.cpp.o tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o tests/CMakeFiles/Option_tester.dir/test_option.cpp.o | /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
+build tests/Option_tester: CXX_EXECUTABLE_LINKER__Option_tester_Debug tests/CMakeFiles/Option_tester.dir/test_main.cpp.o tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o | /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
   LINK_LIBRARIES = /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a  /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
