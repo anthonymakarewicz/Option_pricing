@@ -1,7 +1,6 @@
 #ifndef OPTION_PRICER_PAYOFF_H
 #define OPTION_PRICER_PAYOFF_H
 
-#include <algorithm>
 #include <memory>
 
 
@@ -10,8 +9,10 @@ public:
     Payoff() = default; // Default (no parameter) constructor
     virtual ~Payoff() = default; // Virtual destructor
     [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0;
-    // Overloaded operator() which turns the Payoff into an abstract functor
-    virtual double operator()(const double& S) const = 0;
+    virtual double operator()(const double& S) const = 0; // Define Payoff as an abstract functor
+    virtual void print(std::ostream& os) const = 0;
+
+    friend std::ostream& operator<<(std::ostream& os, const Payoff& payoff);
 };
 
 
@@ -20,8 +21,8 @@ public:
     explicit PayoffSingleStrike(const double& K);
     ~PayoffSingleStrike() override = default;
 
-    [[nodiscard]] virtual double getK() const;
-
+    [[nodiscard]] double getK() const;
+    void print(std::ostream& os) const override;
 protected:
     double K_;
 };
@@ -30,8 +31,9 @@ protected:
 class PayoffDoubleStrikes : public Payoff {
 public:
     explicit PayoffDoubleStrikes(const double& K_L, const double& K_U);
-    ~PayoffDoubleStrikes() override = default;;
+    ~PayoffDoubleStrikes() override = default;
 
+    void print(std::ostream& os) const override;
     [[nodiscard]] double getKU() const;
     [[nodiscard]] double getKL() const;
 
@@ -83,7 +85,6 @@ public:
     [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
     double operator()(const double& S) const override;
 };
-
 
 
 #endif //OPTION_PRICER_PAYOFF_H

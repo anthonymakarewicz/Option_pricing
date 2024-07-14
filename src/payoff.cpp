@@ -1,11 +1,15 @@
-//
-// Created by anthony on 18/02/2024.
-//
-
 #ifndef OPTION_PRICER_PAYOFF_CPP
 #define OPTION_PRICER_PAYOFF_CPP
 
 #include "payoff.h"
+#include <ostream>
+
+
+std::ostream& operator<<(std::ostream& os, const Payoff& payoff) {
+    payoff.print(os);
+    return os;
+}
+
 
 // PayoffSingleStrike abstract class
 PayoffSingleStrike::PayoffSingleStrike(const double& K) : K_(K) {
@@ -16,11 +20,20 @@ double PayoffSingleStrike::getK() const {
     return K_;
 }
 
+void PayoffSingleStrike::print(std::ostream &os) const {
+    os << "Stike: " << K_;
+}
+
+
 // PayoffDoubleStrikes abstract class
 PayoffDoubleStrikes::PayoffDoubleStrikes(const double& K_L, const double& K_U)
     : K_L_(K_L), K_U_(K_U) {
     if (K_L_ < 0) throw std::invalid_argument("Lower Strike price (K_L) must be positive.");
-    if (K_L_ < 0) throw std::invalid_argument("Upper Strike price (K_U) must be positive.");
+    if (K_U_ < 0) throw std::invalid_argument("Upper Strike price (K_U) must be positive.");
+}
+
+void PayoffDoubleStrikes::print(std::ostream &os) const {
+    os << "Lower Strike: " << K_L_ << ", Upper Strike: " << K_U_;
 }
 
 double PayoffDoubleStrikes::getKU() const {
@@ -91,7 +104,4 @@ std::unique_ptr<Payoff> PayoffDoubleDigital::clone() const {
 }
 
 
-
 #endif //OPTION_PRICER_PAYOFF_CPP
-
-

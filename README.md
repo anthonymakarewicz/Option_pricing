@@ -33,8 +33,8 @@ The Option Pricer project is a C++ library designed to model and price various f
 │   ├── observer.cpp
 ├── tests
 │   ├── option_tests.cpp
-│   ├── market_data_tests.cpp
-│   ├── payoff_tests.cpp
+│   ├── test_market_data.cpp
+│   ├── test_payoff.cpp
 ├── CMakeLists.txt
 └── README.md
 ```

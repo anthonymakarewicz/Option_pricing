@@ -83,33 +83,33 @@ tests/CMakeFiles/Option_tester.dir/option_tests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_tester.dir/option_tests.cpp.s"
 	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/tests/option_tests.cpp -o CMakeFiles/Option_tester.dir/option_tests.cpp.s
 
-tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o: tests/CMakeFiles/Option_tester.dir/flags.make
-tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o: /Users/anthony/CLionProjects/Option_pricer/tests/payoff_tests.cpp
-tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o: tests/CMakeFiles/Option_tester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o"
-	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o -MF CMakeFiles/Option_tester.dir/payoff_tests.cpp.o.d -o CMakeFiles/Option_tester.dir/payoff_tests.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/tests/payoff_tests.cpp
+tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o: tests/CMakeFiles/Option_tester.dir/flags.make
+tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o: /Users/anthony/CLionProjects/Option_pricer/tests/test_payoff.cpp
+tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o: tests/CMakeFiles/Option_tester.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o"
+	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o -MF CMakeFiles/Option_tester.dir/test_payoff.cpp.o.d -o CMakeFiles/Option_tester.dir/test_payoff.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/tests/test_payoff.cpp
 
-tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_tester.dir/payoff_tests.cpp.i"
-	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/tests/payoff_tests.cpp > CMakeFiles/Option_tester.dir/payoff_tests.cpp.i
+tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_tester.dir/test_payoff.cpp.i"
+	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/tests/test_payoff.cpp > CMakeFiles/Option_tester.dir/test_payoff.cpp.i
 
-tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_tester.dir/payoff_tests.cpp.s"
-	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/tests/payoff_tests.cpp -o CMakeFiles/Option_tester.dir/payoff_tests.cpp.s
+tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_tester.dir/test_payoff.cpp.s"
+	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/tests/test_payoff.cpp -o CMakeFiles/Option_tester.dir/test_payoff.cpp.s
 
-tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o: tests/CMakeFiles/Option_tester.dir/flags.make
-tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o: /Users/anthony/CLionProjects/Option_pricer/tests/market_data_tests.cpp
-tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o: tests/CMakeFiles/Option_tester.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o"
-	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o -MF CMakeFiles/Option_tester.dir/market_data_tests.cpp.o.d -o CMakeFiles/Option_tester.dir/market_data_tests.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/tests/market_data_tests.cpp
+tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o: tests/CMakeFiles/Option_tester.dir/flags.make
+tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o: /Users/anthony/CLionProjects/Option_pricer/tests/test_market_data.cpp
+tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o: tests/CMakeFiles/Option_tester.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o"
+	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o -MF CMakeFiles/Option_tester.dir/test_market_data.cpp.o.d -o CMakeFiles/Option_tester.dir/test_market_data.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/tests/test_market_data.cpp
 
-tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_tester.dir/market_data_tests.cpp.i"
-	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/tests/market_data_tests.cpp > CMakeFiles/Option_tester.dir/market_data_tests.cpp.i
+tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_tester.dir/test_market_data.cpp.i"
+	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/tests/test_market_data.cpp > CMakeFiles/Option_tester.dir/test_market_data.cpp.i
 
-tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_tester.dir/market_data_tests.cpp.s"
-	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/tests/market_data_tests.cpp -o CMakeFiles/Option_tester.dir/market_data_tests.cpp.s
+tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_tester.dir/test_market_data.cpp.s"
+	cd /Users/anthony/CLionProjects/Option_pricer/build/tests && /usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/tests/test_market_data.cpp -o CMakeFiles/Option_tester.dir/test_market_data.cpp.s
 
 tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o: tests/CMakeFiles/Option_tester.dir/flags.make
 tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o: /Users/anthony/CLionProjects/Option_pricer/src/option.cpp
@@ -156,8 +156,8 @@ tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.s: cmake_force
 # Object files for target Option_tester
 Option_tester_OBJECTS = \
 "CMakeFiles/Option_tester.dir/option_tests.cpp.o" \
-"CMakeFiles/Option_tester.dir/payoff_tests.cpp.o" \
-"CMakeFiles/Option_tester.dir/market_data_tests.cpp.o" \
+"CMakeFiles/Option_tester.dir/test_payoff.cpp.o" \
+"CMakeFiles/Option_tester.dir/test_market_data.cpp.o" \
 "CMakeFiles/Option_tester.dir/__/src/option.cpp.o" \
 "CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o" \
 "CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o"
@@ -166,8 +166,8 @@ Option_tester_OBJECTS = \
 Option_tester_EXTERNAL_OBJECTS =
 
 tests/Option_tester: tests/CMakeFiles/Option_tester.dir/option_tests.cpp.o
-tests/Option_tester: tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o
-tests/Option_tester: tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o
+tests/Option_tester: tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o
+tests/Option_tester: tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o
 tests/Option_tester: tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o
 tests/Option_tester: tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o
 tests/Option_tester: tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o

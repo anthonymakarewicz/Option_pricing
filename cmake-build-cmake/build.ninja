@@ -142,8 +142,22 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build cmake_object_order_depends_target_Option_tester: phony || tests/CMakeFiles/Option_tester.dir
 
-build tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/tests/market_data_tests.cpp || cmake_object_order_depends_target_Option_tester
-  DEP_FILE = tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o.d
+build tests/CMakeFiles/Option_tester.dir/test_main.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/tests/test_main.cpp || cmake_object_order_depends_target_Option_tester
+  DEP_FILE = tests/CMakeFiles/Option_tester.dir/test_main.cpp.o.d
+  FLAGS = -g -std=gnu++2b -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/include
+  OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir
+
+build tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/tests/test_market_data.cpp || cmake_object_order_depends_target_Option_tester
+  DEP_FILE = tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o.d
+  FLAGS = -g -std=gnu++2b -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/include
+  OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir
+
+build tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/tests/test_payoff.cpp || cmake_object_order_depends_target_Option_tester
+  DEP_FILE = tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o.d
   FLAGS = -g -std=gnu++2b -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/include
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
@@ -163,20 +177,6 @@ build tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o: CXX_COMPILER_
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir/__/src
 
-build tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option.cpp || cmake_object_order_depends_target_Option_tester
-  DEP_FILE = tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o.d
-  FLAGS = -g -std=gnu++2b -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/include
-  OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir/__/src
-
-build tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o: CXX_COMPILER__Option_tester_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/tests/payoff_tests.cpp || cmake_object_order_depends_target_Option_tester
-  DEP_FILE = tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o.d
-  FLAGS = -g -std=gnu++2b -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/include
-  OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/Option_tester.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Option_tester
@@ -185,7 +185,7 @@ build tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o: CXX_COMPILER__Optio
 #############################################
 # Link the executable tests/Option_tester
 
-build tests/Option_tester: CXX_EXECUTABLE_LINKER__Option_tester_Debug tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o | /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
+build tests/Option_tester: CXX_EXECUTABLE_LINKER__Option_tester_Debug tests/CMakeFiles/Option_tester.dir/test_main.cpp.o tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o | /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
   LINK_LIBRARIES = /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a  /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir

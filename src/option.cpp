@@ -80,6 +80,7 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
     if (!option.marketData_) {
         throw std::runtime_error("MarketData object is missing");
     }
+
     // Get the demangled name of the type
     int status;
     const char* mangledName = typeid(option).name();
@@ -90,12 +91,13 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
 
     os << "Ticker: " << option.id_ << ", Expiration: " << option.T_;
     if (option.payoff_) {
-        //os << ", Strike: " << option.payoff_->getK();
+        os << *option.payoff_;
     } else {
         throw std::runtime_error("Payoff object is missing");
     }
+
     auto stockData = option.marketData_->getStockData(option.id_);
-    os << ", StockData: " << stockData;
+    os << ", StockData: " << *stockData;
     os << ", Risk Free interest rate" << option.marketData_->getR();
 
     return os;
@@ -104,9 +106,8 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
 void Option::copyFrom(const Option& other) {
     T_ = other.T_;
     id_ = other.id_;
-    // Make a deep copy of the Payoff object
     if (other.payoff_) {
-        payoff_ = other.payoff_->clone();
+        payoff_ = other.payoff_->clone(); // Make a deep copy of the Payoff object
     } else {
         throw std::invalid_argument("Payoff object is missing.");
     }
