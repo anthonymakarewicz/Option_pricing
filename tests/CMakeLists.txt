@@ -3,7 +3,7 @@ find_package(GTest REQUIRED)
 #include_directories(${GTEST_INCLUDE_DIRS})
 
 # Define the test executable
-add_executable(Option_tester market_data_tests.cpp
+add_executable(Option_tester market_data_tests.cpp payoff_tests.cpp
                ../src/payoff.cpp
                ../src/market_data.cpp
                 ../src/option.cpp)

@@ -32,7 +32,6 @@ Option::Option(std::string ticker,
                const double& T)
     : MarketDataObserver(std::move(ticker)), T_(T) {
     if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
-
     // Get the MarketData instance and try to retrieve StockData
     marketData_ = MarketData::getInstance();
     auto stockData = marketData_->getStockData(ticker); // If not found it throws an exception
@@ -76,16 +75,11 @@ void Option::update() {
     std::cout << "StockData " << id_ << " updated!";
     std::cout << "The new Option price is: "<< calc_price() << '\n';
 }
-/*
-std::string Option::getTicker() const {
-    return ticker_;
-}
-*/
+
 std::ostream& operator<<(std::ostream& os, const Option& option) {
     if (!option.marketData_) {
         throw std::runtime_error("MarketData object is missing");
     }
-
     // Get the demangled name of the type
     int status;
     const char* mangledName = typeid(option).name();
@@ -149,9 +143,9 @@ void Option::moveFrom(Option&& other) {
 }
 
 
-
 VanillaOption::VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
     : Option(std::move(ticker), std::move(payoff), T) {}
+
 
 double VanillaOption::calc_price() const {
     // Implementation of price calculation for VanillaOption

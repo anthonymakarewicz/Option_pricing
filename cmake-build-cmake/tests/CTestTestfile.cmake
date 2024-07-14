@@ -5,4 +5,4 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 add_test([=[OptionTester]=] "/Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/Option_tester")
-set_tests_properties([=[OptionTester]=] PROPERTIES  _BACKTRACE_TRIPLES "/Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt;15;add_test;/Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt;0;")
+set_tests_properties([=[OptionTester]=] PROPERTIES  _BACKTRACE_TRIPLES "/Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt;16;add_test;/Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt;0;")

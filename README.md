@@ -49,7 +49,7 @@ The Option Pricer project is a C++ library designed to model and price various f
 ### Build Instructions
 1. Clone the repository:
 ```
-git clone https://github.com/yourusername/option_pricer.git
+git clone https://github.com/anthonymakarewicz/option_pricer.git
 cd option_pricer
 ```
 
@@ -76,19 +76,36 @@ make test
 Options are created using factory methods to ensure they are managed by `std::shared_ptr`. <br>
 Here is an example of creating a VanillaOption (EuropeanOption) using the factory method:
 
+#### Example: Creating a VanillaOption 
+The following example demonstrates how to create a VanillaOption (EuropeanOption) using the factory method.
+The example also shows how to handle potential exceptions that may be thrown during the creation and use of the Option.
+
 ```
+#include <iostream>
 #include "vanilla_option.h"
 #include "payoff.h"
-#include "market_data.h"
 
 int main() {
-auto payoff = std::make_unique<PayoffCall>(100.0); // Strike price of 100
-auto stockData = MarketData::getInstance()->getStockData("AAPL");
-auto interestRateData = std::make_shared<InterestRateData>(0.05); // 5% risk-free rate
+    VanillaOptionFactory factory;
 
-    auto option = VanillaOptionFactory::create("AAPL", std::move(payoff), stockData, interestRateData, 1.0); // 1 year maturity
+    try {
+        // Create a valid Payoff object
+        auto payoff = std::make_unique<PayoffCall>(100.0);
+        // Use the factory to create a VanillaOption
+        auto option = factory.createOption("AAPL", std::move(payoff), 1.0);
+        std::cout << *option << std::endl; // Output the option details
 
-    std::cout << "Option price: " << option->calc_price() << std::endl;
+        // Attempt to create an invalid Payoff object
+        auto invalidPayoff = std::make_unique<PayoffDoubleDigital>(90.0, 110.0);
+        // This will throw an exception since VanillaOption only supports PayoffSingleStrike
+        auto invalidOption = factory.createOption("AAPL", std::move(invalidPayoff), 1.0);
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl; // Handle invalid argument exceptions
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Runtime error: " << e.what() << std::endl; // Handle runtime errors
+    } catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl; // Handle all other exceptions
+    }
 
     return 0;
 }

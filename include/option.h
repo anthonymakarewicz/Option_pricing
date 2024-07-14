@@ -86,6 +86,9 @@ public:
     std::shared_ptr<Option> createOption(std::string ticker,
                                          std::unique_ptr<Payoff>&& payoff,
                                          const double& T) override {
+        if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
+            throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
+        }
         return std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
     }
 };

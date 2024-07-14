@@ -12,101 +12,126 @@
  * --> cd cmake-build-cmake/tests
  * - Enter  ./Option_tester --gtest_filter=PayoffTest.StandardPayoff in the console
  */
-/*
-TEST(PayoffTest, StandardPayoff) {
-    // Vanilla Call and Put payoffs
-    double K = 150.0;
-    PayoffCall payoff_call(K);
-    PayoffPut payoff_put(K);
+#include <gtest/gtest.h>
+#include "payoff.h"
 
-    // Call payoff: max(S - K, 0)
-    EXPECT_EQ(payoff_call(250.0), 100.0); // Call option in-the-money
-    EXPECT_EQ(payoff_call(50.0), 0.0); // Call option out-of-the-money
+class PayoffSingleStrikeTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        K = 100.0;
+    }
 
-    // Put payoff: max(K - S, 0)
-    EXPECT_EQ(payoff_put(250.0), 0.0); // Put option out-of-the-money
-    EXPECT_EQ(payoff_put(50.0), 100.0); // Put option in-the-money
+    double K;
+};
 
-    // Polymorphism
-    auto ptr_payoff_call = std::make_unique<PayoffCall>(K);
-    auto ptr_payoff_put = std::make_unique<PayoffPut>(K);
+class PayoffDoubleStrikesTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        lowerStrike = 90.0;
+        upperStrike = 110.0;
+    }
 
-    // Using the base class pointer to call the derived class's overridden operator()
-    EXPECT_EQ((*ptr_payoff_call)(250.0), 100.0); // Call option, in-the-money
-    EXPECT_EQ((*ptr_payoff_call)(50.0), 0.0); // Call option, out-of-the-money
+    double lowerStrike;
+    double upperStrike;
+};
 
-    EXPECT_EQ((*ptr_payoff_put)(250.0), 0.0); // Put option, in-the-money
-    EXPECT_EQ((*ptr_payoff_put)(50.0), 100.0); // Put option, out-of-the-money
+// Tests for PayoffCall
+TEST_F(PayoffSingleStrikeTest, PayoffCallTests) {
+    // Construction
+    EXPECT_NO_THROW(PayoffCall(strike));
+    EXPECT_THROW(PayoffCall(-K), std::invalid_argument);
 
-    // Clone the option to a unique_ptr<Payoff>
-    auto ptr_payoff_call_clone = ptr_payoff_call->clone();
-    auto ptr_payoff_put_clone = ptr_payoff_put->clone();
+    // Clone
+    PayoffCall pc(K);
+    auto clone = pc.clone();
+    EXPECT_DOUBLE_EQ(clone->getK(), K);
 
-    // Check that the cloned and original objects have the same state
-    EXPECT_EQ((*ptr_payoff_call_clone)(250.0), (*ptr_payoff_call)(250.0));
-    EXPECT_EQ((*ptr_payoff_put_clone)(50.0), (*ptr_payoff_put)(50.0));
+    // Operator()
+    EXPECT_DOUBLE_EQ(pc(90.0), 0.0);
+    EXPECT_DOUBLE_EQ(pc(110.0), 10.0);
+    EXPECT_DOUBLE_EQ((*clone)(90.0), 0.0);
+    EXPECT_DOUBLE_EQ((*clone)(110.0), 10.0);
 }
 
-TEST(PayoffTest, PayoffDigital) {
-    // Digital Call and Put payoffs
-    double K = 150.0;
-    PayoffDigitalCall payoff_digit_call(K);
-    PayoffDigitalPut payoff_digit_put(K);
+// Tests for PayoffPut
+TEST_F(PayoffSingleStrikeTest, PayoffPutTests) {
+    // Construction
+    EXPECT_NO_THROW(PayoffPut(K));
+    EXPECT_THROW(PayoffPut(-K), std::invalid_argument);
 
-    // Call payoff: max(I(S - K), 0)
-    EXPECT_EQ(payoff_digit_call(250.0), 1.0); // Call option in-the-money
-    EXPECT_EQ(payoff_digit_call(90.0), 0.0); // Call option out-of-the-money
+    // Clone
+    PayoffPut pp(K);
+    auto clone = pp.clone();
+    EXPECT_DOUBLE_EQ(clone->getK(), K);
 
-    // Put payoff: max(I(K - S), 0)
-    EXPECT_EQ(payoff_digit_put(250.0), 0.0); // Put option out-of-the-money
-    EXPECT_EQ(payoff_digit_put(90.0), 1.0); // Put option in-the-money
-
-    // Polymorphism
-    auto ptr_payoff_digit_call = std::make_unique<PayoffDigitalCall>(K);
-    auto ptr_payoff_digit_put = std::make_unique<PayoffDigitalPut>(K);
-
-    // Using the base class pointer to call the derived class's overridden operator()
-    EXPECT_EQ((*ptr_payoff_digit_call)(250.0), 1.0); // Call option, in-the-money
-    EXPECT_EQ((*ptr_payoff_digit_call)(90.0), 0.0); // Call option, out-of-the-money
-
-    EXPECT_EQ((*ptr_payoff_digit_put)(250.0), 0.0); // Put option, in-the-money
-    EXPECT_EQ((*ptr_payoff_digit_put)(90.0), 1.0); // Put option, out-of-the-money
-
-    // Cloning
-    auto ptr_payoff_digit_call_clone = ptr_payoff_digit_call->clone();
-    auto ptr_payoff_put_digit_clone = ptr_payoff_digit_put->clone();
-
-    // Check that the cloned and original objects have the same state
-    EXPECT_EQ((*ptr_payoff_digit_call_clone)(250.0), (*ptr_payoff_digit_call)(250.0));
-    EXPECT_EQ((*ptr_payoff_put_digit_clone)(90.0), (*ptr_payoff_digit_put)(90.0));
+    // Operator()
+    EXPECT_DOUBLE_EQ(pp(90.0), 10.0);
+    EXPECT_DOUBLE_EQ(pp(110.0), 0.0);
+    EXPECT_DOUBLE_EQ((*clone)(90.0), 10.0);
+    EXPECT_DOUBLE_EQ((*clone)(110.0), 0.0);
 }
 
-TEST(PayoffTest, PayoffDoubleDigital) {
-    // Double Digital payoff
-    double K_L = 70.0;
-    double K_U = 100.0;
-    PayoffDoubleDigital payoff_dbl_digit(K_L, K_U);
+// Tests for PayoffDigitalCall
+TEST_F(PayoffSingleStrikeTest, PayoffDigitalCallTests) {
+    // Construction
+    EXPECT_NO_THROW(PayoffDigitalCall(strike));
+    EXPECT_THROW(PayoffDigitalCall(-K), std::invalid_argument);
 
-    // Double Digital payoff: max(I(K_L <= S <= K_U), 0)
-    EXPECT_EQ(payoff_dbl_digit(50.0), 0.0); // Out-of-the-money Low
-    EXPECT_EQ(payoff_dbl_digit(80.0), 1.0); // In-the-money
-    EXPECT_EQ(payoff_dbl_digit(150.0), 0.0); // Out-of-the-money Up
+    // Clone
+    PayoffDigitalCall pdc(K);
+    auto clone = pdc.clone();
+    EXPECT_DOUBLE_EQ(clone->getK(), K);
 
-    // Polymorphism
-    auto ptr_payoff_dbl_digit = std::make_unique<PayoffDoubleDigital>(K_L, K_U);
-
-    // Using the base class pointer to call the derived class's overridden operator()
-    EXPECT_EQ((*ptr_payoff_dbl_digit)(50.0), 0.0); // Out-of-the-money Low
-    EXPECT_EQ((*ptr_payoff_dbl_digit)(80.0), 1.0); // In-the-money
-    EXPECT_EQ((*ptr_payoff_dbl_digit)(150.0), 0.0); // Out-of-the-money Up
-
-    // Cloning
-    auto ptr_payoff_dbl_digit_clone = ptr_payoff_dbl_digit->clone();
-
-    // Check that the cloned and original objects have the same state
-    EXPECT_EQ((*ptr_payoff_dbl_digit_clone)(50.0), (*ptr_payoff_dbl_digit)(50.0));
-    EXPECT_EQ((*ptr_payoff_dbl_digit_clone)(80.0), (*ptr_payoff_dbl_digit)(80.0));
-    EXPECT_EQ((*ptr_payoff_dbl_digit_clone)(150.0), (*ptr_payoff_dbl_digit)(150.0));
+    // Operator()
+    EXPECT_DOUBLE_EQ(pdc(90.0), 0.0);
+    EXPECT_DOUBLE_EQ(pdc(110.0), 1.0);
+    EXPECT_DOUBLE_EQ((*clone)(90.0), 0.0);
+    EXPECT_DOUBLE_EQ((*clone)(110.0), 1.0);
 }
 
-**/
+// Tests for PayoffDigitalPut
+TEST_F(PayoffSingleStrikeTest, PayoffDigitalPutTests) {
+    // Construction
+    EXPECT_NO_THROW(PayoffDigitalPut(strike));
+    EXPECT_THROW(PayoffDigitalPut(-K), std::invalid_argument);
+
+    // Clone
+    PayoffDigitalPut pdp(K);
+    auto clone = pdp.clone();
+    EXPECT_DOUBLE_EQ(clone->getK(), K);
+
+    // Operator()
+    EXPECT_DOUBLE_EQ(pdp(90.0), 1.0);
+    EXPECT_DOUBLE_EQ(pdp(110.0), 0.0);
+    EXPECT_DOUBLE_EQ((*clone)(90.0), 1.0);
+    EXPECT_DOUBLE_EQ((*clone)(110.0), 0.0);
+}
+
+// Tests for PayoffDoubleDigital
+TEST_F(PayoffDoubleStrikesTest, PayoffDoubleDigitalTests) {
+    // Construction
+    EXPECT_NO_THROW(PayoffDoubleDigital(lowerStrike, upperStrike));
+    EXPECT_THROW(PayoffDoubleDigital(-lowerStrike, upperStrike), std::invalid_argument);
+    EXPECT_THROW(PayoffDoubleDigital(lowerStrike, -upperStrike), std::invalid_argument);
+
+    // Clone
+    PayoffDoubleDigital pdd(lowerStrike, upperStrike);
+    auto clone = pdd.clone();
+    EXPECT_DOUBLE_EQ(clone->getKL(), lowerStrike);
+    EXPECT_DOUBLE_EQ(clone->getKU(), upperStrike);
+
+    // Operator()
+    EXPECT_DOUBLE_EQ(pdd(85.0), 0.0);
+    EXPECT_DOUBLE_EQ(pdd(95.0), 1.0);
+    EXPECT_DOUBLE_EQ(pdd(115.0), 0.0);
+    EXPECT_DOUBLE_EQ((*clone)(85.0), 0.0);
+    EXPECT_DOUBLE_EQ((*clone)(95.0), 1.0);
+    EXPECT_DOUBLE_EQ((*clone)(115.0), 0.0);
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+
+
