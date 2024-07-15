@@ -30,10 +30,10 @@ jobs:
           cd build
           make
 
-    #  - name: Analyze code with clang-tidy
-    #    run: |
-    #      cd build
-    #      find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
+      - name: Analyze code with clang-tidy
+        run: |
+          cd build
+          find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
 
       #- name: Check code formatting with clang-format
       #  run: |
