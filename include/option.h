@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <string>
-
 #include "payoff.h"
 #include "market_data.h"
 

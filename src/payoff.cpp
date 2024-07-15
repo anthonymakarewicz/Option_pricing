@@ -4,7 +4,6 @@
 #include "payoff.h"
 #include <ostream>
 
-
 std::ostream& operator<<(std::ostream& os, const Payoff& payoff) {
     payoff.print(os);
     return os;

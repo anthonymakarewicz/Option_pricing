@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <cxxabi.h>
-
 #include "option.h"
 
 /* *****************

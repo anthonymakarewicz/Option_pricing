@@ -4,11 +4,11 @@ find_package(GTest REQUIRED)
 # Define the test executable
 add_executable(Option_tester
         test_main.cpp
-        test_market_data.cpp
-        test_payoff.cpp
-        mock_classes.h
-        test_support.h
-        test_option.cpp
+        unit/test_market_data.cpp
+        unit/test_payoff.cpp
+        config/mock_classes.h
+        config/test_support.h
+        unit/test_option.cpp
         ../src/payoff.cpp
         ../src/market_data.cpp
         ../src/option.cpp

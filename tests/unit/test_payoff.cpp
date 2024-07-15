@@ -1,3 +1,6 @@
+#ifndef TEST_PAYOFF_CPP
+#define TEST_PAYOFF_CPP
+
 #include <iostream>
 #include <gtest/gtest.h>
 #include "payoff.h"
@@ -102,3 +105,5 @@ TEST_F(PayoffDoubleStrikesTest, PayoffDoubleDigitalTests) {
     EXPECT_DOUBLE_EQ((*clone)(95.0), 1.0);
     EXPECT_DOUBLE_EQ((*clone)(115.0), 0.0);
 }
+
+#endif //TEST_PAYOFF_CPP

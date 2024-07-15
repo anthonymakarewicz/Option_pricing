@@ -3,7 +3,6 @@
 
 #include <memory>
 
-
 class Payoff {
 public:
     Payoff() = default; // Default (no parameter) constructor

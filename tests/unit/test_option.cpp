@@ -3,8 +3,8 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "option.h"
-#include "payoff.h"
+#include "../../include/option.h"
+#include "../../include/payoff.h"
 #include "../config/test_support.h"
 #include "../config/mock_classes.h"
 

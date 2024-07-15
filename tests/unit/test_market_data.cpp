@@ -1,24 +1,7 @@
 #include <gtest/gtest.h>
-#include "market_data.h"
 #include <memory>
-
-// TestOption to avoid conflict name with Option class from option.h
-namespace TestOption {
-    // Minimal MockOption class
-    class Option final : public MarketDataObserver, std::enable_shared_from_this<Option> {
-    public:
-        explicit Option(std::string ticker) : MarketDataObserver(std::move(ticker)), updated_(false) {}
-
-        void update() override { updated_ = true; }
-        bool wasUpdated() const { return updated_; }
-        void resetUpdated() { updated_ = false; }
-
-    private:
-        bool updated_;
-    };
-}
-
-using namespace TestOption;
+#include "../../include/market_data.h"
+#include "../config/test_support.h"
 
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
@@ -26,7 +9,7 @@ protected:
     static void SetUpTestSuite() {
         marketData = MarketData::getInstance();
         marketData->addStock("AAPL", 150.0, 0.2, 0.01);
-        observer = std::make_shared<TestOption::Option>("AAPL");
+        observer = std::make_shared<TestSupport::Option>("AAPL");
         marketData->addObserver(observer);
     }
 
@@ -42,13 +25,13 @@ protected:
     }
 
     static std::shared_ptr<MarketData> marketData;
-    static std::shared_ptr<TestOption::Option> observer;
+    static std::shared_ptr<TestSupport::Option> observer;
     //std::string ticker;
 };
 
 // Static member initialization to avoid u
 std::shared_ptr<MarketData> MarketDataTest::marketData = nullptr;
-std::shared_ptr<TestOption::Option> MarketDataTest::observer = nullptr;
+std::shared_ptr<TestSupport::Option> MarketDataTest::observer = nullptr;
 
 
 TEST_F(MarketDataTest, SingletonInstance) {
@@ -63,7 +46,7 @@ TEST_F(MarketDataTest, NotifyObserver) {
 }
 
 TEST_F(MarketDataTest, NotifyAllObservers) {
-    auto observer2 = std::make_shared<TestOption::Option>("AAPL");
+    auto observer2 = std::make_shared<TestSupport::Option>("AAPL");
     marketData->addObserver(observer2);
 
     marketData->notifyObservers();
