@@ -34,7 +34,6 @@ jobs:
         run: |
           cd build
         #  make clean  # Ensure a clean build to run clang-tidy on all files
-        #  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
           find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
 
       #- name: Check code formatting with clang-format
