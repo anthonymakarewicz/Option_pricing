@@ -8,10 +8,10 @@ add_executable(Option_tester
         test_payoff.cpp
         mock_classes.h
         test_support.h
+        test_option.cpp
         ../src/payoff.cpp
         ../src/market_data.cpp
         ../src/option.cpp
-        #test_option.cpp
 )
 
 # Link Google Test and Google Mock to the test executable
