@@ -15,7 +15,7 @@ add_executable(Option_tester
         mock_classes.h)
 
 # Link Google Test and Google Mock to the test executable
-target_link_libraries(Option_tester GTest::GTest GTest::Main GTest::gmock)
+target_link_libraries(Option_tester GTest::GTest GTest::Main GTest::GMock)
 
 # Optionally, register tests with CMake's testing system
 add_test(NAME OptionTester COMMAND Option_tester)
