@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3 # to use node16 instead of node12 which is deprecated
+        uses: actions/checkout@v4 # to use node20 instead of node12 and node 16 which are deprecated
 
       - name: Set up CMake
         uses: jwlawson/actions-setup-cmake@v1 # Use the latest major version for stability
