@@ -7,6 +7,7 @@
 #include <vector>
 #include <optional>
 #include <mutex>
+#include <memory>
 
 class StockData {
 public:
