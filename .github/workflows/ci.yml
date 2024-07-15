@@ -16,7 +16,7 @@ jobs:
           cmake-version: '3.26.3'
 
       - name: Install dependencies
-        run: sudo apt-get install -y libgtest-dev libgmock-dev
+        run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
 
       - name: Configure CMake
         run: |
@@ -34,12 +34,11 @@ jobs:
         run: |
           cd build
           ctest --output-on-failure
-          - name: Analyze code with clang-tidy
-          
+
       - name: Analyze code with clang-tidy
         run: |
           cd build
-         make clang-tidy
+          make clang-tidy
 
       #- name: Check code formatting with clang-format
       #  run: |
