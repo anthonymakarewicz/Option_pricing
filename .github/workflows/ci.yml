@@ -16,7 +16,7 @@ jobs:
           cmake-version: '3.26.3'
 
       - name: Install dependencies
-        run: sudo apt-get install -y libgtest-dev
+        run: sudo apt-get install -y libgtest-dev libgmock-dev
 
       - name: Configure CMake
         run: |
