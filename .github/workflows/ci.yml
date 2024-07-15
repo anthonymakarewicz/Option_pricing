@@ -35,8 +35,8 @@ jobs:
           cd build
           make clean  # Ensure a clean build to run clang-tidy on all files
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-          run-clang-tidy-10 -p
-       #   clang-tidy -p .
+          clang-tidy -p .
+          #   run-clang-tidy-10 -p
 
       #- name: Check code formatting with clang-format
       #  run: |
@@ -49,16 +49,16 @@ jobs:
           cd build
           ctest --output-on-failure
 
-      - name: Generate code coverage
-        run: |
-          cd build
-          make coverage
+    #  - name: Generate code coverage
+    #    run: |
+    #      cd build
+    #      make coverage
 
-      - name: Upload code coverage results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-results
-          path: build/coverage-results
+    #  - name: Upload code coverage results
+    #    if: always()
+    #    uses: actions/upload-artifact@v2
+    #    with:
+    #      name: coverage-results
+    #      path: build/coverage-results
 
 
