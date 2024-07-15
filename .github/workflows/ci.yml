@@ -20,7 +20,8 @@ jobs:
 
       - name: Configure CMake
         run: |
-          mkdir -p build
+          rm -rf build
+          mkdir build
           cd build
           cmake ..
 
