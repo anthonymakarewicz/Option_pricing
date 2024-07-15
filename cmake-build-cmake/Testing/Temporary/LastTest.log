@@ -1,3 +1,59 @@
-Start testing: Jul 15 09:47 CEST
+Start testing: Jul 15 12:24 CEST
 ----------------------------------------------------------
-End testing: Jul 15 09:47 CEST
+1/1 Testing: OptionTester
+1/1 Test: OptionTester
+Command: "/Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/Option_tester"
+Directory: /Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests
+"OptionTester" start time: Jul 15 12:24 CEST
+Output:
+----------------------------------------------------------
+[==========] Running 12 tests from 4 test suites.
+[----------] Global test environment set-up.
+[----------] 6 tests from MarketDataTest
+[ RUN      ] MarketDataTest.SingletonInstance
+[       OK ] MarketDataTest.SingletonInstance (0 ms)
+[ RUN      ] MarketDataTest.NotifyObserver
+[       OK ] MarketDataTest.NotifyObserver (0 ms)
+[ RUN      ] MarketDataTest.NotifyAllObservers
+[       OK ] MarketDataTest.NotifyAllObservers (0 ms)
+[ RUN      ] MarketDataTest.AddAndUpdateStockData
+[       OK ] MarketDataTest.AddAndUpdateStockData (0 ms)
+[ RUN      ] MarketDataTest.UpdateNonExistentStock
+[       OK ] MarketDataTest.UpdateNonExistentStock (0 ms)
+[ RUN      ] MarketDataTest.RiskFreeRate
+[       OK ] MarketDataTest.RiskFreeRate (0 ms)
+[----------] 6 tests from MarketDataTest (0 ms total)
+
+[----------] 1 test from StockDataTest
+[ RUN      ] StockDataTest.InvalidStockData
+[       OK ] StockDataTest.InvalidStockData (0 ms)
+[----------] 1 test from StockDataTest (0 ms total)
+
+[----------] 4 tests from PayoffSingleStrikeTest
+[ RUN      ] PayoffSingleStrikeTest.PayoffCallTests
+[       OK ] PayoffSingleStrikeTest.PayoffCallTests (0 ms)
+[ RUN      ] PayoffSingleStrikeTest.PayoffPutTests
+[       OK ] PayoffSingleStrikeTest.PayoffPutTests (0 ms)
+[ RUN      ] PayoffSingleStrikeTest.PayoffDigitalCallTests
+[       OK ] PayoffSingleStrikeTest.PayoffDigitalCallTests (0 ms)
+[ RUN      ] PayoffSingleStrikeTest.PayoffDigitalPutTests
+[       OK ] PayoffSingleStrikeTest.PayoffDigitalPutTests (0 ms)
+[----------] 4 tests from PayoffSingleStrikeTest (0 ms total)
+
+[----------] 1 test from PayoffDoubleStrikesTest
+[ RUN      ] PayoffDoubleStrikesTest.PayoffDoubleDigitalTests
+[       OK ] PayoffDoubleStrikesTest.PayoffDoubleDigitalTests (0 ms)
+[----------] 1 test from PayoffDoubleStrikesTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 12 tests from 4 test suites ran. (0 ms total)
+[  PASSED  ] 12 tests.
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"OptionTester" end time: Jul 15 12:24 CEST
+"OptionTester" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 15 12:24 CEST

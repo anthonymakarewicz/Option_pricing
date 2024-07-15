@@ -1,7 +1,3 @@
-//
-// Created by anthony on 18/02/2024.
-//
-
 #ifndef OPTION_PRICER_OPTION_CPP
 #define OPTION_PRICER_OPTION_CPP
 
