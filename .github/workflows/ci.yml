@@ -23,7 +23,7 @@ jobs:
           rm -rf build
           mkdir build
           cd build
-          cmake -DCMAKE_CXX_STANDARD=20 ..
+          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
 
       - name: Build Main Executable and Test Executable
         run: |
@@ -33,10 +33,9 @@ jobs:
       - name: Analyze code with clang-tidy
         run: |
           cd build
-          make clean  # Ensure a clean build to run clang-tidy on all files
-          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-          clang-tidy -p .
-          #   run-clang-tidy-10 -p
+        #  make clean  # Ensure a clean build to run clang-tidy on all files
+        #  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+          find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
 
       #- name: Check code formatting with clang-format
       #  run: |
@@ -51,14 +50,17 @@ jobs:
 
     #  - name: Generate code coverage
     #    run: |
-    #      cd build
-    #      make coverage
+    #                cd build
+    #          lcov --capture --directory . --output-file coverage.info
+    #          lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    #          lcov --list coverage.info
+    #
 
     #  - name: Upload code coverage results
     #    if: always()
     #    uses: actions/upload-artifact@v2
     #    with:
     #      name: coverage-results
-    #      path: build/coverage-results
+    #      path: build/coverage.info
 
 
