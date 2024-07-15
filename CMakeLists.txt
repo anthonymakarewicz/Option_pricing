@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.26.3)
 project(Option_pricer)
 
-# Set the version of C++ to 23
+# Set the version of C++ to 23 (using the alias c++2b for compatibility with clang-tidy)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Set the Vcpkg toolchain file
 set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")

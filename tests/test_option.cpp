@@ -97,10 +97,4 @@ TEST_F(OptionTest, AssignmentOperatorTest) {
     EXPECT_EQ(option2->calc_price(), 0.0); // Assuming the initial calc_price is 0.0
 }
 
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
-
-
 #endif //TEST_OPTION_CPP

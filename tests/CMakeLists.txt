@@ -24,9 +24,9 @@ add_test(NAME OptionTester COMMAND Option_tester)
 set_target_properties(Option_tester PROPERTIES CXX_CLANG_TIDY "clang-tidy;-checks=*,-clang-analyzer-alpha.*")
 
 # clang-format integration (target to check formatting)
-add_custom_target(clang-format-check
-        COMMAND find ${CMAKE_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | xargs clang-format -i
-)
+#add_custom_target(clang-format-check
+#        COMMAND find ${CMAKE_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | xargs clang-format -i
+#)
 
 # Code coverage integration (optional)
 if (CMAKE_BUILD_TYPE STREQUAL "Coverage")

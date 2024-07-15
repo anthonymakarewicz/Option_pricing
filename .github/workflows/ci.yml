@@ -30,20 +30,23 @@ jobs:
           cd build
           make
 
+      - name: Analyze code with clang-tidy
+        run: |
+          cd build
+          make clean  # Ensure a clean build to run clang-tidy on all files
+          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+          clang-tidy -p .
+
+      #- name: Check code formatting with clang-format
+      #  run: |
+          #find . -name '*.cpp' -o -name '*.h' | xargs clang-format -i
+      #    cd build
+      #    make clang-format-check
+
       - name: Run Tests
         run: |
           cd build
           ctest --output-on-failure
-
-      - name: Analyze code with clang-tidy
-        run: |
-          cd build
-          make clang-tidy
-
-      #- name: Check code formatting with clang-format
-      #  run: |
-      #    cd build
-      #    make clang-format-check
 
       - name: Generate code coverage
         run: |
