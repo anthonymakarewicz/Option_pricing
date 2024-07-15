@@ -34,3 +34,28 @@ jobs:
         run: |
           cd build
           ctest --output-on-failure
+          - name: Analyze code with clang-tidy
+          
+      - name: Analyze code with clang-tidy
+        run: |
+          cd build
+         make clang-tidy
+
+      #- name: Check code formatting with clang-format
+      #  run: |
+      #    cd build
+      #    make clang-format-check
+
+      - name: Generate code coverage
+        run: |
+          cd build
+          make coverage
+
+      - name: Upload code coverage results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-results
+          path: build/coverage-results
+
+
