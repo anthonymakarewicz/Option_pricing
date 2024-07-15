@@ -17,11 +17,14 @@ add_executable(Option_tester
 # Link Google Test and Google Mock to the test executable
 target_link_libraries(Option_tester GTest::GTest GTest::Main GTest::gmock_main)
 
-# Optionally, register tests with CMake's testing system
+# Registers the Option_tester executable as a test with CTest
 add_test(NAME OptionTester COMMAND Option_tester)
 
 # clang-tidy integration
-set_target_properties(Option_tester PROPERTIES CXX_CLANG_TIDY "clang-tidy;-checks=*,-clang-analyzer-alpha.*")
+find_program(CLANG_TIDY_EXECUTABLE NAMES clang-tidy)
+if(CLANG_TIDY_EXECUTABLE)
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE};-checks=*,-clang-analyzer-alpha.*")
+endif()
 
 # clang-format integration (target to check formatting)
 #add_custom_target(clang-format-check
@@ -29,7 +32,7 @@ set_target_properties(Option_tester PROPERTIES CXX_CLANG_TIDY "clang-tidy;-check
 #)
 
 # Code coverage integration (optional)
-if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    target_compile_options(Option_tester PRIVATE --coverage)
-    target_link_libraries(Option_tester PRIVATE --coverage)
-endif()
+#if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+#    target_compile_options(Option_tester PRIVATE --coverage)
+#    target_link_libraries(Option_tester PRIVATE --coverage)
+#endif()

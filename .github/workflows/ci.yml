@@ -23,7 +23,7 @@ jobs:
           rm -rf build
           mkdir build
           cd build
-          cmake -DCMAKE_CXX_STANDARD=2b ..
+          cmake -DCMAKE_CXX_STANDARD=20 ..
 
       - name: Build Main Executable and Test Executable
         run: |
@@ -35,7 +35,8 @@ jobs:
           cd build
           make clean  # Ensure a clean build to run clang-tidy on all files
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-          clang-tidy -p .
+          run-clang-tidy-10 -p
+       #   clang-tidy -p .
 
       #- name: Check code formatting with clang-format
       #  run: |

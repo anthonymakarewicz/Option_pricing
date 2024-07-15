@@ -15,6 +15,9 @@
 ########################
 
 //Path to a program.
+CLANG_TIDY_EXECUTABLE:FILEPATH=CLANG_TIDY_EXECUTABLE-NOTFOUND
+
+//Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=CMAKE_ADDR2LINE-NOTFOUND
 
 //Path to a program.
