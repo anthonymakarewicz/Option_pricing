@@ -8,7 +8,6 @@
 #include <optional>
 #include <mutex>
 
-
 class StockData {
 public:
     StockData(const double& S,
@@ -93,6 +92,5 @@ private:
     std::unordered_map<std::string, std::shared_ptr<StockData>> stockDataMap_; // Map ticker symbol to StockData
     std::vector<std::weak_ptr<MarketDataObserver>> observers_; // Use weak_ptr to avoid circular references
 };
-
 
 #endif // OPTION_PRICER_MARKET_DATA_H

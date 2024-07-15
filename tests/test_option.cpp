@@ -5,30 +5,24 @@
 #include <gmock/gmock.h>
 #include "option.h"
 #include "payoff.h"
-#include "market_data.h"
+#include "test_support.h"
+#include "mock_classes.h"
 
 using namespace ::testing;
+using namespace TestSupport::MockImplementations;
 
-class MockMarketData : public MarketData {
-public:
-    MOCK_METHOD(std::shared_ptr<StockData>, getStockData, (const std::string& ticker), (const, override));
-    MOCK_METHOD(void, addObserver, (std::shared_ptr<MarketDataObserver> observer), (override));
-    MOCK_METHOD(void, removeObserver, (std::shared_ptr<MarketDataObserver> observer), (override));
-    MOCK_METHOD(double, getR, (), (const, override));
-};
-
-class OptionTest : public ::testing::Test {
+class OptionTest : public Test {
 protected:
     void SetUp() override {
         ticker = "AAPL";
         T = 1.0;
         payoff = std::make_unique<PayoffCall>(100.0);
         mockMarketData = std::make_shared<MockMarketData>();
-        MarketData::instance_ = mockMarketData; // Point the MarketData singleton to the mock
+        //MarketData::instance_ = mockMarketData; // Point the MarketData singleton to the mock
     }
 
     void TearDown() override {
-        MarketData::instance_ = nullptr; // Reset the singleton to avoid interference between tests
+        //MarketData::instance_ = nullptr; // Reset the singleton to avoid interference between tests
     }
 
     std::string ticker;
@@ -107,8 +101,6 @@ int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-
-
 
 
 #endif //TEST_OPTION_CPP

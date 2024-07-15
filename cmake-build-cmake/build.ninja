@@ -192,9 +192,9 @@ build tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o: CXX_COMPILER__Opti
 #############################################
 # Link the executable tests/Option_tester
 
-build tests/Option_tester: CXX_EXECUTABLE_LINKER__Option_tester_Debug tests/CMakeFiles/Option_tester.dir/test_main.cpp.o tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o | /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
+build tests/Option_tester: CXX_EXECUTABLE_LINKER__Option_tester_Debug tests/CMakeFiles/Option_tester.dir/test_main.cpp.o tests/CMakeFiles/Option_tester.dir/test_market_data.cpp.o tests/CMakeFiles/Option_tester.dir/test_payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o | /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgmock.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
-  LINK_LIBRARIES = /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a  /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
+  LINK_LIBRARIES = /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgmock.a  /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/manual-link/libgtest_main.a  /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/debug/lib/libgtest.a
   OBJECT_DIR = tests/CMakeFiles/Option_tester.dir
   POST_BUILD = :
   PRE_LINK = :

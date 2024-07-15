@@ -18,6 +18,8 @@ namespace TestOption {
     };
 }
 
+using namespace TestOption;
+
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
 protected:
