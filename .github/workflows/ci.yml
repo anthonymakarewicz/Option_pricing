@@ -20,7 +20,8 @@ jobs:
 
       - name: Configure CMake
         run: | # ensures a fresh environment for each build
-          mkdir -p build
+          rm -rf build
+          mkdir build
           cd build 
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
 

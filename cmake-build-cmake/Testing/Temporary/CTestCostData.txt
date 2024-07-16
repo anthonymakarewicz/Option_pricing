@@ -1,4 +1,4 @@
 OptionTester 40 0.0342838
-UnitTests 2 0.00472549
-IntegrationTests 2 0.00503248
+UnitTests 3 0.00236562
+IntegrationTests 3 0.00194611
 ---
