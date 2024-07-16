@@ -1,9 +1,10 @@
-name: CI
+name: CI/CD
 
 on: [push, pull_request] # On what action this workflow will be triggered
 
 jobs:
   build:
+    name: Build and Test # Give the build job an appropriate name
     runs-on: ubuntu-latest
 
     steps:
