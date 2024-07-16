@@ -56,11 +56,14 @@
 │   │   │   └── Test.xml
 │   │   ├── TAG
 │   │   └── Temporary
+│   │       ├── CTestCostData.txt
+│   │       ├── LastTest.log
 │   │       ├── LastTest_20240531-1826.log
 │   │       ├── LastTest_20240601-0953.log
 │   │       ├── LastTest_20240602-1052.log
 │   │       ├── LastTest_20240604-1349.log
-│   │       └── LastTest_20240613-1720.log
+│   │       ├── LastTest_20240613-1720.log
+│   │       └── LastTestsFailed.log
 │   ├── cmake_install.cmake
 │   ├── compile_commands.json
 │   └── tests
@@ -130,16 +133,51 @@
 │       │       │       ├── market_data.cpp.o
 │       │       │       ├── option.cpp.o
 │       │       │       └── payoff.cpp.o
+│       │       ├── integration
 │       │       ├── market_data_tests.cpp.o
 │       │       ├── payoff_tests.cpp.o
 │       │       ├── test.cpp.o
 │       │       ├── test_main.cpp.o
 │       │       ├── test_market_data.cpp.o
 │       │       ├── test_option.cpp.o
-│       │       └── test_payoff.cpp.o
+│       │       ├── test_payoff.cpp.o
+│       │       └── unit
 │       ├── CTestTestfile.cmake
 │       ├── Option_tester
-│       └── cmake_install.cmake
+│       ├── Testing
+│       │   └── Temporary
+│       │       ├── CTestCostData.txt
+│       │       └── LastTest.log
+│       ├── cmake_install.cmake
+│       ├── integration
+│       │   ├── CMakeFiles
+│       │   │   └── Integration_tests.dir
+│       │   │       ├── __
+│       │   │       │   ├── __
+│       │   │       │   │   └── src
+│       │   │       │   │       ├── market_data.cpp.o
+│       │   │       │   │       ├── option.cpp.o
+│       │   │       │   │       └── payoff.cpp.o
+│       │   │       │   └── test_main.cpp.o
+│       │   │       └── test_integration_option.cpp.o
+│       │   ├── CTestTestfile.cmake
+│       │   ├── Integration_tests
+│       │   └── cmake_install.cmake
+│       └── unit
+│           ├── CMakeFiles
+│           │   └── Unit_tests.dir
+│           │       ├── __
+│           │       │   ├── __
+│           │       │   │   └── src
+│           │       │   │       ├── market_data.cpp.o
+│           │       │   │       ├── option.cpp.o
+│           │       │   │       └── payoff.cpp.o
+│           │       │   └── test_main.cpp.o
+│           │       ├── test_market_data.cpp.o
+│           │       └── test_payoff.cpp.o
+│           ├── CTestTestfile.cmake
+│           ├── Unit_tests
+│           └── cmake_install.cmake
 ├── cmake-build-debug
 │   ├── CMakeCache.txt
 │   ├── CMakeFiles
@@ -184,6 +222,11 @@
 │       ├── CMakeFiles
 │       ├── CTestTestfile.cmake
 │       └── cmake_install.cmake
+├── docs
+│   └── git
+│       ├── common_workflow_dev.txt
+│       ├── common_workflow_release.txt
+│       └── test.txt
 ├── include
 │   ├── market_data.h
 │   ├── option.h
@@ -196,11 +239,17 @@
 │   └── payoff.cpp
 └── tests
     ├── CMakeLists.txt
+    ├── README.md
     ├── config
     │   ├── mock_classes.h
     │   └── test_support.h
+    ├── integration
+    │   ├── CMakeLists.txt
+    │   └── test_integration_option.cpp
     ├── test_main.cpp
     └── unit
+        ├── CMakeLists.txt
         ├── test_market_data.cpp
         ├── test_option.cpp
         └── test_payoff.cpp
+
