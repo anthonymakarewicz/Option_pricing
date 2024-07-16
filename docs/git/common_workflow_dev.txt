@@ -1,24 +1,24 @@
-# Create a feature branch from develop
-git checkout -b feature/your-feature develop
+# Create a feature branch from your current dev
+git checkout -b feature/your-feature dev
 
 # Work on the feature
 # ...
 
 # Add and commit changes
 git add .
-git commit -m "Add new feature"  # or git commit -am "Add new feature"
+git commit -m "Add new feature"
 
 # Push the feature branch to remote to trigger the CI/CD pipeline
 git push -u origin feature/your-feature
 
-# After CI/CD passes, merge the feature branch into develop
-git checkout develop
-git pull origin develop  # get latest updates from remote repository
+# After CI/CD passes, merge the feature branch into your dev
+git checkout dev
+git pull origin dev  # get latest updates from remote repository
 git merge feature/your-feature
 
-# Push the updated develop branch
-git push origin develop
+# Push the updated dev branch
+git push origin dev
 
-# Delete the feature branch
+# Delete the feature branch on local and on remote
 git branch -d feature/your-feature
 git push origin --delete feature/your-feature
