@@ -1,3 +1,4 @@
+(base) anthony@MacBook-Air-de-anthony-2 Option_pricer % tree
 .
 ├── CMakeLists.txt
 ├── README.md
@@ -134,6 +135,7 @@
 │       │       ├── test.cpp.o
 │       │       ├── test_main.cpp.o
 │       │       ├── test_market_data.cpp.o
+│       │       ├── test_option.cpp.o
 │       │       └── test_payoff.cpp.o
 │       ├── CTestTestfile.cmake
 │       ├── Option_tester
@@ -187,19 +189,18 @@
 │   ├── option.h
 │   └── payoff.h
 ├── main.cpp
-├── main_example.cpp
-├── option_former.cpp
-├── option_former.h
-├── option_pricer_description.docx
-├── option_tests_former.cpp
+├── project_struct.txt
 ├── src
 │   ├── market_data.cpp
 │   ├── option.cpp
 │   └── payoff.cpp
-├── tests
-│   ├── CMakeLists.txt
-│   ├── test_main.cpp
-│   ├── test_market_data.cpp
-│   ├── test_option.cpp
-│   └── test_payoff.cpp
-└── ~$tion_pricer_description.docx
+└── tests
+    ├── CMakeLists.txt
+    ├── config
+    │   ├── mock_classes.h
+    │   └── test_support.h
+    ├── test_main.cpp
+    └── unit
+        ├── test_market_data.cpp
+        ├── test_option.cpp
+        └── test_payoff.cpp

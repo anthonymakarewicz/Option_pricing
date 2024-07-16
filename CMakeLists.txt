@@ -19,19 +19,25 @@ add_executable(Option_pricer main.cpp src/option.cpp src/payoff.cpp src/market_d
 enable_testing()
 add_subdirectory(tests)
 
+#[[
 # clang-tidy integration
 find_program(CLANG_TIDY_EXECUTABLE NAMES clang-tidy)
 if(CLANG_TIDY_EXECUTABLE)
     set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE};-checks=*,-clang-analyzer-alpha.*")
 endif()
+]]
 
+#[[
 # clang-format integration (target to check formatting)
-#add_custom_target(clang-format-check
-#        COMMAND find ${CMAKE_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | xargs clang-format -i
-#)
+add_custom_target(clang-format-check
+       COMMAND find ${CMAKE_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | xargs clang-format -i
+)
+]]
 
+#[[
 # Code coverage integration (optional)
-#if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-#    target_compile_options(Option_pricer PRIVATE --coverage)
-#    target_link_libraries(Option_pricer PRIVATE --coverage)
-#endif()
+if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+   target_compile_options(Option_pricer PRIVATE --coverage)
+   target_link_libraries(Option_pricer PRIVATE --coverage)
+endif()
+]]

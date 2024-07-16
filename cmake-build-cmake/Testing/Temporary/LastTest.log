@@ -1,10 +1,10 @@
-Start testing: Jul 15 18:47 CEST
+Start testing: Jul 16 08:52 CEST
 ----------------------------------------------------------
-1/1 Testing: OptionTester
-1/1 Test: OptionTester
-Command: "/Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/Option_tester"
-Directory: /Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests
-"OptionTester" start time: Jul 15 18:47 CEST
+1/2 Testing: UnitTests
+1/2 Test: UnitTests
+Command: "/Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/unit/Unit_tests"
+Directory: /Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/unit
+"UnitTests" start time: Jul 16 08:52 CEST
 Output:
 ----------------------------------------------------------
 [==========] Running 12 tests from 4 test suites.
@@ -49,11 +49,29 @@ Output:
 [==========] 12 tests from 4 test suites ran. (0 ms total)
 [  PASSED  ] 12 tests.
 <end of output>
-Test time =   1.37 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"OptionTester" end time: Jul 15 18:47 CEST
-"OptionTester" time elapsed: 00:00:01
+"UnitTests" end time: Jul 16 08:52 CEST
+"UnitTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jul 15 18:47 CEST
+2/2 Testing: IntegrationTests
+2/2 Test: IntegrationTests
+Command: "/Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/integration/Integration_tests"
+Directory: /Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake/tests/integration
+"IntegrationTests" start time: Jul 16 08:52 CEST
+Output:
+----------------------------------------------------------
+[==========] Running 0 tests from 0 test suites.
+[==========] 0 tests from 0 test suites ran. (0 ms total)
+[  PASSED  ] 0 tests.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"IntegrationTests" end time: Jul 16 08:52 CEST
+"IntegrationTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 16 08:52 CEST

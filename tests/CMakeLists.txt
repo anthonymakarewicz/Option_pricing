@@ -1,38 +1,12 @@
-# Find Google Test
-find_package(GTest REQUIRED)
+# Top-level CMake configuration for tests
+enable_testing()
 
-# Define the test executable
-add_executable(Option_tester
-        test_main.cpp
-        unit/test_market_data.cpp
-        unit/test_payoff.cpp
-        config/mock_classes.h
-        config/test_support.h
-        unit/test_option.cpp
-        ../src/payoff.cpp
-        ../src/market_data.cpp
-        ../src/option.cpp
+# Add subdirectories for unit and integration tests
+add_subdirectory(unit)
+add_subdirectory(integration)
+
+# Custom target to run all tests at once using CTest
+add_custom_target(Tests
+        COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIG> --output-on-failure
+        DEPENDS Unit_tests Integration_tests
 )
-
-# Link Google Test and Google Mock to the test executable
-target_link_libraries(Option_tester GTest::GTest GTest::Main GTest::gmock_main)
-
-# Registers the Option_tester executable as a test with CTest
-add_test(NAME OptionTester COMMAND Option_tester)
-
-# clang-tidy integration
-find_program(CLANG_TIDY_EXECUTABLE NAMES clang-tidy)
-if(CLANG_TIDY_EXECUTABLE)
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE};-checks=*,-clang-analyzer-alpha.*")
-endif()
-
-# clang-format integration (target to check formatting)
-#add_custom_target(clang-format-check
-#        COMMAND find ${CMAKE_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | xargs clang-format -i
-#)
-
-# Code coverage integration (optional)
-#if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-#    target_compile_options(Option_tester PRIVATE --coverage)
-#    target_link_libraries(Option_tester PRIVATE --coverage)
-#endif()

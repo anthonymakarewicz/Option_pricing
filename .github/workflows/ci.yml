@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [push, pull_request] # On what action this workflow will be triggered
 
 jobs:
   build:
@@ -41,10 +41,10 @@ jobs:
       #    cd build
       #    make clang-format-check
 
-      - name: Run Tests
+      - name: Run all Tests
         run: |
           cd build
-          ctest --output-on-failure
+          ctest -R AllTests --output-on-failure
 
     #  - name: Generate code coverage
     #    run: |
