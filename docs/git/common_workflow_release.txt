@@ -28,6 +28,7 @@ git merge release/1.0
 # Push the updated develop branch
 git push origin develop
 
+
 # Delete the release branch
 git branch -d release/1.0
 git push origin --delete release/1.0
