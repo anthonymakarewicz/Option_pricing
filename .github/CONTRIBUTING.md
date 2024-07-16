@@ -75,6 +75,7 @@ Below are the key assumptions and guidelines that contributors should follow:
 5. **Merging a Pull Request**:
    - Ensure all CI/CD checks pass and the PR is approved.
    - Merge the PR on GitHub to integrate changes into `main`.
+   - Pull changes from origin/main to local main by calling `git pull` inside mai.
 
 ## Example workflows
 
