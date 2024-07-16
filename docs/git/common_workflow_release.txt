@@ -11,6 +11,7 @@ git commit -m "Prepare release 1.0"
 # Push the release branch to remote
 git push -u origin release/1.0
 
+
 # After final testing, merge the release branch into main
 git checkout main
 git pull origin main
