@@ -10,6 +10,7 @@ on: # On what action this workflow will be triggered
   pull_request:
     branches:
       - main
+
 jobs:
   build:
     name: Build and Test # Give the build job an appropriate name
