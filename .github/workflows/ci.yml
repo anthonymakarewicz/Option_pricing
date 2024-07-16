@@ -19,15 +19,14 @@ jobs:
         run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
 
       - name: Configure CMake
-        run: |
-          rm -rf build
-          mkdir build
-          cd build
+        run: | # ensures a fresh environment for each build
+          mkdir -p build
+          cd build 
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
 
       - name: Build Main Executable and Test Executable
-        run: |
-          cd build
+        run: | 
+          cd build 
           make
 
     #  - name: Analyze code with clang-tidy
@@ -44,7 +43,7 @@ jobs:
       - name: Run all Tests
         run: |
           cd build
-          ctest -R AllTests --output-on-failure
+          ctest --output-on-failure
 
     #  - name: Generate code coverage
     #    run: |
