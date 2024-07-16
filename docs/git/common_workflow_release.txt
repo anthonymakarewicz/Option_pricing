@@ -1,0 +1,33 @@
+# Create a release branch from develop
+git checkout -b release/1.0 develop
+
+# Finalize and test the release
+# ...
+
+# Add and commit changes if needed
+git add .
+git commit -m "Prepare release 1.0"
+
+# Push the release branch to remote
+git push -u origin release/1.0
+
+# After final testing, merge the release branch into main
+git checkout main
+git pull origin main
+git merge release/1.0
+
+# Tag the release
+git tag -a v1.0 -m "Release version 1.0"
+git push origin v1.0
+
+# Merge the release branch back into develop
+git checkout develop
+git pull origin develop
+git merge release/1.0
+
+# Push the updated develop branch
+git push origin develop
+
+# Delete the release branch
+git branch -d release/1.0
+git push origin --delete release/1.0
