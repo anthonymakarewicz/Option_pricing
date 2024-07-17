@@ -140,43 +140,17 @@ Option_pricer/fast:
 .PHONY : Option_pricer/fast
 
 #=============================================================================
-# Target rules for targets named Tests
+# Target rules for targets named Option_tester
 
 # Build rule for target.
-Tests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Tests
-.PHONY : Tests
+Option_tester: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Option_tester
+.PHONY : Option_tester
 
 # fast build rule for target.
-Tests/fast:
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Tests.dir/build.make tests/CMakeFiles/Tests.dir/build
-.PHONY : Tests/fast
-
-#=============================================================================
-# Target rules for targets named Unit_tests
-
-# Build rule for target.
-Unit_tests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Unit_tests
-.PHONY : Unit_tests
-
-# fast build rule for target.
-Unit_tests/fast:
-	$(MAKE) $(MAKESILENT) -f tests/unit/CMakeFiles/Unit_tests.dir/build.make tests/unit/CMakeFiles/Unit_tests.dir/build
-.PHONY : Unit_tests/fast
-
-#=============================================================================
-# Target rules for targets named Integration_tests
-
-# Build rule for target.
-Integration_tests: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Integration_tests
-.PHONY : Integration_tests
-
-# fast build rule for target.
-Integration_tests/fast:
-	$(MAKE) $(MAKESILENT) -f tests/integration/CMakeFiles/Integration_tests.dir/build.make tests/integration/CMakeFiles/Integration_tests.dir/build
-.PHONY : Integration_tests/fast
+Option_tester/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/build
+.PHONY : Option_tester/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -283,10 +257,8 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... Tests"
-	@echo "... Integration_tests"
 	@echo "... Option_pricer"
-	@echo "... Unit_tests"
+	@echo "... Option_tester"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

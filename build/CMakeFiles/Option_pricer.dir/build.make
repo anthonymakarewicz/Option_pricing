@@ -73,57 +73,57 @@ CMakeFiles/Option_pricer.dir/main.cpp.o: CMakeFiles/Option_pricer.dir/flags.make
 CMakeFiles/Option_pricer.dir/main.cpp.o: /Users/anthony/CLionProjects/Option_pricer/main.cpp
 CMakeFiles/Option_pricer.dir/main.cpp.o: CMakeFiles/Option_pricer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Option_pricer.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/main.cpp.o -MF CMakeFiles/Option_pricer.dir/main.cpp.o.d -o CMakeFiles/Option_pricer.dir/main.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/main.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/main.cpp.o -MF CMakeFiles/Option_pricer.dir/main.cpp.o.d -o CMakeFiles/Option_pricer.dir/main.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/main.cpp
 
 CMakeFiles/Option_pricer.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_pricer.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/main.cpp > CMakeFiles/Option_pricer.dir/main.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/main.cpp > CMakeFiles/Option_pricer.dir/main.cpp.i
 
 CMakeFiles/Option_pricer.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_pricer.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/main.cpp -o CMakeFiles/Option_pricer.dir/main.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/main.cpp -o CMakeFiles/Option_pricer.dir/main.cpp.s
 
 CMakeFiles/Option_pricer.dir/src/option.cpp.o: CMakeFiles/Option_pricer.dir/flags.make
 CMakeFiles/Option_pricer.dir/src/option.cpp.o: /Users/anthony/CLionProjects/Option_pricer/src/option.cpp
 CMakeFiles/Option_pricer.dir/src/option.cpp.o: CMakeFiles/Option_pricer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Option_pricer.dir/src/option.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/src/option.cpp.o -MF CMakeFiles/Option_pricer.dir/src/option.cpp.o.d -o CMakeFiles/Option_pricer.dir/src/option.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/src/option.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/src/option.cpp.o -MF CMakeFiles/Option_pricer.dir/src/option.cpp.o.d -o CMakeFiles/Option_pricer.dir/src/option.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/src/option.cpp
 
 CMakeFiles/Option_pricer.dir/src/option.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_pricer.dir/src/option.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/src/option.cpp > CMakeFiles/Option_pricer.dir/src/option.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/src/option.cpp > CMakeFiles/Option_pricer.dir/src/option.cpp.i
 
 CMakeFiles/Option_pricer.dir/src/option.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_pricer.dir/src/option.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/src/option.cpp -o CMakeFiles/Option_pricer.dir/src/option.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/src/option.cpp -o CMakeFiles/Option_pricer.dir/src/option.cpp.s
 
 CMakeFiles/Option_pricer.dir/src/payoff.cpp.o: CMakeFiles/Option_pricer.dir/flags.make
 CMakeFiles/Option_pricer.dir/src/payoff.cpp.o: /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp
 CMakeFiles/Option_pricer.dir/src/payoff.cpp.o: CMakeFiles/Option_pricer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Option_pricer.dir/src/payoff.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/src/payoff.cpp.o -MF CMakeFiles/Option_pricer.dir/src/payoff.cpp.o.d -o CMakeFiles/Option_pricer.dir/src/payoff.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/src/payoff.cpp.o -MF CMakeFiles/Option_pricer.dir/src/payoff.cpp.o.d -o CMakeFiles/Option_pricer.dir/src/payoff.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp
 
 CMakeFiles/Option_pricer.dir/src/payoff.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_pricer.dir/src/payoff.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp > CMakeFiles/Option_pricer.dir/src/payoff.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp > CMakeFiles/Option_pricer.dir/src/payoff.cpp.i
 
 CMakeFiles/Option_pricer.dir/src/payoff.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_pricer.dir/src/payoff.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp -o CMakeFiles/Option_pricer.dir/src/payoff.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/src/payoff.cpp -o CMakeFiles/Option_pricer.dir/src/payoff.cpp.s
 
 CMakeFiles/Option_pricer.dir/src/market_data.cpp.o: CMakeFiles/Option_pricer.dir/flags.make
 CMakeFiles/Option_pricer.dir/src/market_data.cpp.o: /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp
 CMakeFiles/Option_pricer.dir/src/market_data.cpp.o: CMakeFiles/Option_pricer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Option_pricer.dir/src/market_data.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/src/market_data.cpp.o -MF CMakeFiles/Option_pricer.dir/src/market_data.cpp.o.d -o CMakeFiles/Option_pricer.dir/src/market_data.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Option_pricer.dir/src/market_data.cpp.o -MF CMakeFiles/Option_pricer.dir/src/market_data.cpp.o.d -o CMakeFiles/Option_pricer.dir/src/market_data.cpp.o -c /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp
 
 CMakeFiles/Option_pricer.dir/src/market_data.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Option_pricer.dir/src/market_data.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp > CMakeFiles/Option_pricer.dir/src/market_data.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp > CMakeFiles/Option_pricer.dir/src/market_data.cpp.i
 
 CMakeFiles/Option_pricer.dir/src/market_data.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Option_pricer.dir/src/market_data.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp -o CMakeFiles/Option_pricer.dir/src/market_data.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/anthony/CLionProjects/Option_pricer/src/market_data.cpp -o CMakeFiles/Option_pricer.dir/src/market_data.cpp.s
 
 # Object files for target Option_pricer
 Option_pricer_OBJECTS = \
