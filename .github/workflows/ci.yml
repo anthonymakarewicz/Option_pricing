@@ -20,6 +20,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4 # to use node20 instead of node12 and node 16 which are deprecated
 
+      - name: Cache CMake files
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-cmake-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-build-
+
       - name: Set up CMake
         uses: jwlawson/actions-setup-cmake@v2 # Use the latest major version for stability
         with:
@@ -29,25 +37,25 @@ jobs:
         run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
 
       - name: Configure CMake
-        run: | # ensures a fresh environment for each build
-          rm -rf build
-          mkdir build
-          cd build 
-          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
+        run: |
+      #    #  #  rm -rf build
+      #    #  #  mkdir build
+      #    #  #  cd build
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
 
       - name: Build Main Executable and Test Executable
-        run: | 
-          cd build 
-          make
+        run: |
+          cmake --build build
+        # make
 
-    #  - name: Analyze code with clang-tidy
-    #    run: |
-    #      cd build
-    #      find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
+        #  - name: Analyze code with clang-tidy
+        #    run: |
+        #      cd build
+        #      find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
 
-      #- name: Check code formatting with clang-format
-      #  run: |
-          #find . -name '*.cpp' -o -name '*.h' | xargs clang-format -i
+        #- name: Check code formatting with clang-format
+        #  run: |
+        #find . -name '*.cpp' -o -name '*.h' | xargs clang-format -i
       #    cd build
       #    make clang-format-check
 
