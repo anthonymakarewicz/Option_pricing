@@ -12,6 +12,6 @@
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Found GTest: /Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestConfig.cmake (found version "1.14.0")  
--- Configuring done (3.9s)
+-- Configuring done (3.7s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake
