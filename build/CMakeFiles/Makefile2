@@ -80,16 +80,50 @@ clean: tests/clean
 # Directory level rules for directory tests
 
 # Recursive "all" directory target.
-tests/all: tests/CMakeFiles/Option_tester.dir/all
+tests/all: tests/unit/all
+tests/all: tests/integration/all
 .PHONY : tests/all
 
 # Recursive "preinstall" directory target.
-tests/preinstall:
+tests/preinstall: tests/unit/preinstall
+tests/preinstall: tests/integration/preinstall
 .PHONY : tests/preinstall
 
 # Recursive "clean" directory target.
-tests/clean: tests/CMakeFiles/Option_tester.dir/clean
+tests/clean: tests/CMakeFiles/Tests.dir/clean
+tests/clean: tests/unit/clean
+tests/clean: tests/integration/clean
 .PHONY : tests/clean
+
+#=============================================================================
+# Directory level rules for directory tests/integration
+
+# Recursive "all" directory target.
+tests/integration/all: tests/integration/CMakeFiles/Integration_tests.dir/all
+.PHONY : tests/integration/all
+
+# Recursive "preinstall" directory target.
+tests/integration/preinstall:
+.PHONY : tests/integration/preinstall
+
+# Recursive "clean" directory target.
+tests/integration/clean: tests/integration/CMakeFiles/Integration_tests.dir/clean
+.PHONY : tests/integration/clean
+
+#=============================================================================
+# Directory level rules for directory tests/unit
+
+# Recursive "all" directory target.
+tests/unit/all: tests/unit/CMakeFiles/Unit_tests.dir/all
+.PHONY : tests/unit/all
+
+# Recursive "preinstall" directory target.
+tests/unit/preinstall:
+.PHONY : tests/unit/preinstall
+
+# Recursive "clean" directory target.
+tests/unit/clean: tests/unit/CMakeFiles/Unit_tests.dir/clean
+.PHONY : tests/unit/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/Option_pricer.dir
@@ -98,7 +132,7 @@ tests/clean: tests/CMakeFiles/Option_tester.dir/clean
 CMakeFiles/Option_pricer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Option_pricer.dir/build.make CMakeFiles/Option_pricer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Option_pricer.dir/build.make CMakeFiles/Option_pricer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target Option_pricer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=7,8,9,10,11 "Built target Option_pricer"
 .PHONY : CMakeFiles/Option_pricer.dir/all
 
 # Build rule for subdir invocation for target.
@@ -118,30 +152,83 @@ CMakeFiles/Option_pricer.dir/clean:
 .PHONY : CMakeFiles/Option_pricer.dir/clean
 
 #=============================================================================
-# Target rules for target tests/CMakeFiles/Option_tester.dir
+# Target rules for target tests/CMakeFiles/Tests.dir
 
 # All Build rule for target.
-tests/CMakeFiles/Option_tester.dir/all:
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/depend
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=6,7,8,9,10,11,12 "Built target Option_tester"
-.PHONY : tests/CMakeFiles/Option_tester.dir/all
+tests/CMakeFiles/Tests.dir/all: tests/unit/CMakeFiles/Unit_tests.dir/all
+tests/CMakeFiles/Tests.dir/all: tests/integration/CMakeFiles/Integration_tests.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Tests.dir/build.make tests/CMakeFiles/Tests.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Tests.dir/build.make tests/CMakeFiles/Tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num= "Built target Tests"
+.PHONY : tests/CMakeFiles/Tests.dir/all
 
 # Build rule for subdir invocation for target.
-tests/CMakeFiles/Option_tester.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 7
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/Option_tester.dir/all
+tests/CMakeFiles/Tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 13
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/Tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 0
-.PHONY : tests/CMakeFiles/Option_tester.dir/rule
+.PHONY : tests/CMakeFiles/Tests.dir/rule
 
 # Convenience name for target.
-Option_tester: tests/CMakeFiles/Option_tester.dir/rule
-.PHONY : Option_tester
+Tests: tests/CMakeFiles/Tests.dir/rule
+.PHONY : Tests
 
 # clean rule for target.
-tests/CMakeFiles/Option_tester.dir/clean:
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/clean
-.PHONY : tests/CMakeFiles/Option_tester.dir/clean
+tests/CMakeFiles/Tests.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Tests.dir/build.make tests/CMakeFiles/Tests.dir/clean
+.PHONY : tests/CMakeFiles/Tests.dir/clean
+
+#=============================================================================
+# Target rules for target tests/unit/CMakeFiles/Unit_tests.dir
+
+# All Build rule for target.
+tests/unit/CMakeFiles/Unit_tests.dir/all:
+	$(MAKE) $(MAKESILENT) -f tests/unit/CMakeFiles/Unit_tests.dir/build.make tests/unit/CMakeFiles/Unit_tests.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/unit/CMakeFiles/Unit_tests.dir/build.make tests/unit/CMakeFiles/Unit_tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=12,13,14,15,16,17,18 "Built target Unit_tests"
+.PHONY : tests/unit/CMakeFiles/Unit_tests.dir/all
+
+# Build rule for subdir invocation for target.
+tests/unit/CMakeFiles/Unit_tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 7
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/unit/CMakeFiles/Unit_tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 0
+.PHONY : tests/unit/CMakeFiles/Unit_tests.dir/rule
+
+# Convenience name for target.
+Unit_tests: tests/unit/CMakeFiles/Unit_tests.dir/rule
+.PHONY : Unit_tests
+
+# clean rule for target.
+tests/unit/CMakeFiles/Unit_tests.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/unit/CMakeFiles/Unit_tests.dir/build.make tests/unit/CMakeFiles/Unit_tests.dir/clean
+.PHONY : tests/unit/CMakeFiles/Unit_tests.dir/clean
+
+#=============================================================================
+# Target rules for target tests/integration/CMakeFiles/Integration_tests.dir
+
+# All Build rule for target.
+tests/integration/CMakeFiles/Integration_tests.dir/all:
+	$(MAKE) $(MAKESILENT) -f tests/integration/CMakeFiles/Integration_tests.dir/build.make tests/integration/CMakeFiles/Integration_tests.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/integration/CMakeFiles/Integration_tests.dir/build.make tests/integration/CMakeFiles/Integration_tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target Integration_tests"
+.PHONY : tests/integration/CMakeFiles/Integration_tests.dir/all
+
+# Build rule for subdir invocation for target.
+tests/integration/CMakeFiles/Integration_tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/integration/CMakeFiles/Integration_tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles 0
+.PHONY : tests/integration/CMakeFiles/Integration_tests.dir/rule
+
+# Convenience name for target.
+Integration_tests: tests/integration/CMakeFiles/Integration_tests.dir/rule
+.PHONY : Integration_tests
+
+# clean rule for target.
+tests/integration/CMakeFiles/Integration_tests.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/integration/CMakeFiles/Integration_tests.dir/build.make tests/integration/CMakeFiles/Integration_tests.dir/clean
+.PHONY : tests/integration/CMakeFiles/Integration_tests.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -5,7 +5,7 @@ enable_testing()
 add_subdirectory(unit)
 add_subdirectory(integration)
 
-# Custom target to run all tests at once using CTest
+# Custom target that runs all tests at once using CTest
 add_custom_target(Tests
         COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIG> --output-on-failure
         DEPENDS Unit_tests Integration_tests
