@@ -4,5 +4,5 @@
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
-subdirs("unit")
-subdirs("integration")
+add_test([=[OptionTester]=] "/Users/anthony/CLionProjects/Option_pricer/build/tests/Option_tester")
+set_tests_properties([=[OptionTester]=] PROPERTIES  _BACKTRACE_TRIPLES "/Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt;18;add_test;/Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt;0;")

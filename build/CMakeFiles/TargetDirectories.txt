@@ -2,15 +2,7 @@
 /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles/test.dir
 /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles/edit_cache.dir
 /Users/anthony/CLionProjects/Option_pricer/build/CMakeFiles/rebuild_cache.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/CMakeFiles/Tests.dir
+/Users/anthony/CLionProjects/Option_pricer/build/tests/CMakeFiles/Option_tester.dir
 /Users/anthony/CLionProjects/Option_pricer/build/tests/CMakeFiles/test.dir
 /Users/anthony/CLionProjects/Option_pricer/build/tests/CMakeFiles/edit_cache.dir
 /Users/anthony/CLionProjects/Option_pricer/build/tests/CMakeFiles/rebuild_cache.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/unit/CMakeFiles/Unit_tests.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/unit/CMakeFiles/test.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/unit/CMakeFiles/edit_cache.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/unit/CMakeFiles/rebuild_cache.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/integration/CMakeFiles/Integration_tests.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/integration/CMakeFiles/test.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/integration/CMakeFiles/edit_cache.dir
-/Users/anthony/CLionProjects/Option_pricer/build/tests/integration/CMakeFiles/rebuild_cache.dir

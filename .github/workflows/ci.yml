@@ -3,13 +3,13 @@ name: CI/CD
 on: # On what action this workflow will be triggered
   push:
     branches:
+      - develop
       - feature/*
       - fix/*
       - release/*
   pull_request:
     branches:
       - main
-      - dev
 
 jobs:
   build:
@@ -70,3 +70,5 @@ jobs:
     #    with:
     #      name: coverage-results
     #      path: build/coverage.info
+
+

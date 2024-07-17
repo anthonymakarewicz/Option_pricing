@@ -127,18 +127,162 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-tests/CMakeFiles/Tests.dir/rule:
-	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/Tests.dir/rule
-.PHONY : tests/CMakeFiles/Tests.dir/rule
+tests/CMakeFiles/Option_tester.dir/rule:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/Option_tester.dir/rule
+.PHONY : tests/CMakeFiles/Option_tester.dir/rule
 
 # Convenience name for target.
-Tests: tests/CMakeFiles/Tests.dir/rule
-.PHONY : Tests
+Option_tester: tests/CMakeFiles/Option_tester.dir/rule
+.PHONY : Option_tester
 
 # fast build rule for target.
-Tests/fast:
-	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Tests.dir/build.make tests/CMakeFiles/Tests.dir/build
-.PHONY : Tests/fast
+Option_tester/fast:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/build
+.PHONY : Option_tester/fast
+
+__/src/market_data.o: __/src/market_data.cpp.o
+.PHONY : __/src/market_data.o
+
+# target to build an object file
+__/src/market_data.cpp.o:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.o
+.PHONY : __/src/market_data.cpp.o
+
+__/src/market_data.i: __/src/market_data.cpp.i
+.PHONY : __/src/market_data.i
+
+# target to preprocess a source file
+__/src/market_data.cpp.i:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.i
+.PHONY : __/src/market_data.cpp.i
+
+__/src/market_data.s: __/src/market_data.cpp.s
+.PHONY : __/src/market_data.s
+
+# target to generate assembly for a file
+__/src/market_data.cpp.s:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/market_data.cpp.s
+.PHONY : __/src/market_data.cpp.s
+
+__/src/option.o: __/src/option.cpp.o
+.PHONY : __/src/option.o
+
+# target to build an object file
+__/src/option.cpp.o:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.o
+.PHONY : __/src/option.cpp.o
+
+__/src/option.i: __/src/option.cpp.i
+.PHONY : __/src/option.i
+
+# target to preprocess a source file
+__/src/option.cpp.i:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.i
+.PHONY : __/src/option.cpp.i
+
+__/src/option.s: __/src/option.cpp.s
+.PHONY : __/src/option.s
+
+# target to generate assembly for a file
+__/src/option.cpp.s:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/option.cpp.s
+.PHONY : __/src/option.cpp.s
+
+__/src/payoff.o: __/src/payoff.cpp.o
+.PHONY : __/src/payoff.o
+
+# target to build an object file
+__/src/payoff.cpp.o:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.o
+.PHONY : __/src/payoff.cpp.o
+
+__/src/payoff.i: __/src/payoff.cpp.i
+.PHONY : __/src/payoff.i
+
+# target to preprocess a source file
+__/src/payoff.cpp.i:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.i
+.PHONY : __/src/payoff.cpp.i
+
+__/src/payoff.s: __/src/payoff.cpp.s
+.PHONY : __/src/payoff.s
+
+# target to generate assembly for a file
+__/src/payoff.cpp.s:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/__/src/payoff.cpp.s
+.PHONY : __/src/payoff.cpp.s
+
+market_data_tests.o: market_data_tests.cpp.o
+.PHONY : market_data_tests.o
+
+# target to build an object file
+market_data_tests.cpp.o:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.o
+.PHONY : market_data_tests.cpp.o
+
+market_data_tests.i: market_data_tests.cpp.i
+.PHONY : market_data_tests.i
+
+# target to preprocess a source file
+market_data_tests.cpp.i:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.i
+.PHONY : market_data_tests.cpp.i
+
+market_data_tests.s: market_data_tests.cpp.s
+.PHONY : market_data_tests.s
+
+# target to generate assembly for a file
+market_data_tests.cpp.s:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/market_data_tests.cpp.s
+.PHONY : market_data_tests.cpp.s
+
+option_tests.o: option_tests.cpp.o
+.PHONY : option_tests.o
+
+# target to build an object file
+option_tests.cpp.o:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/option_tests.cpp.o
+.PHONY : option_tests.cpp.o
+
+option_tests.i: option_tests.cpp.i
+.PHONY : option_tests.i
+
+# target to preprocess a source file
+option_tests.cpp.i:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/option_tests.cpp.i
+.PHONY : option_tests.cpp.i
+
+option_tests.s: option_tests.cpp.s
+.PHONY : option_tests.s
+
+# target to generate assembly for a file
+option_tests.cpp.s:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/option_tests.cpp.s
+.PHONY : option_tests.cpp.s
+
+payoff_tests.o: payoff_tests.cpp.o
+.PHONY : payoff_tests.o
+
+# target to build an object file
+payoff_tests.cpp.o:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.o
+.PHONY : payoff_tests.cpp.o
+
+payoff_tests.i: payoff_tests.cpp.i
+.PHONY : payoff_tests.i
+
+# target to preprocess a source file
+payoff_tests.cpp.i:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.i
+.PHONY : payoff_tests.cpp.i
+
+payoff_tests.s: payoff_tests.cpp.s
+.PHONY : payoff_tests.s
+
+# target to generate assembly for a file
+payoff_tests.cpp.s:
+	cd /Users/anthony/CLionProjects/Option_pricer/build && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/Option_tester.dir/build.make tests/CMakeFiles/Option_tester.dir/payoff_tests.cpp.s
+.PHONY : payoff_tests.cpp.s
 
 # Help Target
 help:
@@ -149,7 +293,25 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... Tests"
+	@echo "... Option_tester"
+	@echo "... __/src/market_data.o"
+	@echo "... __/src/market_data.i"
+	@echo "... __/src/market_data.s"
+	@echo "... __/src/option.o"
+	@echo "... __/src/option.i"
+	@echo "... __/src/option.s"
+	@echo "... __/src/payoff.o"
+	@echo "... __/src/payoff.i"
+	@echo "... __/src/payoff.s"
+	@echo "... market_data_tests.o"
+	@echo "... market_data_tests.i"
+	@echo "... market_data_tests.s"
+	@echo "... option_tests.o"
+	@echo "... option_tests.i"
+	@echo "... option_tests.s"
+	@echo "... payoff_tests.o"
+	@echo "... payoff_tests.i"
+	@echo "... payoff_tests.s"
 .PHONY : help
 
 
