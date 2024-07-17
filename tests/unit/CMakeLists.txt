@@ -1,6 +1,7 @@
 # Unit tests configuration
 find_package(GTest REQUIRED)
 
+# Create the executable called Unit_tests
 add_executable(Unit_tests
         ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         test_market_data.cpp
