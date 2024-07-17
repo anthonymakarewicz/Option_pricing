@@ -3,13 +3,13 @@ name: CI/CD
 on: # On what action this workflow will be triggered
   push:
     branches:
-      - develop
       - feature/*
       - fix/*
       - release/*
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   build:
@@ -32,12 +32,12 @@ jobs:
         run: | # ensures a fresh environment for each build
           rm -rf build
           mkdir build
-          cd build 
+          cd build
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
 
       - name: Build Main Executable and Test Executable
-        run: | 
-          cd build 
+        run: |
+          cd build
           make
 
     #  - name: Analyze code with clang-tidy
@@ -70,5 +70,3 @@ jobs:
     #    with:
     #      name: coverage-results
     #      path: build/coverage.info
-
-

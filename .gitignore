@@ -11,3 +11,6 @@ build/
 *.ninja_log
 *.exe
 
+# Ignore local files
+bckp
+
