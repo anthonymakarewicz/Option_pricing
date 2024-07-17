@@ -10,31 +10,13 @@
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake"
 		},
 		{
-			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeDependentOption.cmake"
-		},
-		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystem.cmake.in"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-cmake/CMakeFiles/3.28.1/CMakeSystem.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeDependentOption.cmake"
+			"path" : "cmake-build-debug/CMakeFiles/3.28.1/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -518,7 +500,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-cmake/CMakeFiles/3.28.1/CMakeCCompiler.cmake"
+			"path" : "cmake-build-debug/CMakeFiles/3.28.1/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -977,7 +959,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-cmake/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake"
+			"path" : "cmake-build-debug/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1116,7 +1098,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-cmake/CMakeFiles/3.28.1/CMakeCCompiler.cmake"
+			"path" : "cmake-build-debug/CMakeFiles/3.28.1/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1215,7 +1197,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-cmake/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake"
+			"path" : "cmake-build-debug/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake"
 		},
 		{
 			"path" : "tests/CMakeLists.txt"
@@ -1245,11 +1227,11 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestConfigVersion.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestConfigVersion.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestConfig.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestConfig.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1293,15 +1275,11 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestTargets.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestTargets.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestTargets-debug.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestTargets-release.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestTargets-release.cmake"
 		},
 		{
 			"path" : "tests/integration/CMakeLists.txt"
@@ -1328,11 +1306,11 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestConfigVersion.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestConfigVersion.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestConfig.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestConfig.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -1371,21 +1349,17 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestTargets.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestTargets.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestTargets-debug.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/Users/anthony/.vcpkg-clion/vcpkg/installed/x64-osx/share/gtest/GTestTargets-release.cmake"
+			"path" : "/usr/local/lib/cmake/GTest/GTestTargets-release.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/Users/anthony/CLionProjects/Option_pricer/cmake-build-cmake",
+		"build" : "/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug",
 		"source" : "/Users/anthony/CLionProjects/Option_pricer"
 	},
 	"version" : 
