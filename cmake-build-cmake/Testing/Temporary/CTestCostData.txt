@@ -1,3 +1,0 @@
-UnitTests 3 0.00497936
-IntegrationTests 3 0.00331739
----
