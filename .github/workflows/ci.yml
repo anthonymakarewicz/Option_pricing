@@ -23,7 +23,10 @@ jobs:
       - name: Cache CMake files
         uses: actions/cache@v3
         with:
-          path: build
+          path: | 
+            build/CMakeFiles
+            build/CMakeCache.txt
+            build/compile_commands.json
           key: ${{ runner.os }}-cmake-build-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-cmake-build-
