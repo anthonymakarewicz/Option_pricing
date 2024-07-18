@@ -5,7 +5,7 @@ find_package(GTest REQUIRED)
 add_executable(Unit_tests
         ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         test_market_data.cpp
-        #test_option.cpp
+        test_option.cpp
         test_payoff.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../config/mock_classes.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../config/test_support.h
