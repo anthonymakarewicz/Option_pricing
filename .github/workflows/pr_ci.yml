@@ -1,11 +1,6 @@
-name: CI/CD
+name: Pull Request CI
 
 on: # On what action this workflow will be triggered
-  push:
-    branches:
-      - feature/*
-      - fix/*
-      - release/*
   pull_request:
     branches:
       - main
@@ -13,7 +8,7 @@ on: # On what action this workflow will be triggered
 
 jobs:
   build:
-    name: Build and Test # Give the build job an appropriate name
+    name: Build & Run All Tests # Give the build job an appropriate name
     runs-on: ubuntu-latest
 
     steps:
