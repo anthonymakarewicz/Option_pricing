@@ -7,7 +7,7 @@ class Payoff {
 public:
     Payoff() = default; // Default (no parameter) constructor
     virtual ~Payoff() = default; // Virtual destructor
-    [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0;
+    [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0; // Prototype creational pattern
     virtual double operator()(const double& S) const = 0; // Define Payoff as an abstract functor
     virtual void print(std::ostream& os) const = 0;
 
