@@ -1,0 +1,36 @@
+name: Push CI
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+
+jobs:
+  build:
+    name: Build & Run All Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # to use node20 instead of node12 and node 16 which are deprecated
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v2 # Use the latest major version for stability
+        with:
+          cmake-version: '3.26.3'
+
+      - name: Install dependencies
+        run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
+
+      - name: Build Main Executable and Test Executable
+        run: |
+          cmake --build build
+
+      - name: Run Unit Tests
+        run: |
+          cd build
+          ctest -R UnitTests--output-on-failure
