@@ -58,10 +58,11 @@ void StockData::validate() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const StockData& stockData) {
-    os << "Price: " << stockData.getPrice()
-       << ", Volatility: " << stockData.getSigma();
+    os << "Stock Data: " << "\n";
+    os << "-> Price: " << stockData.getPrice() << "\n";
+    os << "-> Volatility: " << stockData.getSigma() << "\n";
     if (stockData.getCoupon().has_value()) {
-        os << ", Coupon: " << stockData.getCoupon().value();
+        os << "-> Coupon: " << stockData.getCoupon().value() << "\n";
     }
     return os;
 }

@@ -3,6 +3,25 @@
 
 #include "payoff.h"
 #include <ostream>
+#include <stdexcept>
+#include <typeinfo>
+#include <cxxabi.h>
+
+// Payoff abstract base class
+std::string Payoff::getType() const {
+    // Get the demangled name of the type
+    int status;
+    const char* mangledName = typeid(*this).name();
+    char* demangledName = abi::__cxa_demangle(mangledName, nullptr, nullptr, &status);
+    std::string typeName = (status == 0) ? demangledName : mangledName;
+    std::free(demangledName);
+    return typeName;
+}
+
+void Payoff::print(std::ostream &os) const {
+    os << "Payoff: " << "\n";
+    os << "-> Type: " << getType() << "\n";
+}
 
 std::ostream& operator<<(std::ostream& os, const Payoff& payoff) {
     payoff.print(os);
@@ -20,7 +39,8 @@ double PayoffSingleStrike::getK() const {
 }
 
 void PayoffSingleStrike::print(std::ostream &os) const {
-    os << "Stike: " << K_;
+    Payoff::print(os);
+    os << "-> Stike: " << K_ << "\n";
 }
 
 
@@ -32,7 +52,8 @@ PayoffDoubleStrikes::PayoffDoubleStrikes(const double& K_L, const double& K_U)
 }
 
 void PayoffDoubleStrikes::print(std::ostream &os) const {
-    os << "Lower Strike: " << K_L_ << ", Upper Strike: " << K_U_;
+    Payoff::print(os);
+    os << "-> Lower Strike: " << K_L_ << ", Upper Strike: " << K_U_;
 }
 
 double PayoffDoubleStrikes::getKU() const {

@@ -13,8 +13,8 @@ int main() {
     std::cout << "B" << std::endl;
 
     auto vanilla = factory.createOption("AAPL", std::move(pc), 1.0);
-    std::cout << vanilla.get() << std::endl;
     std::cout << "C" << std::endl;
+    std::cout << *vanilla << std::endl;
     return 0;
     /*
     void MarketData::removeObserver() {

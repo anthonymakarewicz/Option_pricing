@@ -51,6 +51,7 @@ Option::Option(Option&& other) noexcept
 
 Option::~Option() {
     if (marketData_) marketData_->removeObserver();
+    std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
 }
 
 Option& Option::operator=(const Option& other) {
@@ -76,25 +77,18 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
     if (!option.marketData_) {
         throw std::runtime_error("MarketData object is missing");
     }
-
-    // Get the demangled name of the type
-    int status;
-    const char* mangledName = typeid(option).name();
-    char* demangledName = abi::__cxa_demangle(mangledName, nullptr, nullptr, &status);
-    std::string typeName = (status == 0) ? demangledName : mangledName;
-    std::free(demangledName);
-    os << "Type: " << typeName << ", " << "\n"; // Use of "\n" instead of std::endl to avoid flusing the buffer
-
-    os << "Ticker: " << option.id_ << ", Expiration: " << option.T_;
+    os << "Option: " << "\n";
+    os << "-> Type: " << option.getType() << "\n"; // Use of "\n" instead of std::endl to avoid flusing the buffer
+    os << "-> Expiration: " << option.T_ << " year" << "\n";
     if (option.payoff_) {
         os << *option.payoff_;
     } else {
         throw std::runtime_error("Payoff object is missing");
     }
-
-    auto stockData = option.marketData_->getStockData(option.id_);
-    os << ", StockData: " << *stockData;
-    os << ", Risk Free interest rate" << option.marketData_->getR();
+    const auto stockData = option.marketData_->getStockData(option.id_);
+    os << *stockData;
+    os << "-> Ticker: " << option.id_ << "\n";
+    os << "-> Risk Free interest rate: " << option.marketData_->getR() << "\n";
 
     return os;
 }
@@ -141,6 +135,16 @@ void Option::moveFrom(Option&& other) {
 
 void Option::initialize() {
     marketData_->addObserver(shared_from_this()); // Implicit casting from Option to MarketDataObserver
+}
+
+std::string Option::getType() const {
+    // Get the demangled name of the type
+    int status;
+    const char* mangledName = typeid(*this).name();
+    char* demangledName = abi::__cxa_demangle(mangledName, nullptr, nullptr, &status);
+    std::string typeName = (status == 0) ? demangledName : mangledName;
+    std::free(demangledName);
+    return typeName;
 }
 
 VanillaOption::VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
