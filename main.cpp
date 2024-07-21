@@ -11,6 +11,7 @@ int main() {
     std::cout << "A" << std::endl;
     VanillaOptionFactory factory;
     std::cout << "B" << std::endl;
+    /*
     auto vanilla = factory.createOption("AAPL", std::move(pc), 1.0);
     /*
     auto pc3 = std::make_unique<PayoffCall>(100);
@@ -24,7 +25,3 @@ int main() {
     return 0;
 
 }
-
-
-
-
