@@ -19,8 +19,7 @@ std::string Payoff::getType() const {
 }
 
 void Payoff::print(std::ostream &os) const {
-    os << "Payoff: " << "\n";
-    os << "-> Type: " << getType() << "\n";
+    os << "  -> Type: " << getType() << "\n";
 }
 
 std::ostream& operator<<(std::ostream& os, const Payoff& payoff) {
@@ -40,7 +39,7 @@ double PayoffSingleStrike::getK() const {
 
 void PayoffSingleStrike::print(std::ostream &os) const {
     Payoff::print(os);
-    os << "-> Stike: " << K_ << "\n";
+    os << "  -> Stike: " << K_ << "\n";
 }
 
 
@@ -53,7 +52,8 @@ PayoffDoubleStrikes::PayoffDoubleStrikes(const double& K_L, const double& K_U)
 
 void PayoffDoubleStrikes::print(std::ostream &os) const {
     Payoff::print(os);
-    os << "-> Lower Strike: " << K_L_ << ", Upper Strike: " << K_U_;
+    os << "  -> Lower Strike: " << K_L_ << "\n";
+    os << "  -> Upper Strike: " << K_U_ << "\n";
 }
 
 double PayoffDoubleStrikes::getKU() const {
@@ -122,6 +122,5 @@ double PayoffDoubleDigital::operator()(const double& S) const {
 std::unique_ptr<Payoff> PayoffDoubleDigital::clone() const {
     return std::make_unique<PayoffDoubleDigital>(K_L_, K_U_);
 }
-
 
 #endif //OPTION_PRICER_PAYOFF_CPP

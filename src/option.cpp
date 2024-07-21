@@ -77,19 +77,21 @@ std::ostream& operator<<(std::ostream& os, const Option& option) {
     if (!option.marketData_) {
         throw std::runtime_error("MarketData object is missing");
     }
-    os << "Option: " << "\n";
-    os << "-> Type: " << option.getType() << "\n"; // Use of "\n" instead of std::endl to avoid flusing the buffer
-    os << "-> Expiration: " << option.T_ << " year" << "\n";
+    os << "Option:\n"; // Use of "\n" instead of std::endl to avoid flusing the buffer
+    os << "  -> Type: " << option.getType() << "\n";
+    os << "  -> Expiration: " << option.T_ << " year" << "\n";
     if (option.payoff_) {
+        os << "Payoff:\n";
         os << *option.payoff_;
     } else {
         throw std::runtime_error("Payoff object is missing");
     }
     const auto stockData = option.marketData_->getStockData(option.id_);
+    os << "Stock:\n";
+    os << "  -> Ticker: " << option.id_ << "\n";
     os << *stockData;
-    os << "-> Ticker: " << option.id_ << "\n";
-    os << "-> Risk Free interest rate: " << option.marketData_->getR() << "\n";
-
+    os << "MarketData:\n";
+    os << "  -> Risk Free Interest Rate: " << option.marketData_->getR() << "\n";
     return os;
 }
 

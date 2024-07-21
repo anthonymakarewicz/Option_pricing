@@ -86,5 +86,4 @@ public:
     double operator()(const double& S) const override;
 };
 
-
 #endif //OPTION_PRICER_PAYOFF_H
