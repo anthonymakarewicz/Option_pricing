@@ -53,7 +53,7 @@ TEST_F(MarketDataTest, NotifyAllObservers) {
     EXPECT_TRUE(observer->wasUpdated());
     EXPECT_TRUE(observer2->wasUpdated());
 
-    marketData->removeObserver(observer2);
+    marketData->removeObserver();
     observer->resetUpdated();
     observer2->resetUpdated();
 

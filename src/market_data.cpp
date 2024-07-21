@@ -2,6 +2,7 @@
 #define OPTION_PRICER_MARKET_DATA_CPP
 
 #include <ostream>
+#include <iostream>
 #include "market_data.h"
 #include "option.h"
 
@@ -80,6 +81,7 @@ std::shared_ptr<MarketData> MarketData::getInstance() {
     std::lock_guard<std::mutex> lock(mutex_); // Ensure thread safety
     if (!instance_) {
         instance_ = std::shared_ptr<MarketData>(new MarketData());
+        std::cout << "MakertData instance created" << "\n";
     }
     return instance_;
 }
@@ -88,13 +90,15 @@ MarketData::MarketData() : r_(0.05) {}
 
 void MarketData::addObserver(const std::shared_ptr<MarketDataObserver>& observer) {
     observers_.push_back(observer);
+    std::cout << "Observer added. Total observers: " << observers_.size() << std::endl;
 }
 
-void MarketData::removeObserver(const std::shared_ptr<MarketDataObserver>& observer) {
+void MarketData::removeObserver() {
     // Erase_if introduced in C++20 that replace the erase-remove idiom
-    std::erase_if(observers_, [&observer](const std::weak_ptr<MarketDataObserver>& obs) {
-        return obs.lock() == observer;
+    std::erase_if(observers_, [](const std::weak_ptr<MarketDataObserver>& obs) {
+        return obs.expired();
     });
+    std::cout << "Expired observer removed. Total remaining observers: " << observers_.size() << "\n";
 }
 
 /**

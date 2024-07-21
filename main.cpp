@@ -11,17 +11,18 @@ int main() {
     std::cout << "A" << std::endl;
     VanillaOptionFactory factory;
     std::cout << "B" << std::endl;
-    /*
+
     auto vanilla = factory.createOption("AAPL", std::move(pc), 1.0);
-    /*
-    auto pc3 = std::make_unique<PayoffCall>(100);
-    auto option2 = std::make_shared<Option>("AAPL", std::move(pc3), 1.0);
+    std::cout << vanilla.get() << std::endl;
     std::cout << "C" << std::endl;
-    //auto option = std::make_shared<Option>();
-    std::cout << "D" << std::endl;
-    option2->initialize();
-    std::cout << "E" << std::endl;
-    */
     return 0;
+    /*
+    void MarketData::removeObserver() {
+        // Erase_if introduced in C++20 that replace the erase-remove idiom
+        std::erase_if(observers_, [&observer](const std::weak_ptr<MarketDataObserver>& obs) {
+            return obs.expired();
+        });
+    }
+    */
 
 }

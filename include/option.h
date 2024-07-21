@@ -44,9 +44,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
     virtual double calc_price() const = 0; // Force all subclasses to deifne this method
 
-    void initialize() {
-        marketData_->addObserver(shared_from_this()); // Implicit casting from Option to MarketDataObserver
-    }
+    void initialize();
 
 protected:
     Option(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
