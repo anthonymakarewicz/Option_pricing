@@ -29,7 +29,7 @@ Option::Option(std::string ticker,
     if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
     // Get the MarketData instance and try to retrieve StockData
     marketData_ = MarketData::getInstance();
-    auto stockData = marketData_->getStockData(ticker); // If not found it throws an exception
+    auto stockData = marketData_->getStockData(id_); // If not found it throws an exception
 
     // Safely move the payoff and pass the observer to MarketData
     payoff_ = std::move(payoff);

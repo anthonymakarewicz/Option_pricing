@@ -79,7 +79,7 @@ public:
     void updateStockPrice(const std::string& ticker, double S);
     void updateStockSigma(const std::string& ticker, double sigma);
     void updateStockCoupon(const std::string& ticker, std::optional<double> c);
-    [[nodiscard]] std::shared_ptr<StockData> getStockData(const std::string& ticker) const;
+    [[nodiscard]] std::shared_ptr<StockData> getStockData(std::string ticker) const;
     
     [[nodiscard]] double getR() const;
     void setR(const double& r);

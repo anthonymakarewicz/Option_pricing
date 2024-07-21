@@ -92,7 +92,7 @@ public:
         if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
             throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
         }
-        auto option =  std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
+        auto option = std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
         option->initialize();
         return option;
     }
