@@ -33,7 +33,6 @@ Option::Option(std::string ticker,
 
     // Safely move the payoff and pass the observer to MarketData
     payoff_ = std::move(payoff);
-    marketData_->addObserver(shared_from_this()); // Implicit casting from Option to MarketDataObserver
 }
 
 Option::Option(const Option& other)

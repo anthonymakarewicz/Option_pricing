@@ -7,7 +7,7 @@
 #include "market_data.h"
 
 // Option asbtract base class where *this must be managed by a shared_ptr
-class Option : public MarketDataObserver, std::enable_shared_from_this<Option> {
+class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
 public:
     /** @brief Option base class
      *
@@ -43,6 +43,10 @@ public:
     void update() override; // Update method called when MarketData changes
     friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
     virtual double calc_price() const = 0; // Force all subclasses to deifne this method
+
+    void initialize() {
+        marketData_->addObserver(shared_from_this()); // Implicit casting from Option to MarketDataObserver
+    }
 
 protected:
     Option(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
@@ -88,7 +92,9 @@ public:
         if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
             throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
         }
-        return std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
+        auto option =  std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
+        option->initialize();
+        return option;
     }
 };
 
