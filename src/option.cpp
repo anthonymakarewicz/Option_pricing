@@ -12,6 +12,8 @@
  * *****************
 */
 
+
+
 /**
  * @brief Constructor implementation
  *
@@ -48,7 +50,8 @@ Option::Option(Option&& other) noexcept
 }
 
 Option::~Option() {
-    if (marketData_) marketData_->removeObserver(shared_from_this());
+    if (marketData_) marketData_->removeObserver();
+    std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
 }
 
 Option& Option::operator=(const Option& other) {
@@ -66,34 +69,29 @@ Option& Option::operator=(Option&& other) noexcept {
 }
 
 void Option::update() {
-    std::cout << "StockData " << id_ << " updated!";
-    std::cout << "The new Option price is: "<< calc_price() << '\n';
+    std::cout << "StockData " << id_ << " updated!" << "\n";
+    std::cout << "The new Option price is: "<< calc_price() << "\n";
 }
 
 std::ostream& operator<<(std::ostream& os, const Option& option) {
     if (!option.marketData_) {
         throw std::runtime_error("MarketData object is missing");
     }
-
-    // Get the demangled name of the type
-    int status;
-    const char* mangledName = typeid(option).name();
-    char* demangledName = abi::__cxa_demangle(mangledName, nullptr, nullptr, &status);
-    std::string typeName = (status == 0) ? demangledName : mangledName;
-    std::free(demangledName);
-    os << "Type: " << typeName << ", ";
-
-    os << "Ticker: " << option.id_ << ", Expiration: " << option.T_;
+    os << "Option:\n"; // Use of "\n" instead of std::endl to avoid flusing the buffer
+    os << "  -> Type: " << option.getType() << "\n";
+    os << "  -> Expiration: " << option.T_ << " year" << "\n";
     if (option.payoff_) {
+        os << "Payoff:\n";
         os << *option.payoff_;
     } else {
         throw std::runtime_error("Payoff object is missing");
     }
-
-    auto stockData = option.marketData_->getStockData(option.id_);
-    os << ", StockData: " << *stockData;
-    os << ", Risk Free interest rate" << option.marketData_->getR();
-
+    const auto stockData = option.marketData_->getStockData(option.id_);
+    os << "Stock:\n";
+    os << "  -> Ticker: " << option.id_ << "\n";
+    os << *stockData;
+    os << "MarketData:\n";
+    os << "  -> Risk Free Interest Rate: " << option.marketData_->getR() << "\n";
     return os;
 }
 
@@ -118,7 +116,7 @@ void Option::moveFrom(Option&& other) {
         throw std::runtime_error("MarketData object missing");
     }
     */
-    other.marketData_->removeObserver(other.shared_from_this());
+    other.marketData_->removeObserver();
     // Move the attributes from other to *this
     T_ = other.T_;
     id_ = other.id_;
@@ -137,6 +135,19 @@ void Option::moveFrom(Option&& other) {
     }
 }
 
+void Option::initialize() {
+    marketData_->addObserver(shared_from_this()); // Implicit casting from Option to MarketDataObserver
+}
+
+std::string Option::getType() const {
+    // Get the demangled name of the type
+    int status;
+    const char* mangledName = typeid(*this).name();
+    char* demangledName = abi::__cxa_demangle(mangledName, nullptr, nullptr, &status);
+    std::string typeName = (status == 0) ? demangledName : mangledName;
+    std::free(demangledName);
+    return typeName;
+}
 
 VanillaOption::VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
     : Option(std::move(ticker), std::move(payoff), T) {}

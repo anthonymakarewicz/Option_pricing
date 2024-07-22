@@ -63,8 +63,13 @@ public:
      */
     static std::shared_ptr<MarketData> getInstance();
 
+    // MarketData object should not be clonable
+    MarketData(MarketData &other) = delete;
+    void operator=(const MarketData &) = delete;
+
+    // Observer specific methods
     void addObserver(const std::shared_ptr<MarketDataObserver>& observer);
-    void removeObserver(const std::shared_ptr<MarketDataObserver>& observer);
+    void removeObserver();
     void notifyObservers() const;
     void notifyObserver(const std::string& id) const; // Notify specific observers
 
