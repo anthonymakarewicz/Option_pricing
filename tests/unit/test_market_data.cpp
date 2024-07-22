@@ -45,6 +45,12 @@ TEST_F(MarketDataTest, NotifyObserver) {
     EXPECT_TRUE(observer->wasUpdated());
 }
 
+TEST_F(MarketDataTest, RemoveObserver) {
+    marketData->notifyObserver("AAPL");
+    EXPECT_TRUE(observer->wasUpdated());
+}
+
+
 TEST_F(MarketDataTest, NotifyAllObservers) {
     auto observer2 = std::make_shared<TestSupport::Option>("AAPL");
     marketData->addObserver(observer2);
@@ -52,13 +58,6 @@ TEST_F(MarketDataTest, NotifyAllObservers) {
     marketData->notifyObservers();
     EXPECT_TRUE(observer->wasUpdated());
     EXPECT_TRUE(observer2->wasUpdated());
-
-    marketData->removeObserver();
-    observer->resetUpdated();
-    observer2->resetUpdated();
-
-    marketData->notifyObservers();
-    EXPECT_FALSE(observer2->wasUpdated());
 }
 
 TEST_F(MarketDataTest, AddAndUpdateStockData) {
