@@ -14,7 +14,6 @@ include_directories(include)
 
 # Add the main executable
 add_executable(Option_pricer main.cpp src/option.cpp src/payoff.cpp src/market_data.cpp)
-
 # Enable testing
 enable_testing()
 add_subdirectory(tests)

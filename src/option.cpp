@@ -7,13 +7,6 @@
 #include <cxxabi.h>
 #include "option.h"
 
-/* *****************
- * Option base class
- * *****************
-*/
-
-
-
 /**
  * @brief Constructor implementation
  *

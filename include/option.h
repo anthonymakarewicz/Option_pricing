@@ -1,7 +1,6 @@
 #ifndef OPTION_PRICER_OPTION_H
 #define OPTION_PRICER_OPTION_H
 
-#include <memory>
 #include <string>
 #include "payoff.h"
 #include "market_data.h"
@@ -85,15 +84,24 @@ protected:
 
 class VanillaOptionFactory final : public OptionFactory {
 public:
+    /**
+     * @brief VanillaOptionFactory
+     * Because of the protected constructor of VanillaOption, we cannot directly create the shared_ptr
+     * using make_shared. Thus we have to use shared_ptr<>(new ...) which can lead to memeory leak
+     * if an exception fails during the creation and/or call of the initialize method. Therefore,
+     * we have to create a temporary VanillaOption* to catch an exception that can occur and being
+     * able to free the memory if an exception does occur thus preventing memory leakd evne though the use
+     * of shared_ptr<>(new ...) is not memory efficient comapred to make_shared<>().
+     */
     std::shared_ptr<Option> createOption(std::string ticker,
                                          std::unique_ptr<Payoff>&& payoff,
                                          const double& T) override {
         if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
             throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
         }
-        auto option = std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
-        option->initialize();
-        return option;
+        auto optionPtr = std::shared_ptr<Option>(new VanillaOption(ticker, std::move(payoff), T));
+        optionPtr->initialize();
+        return optionPtr;
     }
 };
 
