@@ -142,12 +142,12 @@ std::string Option::getType() const {
     return typeName;
 }
 
-VanillaOption::VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
+SinglePathOption::SinglePathOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
     : Option(std::move(ticker), std::move(payoff), T) {}
 
 
-double VanillaOption::calc_price() const {
-    // Implementation of price calculation for VanillaOption
+double SinglePathOption::calc_price() const {
+    // Implementation of price calculation for SinglePathOption
     return 0.0;
 }
 

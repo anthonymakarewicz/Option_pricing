@@ -62,24 +62,63 @@ protected:
 // Factory asbtract interface for Option
 class OptionFactory {
 public:
-    virtual ~OptionFactory() = default;
-    // Factory method to create specific Option instances
-    virtual std::shared_ptr<Option> createOption(std::string ticker,
-                                                 std::unique_ptr<Payoff>&& payoff,
-                                                 const double& T) = 0;
+    virtual ~OptionFactory() = 0;
 };
+inline OptionFactory::~OptionFactory() = default;
+
 
 // Concrete class declared as final for devirtualization
-class VanillaOption final : public Option {
+class SinglePathOption : public Option {
 public:
-    ~VanillaOption() override = default;
+    ~SinglePathOption() override = default;
     double calc_price() const override;// Implementation of the pure virtual method
 
 protected:
     // Protected parameterized constructor to enforce creation through factory method
-    VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    SinglePathOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
     friend class VanillaOptionFactory;
 };
+
+
+class PathDependentOption : public Option {
+public:
+    ~PathDependentOption() override = default;
+    double calc_price() const override;// Implementation of the pure virtual method
+
+protected:
+    // Protected parameterized constructor to enforce creation through factory method
+    PathDependentOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    friend class VanillaOptionFactory;
+};
+
+class SinglePathOptionFactory : public OptionFactory {
+public:
+    [[nodiscard]] virtual std::shared_ptr<SinglePathOption> create() const = 0;
+};
+
+
+class PathDependentOptionFactory : public OptionFactory {
+public:
+    [[nodiscard]] virtual std::shared_ptr<PathDependentOption> create() const = 0;
+};
+
+
+
+
+class EuropeanOptionFactory : public SinglePathOptionFactory {
+public:
+    std::shared_ptr<SinglePathOption> createOption(std::string ticker,
+                                         std::unique_ptr<Payoff>&& payoff,
+                                         const double& T) override {
+        if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
+            throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
+        }
+        auto optionPtr = std::shared_ptr<SinglePathOption>(new SinglePathOption(ticker, std::move(payoff), T));
+        optionPtr->initialize();
+        return optionPtr;
+    }
+};
+
 
 
 class VanillaOptionFactory final : public OptionFactory {
@@ -99,7 +138,7 @@ public:
         if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
             throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
         }
-        auto optionPtr = std::shared_ptr<Option>(new VanillaOption(ticker, std::move(payoff), T));
+        auto optionPtr = std::shared_ptr<Option>(new SinglePathOption(ticker, std::move(payoff), T));
         optionPtr->initialize();
         return optionPtr;
     }
@@ -124,5 +163,8 @@ public:
 };
 
 */
+
+
+
 
 #endif //OPTION_PRICER_OPTION_H

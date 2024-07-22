@@ -36,7 +36,7 @@ TEST_F(OptionTest, ConstructorTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker)).Times(1).WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, 0.01)));
     EXPECT_CALL(*mockMarketData, addObserver(_)).Times(1);
 
-    std::shared_ptr<Option> option = std::make_shared<VanillaOption>(ticker, std::move(payoff), T);
+    std::shared_ptr<Option> option = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
     EXPECT_EQ(option->calc_price(), 0.0); // Assuming the initial calc_price is 0.0
 }
@@ -47,7 +47,7 @@ TEST_F(OptionTest, UpdateTest) {
     EXPECT_CALL(*mockMarketData, addObserver(_)).Times(1);
     EXPECT_CALL(*mockMarketData, getR()).Times(1).WillOnce(Return(0.05));
 
-    std::shared_ptr<Option> option = std::make_shared<VanillaOption>(ticker, std::move(payoff), T);
+    std::shared_ptr<Option> option = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
     EXPECT_CALL(*mockMarketData, getStockData(ticker)).Times(1).WillOnce(Return(std::make_shared<StockData>(160.0, 0.25, 0.02)));
 
@@ -61,11 +61,11 @@ TEST_F(OptionTest, CopyConstructorTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker)).Times(1).WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, 0.01)));
     EXPECT_CALL(*mockMarketData, addObserver(_)).Times(1);
 
-    std::shared_ptr<Option> option1 = std::make_shared<VanillaOption>(ticker, std::move(payoff), T);
+    std::shared_ptr<Option> option1 = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
     // Create another payoff object for the copy constructor
     auto payoff2 = std::make_unique<PayoffCall>(100.0);
-    VanillaOption option2 = *dynamic_cast<VanillaOption*>(option1.get());
+    SinglePathOption option2 = *dynamic_cast<SinglePathOption*>(option1.get());
 
     EXPECT_EQ(option2.calc_price(), 0.0); // Assuming the initial calc_price is 0.0
 }
@@ -75,9 +75,9 @@ TEST_F(OptionTest, MoveConstructorTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker)).Times(1).WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, 0.01)));
     EXPECT_CALL(*mockMarketData, addObserver(_)).Times(1);
 
-    std::shared_ptr<Option> option1 = std::make_shared<VanillaOption>(ticker, std::move(payoff), T);
+    std::shared_ptr<Option> option1 = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
-    VanillaOption option2 = std::move(*dynamic_cast<VanillaOption*>(option1.get()));
+    SinglePathOption option2 = std::move(*dynamic_cast<SinglePathOption*>(option1.get()));
 
     EXPECT_EQ(option2.calc_price(), 0.0); // Assuming the initial calc_price is 0.0
 }
@@ -87,12 +87,12 @@ TEST_F(OptionTest, AssignmentOperatorTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker)).Times(2).WillRepeatedly(Return(std::make_shared<StockData>(150.0, 0.2, 0.01)));
     EXPECT_CALL(*mockMarketData, addObserver(_)).Times(2);
 
-    std::shared_ptr<Option> option1 = std::make_shared<VanillaOption>(ticker, std::move(payoff), T);
+    std::shared_ptr<Option> option1 = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
     auto payoff2 = std::make_unique<PayoffCall>(100.0);
-    std::shared_ptr<Option> option2 = std::make_shared<VanillaOption>(ticker, std::move(payoff2), T);
+    std::shared_ptr<Option> option2 = std::make_shared<SinglePathOption>(ticker, std::move(payoff2), T);
 
-    *dynamic_cast<VanillaOption*>(option2.get()) = *dynamic_cast<VanillaOption*>(option1.get());
+    *dynamic_cast<SinglePathOption*>(option2.get()) = *dynamic_cast<SinglePathOption*>(option1.get());
 
     EXPECT_EQ(option2->calc_price(), 0.0); // Assuming the initial calc_price is 0.0
 }
