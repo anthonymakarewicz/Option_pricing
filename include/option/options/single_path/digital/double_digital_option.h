@@ -5,7 +5,7 @@
 
 class DoubleDigitalOption final: public SinglePathOption {
 public:
-    ~DoubleDigitalOption() override = default;
+    ~DoubleDigitalOption() override;
     [[nodiscard]] double calc_price() const override;
 
 private:

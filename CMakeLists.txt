@@ -15,8 +15,22 @@ include_directories(include)
 # Add the main executable
 add_executable(Option_pricer main.cpp src/payoff.cpp src/market_data.cpp
         src/option/options/base_option.cpp
-        include/sss.h
-        src/sss.cpp
+        src/option/options/single_path/base_single_path_option.cpp
+        src/option/options/single_path/european_option.cpp
+        src/option/options/single_path/digital/digital_option.cpp
+        src/option/options/single_path/digital/double_digital_option.cpp
+        src/option/options/path_dependent/base_path_dependent_option.cpp
+        src/option/options/path_dependent/american_option.cpp
+        src/option/options/path_dependent/asian/base_asian_option.cpp
+        src/option/options/path_dependent/asian/arithmetic_asian_option.cpp
+        src/option/options/path_dependent/asian/geometric_asian_option.cpp
+        src/option/options/path_dependent/barrier/base_barrier_option.cpp
+        src/option/options/path_dependent/barrier/knock_behavior.cpp
+        src/option/options/path_dependent/barrier/double_barrier.cpp
+        src/option/options/path_dependent/barrier/single_barrier/base_single_barrier_option.cpp
+        src/option/options/path_dependent/barrier/single_barrier/up_single_barrier_option.cpp
+        src/option/options/path_dependent/barrier/single_barrier/down_single_barrier_option.cpp
+
 )
 
 # Enable testing

@@ -1,16 +1,10 @@
-#ifndef DOUBLE_DIGITAL_OPTION_CPP
-#define DOUBLE_DIGITAL_OPTION_CPP
+#include "option/options/single_path/digital/double_digital_option.h"
 
-#include "../base_single_path_option.h"
+DoubleDigitalOption::~DoubleDigitalOption() = default;
 
-class DoubleDigitalOption : public SinglePathOption {
-public:
-    ~DoubleDigitalOption() override = default;
-    [[nodiscard]] double calc_price() const override;
+double DoubleDigitalOption::calc_price() const {
+    return 0.0;
+}
 
-private:
-    DoubleDigitalOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class DoubleDigitalOptionFactory;
-};
-
-#endif //DOUBLE_DIGITAL_OPTION_CPP
+DoubleDigitalOption::DoubleDigitalOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
+    : SinglePathOption(ticker, std::move(payoff), T) {}

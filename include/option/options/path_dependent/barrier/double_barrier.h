@@ -1,26 +1,22 @@
-#ifndef BASE_DOUBLE_BARRIER_H
-#define BASE_DOUBLE_BARRIER_H
+#ifndef DOUBLE_BARRIER_H
+#define DOUBLE_BARRIER_H
 
 #include "base_barrier_option.h"
 
 class DoubleBarrierOption final: public BarrierOption {
 public:
-    ~DoubleBarrierOption() override = default;
+    ~DoubleBarrierOption() override;
+    [[nodiscard]] double calc_price() const override;
 
 private:
-    DoubleBarrier(double lowerBarrier, double lowerBarrier, std::unique_ptr<KnockBehavior> knockBehavior)
-        : lowerLevel_(lowerBarrier), upperLevel_(lowerBarrier), knockBehavior_(std::move(knockBehavior)) {
-        if (lowerBarrier_ >= upperBarrier_) {
-            throw std::invalid_argument("Lower barrier must be less than upper barrier.");
-        }
-    }
+    DoubleBarrierOption(const std::string &ticker, std::unique_ptr<Payoff> &&payoff, const double &T,
+                        std::unique_ptr<KnockBehavior> knockBehavior,
+                        const double& lowerBarrier, const double& upperBarrier);
 
-    bool isOut(double S) const override {
-        return S < lowerBarrier_ || S > upperBarrier_;
-    }
+    bool isOut(double S) const override;
 
     double lowerBarrier_;
     double upperBarrier_;
 };
 
-#endif //BASE_DOUBLE_BARRIER_H
+#endif //DOUBLE_BARRIER_H

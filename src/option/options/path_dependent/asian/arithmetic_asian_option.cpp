@@ -1,8 +1,13 @@
-#ifndef ARITHMETIC_ASIAN_OPTION_CPP
-#define ARITHMETIC_ASIAN_OPTION_CPP
+#include "option/options/path_dependent/asian/arithmetic_asian_option.h"
 
+ArithmeticAsianOption::~ArithmeticAsianOption() = default;
 
+double ArithmeticAsianOption::calc_price() const {
+    return 0.0;
+}
 
+ArithmeticAsianOption::ArithmeticAsianOption(const std::string &ticker,
+                                             std::unique_ptr<Payoff> &&payoff,
+                                             const double &T)
 
-
-#endif //ARITHMETIC_ASIAN_OPTION_CPP
+: AsianOption(ticker, std::move(payoff), T) {}

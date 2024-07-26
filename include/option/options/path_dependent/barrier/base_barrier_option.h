@@ -4,23 +4,17 @@
 #include "../base_path_dependent_option.h"
 #include "knock_behavior.h"
 
-
 class BarrierOption: public PathDependentOption {
 public:
-    ~BarrierOption() override = default;
+    ~BarrierOption() override;
 
-    double payoff(double S) const {
-        if (!isActive(S)) {
-            return 0.0;
-        }
-        return Option::payoff(S);
-    }
+    double payoff(double S) const;
 
 protected:
     BarrierOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T,
                   std::unique_ptr<KnockBehavior> knockBehavior);
 
-    virtual bool isOut(double S) = 0;
+    virtual bool isOut(double S) const = 0;
 
     bool isActive(double S) const {
         return knockBehavior_->isActive(isOut(S));

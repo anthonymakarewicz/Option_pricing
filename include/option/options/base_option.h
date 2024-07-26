@@ -1,5 +1,5 @@
-#ifndef OPTION_PRICER_BASE_OPTION_H
-#define OPTION_PRICER_BASE_OPTION_H
+#ifndef BASE_OPTION_H
+#define BASE_OPTION_H
 
 #include <string>
 #include "../../payoff.h"
@@ -47,10 +47,10 @@ public:
     void initialize();
     [[nodiscard]] std::string getType() const;
 
-    virtual double payoff(const double& S) const { return (*payoff_)(S); }
+    virtual double payoff(const double& S) const;
 
 protected:
-    Option(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
+    Option(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
 
     // Utility functions for the copy & move semantics
     void copyFrom(const Option& other);
@@ -62,4 +62,4 @@ protected:
 
 };
 
-#endif //OPTION_PRICER_BASE_OPTION_H
+#endif //BASE_OPTION_H

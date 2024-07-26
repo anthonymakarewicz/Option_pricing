@@ -128,6 +128,7 @@ private:
         } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << "\n";
             std::cout << invalidParams("European Option");
+            throw;
         }
 
         std::unique_ptr<Payoff> payoff;
@@ -236,7 +237,7 @@ private:
     friend class EuropeanOptionFactory;
 };
 
-
+/*
 class AmericanOption : public VanillaOption {
 public:
     AmericanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);

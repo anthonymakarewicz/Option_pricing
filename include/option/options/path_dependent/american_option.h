@@ -5,7 +5,7 @@
 
 class AmericanOption final: public PathDependentOption {
 public:
-    ~AmericanOption() override = default;
+    ~AmericanOption() override;
     [[nodiscard]] double calc_price() const override;
 
 private:

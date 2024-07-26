@@ -1,12 +1,8 @@
-#ifndef OPTION_PRICER_BASE_OPTION_CPP
-#define OPTION_PRICER_BASE_OPTION_CPP
-
 #include <iostream>
 #include <stdexcept>
 #include <typeinfo>
 #include <cxxabi.h>
-#include "base_option.h"
-#inlcude "option.h"
+#include "option/options/base_option.h"
 
 /**
  * @brief Constructor implementation
@@ -18,10 +14,10 @@
  * After, move the payoff unique_ptr to the payoff_ attribute and add a shared_ptr to the current
  * object being created when the constructor is called to the list of observers
  **/
-Option::Option(std::string ticker,
+Option::Option(const std::string& ticker,
                std::unique_ptr<Payoff>&& payoff,
                const double& T)
-    : MarketDataObserver(std::move(ticker)), T_(T) {
+    : MarketDataObserver(ticker), T_(T) {
     if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
     // Get the MarketData instance and try to retrieve StockData
     marketData_ = MarketData::getInstance();
@@ -143,6 +139,6 @@ std::string Option::getType() const {
     return typeName;
 }
 
-
-
-#endif //BASE_OPTION_CPP
+double Option::payoff(const double &S) const {
+    { return (*payoff_)(S); }
+}

@@ -1,8 +1,10 @@
-#ifndef AMERICAN_OPTION_CPP
-#define AMERICAN_OPTION_CPP
+#include "option/options/path_dependent/american_option.h"
 
+AmericanOption::~AmericanOption() = default;
 
+double AmericanOption::calc_price() const {
+    return 0.0;
+}
 
-
-
-#endif //AMERICAN_OPTION_CPP
+AmericanOption::AmericanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
+: PathDependentOption(ticker, std::move(payoff), T) {}

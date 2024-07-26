@@ -3,22 +3,20 @@
 
 class KnockBehavior {
 public:
-    virtual bool isActive(bool barrierBreached) const = 0;
-    virtual ~KnockBehavior() = default;
+    virtual ~KnockBehavior();
+    [[nodiscard]] virtual bool isActive(bool barrierBreached) const = 0;
 };
 
 class KnockIn : public KnockBehavior {
 public:
-    bool isActive(bool barrierBreached) const override {
-        return barrierBreached;
-    }
+    ~KnockIn() override;
+    [[nodiscard]] bool isActive(bool barrierBreached) const override;
 };
 
 class KnockOut : public KnockBehavior {
 public:
-    bool isActive(bool barrierBreached) const override {
-        return !barrierBreached;
-    }
+    ~KnockOut() override;
+    [[nodiscard]] bool isActive(bool barrierBreached) const override;
 };
 
 #endif //KNOCK_BEHAVIOR_H

@@ -1,26 +1,24 @@
-#ifndef BASE_DOUBLE_BARRIER_CPP
-#define BASE_DOUBLE_BARRIER_CPP
+#include "option/options/path_dependent/barrier/double_barrier.h"
 
-#include "base_barrier_option.h"
+DoubleBarrierOption::~DoubleBarrierOption() = default;
 
-class DoubleBarrierOption final: public BarrierOption {
-public:
-    ~DoubleBarrierOption() override = default;
+double DoubleBarrierOption::calc_price() const {
+    return 0.0;
+}
 
-private:
-    DoubleBarrier(double lowerBarrier, double lowerBarrier, std::unique_ptr<KnockBehavior> knockBehavior)
-        : lowerLevel_(lowerBarrier), upperLevel_(lowerBarrier), knockBehavior_(std::move(knockBehavior)) {
-        if (lowerBarrier_ >= upperBarrier_) {
-            throw std::invalid_argument("Lower barrier must be less than upper barrier.");
-        }
+DoubleBarrierOption::DoubleBarrierOption(const std::string &ticker, std::unique_ptr<Payoff> &&payoff, const double &T,
+                                         std::unique_ptr<KnockBehavior> knockBehavior,
+                                         const double& lowerBarrier, const double& upperBarrier)
+: BarrierOption(ticker, std::move(payoff), T, std::move(knockBehavior)),
+  lowerBarrier_(lowerBarrier), upperBarrier_(upperBarrier) {
+    if (lowerBarrier_ >= upperBarrier_) {
+        throw std::invalid_argument("Lower barrier must be less than upper barrier.");
     }
-
-    bool isOut(double S) const override {
-        return S < lowerBarrier_ || S > upperBarrier_;
+    if (lowerBarrier_ < 0 || upperBarrier_ < 0) {
+        throw std::invalid_argument("Lower barrier and upper barrier must be positive.");
     }
+}
 
-    double lowerBarrier_;
-    double upperBarrier_;
-};
-
-#endif //BASE_DOUBLE_BARRIER_CPP
+bool DoubleBarrierOption::isOut(double S) const {
+    return S < lowerBarrier_ || S > upperBarrier_;
+}

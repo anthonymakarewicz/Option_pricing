@@ -5,7 +5,7 @@
 
 class ArithmeticAsianOption final: public AsianOption {
 public:
-    ~ArithmeticAsianOption() override = default;
+    ~ArithmeticAsianOption() override;
     [[nodiscard]] double calc_price() const override;
 
 private:

@@ -5,7 +5,7 @@
 
 class GeometricAsianOption final: public AsianOption {
 public:
-    ~GeometricAsianOption() override = default;
+    ~GeometricAsianOption() override;
     [[nodiscard]] double calc_price() const override;
 
 private:

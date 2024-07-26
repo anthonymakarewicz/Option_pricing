@@ -5,7 +5,7 @@
 
 class EuropeanOption final: public SinglePathOption {
 public:
-    ~EuropeanOption() override = default;
+    ~EuropeanOption() override;
     [[nodiscard]] double calc_price() const override;
 
 private:

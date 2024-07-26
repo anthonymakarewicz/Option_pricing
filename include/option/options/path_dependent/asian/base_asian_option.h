@@ -5,7 +5,7 @@
 
 class AsianOption: public PathDependentOption {
 public:
-    ~AsianOption() override = default;
+    ~AsianOption() override;
 
 private:
     AsianOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
