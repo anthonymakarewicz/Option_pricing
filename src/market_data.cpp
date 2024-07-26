@@ -4,7 +4,6 @@
 #include <ostream>
 #include <iostream>
 #include "market_data.h"
-#include "option.h"
 
 // Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketData::instance_ = nullptr;

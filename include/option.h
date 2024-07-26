@@ -59,14 +59,6 @@ protected:
 };
 
 
-// Factory asbtract interface for Option
-class OptionFactory {
-public:
-    virtual ~OptionFactory() = 0;
-};
-inline OptionFactory::~OptionFactory() = default;
-
-
 // Concrete class declared as final for devirtualization
 class SinglePathOption : public Option {
 public:
@@ -76,49 +68,138 @@ public:
 protected:
     // Protected parameterized constructor to enforce creation through factory method
     SinglePathOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class VanillaOptionFactory;
 };
 
 
 class PathDependentOption : public Option {
 public:
     ~PathDependentOption() override = default;
-    double calc_price() const override;// Implementation of the pure virtual method
 
 protected:
     // Protected parameterized constructor to enforce creation through factory method
     PathDependentOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class VanillaOptionFactory;
 };
 
-class SinglePathOptionFactory : public OptionFactory {
+// Factory asbtract interface for Option
+class OptionFactory {
 public:
-    [[nodiscard]] virtual std::shared_ptr<SinglePathOption> create() const = 0;
-};
+    virtual ~OptionFactory() = 0;
 
-
-class PathDependentOptionFactory : public OptionFactory {
-public:
-    [[nodiscard]] virtual std::shared_ptr<PathDependentOption> create() const = 0;
-};
-
-
-
-
-class EuropeanOptionFactory : public SinglePathOptionFactory {
-public:
-    std::shared_ptr<SinglePathOption> createOption(std::string ticker,
-                                         std::unique_ptr<Payoff>&& payoff,
-                                         const double& T) override {
-        if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
-            throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
-        }
-        auto optionPtr = std::shared_ptr<SinglePathOption>(new SinglePathOption(ticker, std::move(payoff), T));
-        optionPtr->initialize();
-        return optionPtr;
+protected:
+    // Can be overidden in subclasses to accomodate extra parameters
+    [[nodiscard]] virtual std::string invalidParams(const std::string& option_type) const {
+        return "Invalid parameters for " + option_type + "\n"
+        "Expected parameters:\n"
+        "  - \"ticker\" (string) for ticker symbol\n"
+        "  - \"T\" (double) for maturity\n"
+        "  - \"K\" (double) for strike\n";
     }
 };
 
+inline OptionFactory::~OptionFactory() = default;
+
+
+class SinglePathOptionFactory : public OptionFactory {
+public:
+    [[nodiscard]] std::shared_ptr<SinglePathOption> createCallOption(const ParameterObject& params) {
+        return createOption(params, "call");
+    }
+
+    [[nodiscard]] std::shared_ptr<SinglePathOption> createPutOption(const ParameterObject& params) {
+        return createOption(params, "put");
+    }
+protected:
+    virtual std::shared_ptr<SinglePathOption> createOption(const ParameterObject& params, const std::string& type) = 0;
+};
+
+
+class EuropeanOptionFactory : public SinglePathOptionFactory {
+private:
+    std::shared_ptr<Option> createOption(const ParameterObject& params, const std::string& type) override {
+        std::string ticker;
+        double T;
+        double K;
+
+        // Catch the exception early to inform about the constructor's signature
+        try {
+            ticker = params.getProperty<std::string>("ticker");
+            T = params.getProperty<double>("T");
+            K = params.getProperty<double>("K");
+        } catch (const std::invalid_argument& e) {
+            std::cerr << e.what() << "\n";
+            std::cout << invalidParams("European Option");
+        }
+
+        std::unique_ptr<Payoff> payoff;
+        if (type == "call") {
+            payoff = std::make_unique<PayoffCall>(K);
+        } else if (type == "put") {
+            payoff = std::make_unique<PayoffPut>(K);
+        } else {
+            throw std::invalid_argument("Invalid option type: " + type);
+        }
+
+        auto option = std::shared_ptr<SinglePathOption>(new EuropeanOption(ticker, std::move(payoff), T));
+        option->initialize();
+        return option;
+    }
+};
+
+
+class EuropeanOption : public SinglePathOption {
+public:
+    ~EuropeanOption() override = default;
+    [[nodiscard]] double calc_price() const override;
+
+private:
+    EuropeanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    friend class EuropeanOptionFactory;
+};
+
+
+
+std::shared_ptr<Option> createOption(const PropertySet& params) const {
+        std::string ticker;
+        double T;
+        double strike;
+
+        try {
+            ticker = params.getProperty<std::string>("ticker");
+            T = params.getProperty<double>("T");
+            strike = params.getProperty<double>("strike");
+        } catch (const std::exception& e) {
+            invalidParams();
+            throw;
+        }
+
+        std::string type = params.getProperty<std::string>("type");
+        std::unique_ptr<Payoff> payoff;
+        if (type == "call") {
+            payoff = std::make_unique<PayoffCall>(strike);
+        } else if (type == "put") {
+            payoff = std::make_unique<PayoffPut>(strike);
+        } else {
+            throw std::invalid_argument("Invalid option type: " + type);
+        }
+
+        auto option = std::make_shared<EuropeanOption>(ticker, std::move(payoff), T);
+        option->initialize();
+        return option;
+    }
+
+    void invalidParams() const {
+        std::cerr << "Invalid parameters for European Option\n";
+        std::cerr << "Expected parameters:\n";
+        std::cerr << "  - ticker (string)\n";
+        std::cerr << "  - T (double) for maturity\n";
+        std::cerr << "  - strike (double)\n";
+    }
+
+class PathDependentOptionFactory : public OptionFactory {
+public:
+    [[nodiscard]] virtual std::shared_ptr<PathDependentOptionFactory> createCallOption(const PropertySet& propertySet) = 0;
+    [[nodiscard]] virtual std::shared_ptr<PathDependentOptionFactory> createPutOption(const PropertySet& propertySetT) = 0;
+};
 
 
 class VanillaOptionFactory final : public OptionFactory {
@@ -145,13 +226,14 @@ public:
 };
 
 
-
-/*
-class EuropeanOption : public VanillaOption {
+class EuropeanOption : public SinglePathOption {
 public:
-    EuropeanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
     ~EuropeanOption() override = default;
-    double calc_price() const override;
+    [[nodiscard]] double calc_price() const override;
+
+private:
+    EuropeanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    friend class EuropeanOptionFactory;
 };
 
 

@@ -1,12 +1,8 @@
-//
-// Created by anthony on 22/07/2024.
-//
-
-#ifndef BASE_SINGLE_STEP_OPTION_H
-#define BASE_SINGLE_STEP_OPTION_H
+#ifndef BASE_SINGLE_STEP_OPTION_CPP
+#define BASE_SINGLE_STEP_OPTION_CPP
 
 
 
 
 
-#endif //BASE_SINGLE_STEP_OPTION_H
+#endif //BASE_SINGLE_STEP_OPTION_CPP

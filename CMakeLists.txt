@@ -13,7 +13,12 @@ set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems
 include_directories(include)
 
 # Add the main executable
-add_executable(Option_pricer main.cpp src/option.cpp src/payoff.cpp src/market_data.cpp)
+add_executable(Option_pricer main.cpp src/payoff.cpp src/market_data.cpp
+        src/option/options/base_option.cpp
+        include/sss.h
+        src/sss.cpp
+)
+
 # Enable testing
 enable_testing()
 add_subdirectory(tests)
