@@ -1,9 +1,8 @@
 
 #include <iostream>
-#include "option.h"
 
 int main() {
-
+    /*
     auto marketdata = MarketData::getInstance();
     marketdata->addStock("AAPL", 100.0, 0.2);
 
@@ -12,6 +11,7 @@ int main() {
 
     auto vanilla = factory.createOption("AAPL", std::move(pc), 1.0);
     std::cout << *vanilla << std::endl;
+    */
 
     return 0;
 

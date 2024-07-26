@@ -10,7 +10,6 @@ public:
 
 private:
     ArithmeticAsianOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class PathDependentOptionFactory;
 };
 
 #endif //ARITHMETIC_ASIAN_OPTION_H

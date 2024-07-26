@@ -7,9 +7,8 @@ class AsianOption: public PathDependentOption {
 public:
     ~AsianOption() override;
 
-private:
+protected:
     AsianOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class PathDependentOptionFactory;
 };
 
 #endif //BASE_ASIAN_OPTION_H

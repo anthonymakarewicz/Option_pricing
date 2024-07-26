@@ -10,7 +10,6 @@ public:
 
 private:
     EuropeanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class EuropeanOptionFactory;
 };
 
 #endif //EUROPEAN_OPTION_H

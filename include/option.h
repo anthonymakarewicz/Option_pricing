@@ -5,29 +5,11 @@
 #include "payoff.h"
 #include "market_data.h"
 
+/*
+
 // Option asbtract base class where *this must be managed by a shared_ptr
 class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
 public:
-    /** @brief Option base class
-     *
-     * This asbtract base class serves as an interface shared by all particular types of options.
-     * In addition, this class inherits from the simple MarketDataObserver asbtract class
-     * that enforce all subclasses to implement the update method when market data changes.
-     *
-     * This class does not store directly the StockData object which is only managed by the MarketData
-     * singleton object, but it accesses it through the MarketData object.
-     *
-     * In addition, the Option has a Payoff function object (aka functor) that handles the computation
-     * of the payoff for particualr types of Options. Being a funcotr, it also stores the strike K
-     * used to compute the payoff.
-     *
-     * This design choice of separating the StockData and the Payoff objects from the Option class
-     * follows the composition over inheritance principle
-     *
-     * Note: Instances of derived classes must be managed by a std::shared_ptr.and is handled
-     * by the factory method associated wiht the particular option type.
-     *
-     **/
     // Constructors
     Option(const Option& other); // Copy constructor
     Option(Option&& other) noexcept; // Move constructor
@@ -214,6 +196,7 @@ public:
      * able to free the memory if an exception does occur thus preventing memory leakd evne though the use
      * of shared_ptr<>(new ...) is not memory efficient comapred to make_shared<>().
      */
+/*
     std::shared_ptr<Option> createOption(std::string ticker,
                                          std::unique_ptr<Payoff>&& payoff,
                                          const double& T) override {
@@ -225,6 +208,8 @@ public:
         return optionPtr;
     }
 };
+
+/*
 
 
 class EuropeanOption : public SinglePathOption {

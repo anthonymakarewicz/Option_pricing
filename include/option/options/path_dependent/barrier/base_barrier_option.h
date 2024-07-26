@@ -21,7 +21,6 @@ protected:
     }
 
     std::unique_ptr<KnockBehavior> knockBehavior_;
-    friend class PathDependentOptionFactory;
 };
 
 #endif //BASE_BARRIER_OPTION_H

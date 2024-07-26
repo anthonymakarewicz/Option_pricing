@@ -1,30 +1,27 @@
-#ifndef TEST_PAYOFF_CPP
-#define TEST_PAYOFF_CPP
-
 #include <iostream>
 #include <gtest/gtest.h>
-#include "../../include/payoff.h"
+#include "payoff.h"
 
 // Test fixture for PayoffSingleStrike classes
 class PayoffSingleStrikeTest : public ::testing::Test {
 protected:
-    void SetUp() override {
+    static void SetUpTestSuite() {
         K = 100.0;
     }
 
-    double K;
+    static double K;
 };
 
 // Test fixture for PayoffDoubleStrikes classes
 class PayoffDoubleStrikesTest : public ::testing::Test {
 protected:
-    void SetUp() override {
+    static void SetUpTestSuite() {
         K_L = 90.0;
         K_U = 110.0;
     }
 
-    double K_L;
-    double K_U;
+    static double K_L;
+    static double K_U;
 };
 
 // Test PayoffCall
@@ -105,5 +102,3 @@ TEST_F(PayoffDoubleStrikesTest, PayoffDoubleDigitalTests) {
     EXPECT_DOUBLE_EQ((*clone)(95.0), 1.0);
     EXPECT_DOUBLE_EQ((*clone)(115.0), 0.0);
 }
-
-#endif //TEST_PAYOFF_CPP

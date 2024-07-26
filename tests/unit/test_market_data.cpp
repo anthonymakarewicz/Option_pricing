@@ -50,7 +50,6 @@ TEST_F(MarketDataTest, RemoveObserver) {
     EXPECT_TRUE(observer->wasUpdated());
 }
 
-
 TEST_F(MarketDataTest, NotifyAllObservers) {
     auto observer2 = std::make_shared<TestSupport::Option>("AAPL");
     marketData->addObserver(observer2);

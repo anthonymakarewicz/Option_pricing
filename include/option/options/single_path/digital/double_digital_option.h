@@ -10,7 +10,6 @@ public:
 
 private:
     DoubleDigitalOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class DoubleDigitalOptionFactory;
 };
 
 #endif //DOUBLE_DIGITAL_OPTION_H

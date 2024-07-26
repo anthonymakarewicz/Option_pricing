@@ -10,7 +10,6 @@ public:
 
 private:
     AmericanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class AmericanOptionFactory;
 };
 
 #endif //AMERICAN_OPTION_H

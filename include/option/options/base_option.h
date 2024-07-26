@@ -59,7 +59,6 @@ protected:
     double T_; // Maturity of the Option
     std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
     std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
-
 };
 
 #endif //BASE_OPTION_H

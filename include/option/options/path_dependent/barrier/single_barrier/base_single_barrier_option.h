@@ -12,7 +12,6 @@ protected:
                         std::unique_ptr<KnockBehavior> knockBehavior, const double& barrier);
 
     double barrier_;
-    friend class PathDependentOptionFactory;
 };
 
 #endif //BASE_SINGLE_BARRIER_H

@@ -9,6 +9,9 @@
 #include <mutex>
 #include <memory>
 
+
+// NEED TO PUT STOCKDATA INTO A SPERATE HEADER!
+
 class StockData {
 public:
     StockData(const double& S,
@@ -61,7 +64,14 @@ public:
      * will change.
      *
      */
+
+    // NEED TO ADD DESTRUCTOR!!!
+
     static std::shared_ptr<MarketData> getInstance();
+
+    // MarketData object should not be clonable
+    MarketData(MarketData &other) = delete;
+    void operator=(const MarketData &other) = delete;
 
     // Observer specific methods
     void addObserver(const std::shared_ptr<MarketDataObserver>& observer);
@@ -87,10 +97,6 @@ public:
 
 private:
     MarketData(); // Declare the constructor as private (common in Singleton pattern)
-
-    // MarketData object should not be clonable
-    MarketData(MarketData &other) = delete;
-    void operator=(const MarketData &) = delete;
 
     static std::shared_ptr<MarketData> instance_;
     static std::mutex mutex_;
