@@ -4,7 +4,6 @@
 #include <ostream>
 #include <iostream>
 #include "market_data.h"
-#include "option.h"
 
 // Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketData::instance_ = nullptr;
@@ -85,6 +84,9 @@ std::shared_ptr<MarketData> MarketData::getInstance() {
     }
     return instance_;
 }
+
+MarketData::~MarketData() { std::cout << "MarketData object properly destroyed!"; }
+
 // Initlize risk-free interest with some default value
 MarketData::MarketData() : r_(0.05) {}
 
@@ -162,7 +164,7 @@ void MarketData::updateStockCoupon(const std::string& ticker, std::optional<doub
     }
 }
 
-std::shared_ptr<StockData> MarketData::getStockData(std::string ticker) const {
+std::shared_ptr<StockData> MarketData::getStockData(const std::string &ticker) const {
     if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
         return it->second;
     }

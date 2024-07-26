@@ -9,6 +9,9 @@
 #include <mutex>
 #include <memory>
 
+
+// NEED TO PUT STOCKDATA INTO A SPERATE HEADER!
+
 class StockData {
 public:
     StockData(const double& S,
@@ -61,17 +64,22 @@ public:
      * will change.
      *
      */
+
+    // NEED TO ADD DESTRUCTOR!!!
+
     static std::shared_ptr<MarketData> getInstance();
+
+    ~MarketData();
 
     // MarketData object should not be clonable
     MarketData(MarketData &other) = delete;
-    void operator=(const MarketData &) = delete;
+    void operator=(const MarketData &other) = delete;
 
     // Observer specific methods
     void addObserver(const std::shared_ptr<MarketDataObserver>& observer);
     void removeObserver();
     void notifyObservers() const;
-    void notifyObserver(const std::string& id) const; // Notify specific observers
+    void notifyObserver(const std::string& id) const; // Notify specific observer
 
     // Template methods need to be declared inside the header
     template<typename... Args>
@@ -84,13 +92,14 @@ public:
     void updateStockPrice(const std::string& ticker, double S);
     void updateStockSigma(const std::string& ticker, double sigma);
     void updateStockCoupon(const std::string& ticker, std::optional<double> c);
-    [[nodiscard]] std::shared_ptr<StockData> getStockData(std::string ticker) const;
+    [[nodiscard]] std::shared_ptr<StockData> getStockData(const std::string &ticker) const;
     
     [[nodiscard]] double getR() const;
     void setR(const double& r);
 
 private:
     MarketData(); // Declare the constructor as private (common in Singleton pattern)
+
     static std::shared_ptr<MarketData> instance_;
     static std::mutex mutex_;
 

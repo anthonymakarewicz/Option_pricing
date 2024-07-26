@@ -1,10 +1,10 @@
-#ifndef OPTION_PRICER_OPTION_H
-#define OPTION_PRICER_OPTION_H
+#ifndef BASE_OPTION_H
+#define BASE_OPTION_H
 
-#include <memory>
 #include <string>
-#include "payoff.h"
-#include "market_data.h"
+#include "../../payoff.h"
+#include "../../market_data.h"
+
 
 // Option asbtract base class where *this must be managed by a shared_ptr
 class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
@@ -47,8 +47,10 @@ public:
     void initialize();
     [[nodiscard]] std::string getType() const;
 
+    virtual double payoff(const double& S) const;
+
 protected:
-    Option(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
+    Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T); // Parameter constructor
 
     // Utility functions for the copy & move semantics
     void copyFrom(const Option& other);
@@ -59,62 +61,4 @@ protected:
     std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
 };
 
-
-// Factory asbtract interface for Option
-class OptionFactory {
-public:
-    virtual ~OptionFactory() = default;
-    // Factory method to create specific Option instances
-    virtual std::shared_ptr<Option> createOption(std::string ticker,
-                                                 std::unique_ptr<Payoff>&& payoff,
-                                                 const double& T) = 0;
-};
-
-// Concrete class declared as final for devirtualization
-class VanillaOption final : public Option {
-public:
-    ~VanillaOption() override = default;
-    double calc_price() const override;// Implementation of the pure virtual method
-
-protected:
-    // Protected parameterized constructor to enforce creation through factory method
-    VanillaOption(std::string ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    friend class VanillaOptionFactory;
-};
-
-
-class VanillaOptionFactory final : public OptionFactory {
-public:
-    std::shared_ptr<Option> createOption(std::string ticker,
-                                         std::unique_ptr<Payoff>&& payoff,
-                                         const double& T) override {
-        if (!dynamic_cast<PayoffSingleStrike*>(payoff.get())) {
-            throw std::invalid_argument("VanillaOption only supports PayoffSingleStrike derived classes");
-        }
-        auto option = std::shared_ptr<Option>(new VanillaOption(std::move(ticker), std::move(payoff), T));
-        option->initialize();
-        return option;
-    }
-};
-
-
-
-/*
-class EuropeanOption : public VanillaOption {
-public:
-    EuropeanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    ~EuropeanOption() override = default;
-    double calc_price() const override;
-};
-
-
-class AmericanOption : public VanillaOption {
-public:
-    AmericanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
-    ~AmericanOption() override = default;
-    double calc_price() const override;
-};
-
-*/
-
-#endif //OPTION_PRICER_OPTION_H
+#endif //BASE_OPTION_H
