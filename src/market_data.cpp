@@ -2,8 +2,8 @@
 #define OPTION_PRICER_MARKET_DATA_CPP
 
 #include <ostream>
+#include <iostream>
 #include "market_data.h"
-#include "option.h"
 
 // Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketData::instance_ = nullptr;
@@ -57,10 +57,10 @@ void StockData::validate() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const StockData& stockData) {
-    os << "Price: " << stockData.getPrice()
-       << ", Volatility: " << stockData.getSigma();
+    os << "  -> Price: " << stockData.getPrice() << "\n";
+    os << "  -> Volatility: " << stockData.getSigma() << "\n";
     if (stockData.getCoupon().has_value()) {
-        os << ", Coupon: " << stockData.getCoupon().value();
+        os << "  -> Coupon: " << stockData.getCoupon().value() << "\n";
     }
     return os;
 }
@@ -80,21 +80,27 @@ std::shared_ptr<MarketData> MarketData::getInstance() {
     std::lock_guard<std::mutex> lock(mutex_); // Ensure thread safety
     if (!instance_) {
         instance_ = std::shared_ptr<MarketData>(new MarketData());
+        std::cout << "MakertData instance created" << "\n";
     }
     return instance_;
 }
+
+MarketData::~MarketData() { std::cout << "MarketData object properly destroyed!"; }
+
 // Initlize risk-free interest with some default value
 MarketData::MarketData() : r_(0.05) {}
 
 void MarketData::addObserver(const std::shared_ptr<MarketDataObserver>& observer) {
     observers_.push_back(observer);
+    std::cout << "Observer added. Total observers: " << observers_.size() << std::endl;
 }
 
-void MarketData::removeObserver(const std::shared_ptr<MarketDataObserver>& observer) {
+void MarketData::removeObserver() {
     // Erase_if introduced in C++20 that replace the erase-remove idiom
-    std::erase_if(observers_, [&observer](const std::weak_ptr<MarketDataObserver>& obs) {
-        return obs.lock() == observer;
+    std::erase_if(observers_, [](const std::weak_ptr<MarketDataObserver>& obs) {
+        return obs.expired();
     });
+    std::cout << "Expired observer removed. Total remaining observers: " << observers_.size() << "\n";
 }
 
 /**
@@ -158,7 +164,7 @@ void MarketData::updateStockCoupon(const std::string& ticker, std::optional<doub
     }
 }
 
-std::shared_ptr<StockData> MarketData::getStockData(const std::string& ticker) const {
+std::shared_ptr<StockData> MarketData::getStockData(const std::string &ticker) const {
     if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
         return it->second;
     }

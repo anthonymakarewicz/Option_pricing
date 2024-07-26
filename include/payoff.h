@@ -1,5 +1,5 @@
-#ifndef OPTION_PRICER_PAYOFF_H
-#define OPTION_PRICER_PAYOFF_H
+#ifndef PAYOFF_H
+#define PAYOFF_H
 
 #include <memory>
 
@@ -7,9 +7,11 @@ class Payoff {
 public:
     Payoff() = default; // Default (no parameter) constructor
     virtual ~Payoff() = default; // Virtual destructor
+
     [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0; // Prototype creational pattern
     virtual double operator()(const double& S) const = 0; // Define Payoff as an abstract functor
-    virtual void print(std::ostream& os) const = 0;
+    virtual void print(std::ostream& os) const;
+    [[nodiscard]] std::string getType() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Payoff& payoff);
 };
@@ -85,5 +87,4 @@ public:
     double operator()(const double& S) const override;
 };
 
-
-#endif //OPTION_PRICER_PAYOFF_H
+#endif //PAYOFF_H
