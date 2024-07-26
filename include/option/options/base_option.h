@@ -50,7 +50,7 @@ public:
     virtual double payoff(const double& S) const;
 
 protected:
-    Option(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T); // Parameter constructor
+    Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T); // Parameter constructor
 
     // Utility functions for the copy & move semantics
     void copyFrom(const Option& other);

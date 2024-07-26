@@ -15,7 +15,7 @@
  * object being created when the constructor is called to the list of observers
  **/
 Option::Option(const std::string& ticker,
-               std::unique_ptr<Payoff>&& payoff,
+               std::unique_ptr<Payoff> payoff,
                const double& T)
     : MarketDataObserver(ticker), T_(T) {
     if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
@@ -23,7 +23,7 @@ Option::Option(const std::string& ticker,
     marketData_ = MarketData::getInstance();
     auto stockData = marketData_->getStockData(id_); // If not found it throws an exception
 
-    // Safely move the payoff and pass the observer to MarketData
+    // Safely move the payoff
     payoff_ = std::move(payoff);
 }
 

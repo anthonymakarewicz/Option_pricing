@@ -9,7 +9,7 @@ public:
     [[nodiscard]] double calc_price() const override;
 
 private:
-    DoubleDigitalOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    DoubleDigitalOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T);
 };
 
 #endif //DOUBLE_DIGITAL_OPTION_H

@@ -9,7 +9,7 @@ public:
     [[nodiscard]] double calc_price() const override;
 
 private:
-    AmericanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    AmericanOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T);
 };
 
 #endif //AMERICAN_OPTION_H

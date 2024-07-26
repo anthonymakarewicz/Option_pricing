@@ -8,7 +8,7 @@ public:
     ~AsianOption() override;
 
 protected:
-    AsianOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    AsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T);
 };
 
 #endif //BASE_ASIAN_OPTION_H

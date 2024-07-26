@@ -10,7 +10,7 @@ add_executable(Unit_tests
         ${CMAKE_CURRENT_SOURCE_DIR}/../config/mock_classes.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../config/test_support.h
         ${CMAKE_CURRENT_SOURCE_DIR}/../../src/market_data.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/option.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/option.txt
         ${CMAKE_CURRENT_SOURCE_DIR}/../../src/payoff.cpp
         test_option.cpp
 )

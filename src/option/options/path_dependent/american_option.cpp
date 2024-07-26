@@ -6,5 +6,5 @@ double AmericanOption::calc_price() const {
     return 0.0;
 }
 
-AmericanOption::AmericanOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T)
+AmericanOption::AmericanOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T)
 : PathDependentOption(ticker, std::move(payoff), T) {}

@@ -5,23 +5,25 @@
 // Test fixture for PayoffSingleStrike classes
 class PayoffSingleStrikeTest : public ::testing::Test {
 protected:
-    static void SetUpTestSuite() {
+    PayoffSingleStrikeTest() : K(0.0) {}
+
+    void SetUp() override {
         K = 100.0;
     }
-
-    static double K;
+    double K;
 };
 
 // Test fixture for PayoffDoubleStrikes classes
 class PayoffDoubleStrikesTest : public ::testing::Test {
 protected:
-    static void SetUpTestSuite() {
+    PayoffDoubleStrikesTest() : K_L(0.0), K_U(0.0) {}
+
+    void SetUp() override {
         K_L = 90.0;
         K_U = 110.0;
     }
-
-    static double K_L;
-    static double K_U;
+    double K_L;
+    double K_U;
 };
 
 // Test PayoffCall

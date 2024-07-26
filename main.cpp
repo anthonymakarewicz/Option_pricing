@@ -2,6 +2,8 @@
 #include <iostream>
 
 int main() {
+
+    std::cout << "cbef";
     /*
     auto marketdata = MarketData::getInstance();
     marketdata->addStock("AAPL", 100.0, 0.2);

@@ -9,7 +9,7 @@ public:
     [[nodiscard]] double calc_price() const override;
 
 private:
-    ArithmeticAsianOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T);
+    ArithmeticAsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T);
 };
 
 #endif //ARITHMETIC_ASIAN_OPTION_H
