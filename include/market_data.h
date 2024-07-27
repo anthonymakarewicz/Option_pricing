@@ -10,8 +10,6 @@
 #include <memory>
 
 
-// NEED TO PUT STOCKDATA INTO A SPERATE HEADER!
-
 class StockData {
 public:
     StockData(const double& S,

@@ -25,7 +25,6 @@ TEST_F(PayoffSingleStrikeTest, PayoffDigitalCallEqualityTests) {
     EXPECT_FALSE(pdc != pdc2);
     EXPECT_FALSE(pdc == pdc3);
     EXPECT_TRUE(pdc != pdc3);
-
 }
 
 TEST_F(PayoffSingleStrikeTest, PayoffDigitalCallCalculationTests) {
