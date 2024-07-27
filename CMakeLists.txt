@@ -14,7 +14,6 @@ include_directories(include)
 
 # Add the main executable
 add_executable(Option_pricer main.cpp
-        src/payoff.cpp
         src/market_data.cpp
         src/option/options/base_option.cpp
         src/option/options/single_path/base_single_path_option.cpp
@@ -32,6 +31,16 @@ add_executable(Option_pricer main.cpp
         src/option/options/path_dependent/barrier/single_barrier/base_single_barrier_option.cpp
         src/option/options/path_dependent/barrier/single_barrier/up_single_barrier_option.cpp
         src/option/options/path_dependent/barrier/single_barrier/down_single_barrier_option.cpp
+        src/payoff/base_payoff.cpp
+        src/payoff/single_strike/base_payoff_single_strike.cpp
+        src/payoff/single_strike/vanilla/base_payoff_vanilla.cpp
+        src/payoff/single_strike/vanilla/payoff_vanilla_call.cpp
+        src/payoff/single_strike/vanilla/payoff_vanilla_put.cpp
+        src/payoff/single_strike/digital/base_payoff_digital.cpp
+        src/payoff/single_strike/digital/payoff_digital_call.cpp
+        src/payoff/single_strike/digital/payoff_digital_put.cpp
+        src/payoff/double_strikes/base_payoff_double_strikes.cpp
+        src/payoff/double_strikes/payoff_double_digital.cpp
 )
 
 # Enable testing

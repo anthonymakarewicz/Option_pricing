@@ -8,6 +8,7 @@ public:
     ~SingleBarrierOption() override;;
 
 protected:
+    // PROBABLY NEED TO PUT THE KnockBehavior AS WELL AS barrier INTO A PAYOFF!!
     SingleBarrierOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
                         std::unique_ptr<KnockBehavior> knockBehavior, const double& barrier);
 

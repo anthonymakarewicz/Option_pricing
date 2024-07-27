@@ -6,7 +6,7 @@ add_executable(Integration_tests
         test_integration_option.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../../src/market_data.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../../src/option.txt
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/payoff.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/payoff.txt
         ../config/mock_classes.h
 )
 

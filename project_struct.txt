@@ -42,8 +42,8 @@
 │   │   │       ├── market_data.cpp.o.d
 │   │   │       ├── option.txt.o
 │   │   │       ├── option.txt.o.d
-│   │   │       ├── payoff.cpp.o
-│   │   │       └── payoff.cpp.o.d
+│   │   │       ├── payoff.txt.o
+│   │   │       └── payoff.txt.o.d
 │   │   ├── TargetDirectories.txt
 │   │   ├── cmake.check_cache
 │   │   ├── pkgRedirects
@@ -87,8 +87,8 @@
 │       │   │   │   │   │       ├── market_data.cpp.o.d
 │       │   │   │   │   │       ├── option.txt.o
 │       │   │   │   │   │       ├── option.txt.o.d
-│       │   │   │   │   │       ├── payoff.cpp.o
-│       │   │   │   │   │       └── payoff.cpp.o.d
+│       │   │   │   │   │       ├── payoff.txt.o
+│       │   │   │   │   │       └── payoff.txt.o.d
 │       │   │   │   │   ├── test_main.cpp.o
 │       │   │   │   │   └── test_main.cpp.o.d
 │       │   │   │   ├── build.make
@@ -119,8 +119,8 @@
 │           │   │   │   │       ├── market_data.cpp.o.d
 │           │   │   │   │       ├── option.txt.o
 │           │   │   │   │       ├── option.txt.o.d
-│           │   │   │   │       ├── payoff.cpp.o
-│           │   │   │   │       └── payoff.cpp.o.d
+│           │   │   │   │       ├── payoff.txt.o
+│           │   │   │   │       └── payoff.txt.o.d
 │           │   │   │   ├── test_main.cpp.o
 │           │   │   │   └── test_main.cpp.o.d
 │           │   │   ├── build.make
@@ -164,7 +164,7 @@
 │   │   │   └── src
 │   │   │       ├── market_data.cpp.o
 │   │   │       ├── option.txt.o
-│   │   │       └── payoff.cpp.o
+│   │   │       └── payoff.txt.o
 │   │   ├── TargetDirectories.txt
 │   │   ├── clion-Cmake-log.txt
 │   │   ├── clion-environment.txt
@@ -195,7 +195,7 @@
 │       │   │       │   │   └── src
 │       │   │       │   │       ├── market_data.cpp.o
 │       │   │       │   │       ├── option.txt.o
-│       │   │       │   │       └── payoff.cpp.o
+│       │   │       │   │       └── payoff.txt.o
 │       │   │       │   └── test_main.cpp.o
 │       │   │       └── test_integration_option.cpp.o
 │       │   ├── CTestTestfile.cmake
@@ -209,7 +209,7 @@
 │           │       │   │   └── src
 │           │       │   │       ├── market_data.cpp.o
 │           │       │   │       ├── option.txt.o
-│           │       │   │       └── payoff.cpp.o
+│           │       │   │       └── payoff.txt.o
 │           │       │   └── test_main.cpp.o
 │           │       ├── test_market_data.cpp.o
 │           │       └── test_payoff.cpp.o
@@ -285,7 +285,7 @@
 ├── src
 │   ├── market_data.cpp
 │   ├── option.txt
-│   └── payoff.cpp
+│   └── payoff.txt
 └── tests
     ├── CMakeLists.txt
     ├── README.md
