@@ -9,9 +9,9 @@ public:
     PayoffDoubleStrikes(const double& K_L, const double& K_U);
     ~PayoffDoubleStrikes() override;
 
-    void print(std::ostream& os) const override;
     [[nodiscard]] double getKL() const;
     [[nodiscard]] double getKU() const;
+    void print(std::ostream& os) const override;
 
 protected:
     double K_L_;

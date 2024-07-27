@@ -12,3 +12,11 @@ double PayoffDigitalPut::operator()(const double &S) const {
 std::unique_ptr<Payoff> PayoffDigitalPut::clone() const {
     return std::make_unique<PayoffDigitalPut>(*this);
 }
+
+bool PayoffDigitalPut::operator==(const PayoffDigitalPut &other) const {
+    return K_ == other.K_;
+}
+
+bool PayoffDigitalPut::operator!=(const PayoffDigitalPut &other) const {
+    return !(*this == other);
+}

@@ -8,8 +8,11 @@ public:
     explicit PayoffVanillaCall(const double& K);
     ~PayoffVanillaCall() override;
 
-    double operator()(const double& S) const override;
     [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
+    bool operator==(const PayoffVanillaCall& other) const;
+    bool operator!=(const PayoffVanillaCall& other) const;
+
+    double operator()(const double& S) const override;
 };
 
 #endif //PAYOFF_VANILLA_CALL_H

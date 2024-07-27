@@ -12,3 +12,11 @@ double PayoffDigitalCall::operator()(const double &S) const {
 std::unique_ptr<Payoff> PayoffDigitalCall::clone() const {
     return std::make_unique<PayoffDigitalCall>(*this);
 }
+
+bool PayoffDigitalCall::operator==(const PayoffDigitalCall &other) const {
+    return K_ == other.K_;
+}
+
+bool PayoffDigitalCall::operator!=(const PayoffDigitalCall &other) const {
+    return !(*this == other);
+}

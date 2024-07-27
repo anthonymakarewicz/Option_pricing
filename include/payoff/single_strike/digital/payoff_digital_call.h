@@ -10,6 +10,8 @@ public:
 
     double operator()(const double& S) const override;
     [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
+    bool operator==(const PayoffDigitalCall& other) const;
+    bool operator!=(const PayoffDigitalCall& other) const;
 };
 
 #endif //PAYOFF_DIGITAL_CALL_H
