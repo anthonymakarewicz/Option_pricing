@@ -6,7 +6,7 @@ double DoubleBarrierOption::calc_price() const {
     return 0.0;
 }
 
-DoubleBarrierOption::DoubleBarrierOption(const std::string &ticker, std::unique_ptr<Payoff> &&payoff, const double &T,
+DoubleBarrierOption::DoubleBarrierOption(const std::string &ticker, std::unique_ptr<Payoff> payoff, const double &T,
                                          std::unique_ptr<KnockBehavior> knockBehavior,
                                          const double& lowerBarrier, const double& upperBarrier)
 : BarrierOption(ticker, std::move(payoff), T, std::move(knockBehavior)),

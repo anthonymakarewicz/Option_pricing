@@ -1,6 +1,3 @@
-#ifndef OPTION_PRICER_MARKET_DATA_CPP
-#define OPTION_PRICER_MARKET_DATA_CPP
-
 #include <ostream>
 #include <iostream>
 #include "market_data.h"
@@ -179,6 +176,3 @@ void MarketData::setR(const double& r) {
     r_ = r;
     notifyObservers();
 }
-
-
-#endif //OPTION_PRICER_MARKET_DATA_CPP

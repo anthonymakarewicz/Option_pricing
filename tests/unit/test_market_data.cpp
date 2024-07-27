@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <memory>
-#include "../../include/market_data.h"
+#include "market_data.h"
 #include "../config/test_support.h"
 
 // Test fixture for MarketData tests
@@ -59,7 +59,7 @@ TEST_F(MarketDataTest, NotifyAllObservers) {
     EXPECT_TRUE(observer2->wasUpdated());
 }
 
-TEST_F(MarketDataTest, AddAndUpdateStockData) {
+TEST_F(MarketDataTest, UpdateStockData) {
     auto stockData = marketData->getStockData("AAPL");
     EXPECT_DOUBLE_EQ(stockData->getPrice(), 150.0);
     EXPECT_DOUBLE_EQ(stockData->getSigma(), 0.2);
