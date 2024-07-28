@@ -3,13 +3,13 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "../../../include/market_data/market_data.h"
+#include "market_data/market_data.h"
 
 namespace Mocks {
     // Minimal Mock Option class
     class Option final : public MarketDataObserver, public std::enable_shared_from_this<Option> {
     public:
-        explicit Option(std::string ticker) : MarketDataObserver(std::move(ticker)), updated_(false) {}
+        explicit Option(const std::string& ticker) : MarketDataObserver(ticker), updated_(false) {}
 
         void update() override { updated_ = true; }
         bool wasUpdated() const { return updated_; }

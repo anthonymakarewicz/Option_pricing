@@ -35,7 +35,7 @@ Option::Option(const Option& other)
 }
 
 Option::Option(Option&& other) noexcept
-    : MarketDataObserver(std::move(other.id_)), T_(0.0), payoff_(nullptr), marketData_(nullptr) {
+    : MarketDataObserver(other.id_), T_(0.0), payoff_(nullptr), marketData_(nullptr) {
     moveFrom(std::move(other));
 }
 
