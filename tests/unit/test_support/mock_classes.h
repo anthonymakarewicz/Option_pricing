@@ -1,10 +1,11 @@
-#ifndef TEST_CLASSES_H
-#define TEST_CLASSES_H
+#ifndef MOCK_CLASSES_H
+#define MOCK_CLASSES_H
 
-#include <string>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 #include "../../include/market_data/market_data.h"
 
-namespace TestSupport {
+namespace Mocks {
     // Minimal Mock Option class
     class Option final : public MarketDataObserver, public std::enable_shared_from_this<Option> {
     public:
@@ -17,10 +18,11 @@ namespace TestSupport {
     private:
         bool updated_;
     };
+
     // Minimal Mock MarketData class
-    class MarketData {
+    class MockMarketData {
     public:
-        virtual ~MarketData() = default;
+        virtual ~MockMarketData() = default;
 
         virtual std::shared_ptr<StockData> getStockData(const std::string& ticker) const = 0;
         virtual void addObserver(std::shared_ptr<MarketDataObserver> observer) = 0;
@@ -28,6 +30,15 @@ namespace TestSupport {
 
         virtual double getR() const = 0;
     };
+
+    // Mock class for MarketData using Google Mock
+    class MarketData final : public MockMarketData {
+    public:
+        MOCK_METHOD(std::shared_ptr<StockData>, getStockData, (const std::string& ticker), (const, override));
+        MOCK_METHOD(void, addObserver, (std::shared_ptr<MarketDataObserver> observer), (override));
+        MOCK_METHOD(void, removeObserver, (std::shared_ptr<MarketDataObserver> observer), (override));
+        MOCK_METHOD(double, getR, (), (const, override));
+    };
 }
 
-#endif // TEST_CLASSES_H
+#endif //MOCK_CLASSES_H

@@ -1,23 +1,21 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <option/options/single_path/european_option.h>
-
 #include "option/options/base_option.h"
-#include "../config/test_support.h"
-#include "../config/mock_classes.h"
+#include "payoff/single_strike/vanilla/payoff_vanilla_call.h"
+#include "test_support/mock_classes.h"
 
-using namespace ::testing;
-using namespace TestSupport::MockImplementations;
+using namespace testing;
 
-
-/*
-class OptionTest : public Test {
+class OptionTest : public ::testing::Test {
 protected:
+    OptionTest() : T(0.0) {}
+
     void SetUp() override {
         ticker = "AAPL";
         T = 1.0;
-        payoff = std::make_unique<PayoffCall>(100.0);
-        mockMarketData = std::make_shared<MockMarketData>();
+        payoff = std::make_unique<PayoffVanillaCall>(100.0);
+        mockMarketData = std::make_shared<Mocks::MarketData>();
         //MarketData::instance_ = mockMarketData; // Point the MarketData singleton to the mock
     }
 
@@ -28,7 +26,7 @@ protected:
     std::string ticker;
     double T;
     std::unique_ptr<Payoff> payoff;
-    std::shared_ptr<MockMarketData> mockMarketData;
+    std::shared_ptr<Mocks::MarketData> mockMarketData;
 };
 
 // Test constructor and initialization
@@ -64,7 +62,7 @@ TEST_F(OptionTest, CopyConstructorTest) {
     std::shared_ptr<Option> option1 = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
     // Create another payoff object for the copy constructor
-    auto payoff2 = std::make_unique<PayoffCall>(100.0);
+    auto payoff2 = std::make_unique<PayoffVanillaCall>(100.0);
     EuropeanOption option2 = *dynamic_cast<EuropeanOption*>(option1.get());
 
     EXPECT_EQ(option2.calc_price(), 0.0); // Assuming the initial calc_price is 0.0
@@ -89,11 +87,10 @@ TEST_F(OptionTest, AssignmentOperatorTest) {
 
     std::shared_ptr<Option> option1 = std::make_shared<SinglePathOption>(ticker, std::move(payoff), T);
 
-    auto payoff2 = std::make_unique<PayoffCall>(100.0);
+    auto payoff2 = std::make_unique<PayoffVanillaCall>(100.0);
     std::shared_ptr<Option> option2 = std::make_shared<SinglePathOption>(ticker, std::move(payoff2), T);
 
     *dynamic_cast<SinglePathOption*>(option2.get()) = *dynamic_cast<SinglePathOption*>(option1.get());
 
     EXPECT_EQ(option2->calc_price(), 0.0); // Assuming the initial calc_price is 0.0
 }
-*/

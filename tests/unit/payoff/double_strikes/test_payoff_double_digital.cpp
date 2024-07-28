@@ -36,7 +36,6 @@ TEST_F(PayoffDoubleDigitalTest, PayoffDoubleDigitalEqualityTests) {
 
     EXPECT_TRUE(pdd == pdd2);
     EXPECT_FALSE(pdd != pdd2);
-
     EXPECT_FALSE(pdd == pdd3);
     EXPECT_TRUE(pdd != pdd3);
 }
