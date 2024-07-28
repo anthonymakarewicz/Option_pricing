@@ -33,7 +33,6 @@ protected:
 std::shared_ptr<MarketData> MarketDataTest::marketData = nullptr;
 std::shared_ptr<Mocks::Option> MarketDataTest::observer = nullptr;
 
-
 TEST_F(MarketDataTest, SingletonInstance) {
     auto instance1 = MarketData::getInstance();
     auto instance2 = MarketData::getInstance();

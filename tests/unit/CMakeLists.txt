@@ -3,7 +3,6 @@ find_package(GTest REQUIRED)
 
 # Create the executable called Unit_tests
 add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
-        test_option.cpp
         market_data/test_stock_data.cpp
         market_data/test_market_data.cpp
         payoff/single_strike/vanilla/test_payoff_vanilla_call.cpp
@@ -41,6 +40,8 @@ add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         ../../src/payoff/single_strike/digital/payoff_digital_put.cpp
         ../../src/payoff/double_strikes/base_payoff_double_strikes.cpp
         ../../src/payoff/double_strikes/payoff_double_digital.cpp
+        option/test_base_option.cpp
+        option/test_european_option.cpp
 )
 
 target_link_libraries(Unit_tests GTest::GTest GTest::Main GTest::gmock_main)
