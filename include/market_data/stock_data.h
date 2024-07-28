@@ -2,6 +2,7 @@
 #define STOCK_DATA_H
 
 #include <optional>
+#include <ostream>
 
 class StockData {
 public:
