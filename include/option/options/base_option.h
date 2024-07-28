@@ -3,7 +3,7 @@
 
 #include <string>
 #include "../../payoff/base_payoff.h"
-#include "../../market_data.h"
+#include "../../market_data/market_data.h"
 
 // Option asbtract base class where *this must be managed by a shared_ptr
 class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
