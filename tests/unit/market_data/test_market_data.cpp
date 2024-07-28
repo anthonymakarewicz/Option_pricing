@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include "market_data/market_data.h"
-#include "../../config/test_support.h"
+#include "../test_support/mock_classes.h"
 
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
@@ -9,7 +9,7 @@ protected:
     static void SetUpTestSuite() {
         marketData = MarketData::getInstance();
         marketData->addStock("AAPL", 150.0, 0.2, 0.01);
-        observer = std::make_shared<TestSupport::Option>("AAPL");
+        observer = std::make_shared<Mocks::Option>("AAPL");
         marketData->addObserver(observer);
     }
 
@@ -25,14 +25,13 @@ protected:
     }
 
     static std::shared_ptr<MarketData> marketData;
-    static std::shared_ptr<TestSupport::Option> observer;
+    static std::shared_ptr<Mocks::Option> observer;
     //std::string ticker;
 };
 
 // Static member initialization to avoid u
 std::shared_ptr<MarketData> MarketDataTest::marketData = nullptr;
-std::shared_ptr<TestSupport::Option> MarketDataTest::observer = nullptr;
-
+std::shared_ptr<Mocks::Option> MarketDataTest::observer = nullptr;
 
 TEST_F(MarketDataTest, SingletonInstance) {
     auto instance1 = MarketData::getInstance();
@@ -51,7 +50,7 @@ TEST_F(MarketDataTest, RemoveObserver) {
 }
 
 TEST_F(MarketDataTest, NotifyAllObservers) {
-    auto observer2 = std::make_shared<TestSupport::Option>("AAPL");
+    auto observer2 = std::make_shared<Mocks::Option>("AAPL");
     marketData->addObserver(observer2);
 
     marketData->notifyObservers();

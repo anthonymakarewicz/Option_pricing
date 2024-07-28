@@ -23,10 +23,8 @@ TEST_F(PayoffSingleStrikeTest, PayoffVanillaCallEqualityTests) {
 
     EXPECT_TRUE(pvc == pvc2);
     EXPECT_FALSE(pvc != pvc2);
-
     EXPECT_FALSE(pvc == pvc3);
     EXPECT_TRUE(pvc != pvc3);
-
 }
 
 TEST_F(PayoffSingleStrikeTest, PayoffVanillaCallPayoffCalculationTests) {

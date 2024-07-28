@@ -23,10 +23,8 @@ TEST_F(PayoffSingleStrikeTest, PayoffVanillaPutEqualityTests) {
 
     EXPECT_TRUE(pvp == pvp2);
     EXPECT_FALSE(pvp != pvp2);
-
     EXPECT_FALSE(pvp == pvp3);
     EXPECT_TRUE(pvp != pvp3);
-
 }
 
 TEST_F(PayoffSingleStrikeTest, PayoffVanillaPutPayoffCalculationTests) {
