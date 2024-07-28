@@ -2,7 +2,7 @@
 #define TEST_CLASSES_H
 
 #include <string>
-#include "../../include/market_data.h"
+#include "../../include/market_data/market_data.h"
 
 namespace TestSupport {
     // Minimal Mock Option class

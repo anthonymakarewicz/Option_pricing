@@ -1,5 +1,5 @@
-#ifndef OPTION_PRICER_MARKET_DATA_H
-#define OPTION_PRICER_MARKET_DATA_H
+#ifndef MARKET_DATA_H
+#define MARKET_DATA_H
 
 #include <unordered_map>
 #include <string>
@@ -9,46 +9,8 @@
 #include <mutex>
 #include <memory>
 
-
-// NEED TO PUT STOCKDATA INTO A SPERATE HEADER!
-
-class StockData {
-public:
-    StockData(const double& S,
-              const double& sigma,
-              const std::optional<double>& c = std::nullopt);
-
-    // Prefix guetters with nodiscard C++17
-    [[nodiscard]] double getPrice() const;
-    [[nodiscard]] double getSigma() const;
-    [[nodiscard]] std::optional<double> getCoupon() const;
-    friend std::ostream& operator<<(std::ostream& os, const StockData& stockData);
-
-private:
-    void setPrice(const double& S);
-    void setSigma(const double& sigma);
-    void setCoupon(const std::optional<double>& c);
-    void validate() const;
-
-    double S_; // Stock Price
-    double sigma_; // Volatility
-    std::optional<double> c_; // Dividen yield as std::optional C++17
-    friend class MarketData; // Allow MarketData to access private setters
-};
-
-
-// Declare MarketDataObserver using Observer design pattern
-class MarketDataObserver {
-public:
-    explicit MarketDataObserver(std::string id) : id_(std::move(id)) {}
-    virtual ~MarketDataObserver() = default;
-    virtual void update() = 0;
-    [[nodiscard]] std::string getID() const { return id_; } // More efficient than virtual/final due to vtable usage
-
-protected:
-    std::string id_;
-};
-
+#include "stock_data.h"
+#include "market_data_observer.h"
 
 // Declare MarketData using Singleton design pattern
 class MarketData {
@@ -108,4 +70,4 @@ private:
     std::vector<std::weak_ptr<MarketDataObserver>> observers_; // Use weak_ptr to avoid circular references
 };
 
-#endif // OPTION_PRICER_MARKET_DATA_H
+#endif //MARKET_DATA_H
