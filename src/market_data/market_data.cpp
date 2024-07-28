@@ -1,69 +1,10 @@
-#ifndef OPTION_PRICER_MARKET_DATA_CPP
-#define OPTION_PRICER_MARKET_DATA_CPP
-
 #include <ostream>
 #include <iostream>
-#include "market_data.h"
+#include "market_data/market_data.h"
 
 // Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketData::instance_ = nullptr;
 std::mutex MarketData::mutex_;
-
-// StockData implementation
-StockData::StockData(const double& S, const double& sigma, const std::optional<double>& c)
-    : S_(S), sigma_(sigma), c_(c) {
-    validate();
-}
-
-// Prefix common guetters with nodiscard C++17
-[[nodiscard]] double StockData::getPrice() const {
-    return S_;
-}
-
-[[nodiscard]] double StockData::getSigma() const {
-    return sigma_;
-}
-
-[[nodiscard]] std::optional<double> StockData::getCoupon() const {
-    return c_;
-}
-
-void StockData::setPrice(const double& S) {
-    S_ = S;
-    validate();
-}
-
-void StockData::setSigma(const double& sigma) {
-    sigma_ = sigma;
-    validate();
-}
-
-void StockData::setCoupon(const std::optional<double>& c) {
-    c_ = c;
-    validate();
-}
-
-void StockData::validate() const {
-    if (S_ <= 0) {
-        throw std::invalid_argument("Price must be positive.");
-    }
-    if (sigma_ < 0) {
-        throw std::invalid_argument("Sigma cannot be negative.");
-    }
-    // Check if the optional dividend was specified before accessing
-    if (c_.has_value() && (c_.value() < 0 || c_.value() > 1)) {
-        throw std::invalid_argument("Coupon rate must be between 0 and 1.");
-    }
-}
-
-std::ostream& operator<<(std::ostream& os, const StockData& stockData) {
-    os << "  -> Price: " << stockData.getPrice() << "\n";
-    os << "  -> Volatility: " << stockData.getSigma() << "\n";
-    if (stockData.getCoupon().has_value()) {
-        os << "  -> Coupon: " << stockData.getCoupon().value() << "\n";
-    }
-    return os;
-}
 
 // MarketData implementation
 /** @brief
@@ -179,6 +120,3 @@ void MarketData::setR(const double& r) {
     r_ = r;
     notifyObservers();
 }
-
-
-#endif //OPTION_PRICER_MARKET_DATA_CPP

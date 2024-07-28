@@ -2,7 +2,7 @@
 #define TEST_CLASSES_H
 
 #include <string>
-#include "../../include/market_data.h"
+#include "../../include/market_data/market_data.h"
 
 namespace TestSupport {
     // Minimal Mock Option class
@@ -21,9 +21,11 @@ namespace TestSupport {
     class MarketData {
     public:
         virtual ~MarketData() = default;
+
         virtual std::shared_ptr<StockData> getStockData(const std::string& ticker) const = 0;
         virtual void addObserver(std::shared_ptr<MarketDataObserver> observer) = 0;
         virtual void removeObserver(std::shared_ptr<MarketDataObserver> observer) = 0;
+
         virtual double getR() const = 0;
     };
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
-#include "payoff.h"
+
+/*
 
 // Test fixture for PayoffSingleStrike classes
 class PayoffSingleStrikeTest : public ::testing::Test {

@@ -4,10 +4,6 @@ find_package(GTest REQUIRED)
 add_executable(Integration_tests
         ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         test_integration_option.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/market_data.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/option.txt
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../src/payoff.cpp
-        ../config/mock_classes.h
 )
 
 target_link_libraries(Integration_tests GTest::GTest GTest::Main GTest::gmock_main)

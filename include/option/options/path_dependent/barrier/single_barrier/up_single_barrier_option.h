@@ -9,7 +9,7 @@ public:
     [[nodiscard]] double calc_price() const override;
 
 private:
-    UpSingleBarrierOption(const std::string& ticker, std::unique_ptr<Payoff>&& payoff, const double& T,
+    UpSingleBarrierOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
     std::unique_ptr<KnockBehavior> knockBehavior, const double& barrier);
 
     bool isOut(double S) const override;

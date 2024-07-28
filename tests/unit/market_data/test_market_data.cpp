@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <memory>
-#include "../../include/market_data.h"
-#include "../config/test_support.h"
+#include "market_data/market_data.h"
+#include "../../config/test_support.h"
 
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
@@ -59,7 +59,7 @@ TEST_F(MarketDataTest, NotifyAllObservers) {
     EXPECT_TRUE(observer2->wasUpdated());
 }
 
-TEST_F(MarketDataTest, AddAndUpdateStockData) {
+TEST_F(MarketDataTest, UpdateStockData) {
     auto stockData = marketData->getStockData("AAPL");
     EXPECT_DOUBLE_EQ(stockData->getPrice(), 150.0);
     EXPECT_DOUBLE_EQ(stockData->getSigma(), 0.2);
@@ -93,14 +93,4 @@ TEST_F(MarketDataTest, RiskFreeRate) {
 
     marketData->setR(0.03);
     EXPECT_DOUBLE_EQ(marketData->getR(), 0.03);
-}
-
-
-class StockDataTest : public ::testing::Test {};
-
-TEST_F(StockDataTest, InvalidStockData) {
-    EXPECT_THROW(StockData(-150.0, 0.2, 0.01), std::invalid_argument);
-    EXPECT_THROW(StockData(150.0, -0.2, 0.01), std::invalid_argument);
-    EXPECT_THROW(StockData(150.0, 0.2, -0.01), std::invalid_argument);
-    EXPECT_THROW(StockData(150.0, 0.2, 1.5), std::invalid_argument);
 }

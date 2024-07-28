@@ -3,7 +3,6 @@
 #include <option/options/single_path/european_option.h>
 
 #include "option/options/base_option.h"
-#include "payoff.h"
 #include "../config/test_support.h"
 #include "../config/mock_classes.h"
 
