@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+
+/*
 #include "option/base_option.h"
 #include "payoff/single_strike/payoff_vanilla_call.h"
 //#include "../test_support/mock_classes.h"

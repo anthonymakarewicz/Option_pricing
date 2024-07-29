@@ -1,21 +1,25 @@
 #ifndef BASE_PAYOFF_H
 #define BASE_PAYOFF_H
 
-#include<memory>
+#include <memory>
 
-// Abastract base class for Payoff
-class Payoff {
-public:
-    Payoff();
-    virtual ~Payoff();
+#include "market_data/market_data.h"
 
-    [[nodiscard]] std::string getType() const;
-    [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0; // Prototype creational pattern
+namespace OptionPricer {
+    // Abstract base class for Payoff
+    class Payoff {
+    public:
+        Payoff();
+        virtual ~Payoff();
 
-    virtual void print(std::ostream& os) const;
-    friend std::ostream& operator<<(std::ostream& os, const Payoff& payoff);
+        [[nodiscard]] std::string getType() const;
+        [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0; // Prototype creational pattern
 
-    virtual double operator()(const double& S) const = 0; // Define Payoff as a functor
-};
+        virtual void print(std::ostream& os) const;
+        friend std::ostream& operator<<(std::ostream& os, const Payoff& payoff);
+
+        virtual double operator()(const double& S) const = 0; // Define Payoff as a functor
+    };
+}
 
 #endif //BASE_PAYOFF_H

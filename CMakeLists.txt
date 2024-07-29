@@ -14,6 +14,7 @@ include_directories(include)
 
 # Add the main executable
 add_executable(Option_pricer main.cpp
+        src/market_data/base_market_data.cpp
         src/market_data/market_data.cpp
         src/market_data/market_data_observer.cpp
         src/market_data/stock_data.cpp
@@ -43,7 +44,6 @@ add_executable(Option_pricer main.cpp
         src/payoff/single_strike/payoff_digital_put.cpp
         src/payoff/double_strikes/base_payoff_double_strikes.cpp
         src/payoff/double_strikes/payoff_double_digital.cpp
-        src/market_data/imarket_data.cpp
 )
 
 # Enable testing

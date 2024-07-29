@@ -8,13 +8,13 @@ namespace OptionPricer {
         [[nodiscard]] virtual bool isActive(bool barrierBreached) const = 0;
     };
 
-    class KnockIn : public KnockBehavior {
+    class KnockIn final: public KnockBehavior {
     public:
         ~KnockIn() override;
         [[nodiscard]] bool isActive(bool barrierBreached) const override;
     };
 
-    class KnockOut : public KnockBehavior {
+    class KnockOut final: public KnockBehavior {
     public:
         ~KnockOut() override;
         [[nodiscard]] bool isActive(bool barrierBreached) const override;
