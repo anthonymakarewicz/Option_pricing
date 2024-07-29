@@ -5,6 +5,7 @@ namespace OptionPricer {
 
     PathDependentOption::PathDependentOption(const std::string& ticker,
                                              std::unique_ptr<Payoff> payoff,
-                                             const double& T)
-    : Option(ticker, std::move(payoff), T) {}
+                                             const double& T,
+                                             std::shared_ptr<IMarketData> marketData)
+    : Option(ticker, std::move(payoff), T, std::move(marketData)) {}
 }

@@ -4,7 +4,6 @@
 
 #include "payoff/base_payoff.h"
 
-
 namespace OptionPricer {
     Payoff::Payoff() = default;
 

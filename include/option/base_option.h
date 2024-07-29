@@ -3,7 +3,7 @@
 
 #include <string>
 #include "payoff/base_payoff.h"
-#include "market_data/market_data.h"
+#include "market_data/base_market_data.h"
 
 namespace OptionPricer {
     // Option asbtract base class where *this must be managed by a shared_ptr
@@ -51,7 +51,8 @@ namespace OptionPricer {
         virtual double payoff(const double& S) const;
 
     protected:
-        Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T); // Parameter constructor
+        Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
+            std::shared_ptr<IMarketData> marketData); // Parameter constructor
 
         // Utility functions for the copy & move semantics
         void copyFrom(const Option& other);
@@ -59,7 +60,7 @@ namespace OptionPricer {
 
         double T_; // Maturity of the Option
         std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
-        std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
+        std::shared_ptr<IMarketData> marketData_; // Shared ptr to IMarketData interface
     };
 };
 
