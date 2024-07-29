@@ -4,8 +4,7 @@
 #include <cxxabi.h>
 #include "option/base_option.h"
 
-
-
+#include <payoff/single_strike/base_payoff_vanilla.h>
 
 /**
 * @brief Constructor implementation
@@ -17,6 +16,7 @@
 * After, move the payoff unique_ptr to the payoff_ attribute and add a shared_ptr to the current
 * object being created when the constructor is called to the list of observers
 **/
+
 namespace OptionPricer {
     Option::Option(const std::string& ticker,
                    std::unique_ptr<Payoff> payoff,
@@ -136,6 +136,6 @@ namespace OptionPricer {
     }
 
     double Option::payoff(const double &S) const {
-        { return (*payoff_)(S); }
+        return (*payoff_)(S);
     }
 }

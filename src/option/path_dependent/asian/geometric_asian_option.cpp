@@ -10,4 +10,5 @@ namespace OptionPricer {
     GeometricAsianOption::GeometricAsianOption(const std::string &ticker,
                                                std::unique_ptr<Payoff> payoff,
                                                const double &T)
+    : AsianOption(ticker, std::move(payoff), T) {}
 }

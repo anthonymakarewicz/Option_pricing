@@ -13,6 +13,7 @@ add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         payoff/single_strike/test_payoff_digital_put.cpp
         payoff/double_strikes/test_payoff_double_digital.cpp
         # Add the necessary source files
+        ../../src/market_data/base_market_data.cpp
         ../../src/market_data/market_data.cpp
         ../../src/market_data/market_data_observer.cpp
         ../../src/market_data/stock_data.cpp

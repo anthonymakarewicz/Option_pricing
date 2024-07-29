@@ -3,16 +3,18 @@
 
 #include "base_payoff_vanilla.h"
 
-class PayoffVanillaPut final : public PayoffVanilla {
-public:
-    explicit PayoffVanillaPut(const double& K);
-    ~PayoffVanillaPut() override;
+namespace OptionPricer {
+    class PayoffVanillaPut final : public PayoffVanilla {
+    public:
+        explicit PayoffVanillaPut(const double& K);
+        ~PayoffVanillaPut() override;
 
-    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
-    bool operator==(const PayoffVanillaPut& other) const;
-    bool operator!=(const PayoffVanillaPut& other) const;
+        [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
+        bool operator==(const PayoffVanillaPut& other) const;
+        bool operator!=(const PayoffVanillaPut& other) const;
 
-    double operator()(const double& S) const override;
-};
+        double operator()(const double& S) const override;
+    };
+}
 
 #endif //PAYOFF_VANILLA_PUT_H

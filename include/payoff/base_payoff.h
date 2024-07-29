@@ -3,8 +3,6 @@
 
 #include <memory>
 
-#include "market_data/market_data.h"
-
 namespace OptionPricer {
     // Abstract base class for Payoff
     class Payoff {

@@ -1,6 +1,8 @@
 #include "payoff/double_strikes/payoff_double_digital.h"
 #include <gtest/gtest.h>
 
+using namespace OptionPricer;
+
 // Test fixture for PayoffDoubleDigital classes
 class PayoffDoubleDigitalTest : public ::testing::Test {
 protected:

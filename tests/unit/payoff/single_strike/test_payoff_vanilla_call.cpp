@@ -1,6 +1,8 @@
 #include "test_support/fixture_payoff_single_strike.h"
 #include "payoff/single_strike/payoff_vanilla_call.h"
 
+using namespace OptionPricer;
+
 TEST_F(PayoffSingleStrikeTest, PayoffVanillaCallConstructorTests) {
     EXPECT_NO_THROW(PayoffVanillaCall pvc(K));
     EXPECT_THROW(PayoffVanillaCall pvc(-K), std::invalid_argument);

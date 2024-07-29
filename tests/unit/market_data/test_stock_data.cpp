@@ -1,5 +1,8 @@
 #include "gtest/gtest.h"
 #include "market_data/stock_data.h"
+
+using namespace OptionPricer;
+
 class StockDataTest : public ::testing::Test {};
 
 TEST_F(StockDataTest, InvalidStockData) {

@@ -1,6 +1,8 @@
 #include "test_support/fixture_payoff_single_strike.h"
 #include "payoff/single_strike/payoff_digital_put.h"
 
+using namespace OptionPricer;
+
 TEST_F(PayoffSingleStrikeTest, PayoffDigitalPutConstructorTests) {
     EXPECT_NO_THROW(PayoffDigitalPut pdp(K));
     EXPECT_THROW(PayoffDigitalPut pdp(-K), std::invalid_argument);

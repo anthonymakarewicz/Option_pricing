@@ -3,6 +3,8 @@
 #include "market_data/market_data.h"
 #include "../test_support/mock_classes.h"
 
+using namespace OptionPricer;
+
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
 protected:

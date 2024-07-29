@@ -11,7 +11,7 @@
 
 #include "stock_data.h"
 #include "market_data_observer.h"
-#include "imarket_data.h"
+#include "base_market_data.h"
 
 namespace OptionPricer {
     // Declare MarketData as Singleton

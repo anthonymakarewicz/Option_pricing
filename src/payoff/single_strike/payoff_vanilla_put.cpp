@@ -1,22 +1,24 @@
 #include <algorithm>
 #include "payoff/single_strike/payoff_vanilla_put.h"
 
-PayoffVanillaPut::PayoffVanillaPut(const double &K) : PayoffVanilla(K) {}
+namespace OptionPricer {
+    PayoffVanillaPut::PayoffVanillaPut(const double &K) : PayoffVanilla(K) {}
 
-PayoffVanillaPut::~PayoffVanillaPut() = default;
+    PayoffVanillaPut::~PayoffVanillaPut() = default;
 
-std::unique_ptr<Payoff> PayoffVanillaPut::clone() const {
-    return std::make_unique<PayoffVanillaPut>(*this);
-}
+    std::unique_ptr<Payoff> PayoffVanillaPut::clone() const {
+        return std::make_unique<PayoffVanillaPut>(*this);
+    }
 
-bool PayoffVanillaPut::operator==(const PayoffVanillaPut &other) const {
-    return K_ == other.K_;
-}
+    bool PayoffVanillaPut::operator==(const PayoffVanillaPut &other) const {
+        return K_ == other.K_;
+    }
 
-bool PayoffVanillaPut::operator!=(const PayoffVanillaPut &other) const {
-    return !(*this == other);
-}
+    bool PayoffVanillaPut::operator!=(const PayoffVanillaPut &other) const {
+        return !(*this == other);
+    }
 
-double PayoffVanillaPut::operator()(const double &S) const {
-    return std::max(K_ - S, 0.0);
+    double PayoffVanillaPut::operator()(const double &S) const {
+        return std::max(K_ - S, 0.0);
+    }
 }

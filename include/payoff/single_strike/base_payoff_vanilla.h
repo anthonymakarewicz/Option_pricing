@@ -3,11 +3,13 @@
 
 #include "base_payoff_single_strike.h"
 
-// Abastract base class for PayoffVanilla
-class PayoffVanilla : public PayoffSingleStrike {
-public:
-    explicit PayoffVanilla(const double& K);
-    ~PayoffVanilla() override;
-};
+namespace OptionPricer {
+    // Abastract base class for PayoffVanilla
+    class PayoffVanilla : public PayoffSingleStrike {
+    public:
+        explicit PayoffVanilla(const double& K);
+        ~PayoffVanilla() override;
+    };
+}
 
 #endif //BASE_PAYOFF_VANILLA_H

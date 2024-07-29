@@ -3,15 +3,17 @@
 
 #include "base_payoff_digital.h"
 
-class PayoffDigitalPut final: public PayoffDigital {
-public:
-    explicit PayoffDigitalPut(const double& K);
-    ~PayoffDigitalPut() override;
+namespace OptionPricer {
+    class PayoffDigitalPut final: public PayoffDigital {
+    public:
+        explicit PayoffDigitalPut(const double& K);
+        ~PayoffDigitalPut() override;
 
-    double operator()(const double& S) const override;
-    [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
-    bool operator==(const PayoffDigitalPut& other) const;
-    bool operator!=(const PayoffDigitalPut& other) const;
-};
+        double operator()(const double& S) const override;
+        [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
+        bool operator==(const PayoffDigitalPut& other) const;
+        bool operator!=(const PayoffDigitalPut& other) const;
+    };
+}
 
 #endif //PAYOFF_DIGITAL_PUT_H
