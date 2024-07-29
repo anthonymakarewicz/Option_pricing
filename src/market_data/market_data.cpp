@@ -2,7 +2,6 @@
 #include <iostream>
 #include "market_data/market_data.h"
 
-
 namespace OptionPricer {
     // Static member initialization to avoid undefined behaviour
     std::shared_ptr<MarketData> MarketData::instance_ = nullptr;

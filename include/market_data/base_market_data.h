@@ -1,5 +1,5 @@
-#ifndef IMARKET_DATA_H
-#define IMARKET_DATA_H
+#ifndef BASE_MARKET_DATA_H
+#define BASE_MARKET_DATA_H
 
 #include <memory>
 #include <string>
@@ -21,4 +21,4 @@ namespace OptionPricer {
     };
 }
 
-#endif //IMARKET_DATA_H
+#endif //BASE_MARKET_DATA_H
