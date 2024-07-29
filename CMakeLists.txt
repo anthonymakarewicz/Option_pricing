@@ -43,6 +43,7 @@ add_executable(Option_pricer main.cpp
         src/payoff/single_strike/payoff_digital_put.cpp
         src/payoff/double_strikes/base_payoff_double_strikes.cpp
         src/payoff/double_strikes/payoff_double_digital.cpp
+        src/market_data/imarket_data.cpp
 )
 
 # Enable testing
