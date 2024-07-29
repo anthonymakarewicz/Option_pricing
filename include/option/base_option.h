@@ -5,59 +5,62 @@
 #include "payoff/base_payoff.h"
 #include "market_data/market_data.h"
 
-// Option asbtract base class where *this must be managed by a shared_ptr
-class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
-public:
-    /** @brief Option base class
-     *
-     * This asbtract base class serves as an interface shared by all particular types of options.
-     * In addition, this class inherits from the simple MarketDataObserver asbtract class
-     * that enforce all subclasses to implement the update method when market data changes.
-     *
-     * This class does not store directly the StockData object which is only managed by the MarketData
-     * singleton object, but it accesses it through the MarketData object.
-     *
-     * In addition, the Option has a Payoff function object (aka functor) that handles the computation
-     * of the payoff for particualr types of Options. Being a funcotr, it also stores the strike K
-     * used to compute the payoff.
-     *
-     * This design choice of separating the StockData and the Payoff objects from the Option class
-     * follows the composition over inheritance principle
-     *
-     * Note: Instances of derived classes must be managed by a std::shared_ptr.and is handled
-     * by the factory method associated wiht the particular option type.
-     *
-     **/
-    // Constructors
-    Option(const Option& other); // Copy constructor
-    Option(Option&& other) noexcept; // Move constructor
+namespace OptionPricer {
+    // Option asbtract base class where *this must be managed by a shared_ptr
+    class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
+    public:
+        /** @brief Option base class
+         *
+         * This asbtract base class serves as an interface shared by all particular types of options.
+         * In addition, this class inherits from the simple MarketDataObserver asbtract class
+         * that enforce all subclasses to implement the update method when market data changes.
+         *
+         * This class does not store directly the StockData object which is only managed by the MarketData
+         * singleton object, but it accesses it through the MarketData object.
+         *
+         * In addition, the Option has a Payoff function object (aka functor) that handles the computation
+         * of the payoff for particualr types of Options. Being a funcotr, it also stores the strike K
+         * used to compute the payoff.
+         *
+         * This design choice of separating the StockData and the Payoff objects from the Option class
+         * follows the composition over inheritance principle
+         *
+         * Note: Instances of derived classes must be managed by a std::shared_ptr.and is handled
+         * by the factory method associated wiht the particular option type.
+         *
+         **/
 
-    // Destructor
-    ~Option() override;
+        // Constructors
+        Option(const Option& other); // Copy constructor
+        Option(Option&& other) noexcept; // Move constructor
 
-    // Assignment operators
-    Option& operator=(const Option& other); // Copy assignment operator
-    Option& operator=(Option&& other) noexcept; // Move assignment operator
+        // Destructor
+        ~Option() override;
 
-    void update() override; // Update method called when MarketData changes
-    friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
-    virtual double calc_price() const = 0; // Force all subclasses to deifne this method
+        // Assignment operators
+        Option& operator=(const Option& other); // Copy assignment operator
+        Option& operator=(Option&& other) noexcept; // Move assignment operator
 
-    void initialize();
-    [[nodiscard]] std::string getType() const;
+        void update() override; // Update method called when MarketData changes
+        friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
+        virtual double calc_price() const = 0; // Force all subclasses to deifne this method
 
-    virtual double payoff(const double& S) const;
+        void initialize();
+        [[nodiscard]] std::string getType() const;
 
-protected:
-    Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T); // Parameter constructor
+        virtual double payoff(const double& S) const;
 
-    // Utility functions for the copy & move semantics
-    void copyFrom(const Option& other);
-    void moveFrom(Option&& other);
+    protected:
+        Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T); // Parameter constructor
 
-    double T_; // Maturity of the Option
-    std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
-    std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
+        // Utility functions for the copy & move semantics
+        void copyFrom(const Option& other);
+        void moveFrom(Option&& other);
+
+        double T_; // Maturity of the Option
+        std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
+        std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
+    };
 };
 
 #endif //BASE_OPTION_H

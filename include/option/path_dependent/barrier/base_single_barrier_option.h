@@ -3,16 +3,18 @@
 
 #include "base_barrier_option.h"
 
-class SingleBarrierOption: public BarrierOption {
-public:
-    ~SingleBarrierOption() override;;
+namespace OptionPricer {
+    class SingleBarrierOption: public BarrierOption {
+    public:
+        ~SingleBarrierOption() override;;
 
-protected:
-    // PROBABLY NEED TO PUT THE KnockBehavior AS WELL AS barrier INTO A PAYOFF!!
-    SingleBarrierOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-                        std::unique_ptr<KnockBehavior> knockBehavior, const double& barrier);
+    protected:
+        // PROBABLY NEED TO PUT THE KnockBehavior AS WELL AS barrier INTO A PAYOFF!!
+        SingleBarrierOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
+                            std::unique_ptr<KnockBehavior> knockBehavior, const double& barrier);
 
-    double barrier_;
-};
+        double barrier_;
+    };
+}
 
 #endif //BASE_SINGLE_BARRIER_H

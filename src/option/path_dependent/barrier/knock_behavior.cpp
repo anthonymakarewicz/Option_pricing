@@ -1,15 +1,17 @@
 #include "option/path_dependent/barrier/knock_behavior.h"
 
-KnockBehavior::~KnockBehavior() = default;
+namespace OptionPricer {
+    KnockBehavior::~KnockBehavior() = default;
 
-KnockIn::~KnockIn() = default;
+    KnockIn::~KnockIn() = default;
 
-bool KnockIn::isActive(bool barrierBreached) const {
-    return barrierBreached;
-}
+    bool KnockIn::isActive(bool barrierBreached) const {
+        return barrierBreached;
+    }
 
-KnockOut::~KnockOut() = default;
+    KnockOut::~KnockOut() = default;
 
-bool KnockOut::isActive(bool barrierBreached) const {
-    return !barrierBreached;
+    bool KnockOut::isActive(bool barrierBreached) const {
+        return !barrierBreached;
+    }
 }

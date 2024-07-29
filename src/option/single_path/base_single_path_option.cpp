@@ -1,6 +1,8 @@
 #include "option/single_path/base_single_path_option.h"
 
-SinglePathOption::~SinglePathOption() = default;
+namespace OptionPricer {
+    SinglePathOption::~SinglePathOption() = default;
 
-SinglePathOption::SinglePathOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T)
+    SinglePathOption::SinglePathOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T)
     : Option(ticker, std::move(payoff), T) {}
+}
