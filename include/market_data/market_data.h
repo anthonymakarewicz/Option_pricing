@@ -11,63 +11,62 @@
 
 #include "stock_data.h"
 #include "market_data_observer.h"
+#include "base_market_data.h"
 
-// Declare MarketData using Singleton design pattern
-class MarketData {
-public:
-    /** @brief MarketData Singleton class
-     *
-     * This class serves as a centralized location where all MarketData object will be stored
-     * and updated and acces by all MarketDataObserver subclasses instances.
-     * Specifically, only 1 instance of the MarketData object will be created when our program
-     * will execute be stored as a shared_ptr that all our Options will own the adress of it.
-     *
-     * This MarketData data will notify all the Option when StockData used for those Options
-     * will change.
-     *
-     */
+namespace OptionPricer {
+    // Declare MarketData as Singleton
+    class MarketData final: public IMarketData {
+    public:
+        /** @brief MarketData Singleton class
+         *
+         * This class serves as a centralized location where all MarketData object will be stored
+         * and updated and acces by all MarketDataObserver subclasses instances.
+         * Specifically, only 1 instance of the MarketData object will be created when our program
+         * will execute be stored as a shared_ptr that all our Options will own the adress of it.
+         *
+         * This MarketData data will notify all the Option when StockData used for those Options
+         * will change.
+         *
+         */
+        static std::shared_ptr<MarketData> getInstance();
+        ~MarketData() override;
 
-    // NEED TO ADD DESTRUCTOR!!!
+        // MarketData object should not be clonable
+        MarketData(MarketData &other) = delete;
+        void operator=(const MarketData &other) = delete;
 
-    static std::shared_ptr<MarketData> getInstance();
+        // Observer specific methods
+        void addObserver(const std::shared_ptr<MarketDataObserver>& observer) override;
+        void removeObserver() override;
+        void notifyObservers() const;
+        void notifyObserver(const std::string& id) const; // Notify specific observer
 
-    ~MarketData();
+        // Template methods need to be declared inside the header
+        template<typename... Args>
+        void addStock(const std::string& ticker, Args&&... args) {
+            // Perfect forwarding C++17 to preserve rvalue/lvalue ness
+            stockDataMap_[ticker] = std::make_shared<StockData>(std::forward<Args>(args)...);
+        }
 
-    // MarketData object should not be clonable
-    MarketData(MarketData &other) = delete;
-    void operator=(const MarketData &other) = delete;
+        // Update & access StockData through the MarketData singleton
+        void updateStockPrice(const std::string& ticker, double S);
+        void updateStockSigma(const std::string& ticker, double sigma);
+        void updateStockCoupon(const std::string& ticker, std::optional<double> c);
+        [[nodiscard]] std::shared_ptr<StockData> getStockData(const std::string &ticker) const override;
 
-    // Observer specific methods
-    void addObserver(const std::shared_ptr<MarketDataObserver>& observer);
-    void removeObserver();
-    void notifyObservers() const;
-    void notifyObserver(const std::string& id) const; // Notify specific observer
+        [[nodiscard]] double getR() const override;
+        void setR(const double& r) override;
 
-    // Template methods need to be declared inside the header
-    template<typename... Args>
-    void addStock(const std::string& ticker, Args&&... args) {
-        // Perfect forwarding C++17 to preserve rvalue/lvalue ness
-        stockDataMap_[ticker] = std::make_shared<StockData>(std::forward<Args>(args)...);
-    }
+    private:
+        MarketData(); // Declare the constructor as private (common in Singleton pattern)
 
-    // Update & access StockData through the MarketData singleton
-    void updateStockPrice(const std::string& ticker, double S);
-    void updateStockSigma(const std::string& ticker, double sigma);
-    void updateStockCoupon(const std::string& ticker, std::optional<double> c);
-    [[nodiscard]] std::shared_ptr<StockData> getStockData(const std::string &ticker) const;
-    
-    [[nodiscard]] double getR() const;
-    void setR(const double& r);
+        static std::shared_ptr<MarketData> instance_;
+        static std::mutex mutex_;
 
-private:
-    MarketData(); // Declare the constructor as private (common in Singleton pattern)
-
-    static std::shared_ptr<MarketData> instance_;
-    static std::mutex mutex_;
-
-    double r_; // Risk-free interest rate
-    std::unordered_map<std::string, std::shared_ptr<StockData>> stockDataMap_; // Map ticker symbol to StockData
-    std::vector<std::weak_ptr<MarketDataObserver>> observers_; // Use weak_ptr to avoid circular references
-};
+        double r_; // Risk-free interest rate
+        std::unordered_map<std::string, std::shared_ptr<StockData>> stockDataMap_; // Map ticker symbol to StockData
+        std::vector<std::weak_ptr<MarketDataObserver>> observers_; // Use weak_ptr to avoid circular references
+    };
+}
 
 #endif //MARKET_DATA_H

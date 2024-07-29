@@ -1,20 +1,12 @@
 
 #include <iostream>
+#include <option/path_dependent/american_option.h>
+
+using namespace OptionPricer;
+
 
 int main() {
-
-    std::cout << "cbef";
-    /*
-    auto marketdata = MarketData::getInstance();
-    marketdata->addStock("AAPL", 100.0, 0.2);
-
-    auto pc = std::make_unique<PayoffCall>(100);
-    VanillaOptionFactory factory;
-
-    auto vanilla = factory.createOption("AAPL", std::move(pc), 1.0);
-    std::cout << *vanilla << std::endl;
-    */
-
+    std::cout << "OK";
     return 0;
 
 }
