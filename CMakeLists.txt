@@ -14,7 +14,7 @@ include_directories(include)
 
 # Add the main executable
 add_executable(Option_pricer main.cpp
-        src/market_data/base_market_data.cpp
+        src/market_data/interface_market_data.cpp
         src/market_data/market_data.cpp
         src/market_data/market_data_observer.cpp
         src/market_data/stock_data.cpp
