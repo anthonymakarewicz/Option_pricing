@@ -3,7 +3,7 @@
 
 #include <string>
 #include "payoff/base_payoff.h"
-#include "market_data/base_market_data.h"
+#include "market_data/interface_market_data.h"
 
 namespace OptionPricer {
     // Option asbtract base class where *this must be managed by a shared_ptr
