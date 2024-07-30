@@ -13,6 +13,7 @@ namespace OptionPricer {
         [[nodiscard]] double getK() const;
         void print(std::ostream& os) const override;
 
+
     protected:
         double K_;
     };

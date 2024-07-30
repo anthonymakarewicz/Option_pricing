@@ -4,7 +4,6 @@
 
 #include "payoff/base_payoff.h"
 
-
 namespace OptionPricer {
     Payoff::Payoff() = default;
 
@@ -21,6 +20,15 @@ namespace OptionPricer {
 
     void Payoff::print(std::ostream &os) const {
         os << "  -> Type: " << getType() << "\n";
+    }
+
+    bool Payoff::operator==(const Payoff &other) const {
+        if (typeid(*this) != typeid(other)) return false;
+        return this->compare(other) && other.compare(*this);
+    }
+
+    bool Payoff::operator!=(const Payoff &other) const {
+        return !(*this == other);
     }
 
     std::ostream& operator<<(std::ostream& os, const Payoff& payoff) {

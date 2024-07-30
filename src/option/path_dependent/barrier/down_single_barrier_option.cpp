@@ -8,8 +8,10 @@ namespace OptionPricer {
     }
 
     DownSingleBarrierOption::DownSingleBarrierOption(const std::string &ticker, std::unique_ptr<Payoff> payoff,
-        const double &T, std::unique_ptr<KnockBehavior> knockBehavior, const double &barrier)
-    : SingleBarrierOption(ticker, std::move(payoff), T, std::move(knockBehavior), barrier) {}
+        const double &T, std::shared_ptr<IMarketData> marketData, std::unique_ptr<KnockBehavior> knockBehavior,
+        const double &barrier)
+    : SingleBarrierOption(ticker, std::move(payoff),T, std::move(marketData),
+        std::move(knockBehavior), barrier) {}
 
     bool DownSingleBarrierOption::isOut(double S) const {
         return S < barrier_;

@@ -10,7 +10,8 @@ namespace OptionPricer {
         [[nodiscard]] double calc_price() const override;
 
     private:
-        DigitalOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T);
+        DigitalOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
+            std::shared_ptr<IMarketData> marketData);
     };
 }
 

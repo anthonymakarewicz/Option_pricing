@@ -3,7 +3,7 @@
 
 #include <string>
 #include "payoff/base_payoff.h"
-#include "market_data/market_data.h"
+#include "market_data/base_market_data.h"
 
 namespace OptionPricer {
     // Option asbtract base class where *this must be managed by a shared_ptr
@@ -29,37 +29,34 @@ namespace OptionPricer {
          * by the factory method associated wiht the particular option type.
          *
          **/
-
-        // Constructors
-        Option(const Option& other); // Copy constructor
-        Option(Option&& other) noexcept; // Move constructor
-
         // Destructor
         ~Option() override;
 
-        // Assignment operators
-        Option& operator=(const Option& other); // Copy assignment operator
-        Option& operator=(Option&& other) noexcept; // Move assignment operator
+        // Forbid copy and move semantics
+        Option(const Option& other) = delete; // Copy constructor
+        Option(Option&& other) noexcept = delete; // Move constructor
+        Option& operator=(const Option& other) = delete;// Copy assignment operator
+        Option& operator=(Option&& other) noexcept = delete;// Move assignment operator
 
         void update() override; // Update method called when MarketData changes
         friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
+        bool operator==(const Option& other) const;
+        bool operator!=(const Option& other) const;
         virtual double calc_price() const = 0; // Force all subclasses to deifne this method
 
         void initialize();
         [[nodiscard]] std::string getType() const;
 
-        virtual double payoff(const double& S) const;
+        double payoff() const;
+        double payoff(const double& S) const;
 
     protected:
-        Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T); // Parameter constructor
-
-        // Utility functions for the copy & move semantics
-        void copyFrom(const Option& other);
-        void moveFrom(Option&& other);
+        Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
+            std::shared_ptr<IMarketData> marketData); // Parameter constructor
 
         double T_; // Maturity of the Option
         std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
-        std::shared_ptr<MarketData> marketData_; // Shared ptr to MarketData singleton
+        std::shared_ptr<IMarketData> marketData_; // Shared ptr to IMarketData interface
     };
 };
 

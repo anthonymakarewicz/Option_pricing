@@ -13,7 +13,7 @@ namespace OptionPricer {
 
     protected:
         BarrierOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-                      std::unique_ptr<KnockBehavior> knockBehavior);
+            std::shared_ptr<IMarketData> marketData, std::unique_ptr<KnockBehavior> knockBehavior);
 
         virtual bool isOut(double S) const = 0;
 

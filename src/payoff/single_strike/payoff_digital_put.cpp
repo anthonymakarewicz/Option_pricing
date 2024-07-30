@@ -14,11 +14,9 @@ namespace OptionPricer {
         return std::make_unique<PayoffDigitalPut>(*this);
     }
 
-    bool PayoffDigitalPut::operator==(const PayoffDigitalPut &other) const {
-        return K_ == other.K_;
-    }
-
-    bool PayoffDigitalPut::operator!=(const PayoffDigitalPut &other) const {
-        return !(*this == other);
+    bool PayoffDigitalPut::compare(const Payoff &other) const {
+        const auto otherPayoffPtr = dynamic_cast<const PayoffDigitalPut*>(&other);
+        if (!otherPayoffPtr) return false;
+        return K_ == otherPayoffPtr->K_;
     }
 }

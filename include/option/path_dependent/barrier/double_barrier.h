@@ -11,8 +11,8 @@ namespace OptionPricer {
 
     private:
         DoubleBarrierOption(const std::string &ticker, std::unique_ptr<Payoff> payoff, const double &T,
-                            std::unique_ptr<KnockBehavior> knockBehavior,
-                            const double& lowerBarrier, const double& upperBarrier);
+            std::shared_ptr<IMarketData> marketData, std::unique_ptr<KnockBehavior> knockBehavior,
+            const double& lowerBarrier, const double& upperBarrier);
 
         bool isOut(double S) const override;
 

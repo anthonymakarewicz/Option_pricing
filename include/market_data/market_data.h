@@ -52,7 +52,7 @@ namespace OptionPricer {
         void updateStockPrice(const std::string& ticker, double S);
         void updateStockSigma(const std::string& ticker, double sigma);
         void updateStockCoupon(const std::string& ticker, std::optional<double> c);
-        [[nodiscard]] std::shared_ptr<StockData> getStockData(const std::string &ticker) const override;
+        [[nodiscard]] std::shared_ptr<const StockData> getStockData(const std::string &ticker) const override;
 
         [[nodiscard]] double getR() const override;
         void setR(const double& r) override;

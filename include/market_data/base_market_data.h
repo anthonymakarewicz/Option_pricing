@@ -1,5 +1,5 @@
-#ifndef IMARKET_DATA_H
-#define IMARKET_DATA_H
+#ifndef BASE_MARKET_DATA_H
+#define BASE_MARKET_DATA_H
 
 #include <memory>
 #include <string>
@@ -15,10 +15,10 @@ namespace OptionPricer {
         virtual void addObserver(const std::shared_ptr<MarketDataObserver>& observer) = 0;
         virtual void removeObserver() = 0;
 
-        [[nodiscard]] virtual std::shared_ptr<StockData> getStockData(const std::string& ticker) const = 0;
+        [[nodiscard]] virtual std::shared_ptr<const StockData> getStockData(const std::string &ticker) const = 0;
         [[nodiscard]] virtual double getR() const = 0;
         virtual void setR(const double& r) = 0;
     };
 }
 
-#endif //IMARKET_DATA_H
+#endif //BASE_MARKET_DATA_H

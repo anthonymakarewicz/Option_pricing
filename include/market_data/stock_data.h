@@ -16,6 +16,8 @@ namespace OptionPricer {
         [[nodiscard]] double getSigma() const;
         [[nodiscard]] std::optional<double> getCoupon() const;
         friend std::ostream& operator<<(std::ostream& os, const StockData& stockData);
+        bool operator==(const StockData& other) const;
+        bool operator!=(const StockData& other) const;
 
     private:
         void setPrice(const double& S);
