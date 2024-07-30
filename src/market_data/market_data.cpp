@@ -106,9 +106,9 @@ namespace OptionPricer {
         }
     }
 
-    std::shared_ptr<StockData> MarketData::getStockData(const std::string &ticker) const {
+    std::shared_ptr<const StockData> MarketData::getStockData(const std::string &ticker) const {
         if (auto it = stockDataMap_.find(ticker); it != stockDataMap_.end()) {
-            return it->second;
+            return std::const_pointer_cast<const StockData>(it->second);
         }
         throw std::invalid_argument(ticker + " Stock data not found.");
     }

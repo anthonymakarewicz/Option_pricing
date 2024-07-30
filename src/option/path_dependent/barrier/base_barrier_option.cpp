@@ -7,7 +7,7 @@ namespace OptionPricer {
         if (!isActive(S)) {
             return 0.0;
         }
-        return Option::payoff(S);
+        return Option::payoff();
     }
 
     BarrierOption::BarrierOption(const std::string &ticker, std::unique_ptr<Payoff> payoff, const double &T,

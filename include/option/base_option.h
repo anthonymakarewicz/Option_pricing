@@ -47,15 +47,12 @@ namespace OptionPricer {
         void initialize();
         [[nodiscard]] std::string getType() const;
 
-        virtual double payoff(const double& S) const;
+        double payoff() const;
+        double payoff(const double& S) const;
 
     protected:
         Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
             std::shared_ptr<IMarketData> marketData); // Parameter constructor
-
-        // Utility functions for the copy & move semantics
-        void copyFrom(const Option& other);
-        void moveFrom(Option&& other);
 
         double T_; // Maturity of the Option
         std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor

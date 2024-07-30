@@ -22,7 +22,7 @@ namespace OptionPricer::Mocks {
     // Mock class for MarketData using Google Mock
     class MarketData final : public IMarketData {
     public:
-        MOCK_METHOD(std::shared_ptr<StockData>, getStockData, (const std::string& ticker), (const, override));
+        MOCK_METHOD(std::shared_ptr<const StockData>, getStockData, (const std::string& ticker), (const, override));
         MOCK_METHOD(void, addObserver, (const std::shared_ptr<MarketDataObserver>& observer), (override));
         MOCK_METHOD(void, removeObserver, (), (override));
         MOCK_METHOD(double, getR, (), (const, override));

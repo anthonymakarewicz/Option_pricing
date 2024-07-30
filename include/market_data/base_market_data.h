@@ -15,7 +15,7 @@ namespace OptionPricer {
         virtual void addObserver(const std::shared_ptr<MarketDataObserver>& observer) = 0;
         virtual void removeObserver() = 0;
 
-        [[nodiscard]] virtual std::shared_ptr<StockData> getStockData(const std::string& ticker) const = 0;
+        [[nodiscard]] virtual std::shared_ptr<const StockData> getStockData(const std::string &ticker) const = 0;
         [[nodiscard]] virtual double getR() const = 0;
         virtual void setR(const double& r) = 0;
     };

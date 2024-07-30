@@ -61,7 +61,7 @@ namespace OptionPricer {
         } else {
             throw std::runtime_error("Payoff object is missing");
         }
-        const auto stockData = option.marketData_->getStockData(option.id_);
+        const auto stockData = option.marketData_->getStockData(option.id_); // O(1)
         os << "Stock:\n";
         os << "  -> Ticker: " << option.id_ << "\n";
         os << *stockData;
@@ -82,6 +82,11 @@ namespace OptionPricer {
         std::string typeName = (status == 0) ? demangledName : mangledName;
         std::free(demangledName);
         return typeName;
+    }
+
+    double Option::payoff() const {
+        const auto stockData = marketData_->getStockData(id_);
+        return (*payoff_)(stockData->getPrice());
     }
 
     double Option::payoff(const double &S) const {

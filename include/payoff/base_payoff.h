@@ -15,9 +15,11 @@ namespace OptionPricer {
 
         virtual void print(std::ostream& os) const;
         friend std::ostream& operator<<(std::ostream& os, const Payoff& payoff);
+
         bool operator==(const Payoff& other) const;
         bool operator!=(const Payoff& other) const;
         [[nodiscard]] virtual bool compare(const Payoff& other) const = 0;
+
         virtual double operator()(const double& S) const = 0; // Define Payoff as a functor
 
     };
