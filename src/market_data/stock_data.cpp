@@ -20,6 +20,19 @@ namespace OptionPricer {
         return c_;
     }
 
+    bool StockData::operator==(const StockData& other) const {
+        if (S_ != other.S_ || sigma_ != other.sigma_) {
+            return false;
+        }
+        if (!c_.has_value() != !other.c_.has_value()) {
+            return false;
+        }
+        if (c_.has_value() && other.c_.has_value() && c_.value() != other.c_.value()) {
+            return false;
+        }
+        return true;
+    }
+
     void StockData::setPrice(const double& S) {
         S_ = S;
         validate();
