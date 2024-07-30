@@ -12,8 +12,8 @@ set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems
 # Specify where to look for header files
 include_directories(include)
 
-# Add the main executable
-add_executable(Option_pricer main.cpp
+# Create dynamic library for our source code
+add_library(core_library SHARED
         src/market_data/interface_market_data.cpp
         src/market_data/market_data.cpp
         src/market_data/market_data_observer.cpp
@@ -47,7 +47,13 @@ add_executable(Option_pricer main.cpp
         src/payoff/double_strikes/payoff_double_digital.cpp
 )
 
-# Enable testing
+# Create main executable
+add_executable(Option_pricer main.cpp)
+
+# Link the main executable to our dynamic library
+target_link_libraries(Option_pricer core_library)
+
+# Enable testing and add the tests directory
 enable_testing()
 add_subdirectory(tests)
 
