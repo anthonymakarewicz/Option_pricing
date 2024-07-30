@@ -10,15 +10,13 @@ namespace OptionPricer {
         return std::make_unique<PayoffVanillaCall>(*this);
     }
 
-    bool PayoffVanillaCall::operator==(const PayoffVanillaCall &other) const {
-        return K_ == other.K_;
-    }
-
-    bool PayoffVanillaCall::operator!=(const PayoffVanillaCall &other) const {
-        return !(*this == other);
-    }
-
     double PayoffVanillaCall::operator()(const double &S) const {
         return std::max(S - K_, 0.0);
+    }
+
+    bool PayoffVanillaCall::compare(const Payoff &other) const {
+        const auto otherPayoffPtr = dynamic_cast<const PayoffVanillaCall*>(&other);
+        if (!otherPayoffPtr) return false;
+        return K_ == otherPayoffPtr->K_;
     }
 }

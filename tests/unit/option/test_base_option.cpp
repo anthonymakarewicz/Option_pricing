@@ -68,6 +68,22 @@ TEST_F(OptionTest, SharedPtrConstructorTest) {
     EXPECT_EQ(optionPtr->getType(), "TestOption");
 }
 
+/*
+TEST_F(OptionTest, EqualityTest) {
+    EXPECT_CALL(*mockMarketData, getStockData(ticker))
+        .Times(2)
+        .WillRepeatedly(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
+    EXPECT_CALL(*mockMarketData, removeObserver())
+        .Times(2);
+
+    auto payoffCopy = payoff->clone();
+    TestOption option (ticker, std::move(payoff), T, mockMarketData);
+    TestOption optionCopy (ticker, std::move(payoffCopy), T, mockMarketData);
+
+    // Check if the Option object is constructed properly
+    EXPECT_TRUE(option == optionCopy);
+}
+*/
 TEST_F(OptionTest, CalculatePriceTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker))
         .Times(1)

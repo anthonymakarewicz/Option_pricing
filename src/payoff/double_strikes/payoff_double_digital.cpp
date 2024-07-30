@@ -10,15 +10,13 @@ namespace OptionPricer {
         return std::make_unique<PayoffDoubleDigital>(*this);
     }
 
-    bool PayoffDoubleDigital::operator==(const PayoffDoubleDigital &other) const {
-        return (K_L_ == other.K_L_) && (K_U_ == other.K_U_);
-    }
-
-    bool PayoffDoubleDigital::operator!=(const PayoffDoubleDigital &other) const {
-        return !(*this == other);
-    }
-
     double PayoffDoubleDigital::operator()(const double& S) const {
         return  K_L_ <= S && S <= K_U_ ? 1.0 : 0.0;
+    }
+
+    bool PayoffDoubleDigital::compare(const Payoff &other) const {
+        const auto otherPayoffPtr = dynamic_cast<const PayoffDoubleDigital*>(&other);
+        if (!otherPayoffPtr) return false;
+        return K_U_ == otherPayoffPtr->K_U_ && K_L_ == otherPayoffPtr->K_L_;
     }
 }

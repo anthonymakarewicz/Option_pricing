@@ -11,10 +11,8 @@ namespace OptionPricer {
         ~PayoffDoubleDigital() override;
 
         [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
-        bool operator==(const PayoffDoubleDigital& other) const;
-        bool operator!=(const PayoffDoubleDigital& other) const;
-
         double operator()(const double& S) const override;
+        [[nodiscard]] bool compare(const Payoff &other) const override;
     };
 }
 

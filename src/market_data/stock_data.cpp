@@ -33,6 +33,10 @@ namespace OptionPricer {
         return true;
     }
 
+    bool StockData::operator!=(const StockData &other) const {
+        return !(*this == other);
+    }
+
     void StockData::setPrice(const double& S) {
         S_ = S;
         validate();

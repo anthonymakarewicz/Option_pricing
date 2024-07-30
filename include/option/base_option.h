@@ -40,6 +40,8 @@ namespace OptionPricer {
 
         void update() override; // Update method called when MarketData changes
         friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
+        bool operator==(const Option& other) const;
+        bool operator!=(const Option& other) const;
         virtual double calc_price() const = 0; // Force all subclasses to deifne this method
 
         void initialize();

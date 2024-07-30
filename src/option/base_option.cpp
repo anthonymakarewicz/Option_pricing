@@ -39,6 +39,15 @@ namespace OptionPricer {
         std::cout << "The new Option price is: "<< calc_price() << "\n";
     }
 
+    bool Option::operator==(const Option &other) const {
+        return (T_ == other.T_ && *payoff_ == *other.payoff_ &&
+          *marketData_->getStockData(id_) == *other.marketData_->getStockData(other.id_));
+    }
+
+    bool Option::operator!=(const Option &other) const {
+        return !(*this == other);
+    }
+
     std::ostream& operator<<(std::ostream& os, const Option& option) {
         if (!option.marketData_) {
             throw std::runtime_error("MarketData object is missing");

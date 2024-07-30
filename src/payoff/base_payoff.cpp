@@ -22,6 +22,15 @@ namespace OptionPricer {
         os << "  -> Type: " << getType() << "\n";
     }
 
+    bool Payoff::operator==(const Payoff &other) const {
+        if (typeid(*this) != typeid(other)) return false;
+        return this->compare(other) && other.compare(*this);
+    }
+
+    bool Payoff::operator!=(const Payoff &other) const {
+        return !(*this == other);
+    }
+
     std::ostream& operator<<(std::ostream& os, const Payoff& payoff) {
         payoff.print(os);
         return os;
