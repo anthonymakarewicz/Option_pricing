@@ -46,7 +46,7 @@ namespace OptionPricer {
         void addStock(const std::string& ticker, Args&&... args) {
             // Perfect forwarding C++17 to preserve rvalue/lvalue ness
             stockDataMap_[ticker] = std::make_shared<StockData>(std::forward<Args>(args)...);
-        }
+        } // Potentially need to check if stockDataMap_[ticker] already exists
 
         // Update & access StockData through the MarketData singleton
         void updateStockPrice(const std::string& ticker, double S);
