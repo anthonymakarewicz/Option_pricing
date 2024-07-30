@@ -29,35 +29,9 @@ namespace OptionPricer {
         payoff_ = std::move(payoff); // Safely move the payoff
     }
 
-    Option::Option(const Option& other)
-        : MarketDataObserver(other.id_),
-          std::enable_shared_from_this<Option>(other),
-          T_(0.0), payoff_(nullptr), marketData_(nullptr) {
-        copyFrom(other);
-    }
-
-    Option::Option(Option&& other) noexcept
-        : MarketDataObserver(other.id_), T_(0.0), payoff_(nullptr), marketData_(nullptr) {
-        moveFrom(std::move(other));
-    }
-
     Option::~Option() {
         if (marketData_) marketData_->removeObserver();
         std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
-    }
-
-    Option& Option::operator=(const Option& other) {
-        if (this != &other) {
-            copyFrom(other);
-        }
-        return *this;
-    }
-
-    Option& Option::operator=(Option&& other) noexcept {
-        if (this != &other) {
-            moveFrom(std::move(other));
-        }
-        return *this;
     }
 
     void Option::update() {
@@ -85,38 +59,6 @@ namespace OptionPricer {
         os << "MarketData:\n";
         os << "  -> Risk Free Interest Rate: " << option.marketData_->getR() << "\n";
         return os;
-    }
-
-    void Option::copyFrom(const Option& other) {
-        T_ = other.T_;
-        id_ = other.id_;
-        if (other.payoff_) {
-            payoff_ = other.payoff_->clone(); // Make a deep copy of the Payoff object
-        } else {
-            throw std::invalid_argument("Payoff object is missing.");
-        }
-        marketData_ = other.marketData_;
-        marketData_->addObserver(shared_from_this()); // Register as an observer
-    }
-
-    void Option::moveFrom(Option&& other) {
-        other.marketData_->removeObserver();
-        // Move the attributes from other to *this
-        T_ = other.T_;
-        id_ = other.id_;
-        payoff_ = std::move(other.payoff_);
-        marketData_ = std::move(other.marketData_);
-
-        // Ensure the source object is left in a valid state
-        other.T_ = 0.0;
-        other.id_.clear();
-        other.payoff_ = nullptr;
-        other.marketData_ = nullptr;
-
-        // Register the current Option as an observer after move
-        if (marketData_) {
-            marketData_->addObserver(shared_from_this());
-        }
     }
 
     void Option::initialize() {

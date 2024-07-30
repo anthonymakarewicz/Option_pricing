@@ -29,17 +29,14 @@ namespace OptionPricer {
          * by the factory method associated wiht the particular option type.
          *
          **/
-
-        // Constructors
-        Option(const Option& other); // Copy constructor
-        Option(Option&& other) noexcept; // Move constructor
-
         // Destructor
         ~Option() override;
 
-        // Assignment operators
-        Option& operator=(const Option& other); // Copy assignment operator
-        Option& operator=(Option&& other) noexcept; // Move assignment operator
+        // Forbid copy and move semantics
+        Option(const Option& other) = delete; // Copy constructor
+        Option(Option&& other) noexcept = delete; // Move constructor
+        Option& operator=(const Option& other) = delete;// Copy assignment operator
+        Option& operator=(Option&& other) noexcept = delete;// Move assignment operator
 
         void update() override; // Update method called when MarketData changes
         friend std::ostream& operator<<(std::ostream& os, const Option& option); // External overload
