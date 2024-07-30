@@ -22,16 +22,12 @@ protected:
         //MarketData::instance_ = nullptr; // Assuming this is allowed in your implementation to reset the singleton
     }
 
-    void TearDown() override {
-        observer->resetUpdated();
-    }
-
     static std::shared_ptr<MarketData> marketData;
     static std::shared_ptr<Mocks::Option> observer;
     //std::string ticker;
 };
 
-// Static member initialization to avoid u
+// Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketDataTest::marketData = nullptr;
 std::shared_ptr<Mocks::Option> MarketDataTest::observer = nullptr;
 
@@ -42,30 +38,38 @@ TEST_F(MarketDataTest, SingletonInstance) {
 }
 
 TEST_F(MarketDataTest, NotifyObserver) {
+    EXPECT_CALL(*observer, update()).Times(1);
     marketData->notifyObserver("AAPL");
-    EXPECT_TRUE(observer->wasUpdated());
 }
 
 TEST_F(MarketDataTest, RemoveObserver) {
+    EXPECT_CALL(*observer, update()).Times(0);
+    observer.reset();
+    marketData->removeObserver();
     marketData->notifyObserver("AAPL");
-    EXPECT_TRUE(observer->wasUpdated());
 }
 
 TEST_F(MarketDataTest, NotifyAllObservers) {
     auto observer2 = std::make_shared<Mocks::Option>("AAPL");
     marketData->addObserver(observer2);
 
+    EXPECT_CALL(*observer, update()).Times(1);
+    EXPECT_CALL(*observer2, update()).Times(1);
     marketData->notifyObservers();
-    EXPECT_TRUE(observer->wasUpdated());
-    EXPECT_TRUE(observer2->wasUpdated());
 }
 
-TEST_F(MarketDataTest, UpdateStockData) {
+TEST_F(MarketDataTest, GetStockData) {
     auto stockData = marketData->getStockData("AAPL");
+
     EXPECT_DOUBLE_EQ(stockData->getPrice(), 150.0);
     EXPECT_DOUBLE_EQ(stockData->getSigma(), 0.2);
     EXPECT_TRUE(stockData->getCoupon().has_value());
     EXPECT_DOUBLE_EQ(stockData->getCoupon().value(), 0.01);
+}
+
+TEST_F(MarketDataTest, UpdateStockData) {
+    EXPECT_CALL(*observer, update()).Times(3);
+    auto stockData = marketData->getStockData("AAPL");
 
     marketData->updateStockPrice("AAPL", 160.0);
     marketData->updateStockSigma("AAPL", 0.25);
@@ -75,23 +79,21 @@ TEST_F(MarketDataTest, UpdateStockData) {
     EXPECT_DOUBLE_EQ(stockData->getSigma(), 0.25);
     EXPECT_TRUE(stockData->getCoupon().has_value());
     EXPECT_DOUBLE_EQ(stockData->getCoupon().value(), 0.02);
-
-    EXPECT_TRUE(observer->wasUpdated());
 }
 
 TEST_F(MarketDataTest, UpdateNonExistentStock) {
     EXPECT_THROW(auto stockData = marketData->getStockData("MSFT"), std::invalid_argument);
 
-    // Ensure exception is thrown when updating non-existent stock data
     EXPECT_THROW(marketData->updateStockPrice("MSFT", 200.0), std::invalid_argument);
     EXPECT_THROW(marketData->updateStockSigma("MSFT", 0.3), std::invalid_argument);
     EXPECT_THROW(marketData->updateStockCoupon("MSFT", 0.04), std::invalid_argument);
 }
 
 TEST_F(MarketDataTest, RiskFreeRate) {
+    EXPECT_CALL(*observer, update()).Times(2);
+
+    marketData->setR(0.10);
+    EXPECT_DOUBLE_EQ(marketData->getR(), 0.10);
     marketData->setR(0.05);
     EXPECT_DOUBLE_EQ(marketData->getR(), 0.05);
-
-    marketData->setR(0.03);
-    EXPECT_DOUBLE_EQ(marketData->getR(), 0.03);
 }

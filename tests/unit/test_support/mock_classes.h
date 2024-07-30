@@ -4,22 +4,19 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include "market_data/market_data.h"
+#include "option/interface_option.h"
 
 namespace OptionPricer::Mocks {
-    // Minimal Mock Option class
-    class Option final : public MarketDataObserver, public std::enable_shared_from_this<Option> {
+    // Mock class for Option
+    class Option final : public IOption {
     public:
-        explicit Option(const std::string& ticker) : MarketDataObserver(ticker), updated_(false) {}
+        explicit Option(const std::string& ticker) : IOption(ticker) {}
 
-        void update() override { updated_ = true; }
-        bool wasUpdated() const { return updated_; }
-        void resetUpdated() { updated_ = false; }
-
-    private:
-        bool updated_;
+        MOCK_METHOD(void, update, (), (override));
+        MOCK_METHOD(std::shared_ptr<Option>, shared_from_this, (), ());
     };
 
-    // Mock class for MarketData using Google Mock
+    // Mock class for MarketData
     class MarketData final : public IMarketData {
     public:
         MOCK_METHOD(std::shared_ptr<const StockData>, getStockData, (const std::string& ticker), (const, override));

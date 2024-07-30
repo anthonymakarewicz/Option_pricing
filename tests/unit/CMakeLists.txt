@@ -17,6 +17,7 @@ add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         ../../src/market_data/market_data.cpp
         ../../src/market_data/market_data_observer.cpp
         ../../src/market_data/stock_data.cpp
+        ../../src/option/interface_option.cpp
         ../../src/option/base_option.cpp
         ../../src/option/single_path/base_single_path_option.cpp
         ../../src/option/single_path/european_option.cpp
