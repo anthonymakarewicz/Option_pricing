@@ -8,28 +8,29 @@ using namespace OptionPricer;
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
 protected:
+    MarketDataTest() : observer(nullptr) {}
+
     static void SetUpTestSuite() {
         marketData = MarketData::getInstance();
         marketData->addStock("AAPL", 150.0, 0.2, 0.01);
+    }
+
+    void SetUp() override {
         observer = std::make_shared<Mocks::Option>("AAPL");
         marketData->addObserver(observer);
     }
 
-    static void TearDownTestSuite() {
-        // Reset the state if necessary
-        marketData.reset();
+    void TearDown() override {
         observer.reset();
-        //MarketData::instance_ = nullptr; // Assuming this is allowed in your implementation to reset the singleton
+        marketData->removeObserver();
     }
 
     static std::shared_ptr<MarketData> marketData;
-    static std::shared_ptr<Mocks::Option> observer;
-    //std::string ticker;
+    std::shared_ptr<Mocks::Option> observer;
 };
 
 // Static member initialization to avoid undefined behaviour
 std::shared_ptr<MarketData> MarketDataTest::marketData = nullptr;
-std::shared_ptr<Mocks::Option> MarketDataTest::observer = nullptr;
 
 TEST_F(MarketDataTest, SingletonInstance) {
     auto instance1 = MarketData::getInstance();
