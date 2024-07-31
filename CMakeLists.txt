@@ -13,9 +13,9 @@ set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems
 include_directories(include)
 
 # Set the output directories for the libraries and executables
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # Create dynamic library for marketdata
 add_library(marketdata SHARED
