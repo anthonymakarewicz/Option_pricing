@@ -15,7 +15,7 @@ add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
 )
 
 # Link Unit_tests to core_library and GTest/GMock
-target_link_libraries(Unit_tests core_library GTest::GTest GTest::Main GTest::gmock_main)
+target_link_libraries(Unit_tests marketdata payoff option GTest::GTest GTest::Main GTest::gmock_main)
 
 # Register the tests for running with CTest
 add_test(NAME UnitTests COMMAND Unit_tests)

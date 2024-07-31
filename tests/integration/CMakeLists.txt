@@ -7,7 +7,7 @@ add_executable(Integration_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
 )
 
 # Link the Integration_tests executable to the already compiled source code
-target_link_libraries(Integration_tests core_library GTest::GTest GTest::Main GTest::gmock_main)
+target_link_libraries(Integration_tests marketdata payoff option GTest::GTest GTest::Main GTest::gmock_main)
 
 # Register the tests for running with CTest
 add_test(NAME IntegrationTests COMMAND Integration_tests)
