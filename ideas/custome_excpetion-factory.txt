@@ -1,0 +1,26 @@
+#ifndef OPTION_PRICER_EXCEPTION_H
+#define OPTION_PRICER_EXCEPTION_H
+
+#include <stdexcept>
+#include <string>
+
+namespace OptionPricer {
+    class OptionPricerException : public std::invalid_argument {
+    public:
+        explicit OptionPricerException(const std::string& message, const std::string& context = "")
+            : std::invalid_argument(message), context_(context) {}
+
+        [[nodiscard]] const std::string& getContext() const {
+            return context_;
+        }
+
+        [[nodiscard]] std::string whatWithContext() const {
+            return std::string(what()) + "\n" + context_;
+        }
+
+    private:
+        std::string context_;
+    };
+}
+
+#endif //OPTION_PRICER_EXCEPTION_H

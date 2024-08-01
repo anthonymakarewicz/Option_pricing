@@ -66,6 +66,9 @@ add_library(option SHARED
         src/option/path_dependent/barrier/base_single_barrier_option.cpp
         src/option/path_dependent/barrier/up_single_barrier_option.cpp
         src/option/path_dependent/barrier/down_single_barrier_option.cpp
+        src/option/factory_option.cpp
+        src/option/single_path/factory_single_path_option.cpp
+        src/option/single_path/factory_european_option.cpp
 )
 
 # Link the option library against marketdata and payoff
@@ -76,7 +79,6 @@ add_executable(Option_pricer main.cpp)
 
 # Link the main executable to our dynamic libraries
 target_link_libraries(Option_pricer marketdata payoff option)
-
 
 # Enable testing and add the tests directory
 enable_testing()

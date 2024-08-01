@@ -21,7 +21,6 @@ namespace OptionPricer {
             if (!hasParameter(name)) {
                 throw std::invalid_argument("Parameter not found: " + name);
             }
-
             try {
                 return std::get<T>(parameters_.at(name));
             } catch (const std::bad_variant_access&) {

@@ -8,8 +8,6 @@ using namespace OptionPricer;
 // Test fixture for MarketData tests
 class MarketDataTest : public ::testing::Test {
 protected:
-    MarketDataTest() : observer(nullptr) {}
-
     static void SetUpTestSuite() {
         marketData = MarketData::getInstance();
         marketData->addStock("AAPL", 150.0, 0.2, 0.01);

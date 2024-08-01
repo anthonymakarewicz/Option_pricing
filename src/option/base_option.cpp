@@ -32,7 +32,7 @@ namespace OptionPricer {
 
     Option::~Option() {
         if (marketData_) marketData_->removeObserver();
-        std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
+        //std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
     }
 
     void Option::update() {
