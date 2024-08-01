@@ -69,6 +69,8 @@ add_library(option SHARED
         src/option/factory_option.cpp
         src/option/single_path/factory_single_path_option.cpp
         src/option/single_path/factory_european_option.cpp
+        include/option/single_path/factory_digital_option.h
+        src/option/single_path/factory_digital_option.cpp
 )
 
 # Link the option library against marketdata and payoff
