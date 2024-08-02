@@ -3,7 +3,7 @@
 
 namespace OptionPricer {
     std::unique_ptr<Payoff> PayoffDoubleDigitalFactory::createPayoff(const std::string& type,
-            const double& K1, const double& K2) const {
+            const double& K1, const double& K2) {
         return std::make_unique<PayoffDoubleDigital>(K1, K2);
     }
 }

@@ -15,6 +15,8 @@ namespace OptionPricer {
                               const double& barrier);
 
         bool isOut(double S) const override;
+
+        friend class UpSingleBarrierOptionFactory;
     };
 }
 

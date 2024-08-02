@@ -14,4 +14,8 @@ namespace OptionPricer {
         std::shared_ptr<IMarketData> marketData, std::unique_ptr<KnockBehavior> knockBehavior)
     : PathDependentOption(ticker, std::move(payoff), T, std::move(marketData)),
       knockBehavior_(std::move(knockBehavior)) {}
+
+    bool BarrierOption::isActive(double S) const {
+        return knockBehavior_->isActive(isOut(S));
+    }
 }

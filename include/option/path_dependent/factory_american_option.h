@@ -1,10 +1,10 @@
-#ifndef FACTORY_DIGITAL_OPTION_H
-#define FACTORY_DIGITAL_OPTION_H
+#ifndef FACTORY_AMERICAN_OPTION_H
+#define FACTORY_AMERICAN_OPTION_H
 
 #include "option/factory_option.h"
 
 namespace OptionPricer {
-    class DigitalOptionFactory final: public OptionFactory {
+    class AmericanOptionFactory final: public OptionFactory {
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const std::string& type) override;
 
         std::shared_ptr<Option> createSpecificOption(const ParameterObject& params,
@@ -15,4 +15,4 @@ namespace OptionPricer {
     };
 }
 
-#endif //FACTORY_DIGITAL_OPTION_H
+#endif //FACTORY_AMERICAN_OPTION_H

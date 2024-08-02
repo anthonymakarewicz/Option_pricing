@@ -1,12 +1,13 @@
 #ifndef FACTORY_PAYOFF_VANILLA_H
 #define FACTORY_PAYOFF_VANILLA_H
 
-#include "factory_payoff_single_strike.h"
+#include <string>
+#include "payoff/base_payoff.h"
 
 namespace OptionPricer {
-    class PayoffVanillaFactory final: public PayoffSingleStrikeFactory {
+    class PayoffVanillaFactory final {
     public:
-        [[nodiscard]] std::unique_ptr<Payoff> createPayoff(const std::string& type, const double &K) const override;
+        [[nodiscard]] static std::unique_ptr<Payoff> createPayoff(const std::string& type, const double &K);
     };
 }
 

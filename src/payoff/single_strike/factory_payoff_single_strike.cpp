@@ -1,1 +1,0 @@
-#include "payoff/single_strike/factory_payoff_single_strike.h"

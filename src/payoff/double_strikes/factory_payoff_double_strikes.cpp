@@ -1,1 +1,0 @@
-#include "payoff/double_strikes/factory_payoff_double_strikes.h"

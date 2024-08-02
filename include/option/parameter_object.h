@@ -16,6 +16,7 @@ namespace OptionPricer {
 
         void setParameter(const std::string& name, Parameter value);
 
+        // Maybe using a context to return only a type specified in Parameter
         template <typename T>
         T getParameter(const std::string& name) const {
             if (!hasParameter(name)) {

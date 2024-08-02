@@ -38,12 +38,9 @@ add_library(payoff SHARED
         src/payoff/double_strikes/base_payoff_double_strikes.cpp
         src/payoff/double_strikes/payoff_double_digital.cpp
         # Factories
-        src/payoff/factory_payoff.cpp
         src/payoff/single_strike/factory_payoff_vanilla.cpp
         src/payoff/single_strike/factory_payoff_digital.cpp
         src/payoff/double_strikes/factory_payoff_double_digital.cpp
-        src/payoff/double_strikes/factory_payoff_double_strikes.cpp
-        src/payoff/single_strike/factory_payoff_single_strike.cpp
 )
 
 # Create dynamic library for option, linking against marketdata and payoff
@@ -66,11 +63,15 @@ add_library(option SHARED
         src/option/path_dependent/barrier/base_single_barrier_option.cpp
         src/option/path_dependent/barrier/up_single_barrier_option.cpp
         src/option/path_dependent/barrier/down_single_barrier_option.cpp
+        # Factories
         src/option/factory_option.cpp
-        src/option/single_path/factory_single_path_option.cpp
         src/option/single_path/factory_european_option.cpp
-        include/option/single_path/factory_digital_option.h
         src/option/single_path/factory_digital_option.cpp
+        src/option/single_path/factory_double_digital_option.cpp
+        src/option/path_dependent/factory_american_option.cpp
+        src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp
+        src/option/path_dependent/asian/factory_geometric_asian_option.cpp
+        src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp
 )
 
 # Link the option library against marketdata and payoff

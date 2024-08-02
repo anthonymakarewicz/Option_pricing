@@ -26,7 +26,7 @@ protected:
 
     ParameterObject params;
     EuropeanOptionFactory factory;
-    std::shared_ptr<SinglePathOption> option;
+    std::shared_ptr<Option> option;
     static std::shared_ptr<MarketData> marketData;
 };
 
