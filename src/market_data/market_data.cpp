@@ -22,19 +22,21 @@ namespace OptionPricer {
         std::lock_guard<std::mutex> lock(mutex_); // Ensure thread safety
         if (!instance_) {
             instance_ = std::shared_ptr<MarketData>(new MarketData());
-            std::cout << "MakertData instance created" << "\n";
+            //std::cout << "MakertData instance created" << "\n";
         }
         return instance_;
     }
 
-    MarketData::~MarketData() { std::cout << "MarketData object properly destroyed!"; }
+    MarketData::~MarketData() {
+        //std::cout << "MarketData object properly destroyed!";
+    }
 
     // Initlize risk-free interest with some default value
     MarketData::MarketData() : r_(0.05) {}
 
     void MarketData::addObserver(const std::shared_ptr<MarketDataObserver>& observer) {
         observers_.push_back(observer);
-        std::cout << "Observer added. Total observers: " << observers_.size() << std::endl;
+        //std::cout << "Observer added. Total observers: " << observers_.size() << std::endl;
     }
 
     void MarketData::removeObserver() {
@@ -42,7 +44,7 @@ namespace OptionPricer {
         std::erase_if(observers_, [](const std::weak_ptr<MarketDataObserver>& obs) {
             return obs.expired();
         });
-        std::cout << "Expired observer removed. Total remaining observers: " << observers_.size() << "\n";
+        //std::cout << "Expired observer removed. Total remaining observers: " << observers_.size() << "\n";
     }
 
     /**

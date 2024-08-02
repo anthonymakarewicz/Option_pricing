@@ -12,14 +12,42 @@ set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems
 # Specify where to look for header files
 include_directories(include)
 
-# Create dynamic library for our source code
-add_library(core_library SHARED
+# Set the output directories for the libraries and executables
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+# Create dynamic library for marketdata
+add_library(marketdata SHARED
         src/market_data/interface_market_data.cpp
         src/market_data/market_data.cpp
         src/market_data/market_data_observer.cpp
         src/market_data/stock_data.cpp
+)
+
+# Create dynamic library for payoff
+add_library(payoff SHARED
+        src/payoff/base_payoff.cpp
+        src/payoff/single_strike/base_payoff_single_strike.cpp
+        src/payoff/single_strike/base_payoff_vanilla.cpp
+        src/payoff/single_strike/payoff_vanilla_call.cpp
+        src/payoff/single_strike/payoff_vanilla_put.cpp
+        src/payoff/single_strike/base_payoff_digital.cpp
+        src/payoff/single_strike/payoff_digital_call.cpp
+        src/payoff/single_strike/payoff_digital_put.cpp
+        src/payoff/double_strikes/base_payoff_double_strikes.cpp
+        src/payoff/double_strikes/payoff_double_digital.cpp
+        # Factories
+        src/payoff/single_strike/factory_payoff_vanilla.cpp
+        src/payoff/single_strike/factory_payoff_digital.cpp
+        src/payoff/double_strikes/factory_payoff_double_digital.cpp
+)
+
+# Create dynamic library for option, linking against marketdata and payoff
+add_library(option SHARED
         src/option/interface_option.cpp
         src/option/base_option.cpp
+        src/option/parameter_object.cpp
         src/option/single_path/base_single_path_option.cpp
         src/option/single_path/european_option.cpp
         src/option/single_path/digital_option.cpp
@@ -35,23 +63,25 @@ add_library(core_library SHARED
         src/option/path_dependent/barrier/base_single_barrier_option.cpp
         src/option/path_dependent/barrier/up_single_barrier_option.cpp
         src/option/path_dependent/barrier/down_single_barrier_option.cpp
-        src/payoff/base_payoff.cpp
-        src/payoff/single_strike/base_payoff_single_strike.cpp
-        src/payoff/single_strike/base_payoff_vanilla.cpp
-        src/payoff/single_strike/payoff_vanilla_call.cpp
-        src/payoff/single_strike/payoff_vanilla_put.cpp
-        src/payoff/single_strike/base_payoff_digital.cpp
-        src/payoff/single_strike/payoff_digital_call.cpp
-        src/payoff/single_strike/payoff_digital_put.cpp
-        src/payoff/double_strikes/base_payoff_double_strikes.cpp
-        src/payoff/double_strikes/payoff_double_digital.cpp
+        # Factories
+        src/option/factory_option.cpp
+        src/option/single_path/factory_european_option.cpp
+        src/option/single_path/factory_digital_option.cpp
+        src/option/single_path/factory_double_digital_option.cpp
+        src/option/path_dependent/factory_american_option.cpp
+        src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp
+        src/option/path_dependent/asian/factory_geometric_asian_option.cpp
+        src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp
 )
+
+# Link the option library against marketdata and payoff
+target_link_libraries(option PUBLIC marketdata payoff)
 
 # Create main executable
 add_executable(Option_pricer main.cpp)
 
-# Link the main executable to our dynamic library
-target_link_libraries(Option_pricer core_library)
+# Link the main executable to our dynamic libraries
+target_link_libraries(Option_pricer marketdata payoff option)
 
 # Enable testing and add the tests directory
 enable_testing()

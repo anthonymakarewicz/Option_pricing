@@ -1,32 +1,32 @@
 #include <gtest/gtest.h>
 #include <memory>
-#include "option/single_path/european_option.h"
+#include "option/single_path/factory_european_option.h"
 #include "market_data/market_data.h"
-#include "payoff/single_strike/payoff_vanilla_call.h"
 
 using namespace OptionPricer;
 
 class OptionIntegrationTest : public ::testing::Test {
 protected:
-    OptionIntegrationTest() : K(0.0), T(0.0), payoff(nullptr), option(nullptr) {}
-
     static void SetUpTestSuite() {
         marketData = MarketData::getInstance();
         marketData->addStock("AAPL", 150.0, 0.2);
     }
 
     void SetUp () override {
-        K = 100.0;
-        payoff = std::make_unique<PayoffVanillaCall>(K);
-        T = 1.0;
-        option = std::make_shared<EuropeanOption>("AAPL", std::move(payoff), T, marketData);
-        option->initialize();
+        std::string ticker = "AAPL";
+        double K = 100.0;
+        double T = 1.0;
+
+        params.setParameter("ticker", ticker);
+        params.setParameter("K", K);
+        params.setParameter("T", T);
+
+        option = factory.createCallOption(params);
     }
 
-    double K;
-    double T;
-    std::unique_ptr<Payoff> payoff;
-    std::shared_ptr<EuropeanOption> option;
+    ParameterObject params;
+    EuropeanOptionFactory factory;
+    std::shared_ptr<Option> option;
     static std::shared_ptr<MarketData> marketData;
 };
 
@@ -49,10 +49,9 @@ TEST_F(OptionIntegrationTest, UpdateStockPriceTest) {
 // Additional test to check observer interaction
 TEST_F(OptionIntegrationTest, ObserverInteractionTest) {
     // Create another option to observe the market data
-    double K2 = 120.0;
-    auto payoff2 = std::make_unique<PayoffVanillaCall>(K2);
-    auto option2 = std::make_shared<EuropeanOption>("AAPL", std::move(payoff2), T, marketData);
-    option2->initialize();
+    params.setParameter("K", 120.0);
+
+    auto option2 = factory.createCallOption(params);
 
     marketData->updateStockPrice("AAPL", 160.0);
     EXPECT_DOUBLE_EQ(option->payoff(), 60.0);

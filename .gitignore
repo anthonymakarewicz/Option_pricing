@@ -3,6 +3,8 @@ cmake-build-debug/
 cmake-build-release/
 cmake-build-cmake/
 build/
+lib/
+bin/
 
 # Ignore other generated files
 *.log

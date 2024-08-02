@@ -17,9 +17,7 @@ namespace OptionPricer {
 
         virtual bool isOut(double S) const = 0;
 
-        bool isActive(double S) const {
-            return knockBehavior_->isActive(isOut(S));
-        }
+        bool isActive(double S) const;
 
         std::unique_ptr<KnockBehavior> knockBehavior_;
     };

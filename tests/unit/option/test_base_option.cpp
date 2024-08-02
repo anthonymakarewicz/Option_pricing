@@ -22,7 +22,7 @@ public:
 // Test fixture for Option tests
 class OptionTest : public Test {
 protected:
-    OptionTest() : T(0.0), K(0.0),  payoff(nullptr), mockMarketData(nullptr) {}
+    OptionTest() : T(0.0), K(0.0) {}
 
     void SetUp() override {
         ticker = "AAPL";

@@ -4,6 +4,7 @@
 #include <cxxabi.h>
 #include "option/base_option.h"
 
+#include <option/single_path/base_single_path_option.h>
 #include <payoff/single_strike/base_payoff_vanilla.h>
 
 /**
@@ -31,7 +32,7 @@ namespace OptionPricer {
 
     Option::~Option() {
         if (marketData_) marketData_->removeObserver();
-        std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
+        //std::cout << getType() << " on " << id_ << " is destroyed!" << "\n";
     }
 
     void Option::update() {
@@ -93,3 +94,5 @@ namespace OptionPricer {
         return (*payoff_)(S);
     }
 }
+
+
