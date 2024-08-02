@@ -7,119 +7,54 @@
 │   └── stock_data.h
 ├── option
 │   ├── base_option.h
-│   ├── factories
-│   │   ├── base_option_factory.h
-│   │   ├── path_dependent
-│   │   │   ├── american_option_factory.h
-│   │   │   ├── asian
-│   │   │   │   ├── arithmetic_asian_option_factory.h
-│   │   │   │   ├── base_asian_option_factory.h
-│   │   │   │   └── geometric_asian_option_factory.h
-│   │   │   ├── barrier
-│   │   │   │   ├── barrier_knockin_option.h
-│   │   │   │   ├── barrier_knockout_option.h
-│   │   │   │   └── base_barrier_option.h
-│   │   │   └── base_single_step_option_factory.h
-│   │   └── single_path
-│   │       ├── base_single_step_option_factory.h
-│   │       ├── digital_option_factory.h
-│   │       └── european_option_factory.h
+│   ├── factory_option.h
 │   ├── interface_option.h
+│   ├── parameter_object.h
 │   ├── path_dependent
 │   │   ├── american_option.h
 │   │   ├── asian
 │   │   │   ├── arithmetic_asian_option.h
 │   │   │   ├── base_asian_option.h
+│   │   │   ├── factory_arithmetic_asian_option.h
+│   │   │   ├── factory_geometric_asian_option.h
 │   │   │   └── geometric_asian_option.h
 │   │   ├── barrier
 │   │   │   ├── base_barrier_option.h
 │   │   │   ├── base_single_barrier_option.h
 │   │   │   ├── double_barrier.h
 │   │   │   ├── down_single_barrier_option.h
+│   │   │   ├── factory_up_single_barrier_option.h
 │   │   │   ├── knock_behavior.h
 │   │   │   └── up_single_barrier_option.h
-│   │   └── base_path_dependent_option.h
+│   │   ├── base_path_dependent_option.h
+│   │   └── factory_american_option.h
 │   └── single_path
 │       ├── base_single_path_option.h
 │       ├── digital_option.h
 │       ├── double_digital_option.h
-│       └── european_option.h
+│       ├── european_option.h
+│       ├── factory_digital_option.h
+│       ├── factory_double_digital_option.h
+│       └── factory_european_option.h
 ├── payoff
 │   ├── base_payoff.h
 │   ├── double_strikes
 │   │   ├── base_payoff_double_strikes.h
+│   │   ├── factory_payoff_double_digital.h
 │   │   └── payoff_double_digital.h
 │   └── single_strike
+│       ├── barrier
+│       │   └── knock_behavior.h
 │       ├── base_payoff_digital.h
 │       ├── base_payoff_single_strike.h
 │       ├── base_payoff_vanilla.h
+│       ├── factory_payoff_digital.h
+│       ├── factory_payoff_vanilla.h
 │       ├── payoff_digital_call.h
 │       ├── payoff_digital_put.h
 │       ├── payoff_vanilla_call.h
 │       └── payoff_vanilla_put.h
 └── solver
-
-(base) anthony@MacBook-Air-de-anthony-2 src % tree
-.
-├── market_data
-│   ├── interface_market_data.cpp
-│   ├── market_data.cpp
-│   ├── market_data_observer.cpp
-│   └── stock_data.cpp
-├── option
-│   ├── base_option.cpp
-│   ├── factories
-│   │   ├── base_option_factory.cpp
-│   │   ├── path_dependent
-│   │   │   ├── american_option_factory.cpp
-│   │   │   ├── asian
-│   │   │   │   ├── arithmetic_asian_option_factory.cpp
-│   │   │   │   ├── base_asian_option_factory.cpp
-│   │   │   │   └── geometric_asian_option_factory.cpp
-│   │   │   ├── barrier
-│   │   │   │   ├── barrier_knockin_option.cpp
-│   │   │   │   ├── barrier_knockout_option.cpp
-│   │   │   │   └── base_barrier_option.cpp
-│   │   │   └── base_single_step_option_factory.cpp
-│   │   └── single_path
-│   │       ├── base_single_path_option_factory.cpp
-│   │       ├── digital_option_factory.cpp
-│   │       └── european_option_factory.cpp
-│   ├── interface_option.cpp
-│   ├── path_dependent
-│   │   ├── american_option.cpp
-│   │   ├── asian
-│   │   │   ├── arithmetic_asian_option.cpp
-│   │   │   ├── base_asian_option.cpp
-│   │   │   └── geometric_asian_option.cpp
-│   │   ├── barrier
-│   │   │   ├── base_barrier_option.cpp
-│   │   │   ├── base_single_barrier_option.cpp
-│   │   │   ├── double_barrier.cpp
-│   │   │   ├── down_single_barrier_option.cpp
-│   │   │   ├── knock_behavior.cpp
-│   │   │   └── up_single_barrier_option.cpp
-│   │   └── base_path_dependent_option.cpp
-│   └── single_path
-│       ├── base_single_path_option.cpp
-│       ├── digital_option.cpp
-│       ├── double_digital_option.cpp
-│       └── european_option.cpp
-├── payoff
-│   ├── base_payoff.cpp
-│   ├── double_strikes
-│   │   ├── base_payoff_double_strikes.cpp
-│   │   └── payoff_double_digital.cpp
-│   └── single_strike
-│       ├── base_payoff_digital.cpp
-│       ├── base_payoff_single_strike.cpp
-│       ├── base_payoff_vanilla.cpp
-│       ├── payoff_digital_call.cpp
-│       ├── payoff_digital_put.cpp
-│       ├── payoff_vanilla_call.cpp
-│       └── payoff_vanilla_put.cpp
-└── solver
-
 
 (base) anthony@MacBook-Air-de-anthony-2 tests % tree
 .
@@ -136,7 +71,8 @@
     │   └── test_stock_data.cpp
     ├── option
     │   ├── test_base_option.cpp
-    │   └── test_european_option.cpp
+    │   ├── test_european_option.cpp
+    │   └── test_factory_european_option.cpp
     ├── payoff
     │   ├── double_strikes
     │   │   └── test_payoff_double_digital.cpp
@@ -152,48 +88,4 @@
         └── mock_classes.h
 
 
-src/
-├── market_data
-    ├── interface_market_data.cpp
-│   ├── market_data.cpp
-│   ├── market_data_observer.cpp
-│   └── stock_data.cpp
-├── options
-    ├── interface_option.cpp
-│   ├── base_option.cpp
-    ├── base_option_factory.cpp
-│   ├── single_path
-│   │   ├── base_single_path_option.cpp
-│   │   ├── european_option.cpp
-│   │   ├── digital_option.cpp
-│   │   ├── double_digital_option.cpp
-│   │   └── factories
-│   │       ├── base_single_path_option_factory.cpp
-│   │       ├── european_option_factory.cpp
-│   │       └── digital_option_factory.cpp
-│   ├── path_dependent
-│   │   ├── base_path_dependent_option.cpp
-│   │   ├── american_option.cpp
-│   │   ├── asian
-│   │   │   ├── arithmetic_asian_option.cpp
-│   │   │   ├── base_asian_option.cpp
-│   │   │   └── geometric_asian_option.cpp
-│   │   ├── barrier
-│   │   │   ├── base_barrier_option.cpp
-│   │   │   ├── double_barrier_option.cpp
-│   │   │   ├── knock_behavior.cpp
-│   │   │   └── single_barrier
-│   │   │       ├── base_single_barrier_option.cpp
-│   │   │       ├── down_single_barrier_option.cpp
-│   │   │       └── up_single_barrier_option.cpp
-│   │   └── factories
-│   │       ├── base_path_dependent_option_factory.cpp
-│   │       ├── american_option_factory.cpp
-│   │       ├── base_asian_option_factory.cpp
-│   │       ├── arithmetic_asian_option_factory.cpp
-│   │       ├── geometric_asian_option_factory.cpp
-│   │       └── barrier
-│   │           ├── base_barrier_option_factory.cpp
-│   │           ├── barrier_knockin_option_factory.cpp
-│   │           ├── barrier_knockout_option_factory.cpp
-│   │           └── single_barrier_option_factory.cpp
+
