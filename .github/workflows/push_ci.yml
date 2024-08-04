@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Main Executable and Test Executable
         run: | # probably need to build specific target --target Option_pricer Unit_tests to exclude examples
-          cmake --build build 
+          cmake --build build --target Unit_tests
 
       - name: Run Unit Tests
         run: |
