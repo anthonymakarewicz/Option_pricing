@@ -20,7 +20,7 @@ jobs:
           cmake-version: '3.26.3'
 
       - name: Install dependencies
-        run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
+        run: sudo apt-get install -y libgtest-dev libgmock-dev libboost-all-dev #clang-tidy lcov #clang-format
 
       - name: Configure CMake
         run: |
