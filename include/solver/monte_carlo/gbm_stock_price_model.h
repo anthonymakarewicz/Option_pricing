@@ -6,31 +6,29 @@
 #include <solver/monte_carlo/stock_price_model.h>
 #include <market_data/interface_market_data.h>
 
-
+// COuld potentially make BrownianMotionModel accept a RNGenerator object so as generate the noise inside.
+// It can be useful for more complex models like Variance Gamma whihc may need to genearte complicated varianbles
+// Or evne jump difusion whihc will generate a set of poissonns rv that will be inside
 
 namespace OptionPricer {
     class BrownianMotionModel : public StockPriceModel {
     public:
-        BrownianMotionModel(const std::string& ticker, std::shared_ptr<IMarketData> marketData, const int seed);
+        BrownianMotionModel(const std::string& ticker, std::shared_ptr<IMarketData> marketData)
+            : StockPriceModel(ticker, std::move(marketData)) {}
 
-        [[nodiscard]] double simulate_price(const double& maturity) const override {
-            /*
-            auto stockData = marketData_->getStockData(ticker_);
-
-            std::normal_distribution<double> distribution(0.0, 1.0);
-            static std::default_random_engine generator(3);
-
-            double St = stockData->getPrice() * exp((r_ - 0.5 * sigma_ * sigma_) * dt + sigma_ * sqrt(dt) * distribution(generator));
-            return St;
-
-            */
-            return 0.0;
+        [[nodiscard]] double simulatePriceAtMaturity(const double& T, const double& z) const override {
+            const double drift = (marketData_->getR() - (0.5 * stockData_->getSigma()*stockData_->getSigma())) * T;
+            const double diffusion = stockData_->getSigma() * sqrt(T) * z;
+            return stockData_->getPrice() * exp(drift+diffusion);
         }
-    protected:
-        std::normal_distribution<double> distribution_;
+
+        [[nodiscard]] double simulateStepPrice(
+                                               const double& dt, const double& z) const override {
+            const double drift = (marketData_->getR() - (0.5 * stockData_->getSigma()*stockData_->getSigma())) * dt;
+            const double diffusion = stockData_->getSigma() * sqrt(dt) * z;
+            return exp(drift+diffusion);
+        }
     };
 }
-
-
 
 #endif //GBM_STOCK_PRICE_MODEL_H

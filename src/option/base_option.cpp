@@ -85,6 +85,10 @@ namespace OptionPricer {
         return typeName;
     }
 
+    double Option::getT() const {
+        return T_;
+    }
+
     double Option::payoff() const {
         const auto stockData = marketData_->getStockData(id_);
         return (*payoff_)(stockData->getPrice());

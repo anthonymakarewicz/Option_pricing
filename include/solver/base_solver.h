@@ -3,13 +3,11 @@
 
 #include <memory>
 
-#include "option/base_option.h"
-
 namespace OptionPricer {
     class Solver {
     public:
         virtual ~Solver();
-        virtual double solve(std::shared_ptr<Option> option) const = 0;
+        [[nodiscard]] virtual double solve() const = 0;
     };
 }
 

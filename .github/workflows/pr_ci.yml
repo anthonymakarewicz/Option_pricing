@@ -32,7 +32,7 @@ jobs:
           cmake-version: '3.26.3'
 
       - name: Install dependencies
-        run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
+        run: sudo apt-get install -y libgtest-dev libgmock-dev libboost-all-dev
 
       - name: Configure CMake
         run: |
@@ -40,7 +40,7 @@ jobs:
 
       - name: Build Main Executable and Test Executable
         run: |
-          cmake --build build
+          cmake --build build --target Unit_tests Integration_tests
 
     #  - name: Analyze code with clang-tidy
     #    run: |

@@ -8,11 +8,12 @@
 #include <unordered_map>
 #include <variant>
 
+#include "path_dependent/barrier_option.h"
+
 namespace OptionPricer {
-    // ParameterObject class to hold various parameters
     class ParameterObject {
     public:
-        using Parameter = std::variant<int, double, std::string>;
+        using Parameter = std::variant<int, double, std::string, BarrierDirection>; // Need template class
 
         void setParameter(const std::string& name, Parameter value);
 

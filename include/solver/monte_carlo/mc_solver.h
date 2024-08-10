@@ -5,17 +5,29 @@
 #include "solver/monte_carlo/mc_base_strategy.h"
 
 namespace OptionPricer {
+    // Bridge between MCSolver and MCStrategy
     class MCSolver : public Solver {
     public:
-        MCSolver(int num_simulations, std::unique_ptr<MCStrategy> strategy)
-            : num_simulations_(num_simulations), strategy_(std::move(strategy)) {}
+        explicit MCSolver(const unsigned long& N = 100000)
+            : N_(N), strategy_(nullptr) {}
 
-        double solve(std::shared_ptr<Option> option) const override {
-            return strategy_->calculate_price(option, num_simulations_);
+        double solve() const override {
+            if (!strategy_) {
+                throw std::logic_error("Strategy is not set for MCSolver.");
+            }
+            return strategy_->calculate_price(N_);
+        }
+
+        void setN(const unsigned long& N) {
+            N_ = N;
+        }
+
+        void setStrategy(std::unique_ptr<MCStrategy> strategy) {
+            strategy_ = std::move(strategy);
         }
 
     private:
-        int num_simulations_;
+        unsigned long N_;
         std::unique_ptr<MCStrategy> strategy_;
     };
 }
