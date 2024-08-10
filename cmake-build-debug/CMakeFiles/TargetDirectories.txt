@@ -1,6 +1,7 @@
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/marketdata.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/payoff.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/option.dir
+/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/solver.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/Option_pricer.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/test.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/CMakeFiles/edit_cache.dir
@@ -17,3 +18,7 @@
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/tests/integration/CMakeFiles/test.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/tests/integration/CMakeFiles/edit_cache.dir
 /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/tests/integration/CMakeFiles/rebuild_cache.dir
+/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples/CMakeFiles/sobol.dir
+/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples/CMakeFiles/test.dir
+/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples/CMakeFiles/edit_cache.dir
+/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples/CMakeFiles/rebuild_cache.dir

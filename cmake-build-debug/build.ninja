@@ -53,7 +53,7 @@ build CMakeFiles/marketdata.dir/src/market_data/interface_market_data.cpp.o: CXX
   DEFINES = -Dmarketdata_EXPORTS
   DEP_FILE = CMakeFiles/marketdata.dir/src/market_data/interface_market_data.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/marketdata.dir
   OBJECT_FILE_DIR = CMakeFiles/marketdata.dir/src/market_data
 
@@ -61,7 +61,7 @@ build CMakeFiles/marketdata.dir/src/market_data/market_data.cpp.o: CXX_COMPILER_
   DEFINES = -Dmarketdata_EXPORTS
   DEP_FILE = CMakeFiles/marketdata.dir/src/market_data/market_data.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/marketdata.dir
   OBJECT_FILE_DIR = CMakeFiles/marketdata.dir/src/market_data
 
@@ -69,7 +69,7 @@ build CMakeFiles/marketdata.dir/src/market_data/market_data_observer.cpp.o: CXX_
   DEFINES = -Dmarketdata_EXPORTS
   DEP_FILE = CMakeFiles/marketdata.dir/src/market_data/market_data_observer.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/marketdata.dir
   OBJECT_FILE_DIR = CMakeFiles/marketdata.dir/src/market_data
 
@@ -77,7 +77,7 @@ build CMakeFiles/marketdata.dir/src/market_data/stock_data.cpp.o: CXX_COMPILER__
   DEFINES = -Dmarketdata_EXPORTS
   DEP_FILE = CMakeFiles/marketdata.dir/src/market_data/stock_data.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/marketdata.dir
   OBJECT_FILE_DIR = CMakeFiles/marketdata.dir/src/market_data
 
@@ -114,7 +114,7 @@ build CMakeFiles/payoff.dir/src/payoff/base_payoff.cpp.o: CXX_COMPILER__payoff_u
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/base_payoff.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff
 
@@ -122,7 +122,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/base_payoff_single_strike.c
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/base_payoff_single_strike.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -130,7 +130,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/base_payoff_vanilla.cpp.o: 
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/base_payoff_vanilla.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -138,7 +138,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_vanilla_call.cpp.o: 
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_vanilla_call.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -146,7 +146,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_vanilla_put.cpp.o: C
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_vanilla_put.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -154,7 +154,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/base_payoff_digital.cpp.o: 
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/base_payoff_digital.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -162,7 +162,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_digital_call.cpp.o: 
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_digital_call.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -170,7 +170,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_digital_put.cpp.o: C
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/payoff_digital_put.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -178,7 +178,7 @@ build CMakeFiles/payoff.dir/src/payoff/double_strikes/base_payoff_double_strikes
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/double_strikes/base_payoff_double_strikes.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/double_strikes
 
@@ -186,7 +186,7 @@ build CMakeFiles/payoff.dir/src/payoff/double_strikes/payoff_double_digital.cpp.
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/double_strikes/payoff_double_digital.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/double_strikes
 
@@ -194,7 +194,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/factory_payoff_vanilla.cpp.
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/factory_payoff_vanilla.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -202,7 +202,7 @@ build CMakeFiles/payoff.dir/src/payoff/single_strike/factory_payoff_digital.cpp.
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/single_strike/factory_payoff_digital.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/single_strike
 
@@ -210,7 +210,7 @@ build CMakeFiles/payoff.dir/src/payoff/double_strikes/factory_payoff_double_digi
   DEFINES = -Dpayoff_EXPORTS
   DEP_FILE = CMakeFiles/payoff.dir/src/payoff/double_strikes/factory_payoff_double_digital.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/payoff.dir
   OBJECT_FILE_DIR = CMakeFiles/payoff.dir/src/payoff/double_strikes
 
@@ -247,7 +247,7 @@ build CMakeFiles/option.dir/src/option/interface_option.cpp.o: CXX_COMPILER__opt
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/interface_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option
 
@@ -255,7 +255,7 @@ build CMakeFiles/option.dir/src/option/base_option.cpp.o: CXX_COMPILER__option_u
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/base_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option
 
@@ -263,7 +263,7 @@ build CMakeFiles/option.dir/src/option/parameter_object.cpp.o: CXX_COMPILER__opt
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/parameter_object.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option
 
@@ -271,7 +271,7 @@ build CMakeFiles/option.dir/src/option/single_path/base_single_path_option.cpp.o
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/base_single_path_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -279,7 +279,7 @@ build CMakeFiles/option.dir/src/option/single_path/european_option.cpp.o: CXX_CO
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/european_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -287,7 +287,7 @@ build CMakeFiles/option.dir/src/option/single_path/digital_option.cpp.o: CXX_COM
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/digital_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -295,7 +295,7 @@ build CMakeFiles/option.dir/src/option/single_path/double_digital_option.cpp.o: 
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/double_digital_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -303,7 +303,7 @@ build CMakeFiles/option.dir/src/option/path_dependent/base_path_dependent_option
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/base_path_dependent_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
@@ -311,87 +311,31 @@ build CMakeFiles/option.dir/src/option/path_dependent/american_option.cpp.o: CXX
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/american_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
-build CMakeFiles/option.dir/src/option/path_dependent/asian/base_asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/asian/base_asian_option.cpp || cmake_object_order_depends_target_option
+build CMakeFiles/option.dir/src/option/path_dependent/asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/asian_option.cpp || cmake_object_order_depends_target_option
   DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/asian/base_asian_option.cpp.o.d
+  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/asian_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/asian
+  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
-build CMakeFiles/option.dir/src/option/path_dependent/asian/arithmetic_asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/asian/arithmetic_asian_option.cpp || cmake_object_order_depends_target_option
+build CMakeFiles/option.dir/src/option/path_dependent/barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier_option.cpp || cmake_object_order_depends_target_option
   DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/asian/arithmetic_asian_option.cpp.o.d
+  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/asian
-
-build CMakeFiles/option.dir/src/option/path_dependent/asian/geometric_asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/asian/geometric_asian_option.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/asian/geometric_asian_option.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/asian
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/base_barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/base_barrier_option.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/base_barrier_option.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/knock_behavior.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/knock_behavior.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/knock_behavior.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/double_barrier.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/double_barrier.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/double_barrier.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/base_single_barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/base_single_barrier_option.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/base_single_barrier_option.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/up_single_barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/up_single_barrier_option.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/up_single_barrier_option.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/down_single_barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/down_single_barrier_option.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/down_single_barrier_option.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
+  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
 build CMakeFiles/option.dir/src/option/factory_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/factory_option.cpp || cmake_object_order_depends_target_option
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/factory_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option
 
@@ -399,7 +343,7 @@ build CMakeFiles/option.dir/src/option/single_path/factory_european_option.cpp.o
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/factory_european_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -407,7 +351,7 @@ build CMakeFiles/option.dir/src/option/single_path/factory_digital_option.cpp.o:
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/factory_digital_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -415,7 +359,7 @@ build CMakeFiles/option.dir/src/option/single_path/factory_double_digital_option
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/single_path/factory_double_digital_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/single_path
 
@@ -423,33 +367,25 @@ build CMakeFiles/option.dir/src/option/path_dependent/factory_american_option.cp
   DEFINES = -Doption_EXPORTS
   DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/factory_american_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
   OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
-build CMakeFiles/option.dir/src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp || cmake_object_order_depends_target_option
+build CMakeFiles/option.dir/src/option/path_dependent/factory_asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/factory_asian_option.cpp || cmake_object_order_depends_target_option
   DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp.o.d
+  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/factory_asian_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/asian
+  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
-build CMakeFiles/option.dir/src/option/path_dependent/asian/factory_geometric_asian_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/asian/factory_geometric_asian_option.cpp || cmake_object_order_depends_target_option
+build CMakeFiles/option.dir/src/option/path_dependent/factory_barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/factory_barrier_option.cpp || cmake_object_order_depends_target_option
   DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/asian/factory_geometric_asian_option.cpp.o.d
+  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/factory_barrier_option.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/usr/local/include -I/Users/anthony/CLionProjects/Option_pricer/include
   OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/asian
-
-build CMakeFiles/option.dir/src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp.o: CXX_COMPILER__option_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp || cmake_object_order_depends_target_option
-  DEFINES = -Doption_EXPORTS
-  DEP_FILE = CMakeFiles/option.dir/src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp.o.d
-  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
-  OBJECT_DIR = CMakeFiles/option.dir
-  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent/barrier
+  OBJECT_FILE_DIR = CMakeFiles/option.dir/src/option/path_dependent
 
 
 # =============================================================================
@@ -459,7 +395,7 @@ build CMakeFiles/option.dir/src/option/path_dependent/barrier/factory_up_single_
 #############################################
 # Link the shared library /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib
 
-build /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib: CXX_SHARED_LIBRARY_LINKER__option_Debug CMakeFiles/option.dir/src/option/interface_option.cpp.o CMakeFiles/option.dir/src/option/base_option.cpp.o CMakeFiles/option.dir/src/option/parameter_object.cpp.o CMakeFiles/option.dir/src/option/single_path/base_single_path_option.cpp.o CMakeFiles/option.dir/src/option/single_path/european_option.cpp.o CMakeFiles/option.dir/src/option/single_path/digital_option.cpp.o CMakeFiles/option.dir/src/option/single_path/double_digital_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/base_path_dependent_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/american_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/asian/base_asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/asian/arithmetic_asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/asian/geometric_asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/base_barrier_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/knock_behavior.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/double_barrier.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/base_single_barrier_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/up_single_barrier_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/down_single_barrier_option.cpp.o CMakeFiles/option.dir/src/option/factory_option.cpp.o CMakeFiles/option.dir/src/option/single_path/factory_european_option.cpp.o CMakeFiles/option.dir/src/option/single_path/factory_digital_option.cpp.o CMakeFiles/option.dir/src/option/single_path/factory_double_digital_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/factory_american_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/asian/factory_geometric_asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp.o | /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib || /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib
+build /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib: CXX_SHARED_LIBRARY_LINKER__option_Debug CMakeFiles/option.dir/src/option/interface_option.cpp.o CMakeFiles/option.dir/src/option/base_option.cpp.o CMakeFiles/option.dir/src/option/parameter_object.cpp.o CMakeFiles/option.dir/src/option/single_path/base_single_path_option.cpp.o CMakeFiles/option.dir/src/option/single_path/european_option.cpp.o CMakeFiles/option.dir/src/option/single_path/digital_option.cpp.o CMakeFiles/option.dir/src/option/single_path/double_digital_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/base_path_dependent_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/american_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/barrier_option.cpp.o CMakeFiles/option.dir/src/option/factory_option.cpp.o CMakeFiles/option.dir/src/option/single_path/factory_european_option.cpp.o CMakeFiles/option.dir/src/option/single_path/factory_digital_option.cpp.o CMakeFiles/option.dir/src/option/single_path/factory_double_digital_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/factory_american_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/factory_asian_option.cpp.o CMakeFiles/option.dir/src/option/path_dependent/factory_barrier_option.cpp.o | /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib || /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib
   ARCH_FLAGS = -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
   INSTALLNAME_DIR = @rpath/
   LANGUAGE_COMPILE_FLAGS = -g
@@ -473,18 +409,89 @@ build /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib: CXX_SHARED
   TARGET_PDB = option.dylib.dbg
 
 # =============================================================================
+# Object build statements for SHARED_LIBRARY target solver
+
+
+#############################################
+# Order-only phony target for solver
+
+build cmake_object_order_depends_target_solver: phony || CMakeFiles/solver.dir
+
+build CMakeFiles/solver.dir/src/solver/base_solver.cpp.o: CXX_COMPILER__solver_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/solver/base_solver.cpp || cmake_object_order_depends_target_solver
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB -Dsolver_EXPORTS
+  DEP_FILE = CMakeFiles/solver.dir/src/solver/base_solver.cpp.o.d
+  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/src/solver
+
+build CMakeFiles/solver.dir/src/solver/monte_carlo/mc_solver.cpp.o: CXX_COMPILER__solver_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/solver/monte_carlo/mc_solver.cpp || cmake_object_order_depends_target_solver
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB -Dsolver_EXPORTS
+  DEP_FILE = CMakeFiles/solver.dir/src/solver/monte_carlo/mc_solver.cpp.o.d
+  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/src/solver/monte_carlo
+
+build CMakeFiles/solver.dir/src/solver/monte_carlo/mc_base_strategy.cpp.o: CXX_COMPILER__solver_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/solver/monte_carlo/mc_base_strategy.cpp || cmake_object_order_depends_target_solver
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB -Dsolver_EXPORTS
+  DEP_FILE = CMakeFiles/solver.dir/src/solver/monte_carlo/mc_base_strategy.cpp.o.d
+  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/src/solver/monte_carlo
+
+build CMakeFiles/solver.dir/src/solver/monte_carlo/stock_price_model.cpp.o: CXX_COMPILER__solver_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/solver/monte_carlo/stock_price_model.cpp || cmake_object_order_depends_target_solver
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB -Dsolver_EXPORTS
+  DEP_FILE = CMakeFiles/solver.dir/src/solver/monte_carlo/stock_price_model.cpp.o.d
+  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/src/solver/monte_carlo
+
+build CMakeFiles/solver.dir/src/solver/monte_carlo/gbm_stock_price_model.cpp.o: CXX_COMPILER__solver_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/src/solver/monte_carlo/gbm_stock_price_model.cpp || cmake_object_order_depends_target_solver
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB -Dsolver_EXPORTS
+  DEP_FILE = CMakeFiles/solver.dir/src/solver/monte_carlo/gbm_stock_price_model.cpp.o.d
+  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fPIC -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
+  OBJECT_DIR = CMakeFiles/solver.dir
+  OBJECT_FILE_DIR = CMakeFiles/solver.dir/src/solver/monte_carlo
+
+
+# =============================================================================
+# Link build statements for SHARED_LIBRARY target solver
+
+
+#############################################
+# Link the shared library /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib
+
+build /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib: CXX_SHARED_LIBRARY_LINKER__solver_Debug CMakeFiles/solver.dir/src/solver/base_solver.cpp.o CMakeFiles/solver.dir/src/solver/monte_carlo/mc_solver.cpp.o CMakeFiles/solver.dir/src/solver/monte_carlo/mc_base_strategy.cpp.o CMakeFiles/solver.dir/src/solver/monte_carlo/stock_price_model.cpp.o CMakeFiles/solver.dir/src/solver/monte_carlo/gbm_stock_price_model.cpp.o | /usr/local/lib/libboost_random-mt.dylib
+  ARCH_FLAGS = -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
+  INSTALLNAME_DIR = @rpath/
+  LANGUAGE_COMPILE_FLAGS = -g
+  LINK_LIBRARIES = /usr/local/lib/libboost_random-mt.dylib
+  OBJECT_DIR = CMakeFiles/solver.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  SONAME = libsolver.dylib
+  SONAME_FLAG = -install_name
+  TARGET_FILE = /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib
+  TARGET_PDB = solver.dylib.dbg
+
+# =============================================================================
 # Object build statements for EXECUTABLE target Option_pricer
 
 
 #############################################
 # Order-only phony target for Option_pricer
 
-build cmake_object_order_depends_target_Option_pricer: phony || cmake_object_order_depends_target_marketdata cmake_object_order_depends_target_option cmake_object_order_depends_target_payoff
+build cmake_object_order_depends_target_Option_pricer: phony || cmake_object_order_depends_target_marketdata cmake_object_order_depends_target_option cmake_object_order_depends_target_payoff cmake_object_order_depends_target_solver
 
 build CMakeFiles/Option_pricer.dir/main.cpp.o: CXX_COMPILER__Option_pricer_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/main.cpp || cmake_object_order_depends_target_Option_pricer
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB
   DEP_FILE = CMakeFiles/Option_pricer.dir/main.cpp.o.d
   FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
   OBJECT_DIR = CMakeFiles/Option_pricer.dir
   OBJECT_FILE_DIR = CMakeFiles/Option_pricer.dir
 
@@ -496,9 +503,9 @@ build CMakeFiles/Option_pricer.dir/main.cpp.o: CXX_COMPILER__Option_pricer_unsca
 #############################################
 # Link the executable /Users/anthony/CLionProjects/Option_pricer/bin/Option_pricer
 
-build /Users/anthony/CLionProjects/Option_pricer/bin/Option_pricer: CXX_EXECUTABLE_LINKER__Option_pricer_Debug CMakeFiles/Option_pricer.dir/main.cpp.o | /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib || /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib
+build /Users/anthony/CLionProjects/Option_pricer/bin/Option_pricer: CXX_EXECUTABLE_LINKER__Option_pricer_Debug CMakeFiles/Option_pricer.dir/main.cpp.o | /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib /usr/local/lib/libboost_random-mt.dylib || /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
-  LINK_LIBRARIES = -Wl,-rpath,/Users/anthony/CLionProjects/Option_pricer/lib  /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib  /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib  /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib
+  LINK_LIBRARIES = -Wl,-rpath,/Users/anthony/CLionProjects/Option_pricer/lib  /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib  /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib  /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib  /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib  /usr/local/lib/libboost_random-mt.dylib
   OBJECT_DIR = CMakeFiles/Option_pricer.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -817,6 +824,80 @@ build tests/integration/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build tests/integration/rebuild_cache: phony tests/integration/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/anthony/CLionProjects/Option_pricer/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for EXECUTABLE target sobol
+
+
+#############################################
+# Order-only phony target for sobol
+
+build cmake_object_order_depends_target_sobol: phony || examples/CMakeFiles/sobol.dir
+
+build examples/CMakeFiles/sobol.dir/generate_sobol.cpp.o: CXX_COMPILER__sobol_unscanned_Debug /Users/anthony/CLionProjects/Option_pricer/examples/generate_sobol.cpp || cmake_object_order_depends_target_sobol
+  DEFINES = -DBOOST_RANDOM_DYN_LINK -DBOOST_RANDOM_NO_LIB
+  DEP_FILE = examples/CMakeFiles/sobol.dir/generate_sobol.cpp.o.d
+  FLAGS = -g -std=c++20 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anthony/CLionProjects/Option_pricer/include -isystem /usr/local/include
+  OBJECT_DIR = examples/CMakeFiles/sobol.dir
+  OBJECT_FILE_DIR = examples/CMakeFiles/sobol.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target sobol
+
+
+#############################################
+# Link the executable examples/sobol
+
+build examples/sobol: CXX_EXECUTABLE_LINKER__sobol_Debug examples/CMakeFiles/sobol.dir/generate_sobol.cpp.o | /usr/local/lib/libboost_random-mt.dylib
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
+  LINK_LIBRARIES = /usr/local/lib/libboost_random-mt.dylib
+  OBJECT_DIR = examples/CMakeFiles/sobol.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = examples/sobol
+  TARGET_PDB = sobol.dbg
+
+
+#############################################
+# Utility command for test
+
+build examples/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples && /Applications/CLion.app/Contents/bin/cmake/mac/x64/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build examples/test: phony examples/CMakeFiles/test.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build examples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples && /Applications/CLion.app/Contents/bin/cmake/mac/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build examples/edit_cache: phony examples/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build examples/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples && /Applications/CLion.app/Contents/bin/cmake/mac/x64/bin/cmake --regenerate-during-build -S/Users/anthony/CLionProjects/Option_pricer -B/Users/anthony/CLionProjects/Option_pricer/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build examples/rebuild_cache: phony examples/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build Integration_tests: phony /Users/anthony/CLionProjects/Option_pricer/bin/Integration_tests
@@ -833,11 +914,17 @@ build liboption.dylib: phony /Users/anthony/CLionProjects/Option_pricer/lib/libo
 
 build libpayoff.dylib: phony /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib
 
+build libsolver.dylib: phony /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib
+
 build marketdata: phony /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib
 
 build option: phony /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib
 
 build payoff: phony /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib
+
+build sobol: phony examples/sobol
+
+build solver: phony /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib
 
 # =============================================================================
 # Folder targets.
@@ -847,7 +934,14 @@ build payoff: phony /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dyl
 #############################################
 # Folder: /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug
 
-build all: phony /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib /Users/anthony/CLionProjects/Option_pricer/bin/Option_pricer tests/all
+build all: phony /Users/anthony/CLionProjects/Option_pricer/lib/libmarketdata.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libpayoff.dylib /Users/anthony/CLionProjects/Option_pricer/lib/liboption.dylib /Users/anthony/CLionProjects/Option_pricer/lib/libsolver.dylib /Users/anthony/CLionProjects/Option_pricer/bin/Option_pricer tests/all examples/all
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/anthony/CLionProjects/Option_pricer/cmake-build-debug/examples
+
+build examples/all: phony examples/sobol
 
 # =============================================================================
 
@@ -877,14 +971,14 @@ build tests/unit/all: phony /Users/anthony/CLionProjects/Option_pricer/bin/Unit_
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindGTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindThreads.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/GoogleTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /Users/anthony/CLionProjects/Option_pricer/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/integration/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/unit/CMakeLists.txt /usr/local/lib/cmake/GTest/GTestConfig.cmake /usr/local/lib/cmake/GTest/GTestConfigVersion.cmake /usr/local/lib/cmake/GTest/GTestTargets-release.cmake /usr/local/lib/cmake/GTest/GTestTargets.cmake CMakeCache.txt CMakeFiles/3.28.6/CMakeCCompiler.cmake CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindBoost.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindGTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindThreads.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/GoogleTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /Users/anthony/CLionProjects/Option_pricer/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/examples/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/integration/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/unit/CMakeLists.txt /usr/local/lib/cmake/Boost-1.85.0/BoostConfig.cmake /usr/local/lib/cmake/Boost-1.85.0/BoostConfigVersion.cmake /usr/local/lib/cmake/BoostDetectToolset-1.85.0.cmake /usr/local/lib/cmake/GTest/GTestConfig.cmake /usr/local/lib/cmake/GTest/GTestConfigVersion.cmake /usr/local/lib/cmake/GTest/GTestTargets-release.cmake /usr/local/lib/cmake/GTest/GTestTargets.cmake /usr/local/lib/cmake/boost_headers-1.85.0/boost_headers-config-version.cmake /usr/local/lib/cmake/boost_headers-1.85.0/boost_headers-config.cmake /usr/local/lib/cmake/boost_random-1.85.0/boost_random-config-version.cmake /usr/local/lib/cmake/boost_random-1.85.0/boost_random-config.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-mt-shared.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-mt-static.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-shared.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-static.cmake CMakeCache.txt CMakeFiles/3.28.6/CMakeCCompiler.cmake CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindGTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindThreads.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/GoogleTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /Users/anthony/CLionProjects/Option_pricer/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/integration/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/unit/CMakeLists.txt /usr/local/lib/cmake/GTest/GTestConfig.cmake /usr/local/lib/cmake/GTest/GTestConfigVersion.cmake /usr/local/lib/cmake/GTest/GTestTargets-release.cmake /usr/local/lib/cmake/GTest/GTestTargets.cmake CMakeCache.txt CMakeFiles/3.28.6/CMakeCCompiler.cmake CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake: phony
+build /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindBoost.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindGTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/FindThreads.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/GoogleTest.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /Users/anthony/CLionProjects/Option_pricer/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/examples/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/integration/CMakeLists.txt /Users/anthony/CLionProjects/Option_pricer/tests/unit/CMakeLists.txt /usr/local/lib/cmake/Boost-1.85.0/BoostConfig.cmake /usr/local/lib/cmake/Boost-1.85.0/BoostConfigVersion.cmake /usr/local/lib/cmake/BoostDetectToolset-1.85.0.cmake /usr/local/lib/cmake/GTest/GTestConfig.cmake /usr/local/lib/cmake/GTest/GTestConfigVersion.cmake /usr/local/lib/cmake/GTest/GTestTargets-release.cmake /usr/local/lib/cmake/GTest/GTestTargets.cmake /usr/local/lib/cmake/boost_headers-1.85.0/boost_headers-config-version.cmake /usr/local/lib/cmake/boost_headers-1.85.0/boost_headers-config.cmake /usr/local/lib/cmake/boost_random-1.85.0/boost_random-config-version.cmake /usr/local/lib/cmake/boost_random-1.85.0/boost_random-config.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-mt-shared.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-mt-static.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-shared.cmake /usr/local/lib/cmake/boost_random-1.85.0/libboost_random-variant-static.cmake CMakeCache.txt CMakeFiles/3.28.6/CMakeCCompiler.cmake CMakeFiles/3.28.6/CMakeCXXCompiler.cmake CMakeFiles/3.28.6/CMakeSystem.cmake: phony
 
 
 #############################################
