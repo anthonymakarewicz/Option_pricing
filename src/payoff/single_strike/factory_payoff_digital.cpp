@@ -8,7 +8,7 @@
 namespace OptionPricer {
     std::unique_ptr<Payoff> PayoffDigitalFactory::createPayoff(const std::string& type, const double& K) {
         // Convert the type string to lowercase
-        std::string typeLower;
+        std::string typeLower = type;
         std::ranges::transform(typeLower, typeLower.begin(),
             [](unsigned char c){ return std::tolower(c); });
 

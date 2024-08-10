@@ -20,15 +20,15 @@ jobs:
           cmake-version: '3.26.3'
 
       - name: Install dependencies
-        run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
+        run: sudo apt-get install -y libgtest-dev libgmock-dev libboost-all-dev
 
       - name: Configure CMake
         run: |
           cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
 
       - name: Build Main Executable and Test Executable
-        run: |
-          cmake --build build
+        run: | # probably need to build specific target --target Option_pricer Unit_tests to exclude examples
+          cmake --build build --target Unit_tests
 
       - name: Run Unit Tests
         run: |

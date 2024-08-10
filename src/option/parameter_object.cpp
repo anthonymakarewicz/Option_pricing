@@ -6,7 +6,8 @@ namespace OptionPricer {
     }
 
     bool ParameterObject::hasParameter(const std::string &name) const {
-        return parameters_.find(name) != parameters_.end();
+        // Introduced in C++20 for less verbosity than find()
+        return parameters_.contains(name);
     }
 
 }

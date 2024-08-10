@@ -29,7 +29,11 @@ namespace OptionPricer {
         double sigma_; // Volatility
         std::optional<double> c_; // Dividen yield as std::optional C++17
         friend class MarketData; // Allow MarketData to access private setters
+
     };
 }
+
+// Could potentially make the setters public and delete this friendship as getStockData rteurns
+// a std::shared_ptr<const StockData> which means that this ptr cannot call non-const methods like setters
 
 #endif //STOCK_DATA_H

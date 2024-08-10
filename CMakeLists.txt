@@ -1,13 +1,29 @@
 cmake_minimum_required(VERSION 3.26.3)
 project(Option_pricer)
 
-# Set the version of C++ to 20
+# Set the version to C++20
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+
 # Set the Vcpkg toolchain file
-set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        CACHE STRING "Vcpkg toolchain file")
+
+find_package(Boost REQUIRED COMPONENTS random)
+
+# Check if random has been found before compiling src
+if (Boost_FOUND)
+    message(STATUS "Boost found: ${Boost_VERSION}")
+    # Ensure Boost include directories are added
+    include_directories(${Boost_INCLUDE_DIRS})
+else()
+    message(FATAL_ERROR "Boost not found!")
+endif()
 
 # Specify where to look for header files
 include_directories(include)
@@ -54,25 +70,34 @@ add_library(option SHARED
         src/option/single_path/double_digital_option.cpp
         src/option/path_dependent/base_path_dependent_option.cpp
         src/option/path_dependent/american_option.cpp
-        src/option/path_dependent/asian/base_asian_option.cpp
-        src/option/path_dependent/asian/arithmetic_asian_option.cpp
-        src/option/path_dependent/asian/geometric_asian_option.cpp
-        src/option/path_dependent/barrier/base_barrier_option.cpp
-        src/option/path_dependent/barrier/knock_behavior.cpp
-        src/option/path_dependent/barrier/double_barrier.cpp
-        src/option/path_dependent/barrier/base_single_barrier_option.cpp
-        src/option/path_dependent/barrier/up_single_barrier_option.cpp
-        src/option/path_dependent/barrier/down_single_barrier_option.cpp
+        src/option/path_dependent/asian_option.cpp
+        src/option/path_dependent/barrier_option.cpp
         # Factories
         src/option/factory_option.cpp
         src/option/single_path/factory_european_option.cpp
         src/option/single_path/factory_digital_option.cpp
         src/option/single_path/factory_double_digital_option.cpp
         src/option/path_dependent/factory_american_option.cpp
-        src/option/path_dependent/asian/factory_arithmetic_asian_option.cpp
-        src/option/path_dependent/asian/factory_geometric_asian_option.cpp
-        src/option/path_dependent/barrier/factory_up_single_barrier_option.cpp
+        src/option/path_dependent/factory_asian_option.cpp
+        src/option/path_dependent/factory_barrier_option.cpp
 )
+
+# Create dynamic library for marketdata
+add_library(solver SHARED
+        src/solver/base_solver.cpp
+        src/solver/monte_carlo/mc_solver.cpp
+        include/solver/monte_carlo/mc_base_strategy.h
+        src/solver/monte_carlo/mc_base_strategy.cpp
+        include/solver/monte_carlo/stock_price_model.h
+        src/solver/monte_carlo/stock_price_model.cpp
+        src/solver/monte_carlo/gbm_stock_price_model.cpp
+        include/solver/monte_carlo/gbm_stock_price_model.h
+        include/solver/monte_carlo/generator.h
+
+)
+
+# Link random library to the solver ONLY
+target_link_libraries(solver PUBLIC Boost::random)
 
 # Link the option library against marketdata and payoff
 target_link_libraries(option PUBLIC marketdata payoff)
@@ -81,31 +106,12 @@ target_link_libraries(option PUBLIC marketdata payoff)
 add_executable(Option_pricer main.cpp)
 
 # Link the main executable to our dynamic libraries
-target_link_libraries(Option_pricer marketdata payoff option)
+target_link_libraries(Option_pricer PUBLIC  marketdata payoff option solver)
+#target_link_libraries(Option_pricer marketdata payoff option solver)
 
 # Enable testing and add the tests directory
 enable_testing()
 add_subdirectory(tests)
 
-#[[
-# clang-tidy integration
-find_program(CLANG_TIDY_EXECUTABLE NAMES clang-tidy)
-if(CLANG_TIDY_EXECUTABLE)
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE};-checks=*,-clang-analyzer-alpha.*")
-endif()
-]]
-
-#[[
-# clang-format integration (target to check formatting)
-add_custom_target(clang-format-check
-       COMMAND find ${CMAKE_SOURCE_DIR} -name '*.cpp' -o -name '*.h' | xargs clang-format -i
-)
-]]
-
-#[[
-# Code coverage integration (optional)
-if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-   target_compile_options(Option_pricer PRIVATE --coverage)
-   target_link_libraries(Option_pricer PRIVATE --coverage)
-endif()
-]]
+# Add the examples subdirectory
+add_subdirectory(examples)

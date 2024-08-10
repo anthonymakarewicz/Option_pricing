@@ -11,6 +11,7 @@ namespace OptionPricer {
                                                                std::unique_ptr<Payoff> payoff,
                                                                const std::shared_ptr<IMarketData>& marketData) override;
 
+        std::string invalidParams(const std::string& option_type) const override;
         std::string getType(const std::string& type) const override;
     };
 }
