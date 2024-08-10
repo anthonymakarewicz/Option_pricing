@@ -1,0 +1,18 @@
+#ifndef PAYOFF_DIGITAL_CALL_H
+#define PAYOFF_DIGITAL_CALL_H
+
+#include "base_payoff_digital.h"
+
+namespace OptionPricer {
+    class PayoffDigitalCall final: public PayoffDigital {
+    public:
+        explicit PayoffDigitalCall(const double& K);
+        ~PayoffDigitalCall() override;
+
+        double operator()(const double& S) const override;
+        [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
+        [[nodiscard]] bool compare(const Payoff &other) const override;
+    };
+}
+
+#endif //PAYOFF_DIGITAL_CALL_H

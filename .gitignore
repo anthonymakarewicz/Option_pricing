@@ -1,0 +1,20 @@
+# Ignore build directories
+cmake-build-debug/
+cmake-build-release/
+cmake-build-cmake/
+build/
+lib/
+bin/
+
+# Ignore other generated files
+*.log
+*.o
+*.ninja_deps
+*.ninja_log
+*.exe
+
+# Ignore bckp
+bckp
+flattened_folder
+
+

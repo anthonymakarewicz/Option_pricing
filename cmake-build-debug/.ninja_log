@@ -1,9 +1,0 @@
-# ninja log v5
-4	1170	1708279175896777582	CMakeFiles/Option_pricer.dir/src/payoff.cpp.o	68205bc60a65ab4
-2107	2206	1708282489818083398	Option_pricer	615ccb1aea2beb3f
-4	1592	1708279176319198432	CMakeFiles/Option_pricer.dir/src/option.cpp.o	933112ed1944bd4a
-27	2107	1708282489711501013	CMakeFiles/Option_pricer.dir/main.cpp.o	c61305de29959cd9
-7	2482	1708272138977545524	CMakeFiles/Option_pricer.dir/option.cpp.o	7f8c53c8456a0a9d
-19	2090	1708282577835900084	build.ninja	fd85192245839bf5
-8	1890	1708272138368604550	CMakeFiles/Option_pricer.dir/payoff.cpp.o	20a4774632c8bab5
-1	218	1708282577835900084	build.ninja	fd85192245839bf5

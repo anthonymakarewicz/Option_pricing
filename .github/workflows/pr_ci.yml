@@ -1,0 +1,74 @@
+name: Pull Request CI
+
+on: # On what action this workflow will be triggered
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    name: Build & Run All Tests # Give the build job an appropriate name
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # to use node20 instead of node12 and node 16 which are deprecated
+
+    #  - name: Cache CMake files
+    #    uses: actions/cache@v3
+    #    with:
+    #      path: |
+    #        build/CMakeFiles
+    #        build/CMakeCache.txt
+    #        build/compile_commands.json
+    #      key: ${{ runner.os }}-cmake-build-${{ github.sha }}
+    #      restore-keys: |
+    #        ${{ runner.os }}-cmake-build-
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v2 # Use the latest major version for stability
+        with:
+          cmake-version: '3.26.3'
+
+      - name: Install dependencies
+        run: sudo apt-get install -y libgtest-dev libgmock-dev clang-tidy lcov #clang-format
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_STANDARD=20 ..
+
+      - name: Build Main Executable and Test Executable
+        run: |
+          cmake --build build
+
+    #  - name: Analyze code with clang-tidy
+    #    run: |
+    #      cd build
+    #      find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
+
+        #- name: Check code formatting with clang-format
+        #  run: |
+        #find . -name '*.cpp' -o -name '*.h' | xargs clang-format -i
+      #    cd build
+      #    make clang-format-check
+
+      - name: Run all Tests
+        run: |
+          cd build
+          ctest --output-on-failure
+
+    #  - name: Generate code coverage
+    #    run: |
+    #                cd build
+    #          lcov --capture --directory . --output-file coverage.info
+    #          lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    #          lcov --list coverage.info
+    #
+
+    #  - name: Upload code coverage results
+    #    if: always()
+    #    uses: actions/upload-artifact@v2
+    #    with:
+    #      name: coverage-results
+    #      path: build/coverage.info
