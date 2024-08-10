@@ -26,6 +26,4 @@ namespace OptionPricer {
     };
 }
 
-
-
 #endif //FACTORY_ASIAN_OPTION_H
