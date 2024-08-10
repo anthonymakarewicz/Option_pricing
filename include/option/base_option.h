@@ -46,6 +46,7 @@ namespace OptionPricer {
 
         void initialize();
         [[nodiscard]] std::string getType() const;
+        [[nodiscard]] double getT() const;
 
         double payoff() const;
         double payoff(const double& S) const;

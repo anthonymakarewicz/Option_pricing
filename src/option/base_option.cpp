@@ -36,8 +36,8 @@ namespace OptionPricer {
     }
 
     void Option::update() {
-        //std::cout << "StockData " << id_ << " updated!" << "\n";
-        //std::cout << "The new Option price is: "<< calc_price() << "\n";
+        std::cout << "StockData " << id_ << " updated!" << "\n";
+        std::cout << "The new Option price is: "<< calc_price() << "\n";
     }
 
     bool Option::operator==(const Option &other) const {
@@ -83,6 +83,10 @@ namespace OptionPricer {
         std::string typeName = (status == 0) ? demangledName : mangledName;
         std::free(demangledName);
         return typeName;
+    }
+
+    double Option::getT() const {
+        return T_;
     }
 
     double Option::payoff() const {
