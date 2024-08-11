@@ -4,8 +4,9 @@
 #include "base_path_dependent_option.h"
 
 namespace OptionPricer {
-
-    enum class BarrierDirection { Up, Down };
+    enum class BarrierDirection {
+        Up, Down
+    };
 
     class BarrierOption : public PathDependentOption {
     public:

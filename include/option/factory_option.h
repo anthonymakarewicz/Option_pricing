@@ -17,18 +17,18 @@ namespace OptionPricer {
 
     protected:
         // Template method pattern
-        std::shared_ptr<Option> createOption(const ParameterObject& params, const std::string& type);
+        std::shared_ptr<Option> createOption(const ParameterObject& params, const PayoffType& type);
 
         // Can be overiden to add extra parameters
         virtual std::string invalidParams(const std::string& option_type) const;
 
         // To be overidden in concrete factories
         virtual std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params,
-                                                             const std::string& type) = 0;
+                                                             const PayoffType& type) = 0;
         virtual std::shared_ptr<Option> createSpecificOption(const ParameterObject& params,
                                                              std::unique_ptr<Payoff> payoff,
                                                              const std::shared_ptr<IMarketData>& marketData) = 0;
-        virtual std::string getType(const std::string& type) const = 0;
+        virtual std::string getType(const PayoffType& type) const = 0;
     };
 }
 

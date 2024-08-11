@@ -4,9 +4,6 @@
 #include <cxxabi.h>
 #include "option/base_option.h"
 
-#include <option/single_path/base_single_path_option.h>
-#include <payoff/single_strike/base_payoff_vanilla.h>
-
 /**
 * @brief Constructor implementation
 *
@@ -36,8 +33,8 @@ namespace OptionPricer {
     }
 
     void Option::update() {
-        std::cout << "StockData " << id_ << " updated!" << "\n";
-        std::cout << "The new Option price is: "<< calc_price() << "\n";
+        //std::cout << "StockData " << id_ << " updated!" << "\n";
+        //std::cout << "The new Option price is: "<< calc_price() << "\n";
     }
 
     bool Option::operator==(const Option &other) const {
@@ -98,5 +95,3 @@ namespace OptionPricer {
         return (*payoff_)(S);
     }
 }
-
-

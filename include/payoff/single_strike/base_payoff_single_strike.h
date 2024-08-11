@@ -7,12 +7,11 @@ namespace OptionPricer {
     // Abastract base class for PayoffSingleStrike
     class PayoffSingleStrike : public Payoff {
     public:
-        explicit PayoffSingleStrike(const double& K);
+        explicit PayoffSingleStrike(const PayoffType& type, const double& K);
         ~PayoffSingleStrike() override;
 
         [[nodiscard]] double getK() const;
         void print(std::ostream& os) const override;
-
 
     protected:
         double K_;

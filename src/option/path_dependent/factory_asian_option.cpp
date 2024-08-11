@@ -1,14 +1,13 @@
 #include "option/path_dependent/factory_asian_option.h"
-#include "payoff/single_strike/base_payoff_vanilla.h"
 #include "option/path_dependent/asian_option.h"
-#include "payoff/single_strike/factory_payoff_vanilla.h"
 #include "market_data/market_data.h"
+#include "payoff/single_strike/payoff_vanilla.h"
 
 namespace OptionPricer {
     // ArithmeticAsianOptionFactory
     std::unique_ptr<Payoff> ArithmeticAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
-            const std::string &type) {
-        return PayoffVanillaFactory::createPayoff(type, params.getParameter<double>("K"));
+            const PayoffType& type) {
+        return std::make_unique<PayoffVanilla>(type, params.getParameter<double>("K"));
     }
 
     std::shared_ptr<Option> ArithmeticAsianOptionFactory::createSpecificOption(const ParameterObject &params,
@@ -21,14 +20,14 @@ namespace OptionPricer {
         ));
     }
 
-    std::string ArithmeticAsianOptionFactory::getType(const std::string& type) const {
-        return "Arithmetic Asian  " + type + " Option";
+    std::string ArithmeticAsianOptionFactory::getType(const PayoffType& type) const {
+        return "Arithmetic Asian  " + PayoffTypeToString(type) + " Option";
     }
 
     // GeometricAsianOptionFactory
     std::unique_ptr<Payoff> GeometricAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
-            const std::string &type) {
-        return PayoffVanillaFactory::createPayoff(type, params.getParameter<double>("K"));
+            const PayoffType& type) {
+        return std::make_unique<PayoffVanilla>(type, params.getParameter<double>("K"));
     }
 
     std::shared_ptr<Option> GeometricAsianOptionFactory::createSpecificOption(const ParameterObject &params,
@@ -41,7 +40,7 @@ namespace OptionPricer {
         ));
     }
 
-    std::string GeometricAsianOptionFactory::getType(const std::string& type) const {
-        return "Geometric Asian  " + type + " Option";
+    std::string GeometricAsianOptionFactory::getType(const PayoffType& type) const {
+        return "Geometric Asian  " + PayoffTypeToString(type) + " Option";
     }
 }

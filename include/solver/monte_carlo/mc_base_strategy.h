@@ -256,4 +256,7 @@ namespace OptionPricer {
     };
 }
 
+
+
+
 #endif //MC_BASE_STRATEGY_H

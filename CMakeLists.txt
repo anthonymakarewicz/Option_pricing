@@ -45,18 +45,11 @@ add_library(marketdata SHARED
 add_library(payoff SHARED
         src/payoff/base_payoff.cpp
         src/payoff/single_strike/base_payoff_single_strike.cpp
-        src/payoff/single_strike/base_payoff_vanilla.cpp
-        src/payoff/single_strike/payoff_vanilla_call.cpp
-        src/payoff/single_strike/payoff_vanilla_put.cpp
-        src/payoff/single_strike/base_payoff_digital.cpp
-        src/payoff/single_strike/payoff_digital_call.cpp
-        src/payoff/single_strike/payoff_digital_put.cpp
+        src/payoff/single_strike/payoff_vanilla.cpp
+        src/payoff/single_strike/payoff_digital.cpp
         src/payoff/double_strikes/base_payoff_double_strikes.cpp
         src/payoff/double_strikes/payoff_double_digital.cpp
         # Factories
-        src/payoff/single_strike/factory_payoff_vanilla.cpp
-        src/payoff/single_strike/factory_payoff_digital.cpp
-        src/payoff/double_strikes/factory_payoff_double_digital.cpp
 )
 
 # Create dynamic library for option, linking against marketdata and payoff

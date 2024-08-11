@@ -1,7 +1,7 @@
 #include <iostream>
 #include <option/single_path/european_option.h>
 #include "market_data/market_data.h"
-#include <payoff/single_strike/payoff_vanilla_call.h>
+#include <payoff/single_strike/payoff_vanilla.h>
 #include <option/single_path/factory_european_option.h>
 #include "option/single_path/factory_double_digital_option.h"
 #include <boost/random/sobol.hpp>

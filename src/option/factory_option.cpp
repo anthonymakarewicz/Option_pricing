@@ -5,15 +5,15 @@ namespace OptionPricer {
     OptionFactory::~OptionFactory() = default;
 
     std::shared_ptr<Option> OptionFactory::createCallOption(const ParameterObject &params) {
-        return createOption(params, "Call");
+        return createOption(params, PayoffType::Call);
     }
 
     std::shared_ptr<Option> OptionFactory::createPutOption(const ParameterObject &params) {
-        return createOption(params, "Put");
+        return createOption(params, PayoffType::Put);
     }
 
     std::shared_ptr<Option> OptionFactory::createOption(const ParameterObject &params,
-        const std::string &type) {
+        const PayoffType& type) {
         auto marketData = MarketData::getInstance();
         std::shared_ptr<Option> option = nullptr;
 

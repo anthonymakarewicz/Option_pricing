@@ -22,13 +22,14 @@ namespace OptionPricer {
             return stockData_->getPrice() * exp(drift+diffusion);
         }
 
-        [[nodiscard]] double simulateStepPrice(
-                                               const double& dt, const double& z) const override {
+        [[nodiscard]] double simulateStepPrice(const double& dt, const double& z) const override {
             const double drift = (marketData_->getR() - (0.5 * stockData_->getSigma()*stockData_->getSigma())) * dt;
             const double diffusion = stockData_->getSigma() * sqrt(dt) * z;
             return exp(drift+diffusion);
         }
     };
+    // May add a decorator for including coupon by uisng BrownianMotionModel::simulateStepPrice() * exp(dt*c)
+    // Could potentially add a decorator for variance gamma by adding the jumps after the difusion
 }
 
 #endif //GBM_STOCK_PRICE_MODEL_H

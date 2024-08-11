@@ -8,10 +8,8 @@ add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
         option/test_factory_european_option.cpp
         market_data/test_stock_data.cpp
         market_data/test_market_data.cpp
-        payoff/single_strike/test_payoff_vanilla_call.cpp
-        payoff/single_strike/test_payoff_vanilla_put.cpp
-        payoff/single_strike/test_payoff_digital_call.cpp
-        payoff/single_strike/test_payoff_digital_put.cpp
+        payoff/single_strike/test_payoff_vanilla.cpp
+        payoff/single_strike/test_payoff_digital.cpp
         payoff/double_strikes/test_payoff_double_digital.cpp
 )
 

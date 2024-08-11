@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "option/base_option.h"
-#include "payoff/single_strike/payoff_vanilla_call.h"
+#include "payoff/single_strike/payoff_vanilla.h"
 #include "../test_support/mock_classes.h"
 
 using namespace OptionPricer;
@@ -28,7 +28,7 @@ protected:
         ticker = "AAPL";
         T = 1.0;
         K = 100.0;
-        payoff = std::make_unique<PayoffVanillaCall>(K);
+        payoff = std::make_unique<PayoffVanilla>(PayoffType::Call, K);
         mockMarketData = std::make_shared<Mocks::MarketData>();
     }
 
