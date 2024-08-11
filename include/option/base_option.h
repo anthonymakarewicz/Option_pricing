@@ -50,8 +50,8 @@ namespace OptionPricer {
         [[nodiscard]] const Payoff& getPayoff() const;
         double getT() const;
 
-        double payoff() const;
         double payoff(const double& S) const;
+        double payoff(const double& S, const double& extremeS) const;
 
     protected:
         Option(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,

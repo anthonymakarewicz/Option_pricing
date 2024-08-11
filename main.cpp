@@ -12,7 +12,7 @@
 #include <option/single_path/factory_digital_option.h>
 #include "option/path_dependent/factory_asian_option.h"
 #include "option/path_dependent/factory_barrier_option.h"
-
+#include "option/path_dependent/factory_lookback_option.h"
 
 
 #include "solver/monte_carlo/mc_solver.h"
@@ -40,20 +40,26 @@ int main() {
     params.setParameter("B", B);
     params.setParameter("direction", BarrierDirection::Up);
 
-    KnockInBarrierOptionFactory factory;
-    auto call = factory.createCallOption(params);
-
     auto normal = std::make_shared<StandardNormalDistribution>();
     auto generator = std::make_shared<SobolGenerator>(normal, dim);
     auto brownianMotion = std::make_shared<BrownianMotionModel>(ticker, marketData);
-    auto mcStrategy = std::make_unique<KnockInMCStrategy>(call, brownianMotion, generator, marketData, dim);
+
+    AmericanOptionFactory factory;
+    FloatingStrikeLookbackOptionFactory factory2;
+    auto call = factory.createCallOption(params);
+    auto call2 = factory2.createCallOption(params);
+
+    auto mcStrategy = std::make_unique<AmericanMCStrategy>(call, brownianMotion, generator, marketData, dim);
+    auto mcStrategy2 = std::make_unique<FloatingStrikeLookbackMCStrategy>(call2, brownianMotion, generator, marketData, dim);
 
 
     MCSolver mcSolver;
-    mcSolver.setN(500000);
+    mcSolver.setN(200000);
     mcSolver.setStrategy(std::move(mcStrategy));
 
     std::cout << mcSolver.solve();
+
+
 
     //std::vector<unsigned long> Ns = {100, 1000, 10000, 100000, 1000000, 10000000};
 

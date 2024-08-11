@@ -91,9 +91,8 @@ namespace OptionPricer {
         return T_;
     }
 
-    double Option::payoff() const {
-        const auto stockData = marketData_->getStockData(id_);
-        return (*payoff_)(stockData->getPrice());
+    double Option::payoff(const double& S, const double& extremeS) const {
+        return (*payoff_)(S, extremeS);
     }
 
     double Option::payoff(const double &S) const {

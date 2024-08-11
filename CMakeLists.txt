@@ -15,6 +15,7 @@ set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems
         CACHE STRING "Vcpkg toolchain file")
 
 find_package(Boost REQUIRED COMPONENTS random)
+find_package(Eigen3 REQUIRED)
 
 # Check if random has been found before compiling src
 if (Boost_FOUND)
@@ -91,7 +92,7 @@ add_library(solver SHARED
 )
 
 # Link random library to the solver ONLY
-target_link_libraries(solver PUBLIC Boost::random)
+target_link_libraries(solver PUBLIC Boost::random Eigen3::Eigen)
 
 # Link the option library against marketdata and payoff
 target_link_libraries(option PUBLIC marketdata payoff)

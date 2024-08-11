@@ -20,8 +20,7 @@ namespace OptionPricer {
         [[nodiscard]] double calc_price() const override;
 
     private:
-       using LookbackOption::LookbackOption;
-
+        using LookbackOption::LookbackOption;
         friend class FloatingStrikeLookbackOptionFactory;
     };
 
@@ -32,7 +31,6 @@ namespace OptionPricer {
 
     private:
         using LookbackOption::LookbackOption;
-
         friend class FixedStrikeLookbackOptionFactory;
     };
 

@@ -1,14 +1,18 @@
 #ifndef MC_BASE_STRATEGY_H
 #define MC_BASE_STRATEGY_H
 
+#include <option/path_dependent/lookback_option.h>
+
 #include "option/path_dependent/asian_option.h"
 #include "option/path_dependent/barrier_option.h"
-
+#include "option/path_dependent/american_option.h"
 #include "option/base_option.h"
 #include "option/single_path/base_single_path_option.h"
 #include "option/path_dependent/base_path_dependent_option.h"
 #include "solver/monte_carlo/stock_price_model.h"
 #include "solver/monte_carlo/generator.h"
+#include "option/path_dependent/factory_american_option.h"
+#include <Eigen/Dense>
 
 
 namespace OptionPricer {
@@ -206,7 +210,7 @@ namespace OptionPricer {
                 sumPayoff += computePayoff(S_t, hasCrossed);
             }
 
-            return (sumPayoff / static_cast<double>(N)) * exp(- marketData_->getR()*option_->getT());
+            return (sumPayoff / static_cast<double>(N)) * exp(-marketData_->getR()*option_->getT());
         }
 
     protected:
@@ -254,6 +258,183 @@ namespace OptionPricer {
             return hasCrossed ? 0.0 : option_->payoff(S_t);
         }
     };
+
+
+    class LookbackMCStrategy : public PathDependentMCStrategy {
+    public:
+        using PathDependentMCStrategy::PathDependentMCStrategy;
+
+        [[nodiscard]] double calculate_price(const unsigned long& N) const override {
+            double sumPayoff = 0.0;
+            const double dt = option_->getT() / static_cast<double>(steps_);
+
+            for (int i = 0; i < N; ++i) {
+                double S_t = marketData_->getStockData(option_->getID())->getPrice();
+                double S_min = S_t;
+                double S_max = S_t;
+
+                for (int step = 0; step < steps_; ++step) {
+                    double z = generator_->generate(step);
+                    S_t *= stockModel_->simulateStepPrice(dt, z);
+
+                    // Track min and max price during the simulation
+                    S_min = std::min(S_min, S_t);
+                    S_max = std::max(S_max, S_t);
+
+                    //std::cout << "Period: " << step << ", Price: " << S_t << "\n";
+                }
+                //std::cout << "S_min: " << S_min << ", S_max: " << S_max << "\n";
+                //std::cout << "Final Payoff: " << computePayoff(S_t, S_min, S_max) << "\n";
+
+                // Calculate the payoff based on min and max prices
+                sumPayoff += computePayoff(S_t, S_min, S_max);
+
+            }
+
+            return (sumPayoff / static_cast<double>(N)) * exp(-marketData_->getR() * option_->getT());
+        }
+
+    protected:
+        // Pure virtual method to calculate the payoff based on S_t, S_min, and S_max
+        virtual double computePayoff(const double& S_t, const double& S_min, const double& S_max) const = 0;
+
+        std::shared_ptr<LookbackOption> option_;
+    };
+
+
+    class FloatingStrikeLookbackMCStrategy : public LookbackMCStrategy {
+    public:
+        FloatingStrikeLookbackMCStrategy(std::shared_ptr<Option> option, std::shared_ptr<StockPriceModel> stockModel,
+                                         std::shared_ptr<NumberGenerarator> generator, std::shared_ptr<IMarketData> marketData,
+                                         const unsigned int& steps)
+            : LookbackMCStrategy(std::move(stockModel), std::move(generator),
+                                 std::move(marketData), steps) {
+            if (auto optionLookback = std::dynamic_pointer_cast<FloatingStrikeLookbackOption>(option)) {
+                option_ = std::move(optionLookback);
+            }
+            else {
+                throw std::invalid_argument("option should be a FloatingStrikeLookbackOption");
+            }
+        }
+
+    private:
+        // Implement the logic for Floating Strike Lookback Option
+        double computePayoff(const double& S_t, const double& S_min, const double& S_max) const override {
+            // Choose min for call and max for put
+            return option_->getPayoff().getPayoffType() == PayoffType::Call
+                   ? option_->payoff(S_t, S_min)  // max(S_T - S_min, 0)
+                   : option_->payoff(S_t, S_max); // max(S_max - S_T, 0)
+        }
+    };
+
+    class FixedStrikeLookbackMCStrategy : public LookbackMCStrategy {
+    public:
+        FixedStrikeLookbackMCStrategy(std::shared_ptr<Option> option, std::shared_ptr<StockPriceModel> stockModel,
+                                      std::shared_ptr<NumberGenerarator> generator, std::shared_ptr<IMarketData> marketData,
+                                      const unsigned int& steps)
+            : LookbackMCStrategy(std::move(stockModel), std::move(generator),
+                                 std::move(marketData), steps) {
+            if (auto optionLookback = std::dynamic_pointer_cast<FixedStrikeLookbackOption>(option)) {
+                option_ = std::move(optionLookback);
+            }
+            else {
+                throw std::invalid_argument("option should be a FixedStrikeLookbackOption");
+            }
+        }
+
+    private:
+        // Implement the logic for Fixed Strike Lookback Option
+        double computePayoff(const double& S_t, const double& S_min, const double& S_max) const override {
+            return option_->getPayoff().getPayoffType() == PayoffType::Call
+                   ? option_->payoff(S_max)  // max(S_max - K, 0)
+                   : option_->payoff(S_min); // max(K - S_min, 0)
+        }
+    };
+
+
+    class AmericanMCStrategy : public PathDependentMCStrategy {
+    public:
+        AmericanMCStrategy(std::shared_ptr<Option> option, std::shared_ptr<StockPriceModel> stockModel,
+                           std::shared_ptr<NumberGenerarator> generator, std::shared_ptr<IMarketData> marketData,
+                           const unsigned int& steps)
+            : PathDependentMCStrategy(std::move(stockModel), std::move(generator), std::move(marketData), steps),
+              option_(std::dynamic_pointer_cast<AmericanOption>(option)) {
+            if (!option_) {
+                throw std::invalid_argument("Option must be an American option.");
+            }
+        }
+
+        double calculate_price(const unsigned long& N) const override {
+            /* This algorithm uses the Least Square Monte Carlo (LSMC) method as described in
+             * Longstaff and Schwartz (2001) for pricing American options.
+             */
+
+            double sumPayoff = 0.0;
+            double dt = option_->getT() / static_cast<double>(steps_);
+            std::vector<std::vector<double>> paths(N, std::vector<double>(steps_ + 1));
+
+            // Step 1: Simulate paths
+            for (unsigned long i = 0; i < N; ++i) {
+                paths[i][0] = marketData_->getStockData(option_->getID())->getPrice();
+                for (unsigned int j = 1; j <= steps_; ++j) {
+                    double z = generator_->generate(j - 1);
+                    paths[i][j] = paths[i][j - 1] * stockModel_->simulateStepPrice(dt, z);
+                }
+            }
+
+            // Step 2: Initialize cash flows at maturity
+            Eigen::VectorXd cashFlows(N);
+            for (unsigned long i = 0; i < N; ++i) {
+                cashFlows(i) = option_->payoff(paths[i].back());
+            }
+
+            // Step 3: Perform backward induction
+            for (int step = steps_ - 1; step >= 0; --step) {
+                std::vector<double> X, Y;
+
+                // Collect in-the-money paths
+                for (unsigned long i = 0; i < N; ++i) {
+                    double exerciseValue = option_->payoff(paths[i][step]);
+                    if (exerciseValue > 0.0) {
+                        X.push_back(paths[i][step]); //
+                        Y.push_back(cashFlows(i) * exp(-marketData_->getR() * dt));
+                    }
+                }
+
+                // Step 4: Least squares regression to estimate continuation values
+                if (!X.empty()) {
+                    Eigen::VectorXd vX = Eigen::Map<Eigen::VectorXd, Eigen::Unaligned>(X.data(), X.size());
+                    Eigen::MatrixXd A(X.size(), 3);           // 3 polynomial basis functions:
+                    A.col(0) = Eigen::VectorXd::Ones(X.size()); // f1(x) = 1
+                    A.col(1) = vX;                              // f2(x) = x
+                    A.col(2) = vX.cwiseProduct(vX);             // f3(x) = x^2
+                    Eigen::VectorXd vY = Eigen::Map<Eigen::VectorXd, Eigen::Unaligned>(Y.data(), Y.size());
+                    Eigen::VectorXd coeffs = A.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV).solve(vY);
+
+                    // Step 5: Determine whether to exercise or continue
+                    for (unsigned long i = 0; i < N; ++i) {
+                        double continuationValue = coeffs(0) + coeffs(1) * paths[i][step] +
+                            coeffs(2) * paths[i][step] * paths[i][step];
+                        double exerciseValue = option_->payoff(paths[i][step]);
+
+                        if (exerciseValue > continuationValue) {
+                            cashFlows(i) = exerciseValue;
+                        } else {
+                            cashFlows(i) *= exp(-marketData_->getR() * dt);
+                        }
+                    }
+                }
+            }
+
+            // Step 6: Compute the option price as the expected discounted payoffs
+            sumPayoff = cashFlows.sum();
+            return (sumPayoff / static_cast<double>(N));
+        }
+
+    private:
+        std::shared_ptr<AmericanOption> option_;
+};
+
 }
 
 
