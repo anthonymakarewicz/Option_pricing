@@ -25,7 +25,9 @@ namespace OptionPricer {
         explicit Payoff(const PayoffType& type);
         virtual ~Payoff();
 
-        [[nodiscard]] virtual std::string getType() const = 0;
+        PayoffType getPayoffType() const;
+
+        virtual std::string getType() const = 0;
         [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0; // Prototype creational pattern
 
         virtual void print(std::ostream& os) const;

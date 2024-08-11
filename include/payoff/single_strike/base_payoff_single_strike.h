@@ -4,7 +4,7 @@
 #include "../base_payoff.h"
 
 namespace OptionPricer {
-    // Abastract base class for PayoffSingleStrike
+    // Abstract base class for PayoffSingleStrike
     class PayoffSingleStrike : public Payoff {
     public:
         explicit PayoffSingleStrike(const PayoffType& type, const double& K);

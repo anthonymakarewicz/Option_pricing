@@ -44,12 +44,12 @@ add_library(marketdata SHARED
 # Create dynamic library for payoff
 add_library(payoff SHARED
         src/payoff/base_payoff.cpp
+        src/payoff/payoff_floating_strike_lookback.cpp
         src/payoff/single_strike/base_payoff_single_strike.cpp
         src/payoff/single_strike/payoff_vanilla.cpp
         src/payoff/single_strike/payoff_digital.cpp
         src/payoff/double_strikes/base_payoff_double_strikes.cpp
         src/payoff/double_strikes/payoff_double_digital.cpp
-        # Factories
 )
 
 # Create dynamic library for option, linking against marketdata and payoff
@@ -65,6 +65,7 @@ add_library(option SHARED
         src/option/path_dependent/american_option.cpp
         src/option/path_dependent/asian_option.cpp
         src/option/path_dependent/barrier_option.cpp
+        src/option/path_dependent/lookback_option.cpp
         # Factories
         src/option/factory_option.cpp
         src/option/single_path/factory_european_option.cpp
@@ -73,6 +74,7 @@ add_library(option SHARED
         src/option/path_dependent/factory_american_option.cpp
         src/option/path_dependent/factory_asian_option.cpp
         src/option/path_dependent/factory_barrier_option.cpp
+        src/option/path_dependent/factory_lookback_option.cpp
 )
 
 # Create dynamic library for marketdata
@@ -86,7 +88,6 @@ add_library(solver SHARED
         src/solver/monte_carlo/gbm_stock_price_model.cpp
         include/solver/monte_carlo/gbm_stock_price_model.h
         include/solver/monte_carlo/generator.h
-
 )
 
 # Link random library to the solver ONLY

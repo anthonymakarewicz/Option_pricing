@@ -6,6 +6,7 @@
 #include "market_data/interface_market_data.h"
 
 namespace OptionPricer {
+
     // Option asbtract base class where *this must be managed by a shared_ptr
     class Option : public MarketDataObserver, public std::enable_shared_from_this<Option> {
     public:
@@ -45,8 +46,9 @@ namespace OptionPricer {
         virtual double calc_price() const = 0; // Force all subclasses to deifne this method
 
         void initialize();
-        [[nodiscard]] std::string getType() const;
-        [[nodiscard]] double getT() const;
+        std::string getType() const;
+        [[nodiscard]] const Payoff& getPayoff() const;
+        double getT() const;
 
         double payoff() const;
         double payoff(const double& S) const;
@@ -59,6 +61,7 @@ namespace OptionPricer {
         std::unique_ptr<Payoff> payoff_; // Unique ptr to Payoff functor
         std::shared_ptr<IMarketData> marketData_; // Shared ptr to IMarketData interface
     };
+
 };
 
 #endif //BASE_OPTION_H

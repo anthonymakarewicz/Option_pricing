@@ -9,6 +9,10 @@ namespace OptionPricer {
 
     Payoff::~Payoff() = default;
 
+    PayoffType Payoff::getPayoffType() const {
+        return type_;
+    }
+
     void Payoff::print(std::ostream &os) const {
         os << "  -> Type: " << PayoffTypeToString(type_) << "\n";
     }

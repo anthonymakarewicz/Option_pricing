@@ -4,6 +4,7 @@
 #include "payoff/single_strike/payoff_vanilla.h"
 
 namespace OptionPricer {
+
     // ArithmeticAsianOptionFactory
     std::unique_ptr<Payoff> ArithmeticAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
             const PayoffType& type) {
@@ -21,7 +22,7 @@ namespace OptionPricer {
     }
 
     std::string ArithmeticAsianOptionFactory::getType(const PayoffType& type) const {
-        return "Arithmetic Asian  " + PayoffTypeToString(type) + " Option";
+        return "Arithmetic Asian " + PayoffTypeToString(type) + " Option";
     }
 
     // GeometricAsianOptionFactory
@@ -43,4 +44,5 @@ namespace OptionPricer {
     std::string GeometricAsianOptionFactory::getType(const PayoffType& type) const {
         return "Geometric Asian  " + PayoffTypeToString(type) + " Option";
     }
+
 }

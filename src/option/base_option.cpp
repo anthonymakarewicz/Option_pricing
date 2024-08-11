@@ -16,6 +16,7 @@
 **/
 
 namespace OptionPricer {
+
     Option::Option(const std::string& ticker,
                    std::unique_ptr<Payoff> payoff,
                    const double& T,
@@ -82,6 +83,10 @@ namespace OptionPricer {
         return typeName;
     }
 
+    const Payoff & Option::getPayoff() const {
+        return *payoff_;
+    }
+
     double Option::getT() const {
         return T_;
     }
@@ -94,4 +99,5 @@ namespace OptionPricer {
     double Option::payoff(const double &S) const {
         return (*payoff_)(S);
     }
+
 }

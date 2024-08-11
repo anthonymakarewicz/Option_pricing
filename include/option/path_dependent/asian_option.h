@@ -9,8 +9,7 @@ namespace OptionPricer {
         ~AsianOption() override;
 
     protected:
-        AsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-            std::shared_ptr<IMarketData> marketData);
+        using PathDependentOption::PathDependentOption;
     };
 
 
@@ -20,9 +19,7 @@ namespace OptionPricer {
         [[nodiscard]] double calc_price() const override;
 
     private:
-        ArithmeticAsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-            std::shared_ptr<IMarketData> marketData);
-
+        using AsianOption::AsianOption;
         friend class ArithmeticAsianOptionFactory;
     };
 
@@ -33,9 +30,7 @@ namespace OptionPricer {
         [[nodiscard]] double calc_price() const override;
 
     private:
-        GeometricAsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-            std::shared_ptr<IMarketData> marketData);
-
+        using AsianOption::AsianOption;
         friend class GeometricAsianOptionFactory;
     };
 }

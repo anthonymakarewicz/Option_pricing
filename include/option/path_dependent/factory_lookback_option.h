@@ -1,11 +1,12 @@
-#ifndef FACTORY_ASIAN_OPTION_H
-#define FACTORY_ASIAN_OPTION_H
+#ifndef FACTORY_LOOKBACK_OPTION_H
+#define FACTORY_LOOKBACK_OPTION_H
 
 #include "option/factory_option.h"
 
 namespace OptionPricer {
 
-    class ArithmeticAsianOptionFactory final: public OptionFactory {
+    class FloatingStrikeLookbackOptionFactory final: public OptionFactory {
+    public:
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
         std::shared_ptr<Option> createSpecificOption(const ParameterObject& params,
                                                      std::unique_ptr<Payoff> payoff,
@@ -13,7 +14,8 @@ namespace OptionPricer {
         std::string getType(const PayoffType& type) const override;
     };
 
-    class GeometricAsianOptionFactory final: public OptionFactory {
+    class FixedStrikeLookbackOptionFactory final: public OptionFactory {
+    public:
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
         std::shared_ptr<Option> createSpecificOption(const ParameterObject& params,
                                                      std::unique_ptr<Payoff> payoff,
@@ -23,4 +25,4 @@ namespace OptionPricer {
 
 }
 
-#endif //FACTORY_ASIAN_OPTION_H
+#endif //FACTORY_LOOKBACK_OPTION_H
