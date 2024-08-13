@@ -36,10 +36,10 @@ namespace OptionPricer {
 
     // Knock In
     KnockInBarrierMCPricer::KnockInBarrierMCPricer(std::shared_ptr<KnockInBarrierOption> option,
-                                     std::shared_ptr<IMarketData> marketData,
-                                     std::shared_ptr<StockPriceModel> stockModel,
-                                     std::shared_ptr<NumberGenerarator> generator,
-                                     const unsigned int& steps)
+                                                   std::shared_ptr<IMarketData> marketData,
+                                                   std::shared_ptr<StockPriceModel> stockModel,
+                                                   std::shared_ptr<NumberGenerarator> generator,
+                                                   const unsigned int& steps)
     : BarrierMCPricer(std::move(option), std::move(marketData),
     std::move(stockModel), std::move(generator), steps) {}
 
@@ -56,10 +56,10 @@ namespace OptionPricer {
 
     // Knock Out
     KnockOutBarrierMCPricer::KnockOutBarrierMCPricer(std::shared_ptr<KnockOutBarrierOption> option,
-                                       std::shared_ptr<IMarketData> marketData,
-                                       std::shared_ptr<StockPriceModel> stockModel,
-                                       std::shared_ptr<NumberGenerarator> generator,
-                                       const unsigned int& steps)
+                                                     std::shared_ptr<IMarketData> marketData,
+                                                     std::shared_ptr<StockPriceModel> stockModel,
+                                                     std::shared_ptr<NumberGenerarator> generator,
+                                                     const unsigned int& steps)
     : BarrierMCPricer(std::move(option), std::move(marketData),
         std::move(stockModel), std::move(generator), steps) {}
 

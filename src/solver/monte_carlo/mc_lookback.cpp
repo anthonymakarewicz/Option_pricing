@@ -54,7 +54,8 @@ namespace OptionPricer {
     }
 
     // Fixed Stike Lookback
-    FixedStrikeLookbackMCPricer::FixedStrikeLookbackMCPricer(std::shared_ptr<FixedStrikeLookbackOption> option,
+    FixedStrikeLookbackMCPricer::FixedStrikeLookbackMCPricer(
+        std::shared_ptr<FixedStrikeLookbackOption> option,
         std::shared_ptr<IMarketData> marketData,
         std::shared_ptr<StockPriceModel> stockModel,
         std::shared_ptr<NumberGenerarator> generator,

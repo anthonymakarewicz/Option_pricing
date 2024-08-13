@@ -6,6 +6,7 @@
 
 namespace OptionPricer {
 
+    // Floating Strike Lookback Factory
     class FloatingStrikeLookbackOptionFactory final: public OptionFactory<FloatingStrikeLookbackOption> {
     public:
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
@@ -15,6 +16,7 @@ namespace OptionPricer {
         std::string getType(const PayoffType& type) const override;
     };
 
+    // Fixed Strike Lookback Factory
     class FixedStrikeLookbackOptionFactory final: public OptionFactory<FixedStrikeLookbackOption> {
     public:
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;

@@ -5,15 +5,18 @@
 #include "option/path_dependent/american_option.h"
 
 namespace OptionPricer {
+
     class AmericanOptionFactory final: public OptionFactory<AmericanOption> {
-        std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
+        std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params,
+                                                     const PayoffType& type) override;
 
         std::shared_ptr<AmericanOption> createSpecificOption(const ParameterObject& params,
-                                                     std::unique_ptr<Payoff> payoff,
-                                                     const std::shared_ptr<IMarketData>& marketData) override;
+                                                             std::unique_ptr<Payoff> payoff,
+                                                             const std::shared_ptr<IMarketData>& marketData) override;
 
         std::string getType(const PayoffType& type) const override;
     };
+
 }
 
 #endif //FACTORY_AMERICAN_OPTION_H

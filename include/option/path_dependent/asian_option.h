@@ -4,6 +4,8 @@
 #include "option/path_dependent/base_path_dependent_option.h"
 
 namespace OptionPricer {
+
+    // Base Asian
     class AsianOption: public PathDependentOption {
     public:
         ~AsianOption() override;
@@ -12,7 +14,7 @@ namespace OptionPricer {
         using PathDependentOption::PathDependentOption;
     };
 
-
+    // Arithmetic Asian
     class ArithmeticAsianOption final: public AsianOption {
     public:
         ~ArithmeticAsianOption() override;
@@ -23,7 +25,7 @@ namespace OptionPricer {
         friend class ArithmeticAsianOptionFactory;
     };
 
-
+    // Geometric Asian
     class GeometricAsianOption final: public AsianOption {
     public:
         ~GeometricAsianOption() override;
@@ -33,6 +35,7 @@ namespace OptionPricer {
         using AsianOption::AsianOption;
         friend class GeometricAsianOptionFactory;
     };
+
 }
 
 #endif //BASE_ASIAN_OPTION_H

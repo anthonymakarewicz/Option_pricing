@@ -6,6 +6,7 @@
 
 namespace OptionPricer {
 
+    // ArithmeticAsianOptionFactory
     class ArithmeticAsianOptionFactory final: public OptionFactory<ArithmeticAsianOption> {
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
         std::shared_ptr<ArithmeticAsianOption> createSpecificOption(const ParameterObject& params,
@@ -14,6 +15,7 @@ namespace OptionPricer {
         std::string getType(const PayoffType& type) const override;
     };
 
+    // GeometricAsianOptionFactory
     class GeometricAsianOptionFactory final: public OptionFactory<GeometricAsianOption> {
         std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
         std::shared_ptr<GeometricAsianOption> createSpecificOption(const ParameterObject& params,

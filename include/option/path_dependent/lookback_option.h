@@ -5,7 +5,7 @@
 
 namespace OptionPricer {
 
-    // Base class for Lookback options
+    // Base Lookback
     class LookbackOption: public PathDependentOption {
     public:
         ~LookbackOption() override;
@@ -14,6 +14,7 @@ namespace OptionPricer {
         using PathDependentOption::PathDependentOption;
     };
 
+    // Floating Strike Lookback
     class FloatingStrikeLookbackOption final: public LookbackOption {
     public:
         ~FloatingStrikeLookbackOption() override;
@@ -24,6 +25,7 @@ namespace OptionPricer {
         friend class FloatingStrikeLookbackOptionFactory;
     };
 
+    // Fixed Strike Lookback
     class FixedStrikeLookbackOption final: public LookbackOption {
     public:
         ~FixedStrikeLookbackOption() override;

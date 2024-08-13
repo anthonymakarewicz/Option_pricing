@@ -26,24 +26,23 @@ namespace OptionPricer {
     class KnockInBarrierMCPricer final: public BarrierMCPricer {
     public:
         KnockInBarrierMCPricer(std::shared_ptr<KnockInBarrierOption> option,
-                        std::shared_ptr<IMarketData> marketData,
-                        std::shared_ptr<StockPriceModel> stockModel,
-                        std::shared_ptr<NumberGenerarator> generator,
-                        const unsigned int& steps);
+                               std::shared_ptr<IMarketData> marketData,
+                               std::shared_ptr<StockPriceModel> stockModel,
+                               std::shared_ptr<NumberGenerarator> generator,
+                               const unsigned int& steps);
 
     protected:
         bool checkHasCrossed(const double& S_t, bool& hasCrossed) const override;
-
         double computePayoff(const double& S_t, const bool& hasCrossed) const override;
     };
 
     class KnockOutBarrierMCPricer final: public BarrierMCPricer {
     public:
         KnockOutBarrierMCPricer(std::shared_ptr<KnockOutBarrierOption> option,
-                         std::shared_ptr<IMarketData> marketData,
-                         std::shared_ptr<StockPriceModel> stockModel,
-                         std::shared_ptr<NumberGenerarator> generator,
-                         const unsigned int& steps);
+                                std::shared_ptr<IMarketData> marketData,
+                                std::shared_ptr<StockPriceModel> stockModel,
+                                std::shared_ptr<NumberGenerarator> generator,
+                                const unsigned int& steps);
 
     protected:
         bool checkHasCrossed(const double& S_t, bool& hasCrossed) const override;

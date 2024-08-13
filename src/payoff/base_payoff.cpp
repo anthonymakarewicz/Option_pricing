@@ -5,6 +5,7 @@
 #include "payoff/base_payoff.h"
 
 namespace OptionPricer {
+
     Payoff::Payoff(const PayoffType& type) : type_(type) {}
 
     Payoff::~Payoff() = default;
@@ -38,4 +39,5 @@ namespace OptionPricer {
     double Payoff::operator()(const double &S, const double &extremeS) const {
         throw std::logic_error("Double-argument operator() should be overridden for Floating Strike Lookback.");
     }
+
 }

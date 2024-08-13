@@ -9,10 +9,10 @@ namespace OptionPricer {
     class AmericanMCPricer final: public PathDependentMCPricer {
     public:
         AmericanMCPricer(std::shared_ptr<AmericanOption> option,
-                           std::shared_ptr<IMarketData> marketData,
-                           std::shared_ptr<StockPriceModel> stockModel,
-                           std::shared_ptr<NumberGenerarator> generator,
-                           const unsigned int& steps);
+                         std::shared_ptr<IMarketData> marketData,
+                         std::shared_ptr<StockPriceModel> stockModel,
+                         std::shared_ptr<NumberGenerarator> generator,
+                         const unsigned int& steps);
                            //std::shared_ptr<RegressionStrategy> regressionStrategy,
                            //std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy);
 

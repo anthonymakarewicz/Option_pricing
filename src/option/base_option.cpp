@@ -21,7 +21,7 @@ namespace OptionPricer {
                    std::unique_ptr<Payoff> payoff,
                    const double& T,
                    std::shared_ptr<IMarketData> marketData)
-        : MarketDataObserver(ticker), T_(T), marketData_(std::move(marketData)) {
+    : MarketDataObserver(ticker), T_(T), marketData_(std::move(marketData)) {
         if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
         // Try to retrieve StockData if not found it throws an exception
         auto stockData = marketData_->getStockData(id_);
