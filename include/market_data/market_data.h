@@ -14,20 +14,10 @@
 #include "interface_market_data.h"
 
 namespace OptionPricer {
+
     // Declare MarketData as Singleton
     class MarketData final: public IMarketData {
     public:
-        /** @brief MarketData Singleton class
-         *
-         * This class serves as a centralized location where all MarketData object will be stored
-         * and updated and acces by all MarketDataObserver subclasses instances.
-         * Specifically, only 1 instance of the MarketData object will be created when our program
-         * will execute be stored as a shared_ptr that all our Options will own the adress of it.
-         *
-         * This MarketData data will notify all the Option when StockData used for those Options
-         * will change.
-         *
-         */
         static std::shared_ptr<MarketData> getInstance();
         ~MarketData() override;
 
@@ -67,6 +57,7 @@ namespace OptionPricer {
         std::unordered_map<std::string, std::shared_ptr<StockData>> stockDataMap_; // Map ticker symbol to StockData
         std::vector<std::weak_ptr<MarketDataObserver>> observers_; // Use weak_ptr to avoid circular references
     };
+
 }
 
 #endif //MARKET_DATA_H

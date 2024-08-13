@@ -13,6 +13,7 @@ namespace OptionPricer {
         [[nodiscard]] std::unique_ptr<Payoff> clone() const override;
         double operator()(const double& S) const override;
         [[nodiscard]] bool compare(const Payoff &other) const override;
+        std::string getType() const override;
     };
 }
 

@@ -4,40 +4,38 @@
 #include "option/path_dependent/base_path_dependent_option.h"
 
 namespace OptionPricer {
+
+    // Base Asian
     class AsianOption: public PathDependentOption {
     public:
         ~AsianOption() override;
 
     protected:
-        AsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-            std::shared_ptr<IMarketData> marketData);
+        using PathDependentOption::PathDependentOption;
     };
 
-
+    // Arithmetic Asian
     class ArithmeticAsianOption final: public AsianOption {
     public:
         ~ArithmeticAsianOption() override;
         [[nodiscard]] double calc_price() const override;
 
     private:
-        ArithmeticAsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-            std::shared_ptr<IMarketData> marketData);
-
+        using AsianOption::AsianOption;
         friend class ArithmeticAsianOptionFactory;
     };
 
-
+    // Geometric Asian
     class GeometricAsianOption final: public AsianOption {
     public:
         ~GeometricAsianOption() override;
         [[nodiscard]] double calc_price() const override;
 
     private:
-        GeometricAsianOption(const std::string& ticker, std::unique_ptr<Payoff> payoff, const double& T,
-            std::shared_ptr<IMarketData> marketData);
-
+        using AsianOption::AsianOption;
         friend class GeometricAsianOptionFactory;
     };
+
 }
 
 #endif //BASE_ASIAN_OPTION_H

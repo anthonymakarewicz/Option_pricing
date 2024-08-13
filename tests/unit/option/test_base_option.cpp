@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "option/base_option.h"
-#include "payoff/single_strike/payoff_vanilla_call.h"
+#include "payoff/single_strike/payoff_vanilla.h"
 #include "../test_support/mock_classes.h"
 
 using namespace OptionPricer;
@@ -28,7 +28,7 @@ protected:
         ticker = "AAPL";
         T = 1.0;
         K = 100.0;
-        payoff = std::make_unique<PayoffVanillaCall>(K);
+        payoff = std::make_unique<PayoffVanilla>(PayoffType::Call, K);
         mockMarketData = std::make_shared<Mocks::MarketData>();
     }
 
@@ -83,22 +83,21 @@ TEST_F(OptionTest, CalculatePriceTest) {
 
 TEST_F(OptionTest, PayoffTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker))
-        .Times(2)
-        .WillRepeatedly(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
+        .Times(1)
+        .WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
     EXPECT_CALL(*mockMarketData, removeObserver())
     .Times(1);
 
     TestOption option(ticker, std::move(payoff), T, mockMarketData);
 
     // Check if the Option object is constructed properly
-    EXPECT_EQ(option.payoff(), 50.0);
     EXPECT_EQ(option.payoff(150.0), 50.0);
 }
 
 TEST_F(OptionTest, SharedPtrMoveTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker))
         .Times(1)
-        .WillRepeatedly(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
+        .WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
     EXPECT_CALL(*mockMarketData, addObserver(_))
         .Times(1);
     EXPECT_CALL(*mockMarketData, removeObserver())

@@ -4,7 +4,7 @@
 #include <string>
 
 namespace OptionPricer {
-    // Observer of MarketData
+
     class MarketDataObserver {
     public:
         explicit MarketDataObserver(const std::string& id);
@@ -16,6 +16,7 @@ namespace OptionPricer {
     protected:
         std::string id_;
     };
+
 }
 
 #endif //MARKET_DATA_OBSERVER_H

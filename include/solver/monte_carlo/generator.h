@@ -16,7 +16,7 @@ namespace OptionPricer {
         virtual double operator()(std::mt19937& gen) = 0;
     };
 
-    class StandardNormalDistribution : public Distribution {
+    class StandardNormalDistribution final: public Distribution {
     public:
         explicit StandardNormalDistribution()
             : normal_dist_(0.0, 1.0) {}

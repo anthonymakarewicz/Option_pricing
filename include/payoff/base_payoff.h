@@ -2,15 +2,32 @@
 #define BASE_PAYOFF_H
 
 #include <memory>
+#include <string>
 
 namespace OptionPricer {
+    enum class PayoffType {
+        Call, Put, DoubleDigital
+    };
+
+    inline std::string PayoffTypeToString(const PayoffType& type) {
+        switch (type) {
+            case PayoffType::Call: return "Call";
+            case PayoffType::Put: return "Put";
+            case PayoffType::DoubleDigital: return "DoubleDigital";
+            // Add other cases as needed
+            default: return "Unknown";
+        }
+    }
+
     // Abstract base class for Payoff
     class Payoff {
     public:
-        Payoff();
+        explicit Payoff(const PayoffType& type);
         virtual ~Payoff();
 
-        [[nodiscard]] std::string getType() const;
+        PayoffType getPayoffType() const;
+
+        virtual std::string getType() const = 0;
         [[nodiscard]] virtual std::unique_ptr<Payoff> clone() const = 0; // Prototype creational pattern
 
         virtual void print(std::ostream& os) const;
@@ -20,9 +37,13 @@ namespace OptionPricer {
         bool operator!=(const Payoff& other) const;
         [[nodiscard]] virtual bool compare(const Payoff& other) const = 0;
 
-        virtual double operator()(const double& S) const = 0; // Define Payoff as a functor
+        // Methods to be overidden in final classes
+        virtual double operator()(const double& S) const;
+        virtual double operator()(const double& S, const double& extremeS) const;
 
+    protected:
+        PayoffType type_;
     };
-}
+};
 
 #endif //BASE_PAYOFF_H

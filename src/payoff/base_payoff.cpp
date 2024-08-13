@@ -5,21 +5,17 @@
 #include "payoff/base_payoff.h"
 
 namespace OptionPricer {
-    Payoff::Payoff() = default;
+
+    Payoff::Payoff(const PayoffType& type) : type_(type) {}
 
     Payoff::~Payoff() = default;
 
-    std::string Payoff::getType() const {
-        int status;
-        const char* mangledName = typeid(*this).name();
-        char* demangledName = abi::__cxa_demangle(mangledName, nullptr, nullptr, &status);
-        std::string typeName = (status == 0) ? demangledName : mangledName;
-        std::free(demangledName);
-        return typeName;
+    PayoffType Payoff::getPayoffType() const {
+        return type_;
     }
 
     void Payoff::print(std::ostream &os) const {
-        os << "  -> Type: " << getType() << "\n";
+        os << "  -> Type: " << PayoffTypeToString(type_) << "\n";
     }
 
     bool Payoff::operator==(const Payoff &other) const {
@@ -35,4 +31,13 @@ namespace OptionPricer {
         payoff.print(os);
         return os;
     }
+
+    double Payoff::operator()(const double &S) const {
+        throw std::logic_error("Single-argument operator() should be overridden.");
+    }
+
+    double Payoff::operator()(const double &S, const double &extremeS) const {
+        throw std::logic_error("Double-argument operator() should be overridden for Floating Strike Lookback.");
+    }
+
 }

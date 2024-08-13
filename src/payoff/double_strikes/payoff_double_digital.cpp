@@ -1,8 +1,10 @@
+#include <string>
 #include "payoff/double_strikes/payoff_double_digital.h"
 
 namespace OptionPricer {
+
     PayoffDoubleDigital::PayoffDoubleDigital(const double& K_L, const double& K_U)
-    : PayoffDoubleStrikes(K_L, K_U) {}
+    : PayoffDoubleStrikes(PayoffType::DoubleDigital, K_L, K_U) {}
 
     PayoffDoubleDigital::~PayoffDoubleDigital() = default;
 
@@ -19,4 +21,9 @@ namespace OptionPricer {
         if (!otherPayoffPtr) return false;
         return K_U_ == otherPayoffPtr->K_U_ && K_L_ == otherPayoffPtr->K_L_;
     }
+
+    std::string PayoffDoubleDigital::getType() const {
+        return {"Double Digital"};
+    }
+
 }

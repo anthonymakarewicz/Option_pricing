@@ -1,7 +1,7 @@
 #include <iostream>
 #include <option/single_path/european_option.h>
 #include "market_data/market_data.h"
-#include <payoff/single_strike/payoff_vanilla_call.h>
+#include <payoff/single_strike/payoff_vanilla.h>
 #include <option/single_path/factory_european_option.h>
 #include "option/single_path/factory_double_digital_option.h"
 #include <boost/random/sobol.hpp>
@@ -12,11 +12,11 @@
 #include <option/single_path/factory_digital_option.h>
 #include "option/path_dependent/factory_asian_option.h"
 #include "option/path_dependent/factory_barrier_option.h"
-
-
+#include "option/path_dependent/factory_lookback_option.h"
+#include "option/path_dependent/factory_american_option.h"
 
 #include "solver/monte_carlo/mc_solver.h"
-#include "solver/monte_carlo/gbm_stock_price_model.h"
+#include "solver/monte_carlo/builder/mc_builder_american.h"
 
 using namespace OptionPricer;
 
@@ -40,25 +40,54 @@ int main() {
     params.setParameter("B", B);
     params.setParameter("direction", BarrierDirection::Up);
 
-    KnockInBarrierOptionFactory factory;
-    auto call = factory.createCallOption(params);
-
     auto normal = std::make_shared<StandardNormalDistribution>();
     auto generator = std::make_shared<SobolGenerator>(normal, dim);
     auto brownianMotion = std::make_shared<BrownianMotionModel>(ticker, marketData);
-    auto mcStrategy = std::make_unique<KnockInMCStrategy>(call, brownianMotion, generator, marketData, dim);
+
+    AmericanOptionFactory factory;
+    auto call = factory.createCallOption(params);
+
+    AmericanMCBuilder builder;
+    auto americanPricer = builder.setOption(call).setSteps(25).build();
+
+    MCSolver mcSolver;
+    mcSolver.setN(100000);
+    mcSolver.setPricer(std::move(americanPricer));
+
+    std::cout << mcSolver.solve() << "\n";
+
+    return 0;
+
+    /*
+    AmericanOptionFactory factory;
+    FloatingStrikeLookbackOptionFactory factory2;
+    KnockOutBarrierOptionFactory factory3;
+    auto call = factory.createCallOption(params);
+    auto call2 = factory2.createCallOption(params);
+    auto call3 = factory3.createCallOption(params);
+
+    auto mcStrategy = std::make_unique<AmericanMCStrategy>(call, brownianMotion, generator, marketData, dim);
+    auto mcStrategy2 = std::make_unique<FloatingStrikeLookbackMCStrategy>(call2, brownianMotion, generator, marketData, dim);
+    auto mcStrategy3 = std::make_unique<KnockOutMCStrategy>(call3, brownianMotion, generator, marketData, dim);
 
 
     MCSolver mcSolver;
-    mcSolver.setN(500000);
+    mcSolver.setN(100000);
     mcSolver.setStrategy(std::move(mcStrategy));
 
-    std::cout << mcSolver.solve();
+    std::cout << mcSolver.solve() << "\n";
+
+    mcSolver.setStrategy(std::move(mcStrategy2));
+    std::cout << mcSolver.solve() << "\n";
+
+    mcSolver.setStrategy(std::move(mcStrategy3));
+    std::cout << mcSolver.solve() << "\n";
+
 
     //std::vector<unsigned long> Ns = {100, 1000, 10000, 100000, 1000000, 10000000};
+    */
 
 
-    return 0;
     /*
     std::cout << "Crude MC Call:" << std::endl;
     for (const auto& N : Ns) {

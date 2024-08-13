@@ -4,6 +4,7 @@
 #include "base_single_path_option.h"
 
 namespace OptionPricer {
+
     class DigitalOption final : public SinglePathOption {
     public:
         ~DigitalOption() override;
@@ -14,6 +15,7 @@ namespace OptionPricer {
             std::shared_ptr<IMarketData> marketData);
         friend class DigitalOptionFactory;
     };
+
 }
 
 #endif //DIGITAL_OPTION_H
