@@ -40,6 +40,7 @@ add_library(marketdata SHARED
         src/market_data/market_data.cpp
         src/market_data/market_data_observer.cpp
         src/market_data/stock_data.cpp
+        include/solver/monte_carlo/builder/mc_builder_american.h
 )
 
 # Create dynamic library for payoff
@@ -68,7 +69,6 @@ add_library(option SHARED
         src/option/path_dependent/barrier_option.cpp
         src/option/path_dependent/lookback_option.cpp
         # Factories
-        src/option/factory_option.cpp
         src/option/single_path/factory_european_option.cpp
         src/option/single_path/factory_digital_option.cpp
         src/option/single_path/factory_double_digital_option.cpp
@@ -82,27 +82,35 @@ add_library(option SHARED
 add_library(solver SHARED
         src/solver/base_solver.cpp
         src/solver/monte_carlo/mc_solver.cpp
-        include/solver/monte_carlo/mc_base_strategy.h
-        src/solver/monte_carlo/mc_base_strategy.cpp
-        include/solver/monte_carlo/stock_price_model.h
         src/solver/monte_carlo/stock_price_model.cpp
         src/solver/monte_carlo/gbm_stock_price_model.cpp
-        include/solver/monte_carlo/gbm_stock_price_model.h
-        include/solver/monte_carlo/generator.h
+        src/solver/monte_carlo/base_mc.cpp
+        src/solver/monte_carlo/mc_single_path.cpp
+        src/solver/monte_carlo/base_mc_path_dependent.cpp
+        src/solver/monte_carlo/mc_asian.cpp
+        src/solver/monte_carlo/mc_barrier.cpp
+        src/solver/monte_carlo/mc_lookback.cpp
+        src/solver/monte_carlo/mc_american.cpp
+        src/solver/monte_carlo/builder/base_mc_builder.cpp
+        src/solver/monte_carlo/builder/mc_builder_single_path.cpp
+        src/solver/monte_carlo/builder/base_mc_builder_path_dependent.cpp
+        src/solver/monte_carlo/builder/mc_builder_asian.cpp
+        src/solver/monte_carlo/builder/mc_builder_barrier.cpp
+        src/solver/monte_carlo/builder/mc_builder_lookback.cpp
+        src/solver/monte_carlo/builder/mc_builder_american.cpp
 )
-
-# Link random library to the solver ONLY
-target_link_libraries(solver PUBLIC Boost::random Eigen3::Eigen)
 
 # Link the option library against marketdata and payoff
 target_link_libraries(option PUBLIC marketdata payoff)
+
+# Link random library to the solver ONLY
+target_link_libraries(solver PUBLIC option Boost::random Eigen3::Eigen)
 
 # Create main executable
 add_executable(Option_pricer main.cpp)
 
 # Link the main executable to our dynamic libraries
 target_link_libraries(Option_pricer PUBLIC  marketdata payoff option solver)
-#target_link_libraries(Option_pricer marketdata payoff option solver)
 
 # Enable testing and add the tests directory
 enable_testing()

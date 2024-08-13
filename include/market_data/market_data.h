@@ -14,6 +14,7 @@
 #include "interface_market_data.h"
 
 namespace OptionPricer {
+
     // Declare MarketData as Singleton
     class MarketData final: public IMarketData {
     public:
@@ -67,6 +68,7 @@ namespace OptionPricer {
         std::unordered_map<std::string, std::shared_ptr<StockData>> stockDataMap_; // Map ticker symbol to StockData
         std::vector<std::weak_ptr<MarketDataObserver>> observers_; // Use weak_ptr to avoid circular references
     };
+
 }
 
 #endif //MARKET_DATA_H

@@ -1,7 +1,6 @@
 //#include "payoff/single_strike/factory_payoff_vanilla.h"
 #include "payoff/single_strike/payoff_vanilla.h"
 #include "option/single_path/factory_european_option.h"
-#include "option/single_path/european_option.h"
 #include <market_data/market_data.h>
 
 namespace OptionPricer {
@@ -10,9 +9,9 @@ namespace OptionPricer {
         return std::make_unique<PayoffVanilla>(type, params.getParameter<double>("K"));
     }
 
-    std::shared_ptr<Option> EuropeanOptionFactory::createSpecificOption(const ParameterObject &params,
+    std::shared_ptr<EuropeanOption> EuropeanOptionFactory::createSpecificOption(const ParameterObject &params,
     std::unique_ptr<Payoff> payoff, const std::shared_ptr<IMarketData>& marketData) {
-        return std::shared_ptr<SinglePathOption>(new EuropeanOption(
+        return std::shared_ptr<EuropeanOption>(new EuropeanOption(
             params.getParameter<std::string>("ticker"),
             std::move(payoff),
             params.getParameter<double>("T"),

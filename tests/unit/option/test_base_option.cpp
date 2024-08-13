@@ -83,22 +83,21 @@ TEST_F(OptionTest, CalculatePriceTest) {
 
 TEST_F(OptionTest, PayoffTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker))
-        .Times(2)
-        .WillRepeatedly(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
+        .Times(1)
+        .WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
     EXPECT_CALL(*mockMarketData, removeObserver())
     .Times(1);
 
     TestOption option(ticker, std::move(payoff), T, mockMarketData);
 
     // Check if the Option object is constructed properly
-    EXPECT_EQ(option.payoff(), 50.0);
     EXPECT_EQ(option.payoff(150.0), 50.0);
 }
 
 TEST_F(OptionTest, SharedPtrMoveTest) {
     EXPECT_CALL(*mockMarketData, getStockData(ticker))
         .Times(1)
-        .WillRepeatedly(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
+        .WillOnce(Return(std::make_shared<StockData>(150.0, 0.2, std::nullopt)));
     EXPECT_CALL(*mockMarketData, addObserver(_))
         .Times(1);
     EXPECT_CALL(*mockMarketData, removeObserver())
