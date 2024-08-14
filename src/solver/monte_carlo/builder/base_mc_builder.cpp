@@ -1,5 +1,7 @@
 #include "solver/monte_carlo/builder/base_mc_builder.h"
 #include "market_data/market_data.h"
+#include "random/distribution/standard_normal_distribution.h"
+#include "random/number_generator/random_generator.h"
 
 namespace OptionPricer {
 
@@ -14,7 +16,7 @@ namespace OptionPricer {
         return *this;
     }
 
-    MCBuilder & MCBuilder::setStockPriceModel(std::shared_ptr<StockPriceModel> stockModel) {
+    MCBuilder & MCBuilder::setStockPriceModel(std::shared_ptr<StockModel> stockModel) {
         stockModel_ = std::move(stockModel);
         return *this;
     }

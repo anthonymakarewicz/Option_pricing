@@ -17,6 +17,11 @@
 
 #include "solver/monte_carlo/mc_solver.h"
 #include "solver/monte_carlo/builder/mc_builder_american.h"
+#include "random/distribution/standard_normal_distribution.h"
+#include "random/number_generator/sobol_quasi_random_generator.h"
+#include <Eigen/Dense>
+#include <solver/monte_carlo/regression/ridge.h>
+#include "solver/monte_carlo/basis_function/legendre.h"
 
 using namespace OptionPricer;
 
@@ -42,7 +47,7 @@ int main() {
 
     auto normal = std::make_shared<StandardNormalDistribution>();
     auto generator = std::make_shared<SobolGenerator>(normal, dim);
-    auto brownianMotion = std::make_shared<BrownianMotionModel>(ticker, marketData);
+    auto brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
 
     AmericanOptionFactory factory;
     auto call = factory.createCallOption(params);
@@ -54,6 +59,18 @@ int main() {
     mcSolver.setN(100000);
     mcSolver.setPricer(std::move(americanPricer));
 
+    std::cout << mcSolver.solve() << "\n";
+
+    auto ridgeStrat = std::make_shared<RidgeRegression>(0);
+    auto americanPricer2 = builder.setRegressionStrategy(ridgeStrat).build();
+
+    mcSolver.setPricer(std::move(americanPricer2));
+    std::cout << mcSolver.solve() << "\n";
+
+    auto legendreStrat = std::make_shared<LegendreBasisFunction>(5);
+    auto americanPricer3 = builder.setBasisFunctionStrategy(legendreStrat).build();
+
+    mcSolver.setPricer(std::move(americanPricer3));
     std::cout << mcSolver.solve() << "\n";
 
     return 0;

@@ -2,7 +2,8 @@
 #define BASE_MC_BUILDER_H
 
 #include "solver/monte_carlo/base_mc.h"
-#include "solver/monte_carlo/gbm_stock_price_model.h"
+#include "model/base_model.h"
+#include "model/gbm_model.h"
 #include "option/base_option.h"
 
 namespace OptionPricer {
@@ -13,7 +14,7 @@ namespace OptionPricer {
         virtual ~MCBuilder();
 
         MCBuilder& setMarketData(std::shared_ptr<IMarketData> marketData);
-        MCBuilder& setStockPriceModel(std::shared_ptr<StockPriceModel> stockModel);
+        MCBuilder& setStockPriceModel(std::shared_ptr<StockModel> stockModel);
         MCBuilder& setNumberGenerator(std::shared_ptr<NumberGenerarator> generator);
 
         virtual MCBuilder& setOption(std::shared_ptr<Option> option) = 0;
@@ -21,7 +22,7 @@ namespace OptionPricer {
 
     protected:
         std::shared_ptr<IMarketData> marketData_;
-        std::shared_ptr<StockPriceModel> stockModel_; // Requires specific option to be provided default values
+        std::shared_ptr<StockModel> stockModel_; // Requires specific option to be provided default values
         std::shared_ptr<NumberGenerarator> generator_;
     };
 

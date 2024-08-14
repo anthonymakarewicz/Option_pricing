@@ -3,6 +3,8 @@
 
 #include "solver/monte_carlo/base_mc_path_dependent.h"
 #include "option/path_dependent/american_option.h"
+#include "solver/monte_carlo/regression/base_regression_strategy.h"
+#include "solver/monte_carlo/basis_function/base_basis_function_strategy.h"
 
 namespace OptionPricer {
 
@@ -10,15 +12,17 @@ namespace OptionPricer {
     public:
         AmericanMCPricer(std::shared_ptr<AmericanOption> option,
                          std::shared_ptr<IMarketData> marketData,
-                         std::shared_ptr<StockPriceModel> stockModel,
+                         std::shared_ptr<StockModel> stockModel,
                          std::shared_ptr<NumberGenerarator> generator,
+                         std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy,
+                         std::shared_ptr<RegressionStrategy> regressionStrategy,
                          const unsigned int& steps);
-                           //std::shared_ptr<RegressionStrategy> regressionStrategy,
-                           //std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy);
 
         double calculate_price(const unsigned long& N) const override;
 
     private:
+        std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy_;
+        std::shared_ptr<RegressionStrategy> regressionStrategy_;
         std::shared_ptr<AmericanOption> option_;
     };
 
