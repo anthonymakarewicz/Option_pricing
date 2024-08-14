@@ -4,6 +4,7 @@
 #include "base_path_dependent_option.h"
 
 namespace OptionPricer {
+
     class AmericanOption final: public PathDependentOption {
     public:
         ~AmericanOption() override;
@@ -14,6 +15,7 @@ namespace OptionPricer {
             std::shared_ptr<IMarketData> marketData);
         friend class AmericanOptionFactory;
     };
+
 }
 
 #endif //AMERICAN_OPTION_H

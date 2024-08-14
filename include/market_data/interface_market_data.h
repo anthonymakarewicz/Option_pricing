@@ -7,6 +7,7 @@
 #include "market_data_observer.h"
 
 namespace OptionPricer {
+
     // Interface injection for production and mock object for unit test
     class IMarketData {
     public:
@@ -19,6 +20,7 @@ namespace OptionPricer {
         [[nodiscard]] virtual double getR() const = 0;
         virtual void setR(const double& r) = 0;
     };
+
 }
 
 #endif //INTERFACE_MARKET_DATA_H

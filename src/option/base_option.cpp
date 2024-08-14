@@ -4,9 +4,6 @@
 #include <cxxabi.h>
 #include "option/base_option.h"
 
-#include <option/single_path/base_single_path_option.h>
-#include <payoff/single_strike/base_payoff_vanilla.h>
-
 /**
 * @brief Constructor implementation
 *
@@ -19,11 +16,12 @@
 **/
 
 namespace OptionPricer {
+
     Option::Option(const std::string& ticker,
                    std::unique_ptr<Payoff> payoff,
                    const double& T,
                    std::shared_ptr<IMarketData> marketData)
-        : MarketDataObserver(ticker), T_(T), marketData_(std::move(marketData)) {
+    : MarketDataObserver(ticker), T_(T), marketData_(std::move(marketData)) {
         if (T < 0) throw std::invalid_argument("Time to expiration (T) must be positive.");
         // Try to retrieve StockData if not found it throws an exception
         auto stockData = marketData_->getStockData(id_);
@@ -36,8 +34,8 @@ namespace OptionPricer {
     }
 
     void Option::update() {
-        std::cout << "StockData " << id_ << " updated!" << "\n";
-        std::cout << "The new Option price is: "<< calc_price() << "\n";
+        //std::cout << "StockData " << id_ << " updated!" << "\n";
+        //std::cout << "The new Option price is: "<< calc_price() << "\n";
     }
 
     bool Option::operator==(const Option &other) const {
@@ -85,18 +83,20 @@ namespace OptionPricer {
         return typeName;
     }
 
+    const Payoff & Option::getPayoff() const {
+        return *payoff_;
+    }
+
     double Option::getT() const {
         return T_;
     }
 
-    double Option::payoff() const {
-        const auto stockData = marketData_->getStockData(id_);
-        return (*payoff_)(stockData->getPrice());
+    double Option::payoff(const double& S, const double& extremeS) const {
+        return (*payoff_)(S, extremeS);
     }
 
     double Option::payoff(const double &S) const {
         return (*payoff_)(S);
     }
+
 }
-
-

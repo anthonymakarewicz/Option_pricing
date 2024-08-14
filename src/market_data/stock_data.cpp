@@ -2,12 +2,12 @@
 #include <ostream>
 
 namespace OptionPricer {
+
     StockData::StockData(const double& S, const double& sigma, const std::optional<double>& c)
     : S_(S), sigma_(sigma), c_(c) {
         validate();
     }
 
-    // Prefix common guetters with nodiscard C++17
     [[nodiscard]] double StockData::getPrice() const {
         return S_;
     }
@@ -73,4 +73,5 @@ namespace OptionPricer {
         }
         return os;
     }
+
 }

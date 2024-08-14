@@ -1,18 +1,17 @@
-#include "option/single_path/double_digital_option.h"
-#include "option/single_path/factory_double_digital_option.h"
-#include "payoff/double_strikes/factory_payoff_double_digital.h"
+#include "payoff/double_strikes/payoff_double_digital.h"
 #include <market_data/market_data.h>
+#include "option/single_path/factory_double_digital_option.h"
 
 namespace OptionPricer {
-    std::unique_ptr<Payoff> DoubleDigitalOptionFactory::createSpecificPayoff(const ParameterObject &params,
-            const std::string &type) {
-        return PayoffDoubleDigitalFactory::createPayoff(type, params.getParameter<double>("K1"),
+    std::unique_ptr<Payoff> DoubleDigitalOptionFactory::createSpecificPayoff(const ParameterObject& params,
+            const PayoffType& type) {
+        return std::make_unique<PayoffDoubleDigital>(params.getParameter<double>("K1"),
             params.getParameter<double>("K2"));
     }
 
-    std::shared_ptr<Option> DoubleDigitalOptionFactory::createSpecificOption(const ParameterObject &params,
+    std::shared_ptr<DoubleDigitalOption> DoubleDigitalOptionFactory::createSpecificOption(const ParameterObject &params,
     std::unique_ptr<Payoff> payoff, const std::shared_ptr<IMarketData>& marketData) {
-        return std::shared_ptr<SinglePathOption>(new DoubleDigitalOption(
+        return std::shared_ptr<DoubleDigitalOption>(new DoubleDigitalOption(
             params.getParameter<std::string>("ticker"),
             std::move(payoff),
             params.getParameter<double>("T"),
@@ -28,7 +27,7 @@ namespace OptionPricer {
         return baseMessage;
     }
 
-    std::string DoubleDigitalOptionFactory::getType(const std::string& type) const {
-        return "Double Digital Option";
+    std::string DoubleDigitalOptionFactory::getType(const PayoffType& type) const {
+        return PayoffTypeToString(type) + " Option";
     }
 }

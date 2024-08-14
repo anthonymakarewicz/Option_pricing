@@ -77,9 +77,9 @@
     │   ├── double_strikes
     │   │   └── test_payoff_double_digital.cpp
     │   └── single_strike
-    │       ├── test_payoff_digital_call.cpp
+    │       ├── test_payoff_digital.cpp
     │       ├── test_payoff_digital_put.cpp
-    │       ├── test_payoff_vanilla_call.cpp
+    │       ├── test_payoff_vanilla.cpp
     │       ├── test_payoff_vanilla_put.cpp
     │       └── test_support
     │           ├── common_payoff_single_strike_tests.h

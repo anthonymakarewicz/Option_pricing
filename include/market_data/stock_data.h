@@ -11,10 +11,10 @@ namespace OptionPricer {
                   const double& sigma,
                   const std::optional<double>& c = std::nullopt);
 
-        // Prefix guetters with nodiscard C++17
         [[nodiscard]] double getPrice() const;
         [[nodiscard]] double getSigma() const;
         [[nodiscard]] std::optional<double> getCoupon() const;
+
         friend std::ostream& operator<<(std::ostream& os, const StockData& stockData);
         bool operator==(const StockData& other) const;
         bool operator!=(const StockData& other) const;
