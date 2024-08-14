@@ -3,26 +3,26 @@
 
 #include "solver/monte_carlo/builder/base_mc_builder_path_dependent.h"
 #include "solver/monte_carlo/mc_american.h"
-//#include "solver/regression_strategy.h"
-//#include "solver/basis_function_strategy.h"
+#include "solver/monte_carlo/regression/least_squares.h"
+#include "solver/monte_carlo/basis_function/monomial.h"
 
 namespace OptionPricer {
 
     class AmericanMCBuilder final : public PathDependentMCBuilder {
     public:
-        using PathDependentMCBuilder::PathDependentMCBuilder;
+        AmericanMCBuilder();
         ~AmericanMCBuilder() override;
 
         AmericanMCBuilder& setOption(std::shared_ptr<Option> option) override;
-        //AmericanMCPricerBuilder& setRegressionStrategy(std::shared_ptr<RegressionStrategy> regressionStrategy);
-        //AmericanMCPricerBuilder& setBasisFunctionStrategy(std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy);
+        AmericanMCBuilder& setRegressionStrategy(std::shared_ptr<RegressionStrategy> regressionStrategy);
+        AmericanMCBuilder& setBasisFunctionStrategy(std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy);
 
         std::unique_ptr<MCPricer> build() override;
 
     private:
         std::shared_ptr<AmericanOption> option_;
-        //std::shared_ptr<RegressionStrategy> regressionStrategy_ = std::make_shared<LeastSquareRegressionStrategy>();
-        //std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy_ = std::make_shared<PolynomialBasisStrategy>();
+        std::shared_ptr<RegressionStrategy> regressionStrategy_;
+        std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy_;
     };
 
 }

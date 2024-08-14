@@ -6,10 +6,10 @@
 
 namespace OptionPricer {
 
-    class StockPriceModel {
+    class StockModel {
     public:
-        StockPriceModel(const std::string& ticker, std::shared_ptr<IMarketData> marketData);
-        virtual ~StockPriceModel();
+        StockModel(const std::string& ticker, std::shared_ptr<IMarketData> marketData);
+        virtual ~StockModel();
 
         [[nodiscard]] virtual double simulatePriceAtMaturity(const double& T, const double& z) const = 0;
         [[nodiscard]] virtual double simulateStepPrice(const double& dt, const double& z) const = 0;

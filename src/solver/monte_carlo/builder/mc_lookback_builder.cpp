@@ -16,7 +16,7 @@ namespace OptionPricer {
     std::unique_ptr<MCPricer> FloatingStrikeLookbackMCBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for FloatingStrikeLookbackMCBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_shared<BrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(), marketData_);
         }
         return std::make_unique<FloatingStrikeLookbackMCPricer>(option_, marketData_, stockModel_, generator_, steps_);
     }
@@ -35,7 +35,7 @@ namespace OptionPricer {
     std::unique_ptr<MCPricer> FixedStrikeLookbackMCBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for FixedStrikeLookbackMCBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_shared<BrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(), marketData_);
         }
         return std::make_unique<FixedStrikeLookbackMCPricer>(option_, marketData_, stockModel_, generator_, steps_);
     }

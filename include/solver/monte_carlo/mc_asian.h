@@ -1,7 +1,6 @@
 #ifndef MC_ASIAN_H
 #define MC_ASIAN_H
 
-#include "gbm_stock_price_model.h"
 #include "solver/monte_carlo/base_mc_path_dependent.h"
 #include "option/path_dependent/asian_option.h"
 
@@ -11,7 +10,7 @@ namespace OptionPricer {
     public:
         AsianMCPricer(std::shared_ptr<AsianOption> option,
                       std::shared_ptr<IMarketData> marketData,
-                      std::shared_ptr<StockPriceModel> stockModel,
+                      std::shared_ptr<StockModel> stockModel,
                       std::shared_ptr<NumberGenerarator> generator,
                       const unsigned int& steps);
 
@@ -29,7 +28,7 @@ namespace OptionPricer {
     public:
         ArithmeticAsianMCPricer(std::shared_ptr<ArithmeticAsianOption> option,
                                 std::shared_ptr<IMarketData> marketData,
-                                std::shared_ptr<StockPriceModel> stockModel,
+                                std::shared_ptr<StockModel> stockModel,
                                 std::shared_ptr<NumberGenerarator> generator,
                                 const unsigned int& steps);
 
@@ -44,7 +43,7 @@ namespace OptionPricer {
     public:
         GeometricAsianMCPricer(std::shared_ptr<GeometricAsianOption> option,
                                std::shared_ptr<IMarketData> marketData,
-                               std::shared_ptr<StockPriceModel> stockModel,
+                               std::shared_ptr<StockModel> stockModel,
                                std::shared_ptr<NumberGenerarator> generator,
                                const unsigned int& steps);
 

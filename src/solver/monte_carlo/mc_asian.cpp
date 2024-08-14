@@ -5,7 +5,7 @@ namespace OptionPricer {
     // Base Asian
     AsianMCPricer::AsianMCPricer(std::shared_ptr<AsianOption> option,
                                  std::shared_ptr<IMarketData> marketData,
-                                 std::shared_ptr<StockPriceModel> stockModel,
+                                 std::shared_ptr<StockModel> stockModel,
                                  std::shared_ptr<NumberGenerarator> generator,
                                  const unsigned int& steps)
     : PathDependentMCPricer(std::move(marketData),
@@ -35,7 +35,7 @@ namespace OptionPricer {
     // Arithmetic Asian
     ArithmeticAsianMCPricer::ArithmeticAsianMCPricer(std::shared_ptr<ArithmeticAsianOption> option,
                                                      std::shared_ptr<IMarketData> marketData,
-                                                     std::shared_ptr<StockPriceModel> stockModel,
+                                                     std::shared_ptr<StockModel> stockModel,
                                                      std::shared_ptr<NumberGenerarator> generator,
                                                      const unsigned int &steps)
     : AsianMCPricer(std::move(option),std::move(marketData),
@@ -52,7 +52,7 @@ namespace OptionPricer {
     // Geometric Asian
     GeometricAsianMCPricer::GeometricAsianMCPricer(std::shared_ptr<GeometricAsianOption> option,
                                                    std::shared_ptr<IMarketData> marketData,
-                                                   std::shared_ptr<StockPriceModel> stockModel,
+                                                   std::shared_ptr<StockModel> stockModel,
                                                    std::shared_ptr<NumberGenerarator> generator,
                                                    const unsigned int &steps)
     : AsianMCPricer(std::move(option),std::move(marketData),

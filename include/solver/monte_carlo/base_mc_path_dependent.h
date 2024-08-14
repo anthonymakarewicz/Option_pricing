@@ -8,7 +8,7 @@ namespace OptionPricer {
     class PathDependentMCPricer : public MCPricer {
     public:
         PathDependentMCPricer(std::shared_ptr<IMarketData> marketData,
-                              std::shared_ptr<StockPriceModel> stockModel,
+                              std::shared_ptr<StockModel> stockModel,
                               std::shared_ptr<NumberGenerarator> generator,
                               const unsigned int& steps);
 

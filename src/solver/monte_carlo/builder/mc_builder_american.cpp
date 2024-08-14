@@ -2,6 +2,10 @@
 
 namespace OptionPricer {
 
+    AmericanMCBuilder::AmericanMCBuilder()
+    : PathDependentMCBuilder(), regressionStrategy_(std::make_shared<LeastSquaresRegression>()),
+    basisFunctionStrategy_(std::make_shared<MonomialBasisFunction>(3)) {}
+
     AmericanMCBuilder::~AmericanMCBuilder() = default;
 
     AmericanMCBuilder& AmericanMCBuilder::setOption(std::shared_ptr<Option> option) {
@@ -12,7 +16,6 @@ namespace OptionPricer {
         return *this;
     }
 
-    /*
     AmericanMCBuilder& AmericanMCBuilder::setRegressionStrategy(std::shared_ptr<RegressionStrategy> regressionStrategy) {
         regressionStrategy_ = std::move(regressionStrategy);
         return *this;
@@ -22,15 +25,14 @@ namespace OptionPricer {
         basisFunctionStrategy_ = std::move(basisFunctionStrategy);
         return *this;
     }
-    */
 
     std::unique_ptr<MCPricer> AmericanMCBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for AmericanMCBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_shared<BrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(), marketData_);
         }
-        return std::make_unique<AmericanMCPricer>(option_, marketData_, stockModel_, generator_, steps_);
-                                                  //regressionStrategy_, basisFunctionStrategy_);
+        return std::make_unique<AmericanMCPricer>(option_, marketData_, stockModel_,
+                                                    generator_, basisFunctionStrategy_, regressionStrategy_, steps_);
     }
 
 }

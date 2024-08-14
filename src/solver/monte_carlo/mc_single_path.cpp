@@ -1,10 +1,11 @@
 #include "solver/monte_carlo/mc_single_path.h"
+#include "random/number_generator/base_quasi_random_generator.h"
 
 namespace OptionPricer {
 
     SinglePathMCPricer::SinglePathMCPricer(std::shared_ptr<SinglePathOption> option,
                                            std::shared_ptr<IMarketData> marketData,
-                                           std::shared_ptr<StockPriceModel> stockModel,
+                                           std::shared_ptr<StockModel> stockModel,
                                            std::shared_ptr<NumberGenerarator> generator)
         : MCPricer(std::move(marketData), std::move(stockModel), std::move(generator)),
           option_(std::move(option)) {
@@ -28,3 +29,7 @@ namespace OptionPricer {
     }
 
 }
+
+
+
+

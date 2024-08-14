@@ -5,7 +5,7 @@ namespace OptionPricer {
     // Base Barrier
     BarrierMCPricer::BarrierMCPricer(std::shared_ptr<BarrierOption> option,
                                      std::shared_ptr<IMarketData> marketData,
-                                     std::shared_ptr<StockPriceModel> stockModel,
+                                     std::shared_ptr<StockModel> stockModel,
                                      std::shared_ptr<NumberGenerarator> generator,
                                      const unsigned int& steps)
     : PathDependentMCPricer(std::move(marketData),std::move(stockModel),
@@ -37,7 +37,7 @@ namespace OptionPricer {
     // Knock In
     KnockInBarrierMCPricer::KnockInBarrierMCPricer(std::shared_ptr<KnockInBarrierOption> option,
                                                    std::shared_ptr<IMarketData> marketData,
-                                                   std::shared_ptr<StockPriceModel> stockModel,
+                                                   std::shared_ptr<StockModel> stockModel,
                                                    std::shared_ptr<NumberGenerarator> generator,
                                                    const unsigned int& steps)
     : BarrierMCPricer(std::move(option), std::move(marketData),
@@ -57,7 +57,7 @@ namespace OptionPricer {
     // Knock Out
     KnockOutBarrierMCPricer::KnockOutBarrierMCPricer(std::shared_ptr<KnockOutBarrierOption> option,
                                                      std::shared_ptr<IMarketData> marketData,
-                                                     std::shared_ptr<StockPriceModel> stockModel,
+                                                     std::shared_ptr<StockModel> stockModel,
                                                      std::shared_ptr<NumberGenerarator> generator,
                                                      const unsigned int& steps)
     : BarrierMCPricer(std::move(option), std::move(marketData),
