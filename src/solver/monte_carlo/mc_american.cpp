@@ -12,10 +12,11 @@ namespace OptionPricer {
                                        const unsigned int& steps)
     : PathDependentMCPricer(std::move(marketData),std::move(stockModel),
         std::move(generator), steps), option_(std::move(option)),
-    basisFunctionStrategy_(std::move(basisFunctionStrategy)), regressionStrategy_(std::move(regressionStrategy)) {}
+    basisFunctionStrategy_(std::move(basisFunctionStrategy)),
+    regressionStrategy_(std::move(regressionStrategy)) {}
 
     double AmericanMCPricer::calculate_price(const unsigned long &N) const {
-            /* This algorithm uses the Least Square Monte Carlo (LSMC) method as described in
+          /* This algorithm uses the Least Square Monte Carlo (LSMC) method as described in
              * Longstaff and Schwartz (2001) for pricing American options.
              */
             const double dt = option_->getT() / static_cast<double>(steps_);
@@ -39,12 +40,16 @@ namespace OptionPricer {
             // Step 3: Perform backward induction
             for (int step = static_cast<int>(steps_) - 1; step >= 0; --step) {
                 std::vector<double> inTheMoneyPaths, discountedCashFlows;
-
+                std::vector<bool> isInTheMoney;
                 // Collect In-The-Money paths
                 for (int i = 0; i < N; ++i) {
-                    if (const double exerciseValue = option_->payoff(paths(i, step)); exerciseValue > 0.0) {
+                    const double exerciseValue = option_->payoff(paths(i, step));
+                    if (exerciseValue > 0.0) {
                         inTheMoneyPaths.push_back(paths(i, step)); //
                         discountedCashFlows.push_back(americanPrices(i) * exp(-marketData_->getR() * dt));
+                        isInTheMoney.push_back(true);
+                    } else {
+                        isInTheMoney.push_back(false);
                     }
                 }
 
@@ -59,15 +64,19 @@ namespace OptionPricer {
                     const Eigen::VectorXd coeffs = regressionStrategy_->solve(inTheMoneyBases, vDiscountedCashFlows);
 
                     // Generate basis functions for all paths at the current step
-                    const Eigen::MatrixXd allPathsBases = basisFunctionStrategy_->generate(paths.col(step));
-
+                    //const Eigen::MatrixXd allPathsBases = basisFunctionStrategy_->generate(paths.col(step));
+                    int idxITM = 0;
                     // Step 5: Determine whether to exercise or continue
                     for (int i = 0; i < N; ++i) {
-                        const double exerciseValue = option_->payoff(paths(i, step));
-                        const double continuationValue = allPathsBases.row(i) * coeffs;
-
-                        if (exerciseValue > continuationValue) {
-                            americanPrices(i) = exerciseValue;
+                        if (isInTheMoney[i]) {
+                            const double exerciseValue = option_->payoff(paths(i, step));
+                            const double continuationValue = inTheMoneyBases.row(idxITM) * coeffs;
+                            idxITM++;
+                            if (exerciseValue > continuationValue) {
+                                americanPrices(i) = exerciseValue;
+                            } else {
+                                americanPrices(i) *= exp(-marketData_->getR() * dt);
+                            }
                         } else {
                             americanPrices(i) *= exp(-marketData_->getR() * dt);
                         }

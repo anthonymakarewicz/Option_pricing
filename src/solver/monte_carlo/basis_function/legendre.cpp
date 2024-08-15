@@ -12,8 +12,8 @@ namespace OptionPricer {
             basis.col(1) = x; // P1(x) = x
 
         for (int n = 2; n < numberBasis_; ++n) {
-            basis.col(n) = ((2 * n - 1) * x.array() * basis.col(n-1).array()
-                            - (n - 1) * basis.col(n-2).array()) / n;
+            basis.col(n) = ((2*(n-1) + 1) * x.array() * basis.col(n-1).array()
+                - (n-1)*basis.col(n-2).array()) / n;
         }
 
         return basis;
