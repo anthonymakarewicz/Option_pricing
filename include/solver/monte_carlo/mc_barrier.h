@@ -11,7 +11,7 @@ namespace OptionPricer {
         BarrierMCPricer(std::shared_ptr<BarrierOption> option,
                         std::shared_ptr<IMarketData> marketData,
                         std::shared_ptr<StockModel> stockModel,
-                        std::shared_ptr<NumberGenerarator> generator,
+                        std::shared_ptr<NumberGenerator> generator,
                         const unsigned int& steps);
 
         [[nodiscard]] double calculate_price(const unsigned long& N) const override;
@@ -28,7 +28,7 @@ namespace OptionPricer {
         KnockInBarrierMCPricer(std::shared_ptr<KnockInBarrierOption> option,
                                std::shared_ptr<IMarketData> marketData,
                                std::shared_ptr<StockModel> stockModel,
-                               std::shared_ptr<NumberGenerarator> generator,
+                               std::shared_ptr<NumberGenerator> generator,
                                const unsigned int& steps);
 
     protected:
@@ -41,7 +41,7 @@ namespace OptionPricer {
         KnockOutBarrierMCPricer(std::shared_ptr<KnockOutBarrierOption> option,
                                 std::shared_ptr<IMarketData> marketData,
                                 std::shared_ptr<StockModel> stockModel,
-                                std::shared_ptr<NumberGenerarator> generator,
+                                std::shared_ptr<NumberGenerator> generator,
                                 const unsigned int& steps);
 
     protected:

@@ -11,7 +11,7 @@ namespace OptionPricer {
         SinglePathMCPricer(std::shared_ptr<SinglePathOption> option,
                            std::shared_ptr<IMarketData> marketData,
                            std::shared_ptr<StockModel> stockModel,
-                           std::shared_ptr<NumberGenerarator> generator);
+                           std::shared_ptr<NumberGenerator> generator);
 
         ~SinglePathMCPricer() override = default;
 

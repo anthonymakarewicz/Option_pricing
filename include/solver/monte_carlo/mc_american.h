@@ -13,7 +13,7 @@ namespace OptionPricer {
         AmericanMCPricer(std::shared_ptr<AmericanOption> option,
                          std::shared_ptr<IMarketData> marketData,
                          std::shared_ptr<StockModel> stockModel,
-                         std::shared_ptr<NumberGenerarator> generator,
+                         std::shared_ptr<NumberGenerator> generator,
                          std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy,
                          std::shared_ptr<RegressionStrategy> regressionStrategy,
                          const unsigned int& steps);

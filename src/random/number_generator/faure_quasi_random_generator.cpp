@@ -3,14 +3,14 @@
 namespace OptionPricer {
 
     FaureGenerator::FaureGenerator(std::shared_ptr<Distribution> dist, const unsigned int &dim)
-    : QRNGenerator(std::move(dist), dim), faureQrng_(dim_) {
+    : QuasiRandomNumberGenerator(std::move(dist), dim), faureQrng_(dim_) {
         faureQrng_.seed(seed_);
     }
 
     FaureGenerator::FaureGenerator(std::shared_ptr<Distribution> dist,
                                    const unsigned int &seed,
                                    const unsigned int &dim)
-    : QRNGenerator(std::move(dist), seed, dim), faureQrng_(dim_) {
+    : QuasiRandomNumberGenerator(std::move(dist), seed, dim), faureQrng_(dim_) {
         faureQrng_.seed(seed_);
     }
 

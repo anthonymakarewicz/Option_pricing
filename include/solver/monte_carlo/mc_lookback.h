@@ -11,7 +11,7 @@ namespace OptionPricer {
             LookbackMCPricer(std::shared_ptr<LookbackOption> option,
                              std::shared_ptr<IMarketData> marketData,
                              std::shared_ptr<StockModel> stockModel,
-                             std::shared_ptr<NumberGenerarator> generator,
+                             std::shared_ptr<NumberGenerator> generator,
                              const unsigned int& steps);
 
             [[nodiscard]] double calculate_price(const unsigned long& N) const override;
@@ -26,7 +26,7 @@ namespace OptionPricer {
         FloatingStrikeLookbackMCPricer(std::shared_ptr<FloatingStrikeLookbackOption> option,
                                        std::shared_ptr<IMarketData> marketData,
                                        std::shared_ptr<StockModel> stockModel,
-                                       std::shared_ptr<NumberGenerarator> generator,
+                                       std::shared_ptr<NumberGenerator> generator,
                                        const unsigned int& steps);
 
     private:
@@ -38,7 +38,7 @@ namespace OptionPricer {
         FixedStrikeLookbackMCPricer(std::shared_ptr<FixedStrikeLookbackOption> option,
                                     std::shared_ptr<IMarketData> marketData,
                                     std::shared_ptr<StockModel> stockModel,
-                                    std::shared_ptr<NumberGenerarator> generator,
+                                    std::shared_ptr<NumberGenerator> generator,
                                     const unsigned int& steps);
 
     private:

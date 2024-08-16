@@ -6,12 +6,12 @@ namespace OptionPricer {
     SinglePathMCPricer::SinglePathMCPricer(std::shared_ptr<SinglePathOption> option,
                                            std::shared_ptr<IMarketData> marketData,
                                            std::shared_ptr<StockModel> stockModel,
-                                           std::shared_ptr<NumberGenerarator> generator)
+                                           std::shared_ptr<NumberGenerator> generator)
         : MCPricer(std::move(marketData), std::move(stockModel), std::move(generator)),
           option_(std::move(option)) {
-        if (const auto generatorQR = std::dynamic_pointer_cast<QRNGenerator>(generator_)) {
+        if (const auto generatorQR = std::dynamic_pointer_cast<QuasiRandomNumberGenerator>(generator_)) {
             if (generatorQR->getDim() != 1) {
-                throw std::invalid_argument("For SinglePath options, the dim parameter of QRNGenerator must be 1");
+                throw std::invalid_argument("For SinglePath options, the dim parameter of QuasiRandomNumberGenerator must be 1");
             }
         }
     }

@@ -11,7 +11,7 @@ namespace OptionPricer {
         AsianMCPricer(std::shared_ptr<AsianOption> option,
                       std::shared_ptr<IMarketData> marketData,
                       std::shared_ptr<StockModel> stockModel,
-                      std::shared_ptr<NumberGenerarator> generator,
+                      std::shared_ptr<NumberGenerator> generator,
                       const unsigned int& steps);
 
         [[nodiscard]] double calculate_price(const unsigned long& N) const override;
@@ -29,7 +29,7 @@ namespace OptionPricer {
         ArithmeticAsianMCPricer(std::shared_ptr<ArithmeticAsianOption> option,
                                 std::shared_ptr<IMarketData> marketData,
                                 std::shared_ptr<StockModel> stockModel,
-                                std::shared_ptr<NumberGenerarator> generator,
+                                std::shared_ptr<NumberGenerator> generator,
                                 const unsigned int& steps);
 
     private:
@@ -44,7 +44,7 @@ namespace OptionPricer {
         GeometricAsianMCPricer(std::shared_ptr<GeometricAsianOption> option,
                                std::shared_ptr<IMarketData> marketData,
                                std::shared_ptr<StockModel> stockModel,
-                               std::shared_ptr<NumberGenerarator> generator,
+                               std::shared_ptr<NumberGenerator> generator,
                                const unsigned int& steps);
 
     private:

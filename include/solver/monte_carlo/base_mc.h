@@ -11,7 +11,7 @@ namespace OptionPricer {
     public:
         MCPricer(std::shared_ptr<IMarketData> marketData,
                  std::shared_ptr<StockModel> stockModel,
-                 std::shared_ptr<NumberGenerarator> generator);
+                 std::shared_ptr<NumberGenerator> generator);
 
         virtual ~MCPricer();
 
@@ -20,7 +20,7 @@ namespace OptionPricer {
     protected:
         std::shared_ptr<IMarketData> marketData_;
         std::shared_ptr<StockModel> stockModel_;
-        std::shared_ptr<NumberGenerarator> generator_;
+        std::shared_ptr<NumberGenerator> generator_;
     };
 
 }

@@ -1,7 +1,5 @@
 #include "solver/monte_carlo/mc_american.h"
-
 #include <random/number_generator/random_generator.h>
-
 #include "Eigen/Dense"
 
 namespace OptionPricer {
@@ -9,7 +7,7 @@ namespace OptionPricer {
     AmericanMCPricer::AmericanMCPricer(std::shared_ptr<AmericanOption> option,
                                        std::shared_ptr<IMarketData> marketData,
                                        std::shared_ptr<StockModel> stockModel,
-                                       std::shared_ptr<NumberGenerarator> generator,
+                                       std::shared_ptr<NumberGenerator> generator,
                                        std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy,
                                        std::shared_ptr<RegressionStrategy> regressionStrategy,
                                        const unsigned int& steps)
@@ -22,7 +20,7 @@ namespace OptionPricer {
         const double dt = option_->getT() / static_cast<double>(steps_);
         const double discountFactor = exp(-marketData_->getR() * dt);
 
-        if (std::dynamic_pointer_cast<RNGenerator>(generator_)) {
+        if (std::dynamic_pointer_cast<RandomNumberGenerator>(generator_)) {
             return brownianBridgePrice(N, dt, discountFactor);
         }
 
@@ -30,8 +28,8 @@ namespace OptionPricer {
     }
 
     double AmericanMCPricer::standardPrice(const unsigned long &N,
-                                       const double &dt,
-                                       const double &discountFactor) const {
+                                           const double &dt,
+                                           const double &discountFactor) const {
        /* This algorithm uses the Least Square Monte Carlo (LSMC) method as described in
         * Longstaff and Schwartz (2001) for pricing American options.
         */
@@ -62,7 +60,7 @@ namespace OptionPricer {
 
                 // Collect In-The-Money paths
                 if (exerciseValue > 0.0) {
-                    inTheMoneyPaths.push_back(paths(i, j)); //
+                    inTheMoneyPaths.push_back(paths(i, j));
                     discountedCashFlows.push_back(americanPrices(i) * discountFactor);
                     isInTheMoney.push_back(true);
                 } else {

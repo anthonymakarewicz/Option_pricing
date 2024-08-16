@@ -6,7 +6,7 @@ namespace OptionPricer {
     LookbackMCPricer::LookbackMCPricer(std::shared_ptr<LookbackOption> option,
                                        std::shared_ptr<IMarketData> marketData,
                                        std::shared_ptr<StockModel> stockModel,
-                                       std::shared_ptr<NumberGenerarator> generator,
+                                       std::shared_ptr<NumberGenerator> generator,
                                        const unsigned int& steps)
     : PathDependentMCPricer(std::move(marketData),std::move(stockModel),
         std::move(generator), steps), option_(std::move(option)) {}
@@ -40,7 +40,7 @@ namespace OptionPricer {
         std::shared_ptr<FloatingStrikeLookbackOption> option,
         std::shared_ptr<IMarketData> marketData,
         std::shared_ptr<StockModel> stockModel,
-        std::shared_ptr<NumberGenerarator> generator,
+        std::shared_ptr<NumberGenerator> generator,
         const unsigned int &steps)
     : LookbackMCPricer(std::move(option),std::move(marketData),
         std::move(stockModel), std::move(generator), steps) {}
@@ -58,7 +58,7 @@ namespace OptionPricer {
         std::shared_ptr<FixedStrikeLookbackOption> option,
         std::shared_ptr<IMarketData> marketData,
         std::shared_ptr<StockModel> stockModel,
-        std::shared_ptr<NumberGenerarator> generator,
+        std::shared_ptr<NumberGenerator> generator,
         const unsigned int &steps)
     : LookbackMCPricer(std::move(option),std::move(marketData),
         std::move(stockModel), std::move(generator), steps) {}

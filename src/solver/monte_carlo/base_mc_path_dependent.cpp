@@ -6,15 +6,15 @@ namespace OptionPricer {
 
     PathDependentMCPricer::PathDependentMCPricer(std::shared_ptr<IMarketData> marketData,
                                                  std::shared_ptr<StockModel> stockModel,
-                                                 std::shared_ptr<NumberGenerarator> generator,
+                                                 std::shared_ptr<NumberGenerator> generator,
                                                  const unsigned int &steps)
     : MCPricer(std::move(marketData), std::move(stockModel), std::move(generator)),
               steps_(steps) {
-        if (const auto generatorQR = std::dynamic_pointer_cast<QRNGenerator>(generator_)) {
+        if (const auto generatorQR = std::dynamic_pointer_cast<QuasiRandomNumberGenerator>(generator_)) {
             if (generatorQR->getDim() != steps_) {
                 steps_ = static_cast<int>(generatorQR->getDim());
                 std::cerr << "For PathDependent options, the steps parameter ";
-                std::cerr << "must be equal to the dim of derived QRNGenerator." << "\n";
+                std::cerr << "must be equal to the dim of derived QuasiRandomNumberGenerator." << "\n";
                 std::cerr << "steps is thus set to " << generatorQR->getDim() << "\n";
             }
         }

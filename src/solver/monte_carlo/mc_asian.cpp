@@ -6,7 +6,7 @@ namespace OptionPricer {
     AsianMCPricer::AsianMCPricer(std::shared_ptr<AsianOption> option,
                                  std::shared_ptr<IMarketData> marketData,
                                  std::shared_ptr<StockModel> stockModel,
-                                 std::shared_ptr<NumberGenerarator> generator,
+                                 std::shared_ptr<NumberGenerator> generator,
                                  const unsigned int& steps)
     : PathDependentMCPricer(std::move(marketData),
     std::move(stockModel), std::move(generator), steps), option_(std::move(option)) {}
@@ -36,7 +36,7 @@ namespace OptionPricer {
     ArithmeticAsianMCPricer::ArithmeticAsianMCPricer(std::shared_ptr<ArithmeticAsianOption> option,
                                                      std::shared_ptr<IMarketData> marketData,
                                                      std::shared_ptr<StockModel> stockModel,
-                                                     std::shared_ptr<NumberGenerarator> generator,
+                                                     std::shared_ptr<NumberGenerator> generator,
                                                      const unsigned int &steps)
     : AsianMCPricer(std::move(option),std::move(marketData),
         std::move(stockModel), std::move(generator), steps) {}
@@ -53,7 +53,7 @@ namespace OptionPricer {
     GeometricAsianMCPricer::GeometricAsianMCPricer(std::shared_ptr<GeometricAsianOption> option,
                                                    std::shared_ptr<IMarketData> marketData,
                                                    std::shared_ptr<StockModel> stockModel,
-                                                   std::shared_ptr<NumberGenerarator> generator,
+                                                   std::shared_ptr<NumberGenerator> generator,
                                                    const unsigned int &steps)
     : AsianMCPricer(std::move(option),std::move(marketData),
         std::move(stockModel), std::move(generator), steps) {}
