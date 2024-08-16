@@ -6,12 +6,12 @@ namespace OptionPricer {
     BarrierMCPricer::BarrierMCPricer(std::shared_ptr<BarrierOption> option,
                                      std::shared_ptr<IMarketData> marketData,
                                      std::shared_ptr<StockModel> stockModel,
-                                     std::shared_ptr<NumberGenerarator> generator,
+                                     std::shared_ptr<NumberGenerator> generator,
                                      const unsigned int& steps)
     : PathDependentMCPricer(std::move(marketData),std::move(stockModel),
         std::move(generator), steps), option_(std::move(option)) {}
 
-    double BarrierMCPricer::calculate_price(const unsigned long &N) const {
+    double BarrierMCPricer::calculatePrice(const unsigned long &N) const {
         double sumPayoff = 0.0;
         const double dt = option_->getT() / static_cast<double>(steps_);
 
@@ -38,7 +38,7 @@ namespace OptionPricer {
     KnockInBarrierMCPricer::KnockInBarrierMCPricer(std::shared_ptr<KnockInBarrierOption> option,
                                                    std::shared_ptr<IMarketData> marketData,
                                                    std::shared_ptr<StockModel> stockModel,
-                                                   std::shared_ptr<NumberGenerarator> generator,
+                                                   std::shared_ptr<NumberGenerator> generator,
                                                    const unsigned int& steps)
     : BarrierMCPricer(std::move(option), std::move(marketData),
     std::move(stockModel), std::move(generator), steps) {}
@@ -58,7 +58,7 @@ namespace OptionPricer {
     KnockOutBarrierMCPricer::KnockOutBarrierMCPricer(std::shared_ptr<KnockOutBarrierOption> option,
                                                      std::shared_ptr<IMarketData> marketData,
                                                      std::shared_ptr<StockModel> stockModel,
-                                                     std::shared_ptr<NumberGenerarator> generator,
+                                                     std::shared_ptr<NumberGenerator> generator,
                                                      const unsigned int& steps)
     : BarrierMCPricer(std::move(option), std::move(marketData),
         std::move(stockModel), std::move(generator), steps) {}

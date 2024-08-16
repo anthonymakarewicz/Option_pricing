@@ -6,7 +6,7 @@
 
 namespace OptionPricer {
 
-    class FaureGenerator final: public QRNGenerator {
+    class FaureGenerator final: public QuasiRandomNumberGenerator {
     public:
         explicit FaureGenerator(std::shared_ptr<Distribution> dist, const unsigned int& dim);
         FaureGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed, const unsigned int& dim);

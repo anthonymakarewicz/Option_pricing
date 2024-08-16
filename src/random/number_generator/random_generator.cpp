@@ -2,13 +2,13 @@
 
 namespace OptionPricer {
 
-    RNGenerator::RNGenerator(std::shared_ptr<Distribution> dist)
-    : NumberGenerarator(std::move(dist)), generator_(seed_) {}
+    RandomNumberGenerator::RandomNumberGenerator(std::shared_ptr<Distribution> dist)
+    : NumberGenerator(std::move(dist)), generator_(seed_) {}
 
-    RNGenerator::RNGenerator(std::shared_ptr<Distribution> dist, const unsigned int &seed)
-    : NumberGenerarator(std::move(dist), seed), generator_(seed_) {}
+    RandomNumberGenerator::RandomNumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int &seed)
+    : NumberGenerator(std::move(dist), seed), generator_(seed_) {}
 
-    double RNGenerator::generate(const int &step) {
+    double RandomNumberGenerator::generate(const int &step) {
         return (*dist_)(generator_);
     }
 
