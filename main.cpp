@@ -20,6 +20,8 @@
 #include "random/distribution/standard_normal_distribution.h"
 #include "random/number_generator/sobol_quasi_random_generator.h"
 #include <Eigen/Dense>
+#include <gtest/internal/gtest-param-util.h>
+#include <random/number_generator/random_generator.h>
 #include <solver/monte_carlo/basis_function/chebyshev.h>
 #include <solver/monte_carlo/basis_function/laguerre.h>
 #include <solver/monte_carlo/regression/lasso.h>
@@ -32,7 +34,7 @@ int main() {
     std::string ticker = "AAPL";
     double T = 1.0;
     double K = 100.0;
-    double S = 90.0;
+    double S = 100.0;
     double sigma = 0.15;
     double r = 0.03;
     int dim = 150;
@@ -47,7 +49,7 @@ int main() {
     params.setParameter("K", K);
 
     auto normal = std::make_shared<StandardNormalDistribution>();
-    auto generator = std::make_shared<SobolGenerator>(normal, dim);
+    auto generator = std::make_shared<RNGenerator>(normal);
     auto brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
     auto laguerre = std::make_shared<LaguerreBasisFunction>(4);
     auto regression = std::make_shared<LeastSquaresRegression>();

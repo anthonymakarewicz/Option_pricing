@@ -19,6 +19,8 @@ namespace OptionPricer {
                          const unsigned int& steps);
 
         double calculate_price(const unsigned long& N) const override;
+        double standardPrice(const unsigned long& N, const double &dt, const double &discountFactor) const ;
+        double brownianBridgePrice(const unsigned long& N, const double &dt, const double &discountFactor) const ;
 
     private:
         std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy_;
@@ -27,6 +29,5 @@ namespace OptionPricer {
     };
 
 }
-
 
 #endif //MC_AMERICAN_H
