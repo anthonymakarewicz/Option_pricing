@@ -16,7 +16,7 @@ namespace OptionPricer {
         }
     }
 
-    double SinglePathMCPricer::calculate_price(const unsigned long& N) const {
+    double SinglePathMCPricer::calculatePrice(const unsigned long& N) const {
         double sumPayoff = 0.0;
 
         for (int i = 0; i < N; ++i) {

@@ -15,7 +15,7 @@ namespace OptionPricer {
 
         virtual ~MCPricer();
 
-        [[nodiscard]] virtual double calculate_price(const unsigned long& N) const = 0;
+        [[nodiscard]] virtual double calculatePrice(const unsigned long& N) const = 0;
 
     protected:
         std::shared_ptr<IMarketData> marketData_;

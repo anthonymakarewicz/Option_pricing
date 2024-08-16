@@ -18,7 +18,7 @@ namespace OptionPricer {
                          std::shared_ptr<RegressionStrategy> regressionStrategy,
                          const unsigned int& steps);
 
-        double calculate_price(const unsigned long& N) const override;
+        double calculatePrice(const unsigned long& N) const override;
         double standardPrice(const unsigned long& N, const double &dt, const double &discountFactor) const ;
         double brownianBridgePrice(const unsigned long& N, const double &dt, const double &discountFactor) const ;
 

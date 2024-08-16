@@ -14,7 +14,7 @@ namespace OptionPricer {
                         std::shared_ptr<NumberGenerator> generator,
                         const unsigned int& steps);
 
-        [[nodiscard]] double calculate_price(const unsigned long& N) const override;
+        [[nodiscard]] double calculatePrice(const unsigned long& N) const override;
 
     protected:
         virtual bool checkHasCrossed(const double& S_t, bool& hasCrossed) const = 0;

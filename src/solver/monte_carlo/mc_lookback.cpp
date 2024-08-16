@@ -11,7 +11,7 @@ namespace OptionPricer {
     : PathDependentMCPricer(std::move(marketData),std::move(stockModel),
         std::move(generator), steps), option_(std::move(option)) {}
 
-    double LookbackMCPricer::calculate_price(const unsigned long &N) const {
+    double LookbackMCPricer::calculatePrice(const unsigned long &N) const {
         double sumPayoff = 0.0;
         const double dt = option_->getT() / static_cast<double>(steps_);
 

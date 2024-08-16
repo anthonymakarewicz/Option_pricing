@@ -15,7 +15,7 @@ namespace OptionPricer {
 
         ~SinglePathMCPricer() override = default;
 
-        [[nodiscard]] double calculate_price(const unsigned long& N) const override;
+        [[nodiscard]] double calculatePrice(const unsigned long& N) const override;
 
     private:
         std::shared_ptr<SinglePathOption> option_;

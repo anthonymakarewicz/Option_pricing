@@ -16,7 +16,7 @@ namespace OptionPricer {
     basisFunctionStrategy_(std::move(basisFunctionStrategy)),
     regressionStrategy_(std::move(regressionStrategy)) {}
 
-    double AmericanMCPricer::calculate_price(const unsigned long &N) const {
+    double AmericanMCPricer::calculatePrice(const unsigned long &N) const {
         const double dt = option_->getT() / static_cast<double>(steps_);
         const double discountFactor = exp(-marketData_->getR() * dt);
 
