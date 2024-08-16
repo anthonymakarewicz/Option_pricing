@@ -3,7 +3,7 @@
 ## Overview
 
 The Option Pricer project is a C++ library designed to model and price various financial options. It leverages modern C++ practices such as smart pointers, factory methods, and the observer pattern to manage market data and calculate option prices efficiently. The library supports a wide range of option types including vanilla, exotic, and path-dependent options.
-
+dev
 ## Features
 
 - **Abstract Base Class**: `Option` serves as the base class for all options, ensuring a unified interface for option pricing.
