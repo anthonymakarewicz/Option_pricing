@@ -1,91 +1,81 @@
-(base) anthony@MacBook-Air-de-anthony-2 include % tree
-.
-├── market_data
-│   ├── interface_market_data.h
-│   ├── market_data.h
-│   ├── market_data_observer.h
-│   └── stock_data.h
-├── option
-│   ├── base_option.h
-│   ├── factory_option.h
-│   ├── interface_option.h
-│   ├── parameter_object.h
-│   ├── path_dependent
-│   │   ├── american_option.h
-│   │   ├── asian
-│   │   │   ├── arithmetic_asian_option.h
-│   │   │   ├── base_asian_option.h
-│   │   │   ├── factory_arithmetic_asian_option.h
-│   │   │   ├── factory_geometric_asian_option.h
-│   │   │   └── geometric_asian_option.h
-│   │   ├── barrier
-│   │   │   ├── base_barrier_option.h
-│   │   │   ├── base_single_barrier_option.h
-│   │   │   ├── double_barrier.h
-│   │   │   ├── down_single_barrier_option.h
-│   │   │   ├── factory_up_single_barrier_option.h
-│   │   │   ├── knock_behavior.h
-│   │   │   └── up_single_barrier_option.h
-│   │   ├── base_path_dependent_option.h
-│   │   └── factory_american_option.h
-│   └── single_path
-│       ├── base_single_path_option.h
-│       ├── digital_option.h
-│       ├── double_digital_option.h
-│       ├── european_option.h
-│       ├── factory_digital_option.h
-│       ├── factory_double_digital_option.h
-│       └── factory_european_option.h
-├── payoff
-│   ├── base_payoff.h
-│   ├── double_strikes
-│   │   ├── base_payoff_double_strikes.h
-│   │   ├── factory_payoff_double_digital.h
-│   │   └── payoff_double_digital.h
-│   └── single_strike
-│       ├── barrier
-│       │   └── knock_behavior.h
-│       ├── base_payoff_digital.h
-│       ├── base_payoff_single_strike.h
-│       ├── base_payoff_vanilla.h
-│       ├── factory_payoff_digital.h
-│       ├── factory_payoff_vanilla.h
-│       ├── payoff_digital_call.h
-│       ├── payoff_digital_put.h
-│       ├── payoff_vanilla_call.h
-│       └── payoff_vanilla_put.h
-└── solver
-
-(base) anthony@MacBook-Air-de-anthony-2 tests % tree
-.
-├── CMakeLists.txt
-├── README.md
-├── integration
-│   ├── CMakeLists.txt
-│   └── test_integration_option.cpp
-├── test_main.cpp
-└── unit
-    ├── CMakeLists.txt
-    ├── market_data
-    │   ├── test_market_data.cpp
-    │   └── test_stock_data.cpp
-    ├── option
-    │   ├── test_base_option.cpp
-    │   ├── test_european_option.cpp
-    │   └── test_factory_european_option.cpp
-    ├── payoff
-    │   ├── double_strikes
-    │   │   └── test_payoff_double_digital.cpp
-    │   └── single_strike
-    │       ├── test_payoff_digital.cpp
-    │       ├── test_payoff_digital_put.cpp
-    │       ├── test_payoff_vanilla.cpp
-    │       ├── test_payoff_vanilla_put.cpp
-    │       └── test_support
-    │           ├── common_payoff_single_strike_tests.h
-    │           └── fixture_payoff_single_strike.h
-    └── test_support
-        └── mock_classes.h
-
-
-
+├── src
+│   ├── market_data
+│   │   ├── interface_market_data.cpp
+│   │   ├── market_data.cpp
+│   │   ├── market_data_observer.cpp
+│   │   └── stock_data.cpp
+│   ├── model
+│   │   ├── base_model.cpp
+│   │   └── gbm_model.cpp
+│   ├── option
+│   │   ├── base_option.cpp
+│   │   ├── interface_option.cpp
+│   │   ├── parameter_object.cpp
+│   │   ├── path_dependent
+│   │   │   ├── american_option.cpp
+│   │   │   ├── asian_option.cpp
+│   │   │   ├── barrier_option.cpp
+│   │   │   ├── base_path_dependent_option.cpp
+│   │   │   ├── factory_american_option.cpp
+│   │   │   ├── factory_asian_option.cpp
+│   │   │   ├── factory_barrier_option.cpp
+│   │   │   ├── factory_lookback_option.cpp
+│   │   │   └── lookback_option.cpp
+│   │   └── single_path
+│   │       ├── base_single_path_option.cpp
+│   │       ├── digital_option.cpp
+│   │       ├── double_digital_option.cpp
+│   │       ├── european_option.cpp
+│   │       ├── factory_digital_option.cpp
+│   │       ├── factory_double_digital_option.cpp
+│   │       └── factory_european_option.cpp
+│   ├── payoff
+│   │   ├── base_payoff.cpp
+│   │   ├── double_strikes
+│   │   │   ├── base_payoff_double_strikes.cpp
+│   │   │   └── payoff_double_digital.cpp
+│   │   ├── payoff_floating_strike_lookback.cpp
+│   │   └── single_strike
+│   │       ├── base_payoff_single_strike.cpp
+│   │       ├── payoff_digital.cpp
+│   │       └── payoff_vanilla.cpp
+│   ├── random
+│   │   ├── distribution
+│   │   │   ├── base_distribution.cpp
+│   │   │   └── standard_normal_distribution.cpp
+│   │   └── number_generator
+│   │       ├── base_generator.cpp
+│   │       ├── base_quasi_random_generator.cpp
+│   │       ├── faure_quasi_random_generator.cpp
+│   │       ├── random_generator.cpp
+│   │       └── sobol_quasi_random_generator.cpp
+│   └── solver
+│       ├── base_solver.cpp
+│       └── monte_carlo
+│           ├── base_mc.cpp
+│           ├── base_mc_path_dependent.cpp
+│           ├── basis_function
+│           │   ├── base_basis_function_strategy.cpp
+│           │   ├── chebyshev.cpp
+│           │   ├── laguerre.cpp
+│           │   ├── legendre.cpp
+│           │   └── monomial.cpp
+│           ├── builder
+│           │   ├── base_mc_builder.cpp
+│           │   ├── base_mc_builder_path_dependent.cpp
+│           │   ├── mc_builder_american.cpp
+│           │   ├── mc_builder_asian.cpp
+│           │   ├── mc_builder_barrier.cpp
+│           │   ├── mc_builder_single_path.cpp
+│           │   └── mc_lookback_builder.cpp
+│           ├── mc_american.cpp
+│           ├── mc_asian.cpp
+│           ├── mc_barrier.cpp
+│           ├── mc_lookback.cpp
+│           ├── mc_single_path.cpp
+│           ├── mc_solver.cpp
+│           └── regression
+│               ├── base_regression_strategy.cpp
+│               ├── lasso.cpp
+│               ├── least_squares.cpp
+│               └── ridge.cpp
