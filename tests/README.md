@@ -19,6 +19,7 @@ tests
 └── integration
     ├── CMakeLists.txt
     └── test_integration_option.cpp
+
 ```
 
 ## Dependencies
@@ -39,61 +40,34 @@ through [vcpkg](https://github.com/microsoft/vcpkg).
    cd path/to/your/project
    ```
 2. **Create a build directory**:
-   ```sh
+   ```
    mkdir build && cd build
    ```
 3. **Configure the project with CMake**:
-   ```sh
+   ```
    cmake ..
    ```
 4. **Build the project**:
-   ```sh
-   cmake --build . # more generic than make and works with any generator
    ```
-   
-### Running tests with Ctest
-For automated testing or integration,
-you can run the all the tests executable using CTest:
-```sh
+   make
+   ```
+### Running tests
+After building the project, you can run the tests using CTest:
+```
 ctest --output-on-failure
 ```
-
 Alternatively, you can run specific tests:
+- **Run all Tests**:
+```
+ctest -R AllTests --output-on-failure
+```
 - **Run only Unit Tests**:
-```sh
+```
 ctest -R UnitTests --output-on-failure
 ```
 - **Run only Integration Tests**:
-```sh
+```
 ctest -R IntegrationTests --output-on-failure
-```
-
-#### Running the Custom Tests Target
-You can also run all the tests at once by using the custom target **Tests**.
-For that purpose, you can build and run the Tests target as follows:
-1. **Build the custom Tests target**:
-```sh
-cmake --build . --target Tests
-```
-2. **Run the custom Tests target**:
-```sh
-ctest -R Tests --output-on-failure
-```
-
-### Running tests with GTest
-For detailed output, running the test using GTest can be a good approach for local
-development and debugging.
-1. **Go to the build directory**:
-```sh
-cd build
-```
-2. **Run the unit tests executable**:
-```sh
-./tests/unit/Unit_tests
-```
-3. **Run the integration tests executable**:
-```sh
-./tests/integration/Integration_tests
 ```
 
 ## Adding New Tests
@@ -101,9 +75,7 @@ cd build
 ### Create a new test file:
 Add your test file in the appropriate directory.
 For example, to add unit tests for a new module, place the file in the `unit` directory.
-For integration tests, place the file in the `integration` directory.<br>
-Note that you don't need to do anything about the custom **Tests** target as it 
-runs the target executable defined for Unittests and IntegrationTests.
+For integration tests, place the file in the `integration` directory
 
 ### Include the test in CMake:
 Edit the `CMakeLists.txt` file to include your new test file in the `add_executable` and `target_link_libraries` sections.
