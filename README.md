@@ -1,4 +1,3 @@
-
 # Overview
 
 The Option Pricer project is a C++ library designed to model and price various financial options.
@@ -175,6 +174,8 @@ std::shared_ptr<AmericanOption> americanPut = factory.createPutOption(params);
 
 ### Explanation:
 - **Market Data initialization**: The `MarketData` singleton is used to store and manage the current stock price, volatility, and risk-free interest rate for the asset. This data is essential for pricing the option.
+
+
 - **Option Creation**: The `AmericanOptionFactory` is used to create an American put option based on the specified parameters (ticker, maturity, and strike price). This factory pattern ensures the option is created and managed correctly. 
 
 ### 2. Setting Up the Monte Carlo Components
@@ -244,9 +245,6 @@ mcSolver.setPricer(std::move(americanPricer3));
 
 std::cout << "Config 3, P = " << mcSolver.solve() << "\n";
 ```
-
-
-
 
 # Testing
 
