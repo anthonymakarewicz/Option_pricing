@@ -49,7 +49,7 @@ int main() {
     params.setParameter("K", K);
 
     auto normal = std::make_shared<StandardNormalDistribution>();
-    auto generator = std::make_shared<RandomNumberGenerator>(normal);
+    auto generator = std::make_shared<SobolGenerator>(normal, dim);
     auto brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
     auto laguerre = std::make_shared<LaguerreBasisFunction>(4);
     auto regression = std::make_shared<LeastSquaresRegression>();
