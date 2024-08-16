@@ -7,7 +7,7 @@ namespace OptionPricer {
 
     MCBuilder::MCBuilder()
     : marketData_(MarketData::getInstance()), // Default to MarketData Singleton
-      generator_(std::make_shared<RNGenerator>(std::make_shared<StandardNormalDistribution>())) {}
+      generator_(std::make_shared<RandomNumberGenerator>(std::make_shared<StandardNormalDistribution>())) {}
 
     MCBuilder::~MCBuilder() = default;
 
@@ -21,7 +21,7 @@ namespace OptionPricer {
         return *this;
     }
 
-    MCBuilder & MCBuilder::setNumberGenerator(std::shared_ptr<NumberGenerarator> generator) {
+    MCBuilder & MCBuilder::setNumberGenerator(std::shared_ptr<NumberGenerator> generator) {
         generator_ = std::move(generator);
         return *this;
     }

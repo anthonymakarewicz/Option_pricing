@@ -13,12 +13,14 @@ namespace OptionPricer {
         AmericanMCPricer(std::shared_ptr<AmericanOption> option,
                          std::shared_ptr<IMarketData> marketData,
                          std::shared_ptr<StockModel> stockModel,
-                         std::shared_ptr<NumberGenerarator> generator,
+                         std::shared_ptr<NumberGenerator> generator,
                          std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy,
                          std::shared_ptr<RegressionStrategy> regressionStrategy,
                          const unsigned int& steps);
 
-        double calculate_price(const unsigned long& N) const override;
+        double calculatePrice(const unsigned long& N) const override;
+        double standardPrice(const unsigned long& N, const double &dt, const double &discountFactor) const ;
+        double brownianBridgePrice(const unsigned long& N, const double &dt, const double &discountFactor) const ;
 
     private:
         std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy_;
@@ -27,6 +29,5 @@ namespace OptionPricer {
     };
 
 }
-
 
 #endif //MC_AMERICAN_H

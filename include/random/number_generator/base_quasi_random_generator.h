@@ -5,12 +5,12 @@
 
 namespace OptionPricer {
 
-    class QRNGenerator : public NumberGenerarator {
+    class QuasiRandomNumberGenerator : public NumberGenerator {
     public:
-        explicit QRNGenerator(std::shared_ptr<Distribution> dist, const unsigned int& dim);
-        QRNGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed, const unsigned int& dim);
+        explicit QuasiRandomNumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& dim);
+        QuasiRandomNumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed, const unsigned int& dim);
 
-        ~QRNGenerator() override;
+        ~QuasiRandomNumberGenerator() override;
 
         unsigned int getDim() const;
 

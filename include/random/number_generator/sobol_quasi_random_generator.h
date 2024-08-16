@@ -6,7 +6,7 @@
 
 namespace OptionPricer {
 
-    class SobolGenerator final: public QRNGenerator {
+    class SobolGenerator final: public QuasiRandomNumberGenerator {
     public:
         explicit SobolGenerator(std::shared_ptr<Distribution> dist, const unsigned int& dim);
         SobolGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed, const unsigned int& dim);

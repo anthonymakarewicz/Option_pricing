@@ -5,12 +5,12 @@
 
 namespace OptionPricer {
 
-    class NumberGenerarator {
+    class NumberGenerator {
     public:
-        explicit NumberGenerarator(std::shared_ptr<Distribution> dist);
-        explicit NumberGenerarator(std::shared_ptr<Distribution> dist, const unsigned int& seed);
+        explicit NumberGenerator(std::shared_ptr<Distribution> dist);
+        explicit NumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed);
 
-        virtual ~NumberGenerarator();
+        virtual ~NumberGenerator();
 
         virtual double generate(const int& step) = 0;
 

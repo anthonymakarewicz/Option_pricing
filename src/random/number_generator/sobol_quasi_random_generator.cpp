@@ -3,14 +3,14 @@
 namespace OptionPricer {
 
     SobolGenerator::SobolGenerator(std::shared_ptr<Distribution> dist, const unsigned int &dim)
-    : QRNGenerator(std::move(dist), dim), sobolQrng_(dim_) {
+    : QuasiRandomNumberGenerator(std::move(dist), dim), sobolQrng_(dim_) {
         sobolQrng_.seed(seed_);
     }
 
     SobolGenerator::SobolGenerator(std::shared_ptr<Distribution> dist,
                                    const unsigned int &seed,
                                    const unsigned int &dim)
-    : QRNGenerator(std::move(dist),seed, dim), sobolQrng_(dim_) {
+    : QuasiRandomNumberGenerator(std::move(dist),seed, dim), sobolQrng_(dim_) {
         sobolQrng_.seed(seed_);
     }
 

@@ -5,10 +5,10 @@
 
 namespace OptionPricer {
 
-    class RNGenerator final: public NumberGenerarator {
+    class RandomNumberGenerator final: public NumberGenerator {
     public:
-        explicit RNGenerator(std::shared_ptr<Distribution> dist);
-        RNGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed);
+        explicit RandomNumberGenerator(std::shared_ptr<Distribution> dist);
+        RandomNumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed);
 
         [[nodiscard]] double generate(const int& step) override;
 

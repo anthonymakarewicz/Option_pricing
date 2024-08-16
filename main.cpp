@@ -20,6 +20,11 @@
 #include "random/distribution/standard_normal_distribution.h"
 #include "random/number_generator/sobol_quasi_random_generator.h"
 #include <Eigen/Dense>
+#include <gtest/internal/gtest-param-util.h>
+#include <random/number_generator/random_generator.h>
+#include <solver/monte_carlo/basis_function/chebyshev.h>
+#include <solver/monte_carlo/basis_function/laguerre.h>
+#include <solver/monte_carlo/regression/lasso.h>
 #include <solver/monte_carlo/regression/ridge.h>
 #include "solver/monte_carlo/basis_function/legendre.h"
 
@@ -30,48 +35,79 @@ int main() {
     double T = 1.0;
     double K = 100.0;
     double S = 100.0;
-    double sigma = 0.2;
-    double r = 0.05;
-    double B = 120;
-    double dim = 52;
+    double sigma = 0.15;
+    double r = 0.03;
+    int dim = 150;
+
     auto marketData = MarketData::getInstance();
     marketData->addStock(ticker, S, sigma);
     marketData->setR(r);
 
     ParameterObject params;
-    params.setParameter("ticker", "AAPL");
+    params.setParameter("ticker", ticker);
     params.setParameter("T", T);
     params.setParameter("K", K);
-    params.setParameter("B", B);
-    params.setParameter("direction", BarrierDirection::Up);
 
     auto normal = std::make_shared<StandardNormalDistribution>();
-    auto generator = std::make_shared<SobolGenerator>(normal, dim);
+    auto generator = std::make_shared<RandomNumberGenerator>(normal);
     auto brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
+    auto laguerre = std::make_shared<LaguerreBasisFunction>(4);
+    auto regression = std::make_shared<LeastSquaresRegression>();
 
     AmericanOptionFactory factory;
-    auto call = factory.createCallOption(params);
+    auto put = factory.createPutOption(params);
 
+    auto pricer = std::make_unique<AmericanMCPricer>(put, marketData, brownianMotion, generator, laguerre, regression, dim);
     AmericanMCBuilder builder;
-    auto americanPricer = builder.setOption(call).setSteps(25).build();
+    auto americanPricer = builder.setOption(put)
+    .setSteps(dim)
+    .setNumberGenerator(generator).build();
 
     MCSolver mcSolver;
-    mcSolver.setN(100000);
-    mcSolver.setPricer(std::move(americanPricer));
+    mcSolver.setN(200000);
+    mcSolver.setPricer(std::move(pricer));
 
+    std::cout << "S = 100, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
 
-    auto ridgeStrat = std::make_shared<RidgeRegression>(0);
-    auto americanPricer2 = builder.setRegressionStrategy(ridgeStrat).build();
-
+    marketData->updateStockPrice(ticker, 90);
+    auto americanPricer2 = builder.build();
     mcSolver.setPricer(std::move(americanPricer2));
+
+    std::cout << "S = 90, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
 
-    auto legendreStrat = std::make_shared<LegendreBasisFunction>(5);
-    auto americanPricer3 = builder.setBasisFunctionStrategy(legendreStrat).build();
+    marketData->updateStockPrice(ticker, 110);
+    auto americanPricer3 = builder.build();
 
     mcSolver.setPricer(std::move(americanPricer3));
+    std::cout << "S = 110, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
+
+    /*
+    dim = 100;
+    marketData->updateStockPrice("AAPL", 100);
+    auto generator2 = std::make_shared<SobolGenerator>(normal, dim);
+    auto americanPricer4 = builder.setSteps(dim).setNumberGenerator(generator2).build();
+
+    std::cout << "S = 100, dim = 100, P = ";
+    mcSolver.setPricer(std::move(americanPricer4));
+    std::cout << mcSolver.solve() << "\n";
+
+    marketData->updateStockPrice("AAPL", 90);
+    auto americanPricer5 = builder.build();
+
+    mcSolver.setPricer(std::move(americanPricer5));
+    std::cout << "S = 90, dim = 100, P = ";
+    std::cout << mcSolver.solve() << "\n";
+
+    marketData->updateStockPrice("AAPL", 110);
+    auto americanPricer6 = builder.build();
+
+    mcSolver.setPricer(std::move(americanPricer6));
+    std::cout << "S = 110, dim = 100, P = ";
+    std::cout << mcSolver.solve() << "\n";
+    */
 
     return 0;
 

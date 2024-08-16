@@ -9,7 +9,7 @@ namespace OptionPricer {
     public:
         PathDependentMCPricer(std::shared_ptr<IMarketData> marketData,
                               std::shared_ptr<StockModel> stockModel,
-                              std::shared_ptr<NumberGenerarator> generator,
+                              std::shared_ptr<NumberGenerator> generator,
                               const unsigned int& steps);
 
     protected:

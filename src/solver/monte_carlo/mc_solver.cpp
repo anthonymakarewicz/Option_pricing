@@ -9,7 +9,7 @@ namespace OptionPricer {
         if (!pricer_) {
             throw std::logic_error("Pricer is not set for MonteCarloSolver.");
         }
-        return pricer_->calculate_price(N_);
+        return pricer_->calculatePrice(N_);
     }
 
     void MCSolver::setN(const unsigned long& N) {
