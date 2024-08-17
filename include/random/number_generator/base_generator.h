@@ -5,6 +5,8 @@
 
 namespace OptionPricer {
 
+    // MAYB PUTTING THE CREATION INSIDE A STOCKMODEL FACTORY THAT WOULD REQUIRE A THE DIM PARAMETER
+    // TO BE PASSED TO BOTH THE QUASI RANDOM NUMBER GENERATOR AS WELL AS THE STOCKPRICEMODEL CLASS
     class NumberGenerator {
     public:
         explicit NumberGenerator(std::shared_ptr<Distribution> dist);

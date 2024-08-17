@@ -285,7 +285,8 @@ tests
 ```
 
 ## Dependencies
-
+- [Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page):  C++ template library for linear algebra.
+- [Boost Random](https://www.boost.org/doc/libs/1_76_0/doc/html/boost_random.html): Part of the C++ Boost libraries for random number generation and probability distributions.
 - [Google Test (GTest)](https://github.com/google/googletest): A popular C++ testing framework.
 - [Google Mock](https://github.com/google/googletest/tree/main/googlemock): A library for writing and using C++ mock classes.
 
