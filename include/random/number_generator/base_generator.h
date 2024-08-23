@@ -7,15 +7,17 @@ namespace OptionPricer {
 
     class NumberGenerator {
     public:
-        explicit NumberGenerator(std::shared_ptr<Distribution> dist);
-        explicit NumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed);
+        explicit NumberGenerator(const unsigned int &dim);
+        explicit NumberGenerator(const unsigned int &dim, const unsigned int& seed);
 
         virtual ~NumberGenerator();
 
-        virtual double generate(const int& step) = 0;
+        virtual double operator()(Distribution &dist) const = 0;
+        unsigned int getDim() const;
 
     protected:
-        std::shared_ptr<Distribution> dist_;
+        void validateDim() const;
+        unsigned int dim_;
         unsigned int seed_;
     };
 

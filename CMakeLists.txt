@@ -10,9 +10,23 @@ set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
+# Specify the target architecture for macOS
+if(APPLE)
+    # Detect the processor architecture
+    if(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "arm64")
+        set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+    elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "x86_64")
+        set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+    else()
+        message(WARNING "Unknown architecture: ${CMAKE_HOST_SYSTEM_PROCESSOR}. Defaulting to x86_64.")
+        set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+    endif()
+endif()
+
+
 # Set the Vcpkg toolchain file
-set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        CACHE STRING "Vcpkg toolchain file")
+#set(CMAKE_TOOLCHAIN_FILE "/Users/anthony/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake"
+#        CACHE STRING "Vcpkg toolchain file")
 
 find_package(Boost REQUIRED COMPONENTS random)
 find_package(Eigen3 REQUIRED)
@@ -81,6 +95,13 @@ add_library(option SHARED
 add_library(model SHARED
         src/model/gbm_model.cpp
         src/model/base_model.cpp
+        src/model/heston_model.cpp
+        src/model/discretization/base_cir_discretization.cpp
+        src/model/discretization/explicit_euler_cir_discretization.cpp
+        src/model/discretization/milstein_cir_discretization.cpp
+        src/model/merton_jump_diffusion_model.cpp
+        src/model/kou_model.cpp
+        src/model/variance_gamma_model.cpp
 )
 
 # Create dynamic library for random
@@ -88,10 +109,15 @@ add_library(random SHARED
         src/random/distribution/base_distribution.cpp
         src/random/distribution/standard_normal_distribution.cpp
         src/random/number_generator/base_generator.cpp
-        src/random/number_generator/random_generator.cpp
+        src/random/number_generator/pseudo_random_generator.cpp
         src/random/number_generator/base_quasi_random_generator.cpp
         src/random/number_generator/faure_quasi_random_generator.cpp
         src/random/number_generator/sobol_quasi_random_generator.cpp
+        src/random/distribution/poisson_distrib.cpp
+        src/random/distribution/normal_distrib.cpp
+        src/random/distribution/continuous_uniform_distrib.cpp
+        src/random/distribution/exponential_distr.cpp
+        src/random/distribution/gamma_distrib.cpp
 )
 
 # Create dynamic library for solver
@@ -100,14 +126,12 @@ add_library(solver SHARED
         src/solver/monte_carlo/mc_solver.cpp
         src/solver/monte_carlo/base_mc.cpp
         src/solver/monte_carlo/mc_single_path.cpp
-        src/solver/monte_carlo/base_mc_path_dependent.cpp
         src/solver/monte_carlo/mc_asian.cpp
         src/solver/monte_carlo/mc_barrier.cpp
         src/solver/monte_carlo/mc_lookback.cpp
         src/solver/monte_carlo/mc_american.cpp
         src/solver/monte_carlo/builder/base_mc_builder.cpp
         src/solver/monte_carlo/builder/mc_builder_single_path.cpp
-        src/solver/monte_carlo/builder/base_mc_builder_path_dependent.cpp
         src/solver/monte_carlo/builder/mc_builder_asian.cpp
         src/solver/monte_carlo/builder/mc_builder_barrier.cpp
         src/solver/monte_carlo/builder/mc_builder_american.cpp
@@ -124,14 +148,9 @@ add_library(solver SHARED
         src/solver/monte_carlo/basis_function/laguerre.cpp
 )
 
-# Link the option library against marketdata and payoff
 target_link_libraries(option PUBLIC marketdata payoff)
-
-# Link random library to the solver ONLY
-target_link_libraries(solver PUBLIC option random model Boost::random Eigen3::Eigen)
-
-target_link_libraries(model PUBLIC option)
-
+target_link_libraries(model PUBLIC option random)
+target_link_libraries(solver PUBLIC option model Boost::random Eigen3::Eigen)
 
 # Create main executable
 add_executable(Option_pricer main.cpp)

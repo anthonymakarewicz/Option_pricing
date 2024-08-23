@@ -1,4 +1,3 @@
-
 # Overview
 
 The Option Pricer project is a C++ library designed to model and price various financial options.
@@ -101,7 +100,7 @@ make test
 │   │       ├── base_generator.cpp
 │   │       ├── base_quasi_random_generator.cpp
 │   │       ├── faure_quasi_random_generator.cpp
-│   │       ├── random_generator.cpp
+│   │       ├── pseudo_random_generator.cpp
 │   │       └── sobol_quasi_random_generator.cpp
 │   └── solver
 │       ├── base_solver.cpp
@@ -175,6 +174,8 @@ std::shared_ptr<AmericanOption> americanPut = factory.createPutOption(params);
 
 ### Explanation:
 - **Market Data initialization**: The `MarketData` singleton is used to store and manage the current stock price, volatility, and risk-free interest rate for the asset. This data is essential for pricing the option.
+
+
 - **Option Creation**: The `AmericanOptionFactory` is used to create an American put option based on the specified parameters (ticker, maturity, and strike price). This factory pattern ensures the option is created and managed correctly. 
 
 ### 2. Setting Up the Monte Carlo Components
@@ -245,9 +246,6 @@ mcSolver.setPricer(std::move(americanPricer3));
 std::cout << "Config 3, P = " << mcSolver.solve() << "\n";
 ```
 
-
-
-
 # Testing
 
 ## Tests Directory
@@ -287,7 +285,8 @@ tests
 ```
 
 ## Dependencies
-
+- [Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page):  C++ template library for linear algebra.
+- [Boost Random](https://www.boost.org/doc/libs/1_76_0/doc/html/boost_random.html): Part of the C++ Boost libraries for random number generation and probability distributions.
 - [Google Test (GTest)](https://github.com/google/googletest): A popular C++ testing framework.
 - [Google Mock](https://github.com/google/googletest/tree/main/googlemock): A library for writing and using C++ mock classes.
 

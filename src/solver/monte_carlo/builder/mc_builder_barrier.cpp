@@ -15,9 +15,11 @@ namespace OptionPricer {
     std::unique_ptr<MCPricer> KnockInBarrierMCBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for KnockInBarrierMCPricerBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(),
+                                                                         marketData_,
+                                                                         std::make_shared<PseudoRandomNumberGenerator>(52));
         }
-        return std::make_unique<KnockInBarrierMCPricer>(option_, marketData_, stockModel_, generator_, steps_);
+        return std::make_unique<KnockInBarrierMCPricer>(option_, marketData_, stockModel_);
     }
 
     // Knock-Out
@@ -32,9 +34,11 @@ namespace OptionPricer {
     std::unique_ptr<MCPricer> KnockOutBarrierMCBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for KnockOutBarrierMCPricerBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(),
+                                                                         marketData_,
+                                                                         std::make_shared<PseudoRandomNumberGenerator>(52));
         }
-        return std::make_unique<KnockOutBarrierMCPricer>(option_, marketData_, stockModel_, generator_, steps_);
+        return std::make_unique<KnockOutBarrierMCPricer>(option_, marketData_, stockModel_);
     }
 
 }

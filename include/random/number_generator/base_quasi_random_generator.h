@@ -7,18 +7,14 @@ namespace OptionPricer {
 
     class QuasiRandomNumberGenerator : public NumberGenerator {
     public:
-        explicit QuasiRandomNumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& dim);
-        QuasiRandomNumberGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed, const unsigned int& dim);
+        explicit QuasiRandomNumberGenerator(const unsigned int& dim);
+        QuasiRandomNumberGenerator(const unsigned int& dim, const unsigned int& seed);
 
         ~QuasiRandomNumberGenerator() override;
 
-        unsigned int getDim() const;
-
     protected:
-        void validateDim() const;
-
-        unsigned int dim_;
-        std::vector<double> point_; // Maybe use array
+        mutable int step_;
+        mutable std::vector<double> point_; // Maybe use array
     };
 
 }

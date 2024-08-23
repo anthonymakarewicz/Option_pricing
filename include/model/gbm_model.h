@@ -3,17 +3,20 @@
 
 #include <cmath>
 #include <random>
-#include <model/base_model.h>
-#include <market_data/interface_market_data.h>
+#include "model/base_model.h"
 
 namespace OptionPricer {
 
-    class GeometricBrownianMotionModel : public StockModel {
+    class GeometricBrownianMotionModel final: public StockModel {
     public:
-        GeometricBrownianMotionModel(const std::string& ticker, std::shared_ptr<IMarketData> marketData);
+        using StockModel::StockModel;
+        ~GeometricBrownianMotionModel() override;
 
-        [[nodiscard]] double simulatePriceAtMaturity(const double& T, const double& z) const override;
-        [[nodiscard]] double simulateStepPrice(const double& dt, const double& z) const override;
+        [[nodiscard]] double simulatePriceAtMaturity(const double& T) const override;
+        [[nodiscard]] std::vector<double> simulatePrices(const double& T) const override;
+        [[nodiscard]] double simulatePriceBackward(const double &S_next,
+                                                   const double &t_j,
+                                                   const double &t_jp1) const override;
     };
 
 }

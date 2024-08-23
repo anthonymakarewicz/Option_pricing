@@ -2,20 +2,16 @@
 #define STANDARD_NORMAL_DISTRIBUTION_H
 
 #include <cmath>
-#include "random/distribution/base_distribution.h"
+#include "random/distribution/normal_distrib.h"
 
 namespace OptionPricer {
 
-    class StandardNormalDistribution final: public Distribution {
+    class StandardNormalDistribution final: public NormalDistribution {
     public:
         explicit StandardNormalDistribution();
         ~StandardNormalDistribution() override;
 
         [[nodiscard]] double inv_cdf(const double& quantile) const override;
-        double operator()(std::mt19937& gen) override;
-
-    private:
-        std::normal_distribution<> normal_dist_;
     };
 
 }
