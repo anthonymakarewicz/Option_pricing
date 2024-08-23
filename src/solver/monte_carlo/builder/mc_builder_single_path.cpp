@@ -1,5 +1,4 @@
 #include "solver/monte_carlo/builder/mc_builder_single_path.h"
-#include "model/gbm_model.h"
 
 namespace OptionPricer {
 
@@ -16,9 +15,11 @@ namespace OptionPricer {
     std::unique_ptr<MCPricer> MCSinglePathBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for AmericanMCPricerBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_unique<GeometricBrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_unique<GeometricBrownianMotionModel>(option_->getID(),
+                                                                         marketData_,
+                                                                         std::make_shared<PseudoRandomNumberGenerator>(52));
         }
-        return std::make_unique<SinglePathMCPricer>(option_, marketData_, stockModel_, generator_);
+        return std::make_unique<SinglePathMCPricer>(option_, marketData_, stockModel_);
     }
 
 }

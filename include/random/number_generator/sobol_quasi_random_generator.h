@@ -8,15 +8,15 @@ namespace OptionPricer {
 
     class SobolGenerator final: public QuasiRandomNumberGenerator {
     public:
-        explicit SobolGenerator(std::shared_ptr<Distribution> dist, const unsigned int& dim);
-        SobolGenerator(std::shared_ptr<Distribution> dist, const unsigned int& seed, const unsigned int& dim);
+        explicit SobolGenerator(const unsigned int& dim);
+        SobolGenerator(const unsigned int& dim, const unsigned int& seed);
 
         ~SobolGenerator() override;
 
-        [[nodiscard]] double generate(const int& step) override;
+        double operator()(Distribution& dist) const override;
 
     private:
-        boost::random::sobol sobolQrng_;
+        mutable boost::random::sobol sobolQrng_;
     };
 
 }

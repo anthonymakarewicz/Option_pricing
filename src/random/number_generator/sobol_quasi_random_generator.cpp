@@ -2,29 +2,31 @@
 
 namespace OptionPricer {
 
-    SobolGenerator::SobolGenerator(std::shared_ptr<Distribution> dist, const unsigned int &dim)
-    : QuasiRandomNumberGenerator(std::move(dist), dim), sobolQrng_(dim_) {
+    SobolGenerator::SobolGenerator(const unsigned int &dim)
+    : QuasiRandomNumberGenerator(dim), sobolQrng_(dim_) {
         sobolQrng_.seed(seed_);
+        sobolQrng_.generate(point_.begin(), point_.end()); // Initialize the point
     }
 
-    SobolGenerator::SobolGenerator(std::shared_ptr<Distribution> dist,
-                                   const unsigned int &seed,
-                                   const unsigned int &dim)
-    : QuasiRandomNumberGenerator(std::move(dist),seed, dim), sobolQrng_(dim_) {
+    SobolGenerator::SobolGenerator(const unsigned int &dim,
+                                   const unsigned int &seed)
+    : QuasiRandomNumberGenerator(dim, seed), sobolQrng_(dim_) {
         sobolQrng_.seed(seed_);
+        sobolQrng_.generate(point_.begin(), point_.end());
     }
 
     SobolGenerator::~SobolGenerator() = default;
 
-    double SobolGenerator::generate(const int &step) {
-        if (step == 0) {
-            // Generate Sobol sequence point
+    double SobolGenerator::operator()(Distribution& dist) const {
+        if (step_ >= dim_) {
             sobolQrng_.generate(point_.begin(), point_.end());
+            step_ = 0; // Reset step
         }
 
         // Normalize and transform using Moro's inversion
-        const double uniformValue = point_[step] / static_cast<double>(boost::random::sobol::max());
-        return dist_->inv_cdf(uniformValue);
+        const double uniformValue = point_[step_] / static_cast<double>(boost::random::sobol::max());
+        ++step_;  // Increment step after use
+        return dist.inv_cdf(uniformValue);
     }
 
 }

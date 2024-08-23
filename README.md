@@ -100,7 +100,7 @@ make test
 │   │       ├── base_generator.cpp
 │   │       ├── base_quasi_random_generator.cpp
 │   │       ├── faure_quasi_random_generator.cpp
-│   │       ├── random_generator.cpp
+│   │       ├── pseudo_random_generator.cpp
 │   │       └── sobol_quasi_random_generator.cpp
 │   └── solver
 │       ├── base_solver.cpp

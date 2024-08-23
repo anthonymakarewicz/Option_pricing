@@ -5,15 +5,19 @@
 #include <string>
 
 namespace OptionPricer {
+
     enum class PayoffType {
-        Call, Put, DoubleDigital
+        Call,
+        Put,
+        DoubleDigital
     };
 
     inline std::string PayoffTypeToString(const PayoffType& type) {
         switch (type) {
-            case PayoffType::Call: return "Call";
-            case PayoffType::Put: return "Put";
-            case PayoffType::DoubleDigital: return "DoubleDigital";
+            using enum PayoffType;
+            case Call: return "Call";
+            case Put: return "Put";
+            case DoubleDigital: return "DoubleDigital";
             // Add other cases as needed
             default: return "Unknown";
         }

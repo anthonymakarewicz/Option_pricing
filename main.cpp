@@ -20,10 +20,15 @@
 #include "random/distribution/standard_normal_distribution.h"
 #include "random/number_generator/sobol_quasi_random_generator.h"
 #include <Eigen/Dense>
-#include <gtest/internal/gtest-param-util.h>
-#include <random/number_generator/random_generator.h>
+#include <model/heston_model.h>
+#include <model/kou_model.h>
+#include <model/merton_jump_diffusion_model.h>
+#include <model/variance_gamma_model.h>
+#include <model/discretization/milstein_cir_discretization.h>
+#include <solver/monte_carlo/mc_single_path.h>
 #include <solver/monte_carlo/basis_function/chebyshev.h>
 #include <solver/monte_carlo/basis_function/laguerre.h>
+#include <solver/monte_carlo/builder/mc_builder_single_path.h>
 #include <solver/monte_carlo/regression/lasso.h>
 #include <solver/monte_carlo/regression/ridge.h>
 #include "solver/monte_carlo/basis_function/legendre.h"
@@ -36,8 +41,29 @@ int main() {
     double K = 100.0;
     double S = 100.0;
     double sigma = 0.15;
-    double r = 0.03;
-    int dim = 150;
+    double r = 0.0319;
+    int dim = 100;
+
+    // Heston parameters
+    double kappa = 6.21;
+    double theta = 0.019;
+    double sigma_v = 0.61;
+    double rho = -0.7;
+    double v0 = 0.010201;
+
+    // Merton paremeters
+    double lambda = 0.1;  // 10% chance of a jump each time step
+    double muJ = -0.05;   // Mean jump size (5% downwards)
+    double sigmaJ = 0.2;  // Jump size volatility
+
+    // Kou parameters
+    double eta1 = 5.0;
+    double eta2 = 7.0;
+    double p = 0.5;
+
+    // Variance Gamma parameters
+    double thetaGamma = -0.05;
+    double nu = 0.5;
 
     auto marketData = MarketData::getInstance();
     marketData->addStock(ticker, S, sigma);
@@ -48,42 +74,79 @@ int main() {
     params.setParameter("T", T);
     params.setParameter("K", K);
 
-    auto normal = std::make_shared<StandardNormalDistribution>();
-    auto generator = std::make_shared<SobolGenerator>(normal, dim);
-    auto brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
-    auto laguerre = std::make_shared<LaguerreBasisFunction>(4);
+    auto generator = std::make_shared<SobolGenerator>(dim);
+    auto prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
+    auto geometricBrownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData, generator);
+    auto heston = std::make_shared<HestonModel>(ticker, marketData, prng, kappa, theta, sigma_v, rho, v0);
+    auto merton = std::make_shared<MertonJumpDiffusionModel>(ticker, marketData, prng, lambda, muJ, sigmaJ);
+    auto kou = std::make_shared<KouModel>(ticker, marketData, prng, lambda, p, eta1, eta2);
+    auto vg = std::make_shared<VarianceGammaModel>(ticker, marketData, prng, sigma, nu, thetaGamma);
+    auto laguerre = std::make_shared<LaguerreBasisFunction>(3);
     auto regression = std::make_shared<LeastSquaresRegression>();
 
     AmericanOptionFactory factory;
-    auto put = factory.createPutOption(params);
+    auto americanPut = factory.createPutOption(params);
 
-    auto pricer = std::make_unique<AmericanMCPricer>(put, marketData, brownianMotion, generator, laguerre, regression, dim);
     AmericanMCBuilder builder;
-    auto americanPricer = builder.setOption(put)
-    .setSteps(dim)
-    .setNumberGenerator(generator).build();
+    auto americanPricer = builder.setOption(americanPut)
+                                 .setBasisFunctionStrategy(laguerre)
+                                 .setStockPriceModel(heston)
+                                 .build();
+
+    EuropeanOptionFactory factoryEuropean;
+    auto europeanCall = factoryEuropean.createCallOption(params);
+
+    MCSinglePathBuilder singlePathBuilder;
+    auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(merton).build();
 
     MCSolver mcSolver;
-    mcSolver.setN(200000);
-    mcSolver.setPricer(std::move(pricer));
+    mcSolver.setN(100000);
+    mcSolver.setPricer(std::move(singlePathPricer));
 
+    /*
     std::cout << "S = 100, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
+    */
 
+
+    for (int i = 0; i < 20; i++) {
+        std::cout << "Price at T Merton: " << merton->simulatePriceAtMaturity(T) << std::endl;
+    }
+
+    for (int i = 0; i < 20; i++) {
+        std::cout << "Price at T Kou: " << kou->simulatePriceAtMaturity(T)<< std::endl;
+    }
+
+    for (int i = 0; i < 20; i++) {
+        std::cout << "Price at T VG: " << vg->simulatePriceAtMaturity(T)<< std::endl;
+    }
+
+
+
+    /*
+    std::cout << "S = 100, dim = 50, P = ";
+    std::cout << mcSolver.solve() << "\n";
+    */
+
+
+    return 0;
+    /*
     marketData->updateStockPrice(ticker, 90);
     auto americanPricer2 = builder.build();
     mcSolver.setPricer(std::move(americanPricer2));
 
     std::cout << "S = 90, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
-
+    return 0;
+    */
+    /*
     marketData->updateStockPrice(ticker, 110);
     auto americanPricer3 = builder.build();
 
     mcSolver.setPricer(std::move(americanPricer3));
     std::cout << "S = 110, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
-
+    */
     /*
     dim = 100;
     marketData->updateStockPrice("AAPL", 100);
@@ -108,112 +171,5 @@ int main() {
     std::cout << "S = 110, dim = 100, P = ";
     std::cout << mcSolver.solve() << "\n";
     */
-
-    return 0;
-
-    /*
-    AmericanOptionFactory factory;
-    FloatingStrikeLookbackOptionFactory factory2;
-    KnockOutBarrierOptionFactory factory3;
-    auto call = factory.createCallOption(params);
-    auto call2 = factory2.createCallOption(params);
-    auto call3 = factory3.createCallOption(params);
-
-    auto mcStrategy = std::make_unique<AmericanMCStrategy>(call, brownianMotion, generator, marketData, dim);
-    auto mcStrategy2 = std::make_unique<FloatingStrikeLookbackMCStrategy>(call2, brownianMotion, generator, marketData, dim);
-    auto mcStrategy3 = std::make_unique<KnockOutMCStrategy>(call3, brownianMotion, generator, marketData, dim);
-
-
-    MCSolver mcSolver;
-    mcSolver.setN(100000);
-    mcSolver.setStrategy(std::move(mcStrategy));
-
-    std::cout << mcSolver.solve() << "\n";
-
-    mcSolver.setStrategy(std::move(mcStrategy2));
-    std::cout << mcSolver.solve() << "\n";
-
-    mcSolver.setStrategy(std::move(mcStrategy3));
-    std::cout << mcSolver.solve() << "\n";
-
-
-    //std::vector<unsigned long> Ns = {100, 1000, 10000, 100000, 1000000, 10000000};
-    */
-
-
-    /*
-    std::cout << "Crude MC Call:" << std::endl;
-    for (const auto& N : Ns) {
-        mcSolver.setN(N);
-        auto mcStrategy = std::make_unique<SinglePathMCStrategy>(call, brownianMotion, generator, marketData);
-        mcSolver.setStrategy(std::move(mcStrategy));
-        std::cout << "N = " << N << ", Price: " << mcSolver.solve() << "\n";
-    }
-
-    auto put = factory.createPutOption(params);
-
-    std::cout << "Crude MC Put:" << std::endl;
-    for (const auto& N : Ns) {
-        mcSolver.setN(N);
-        auto mcStrategy = std::make_unique<SinglePathMCStrategy>(put, brownianMotion, generator, marketData);
-        mcSolver.setStrategy(std::move(mcStrategy));
-        std::cout << "N = " << N << ", Price: " << mcSolver.solve() << "\n";
-    }
-
-    auto generator2 = std::make_shared<SobolGenerator>(normal);
-
-    std::cout << "Quasi MC Sobol:" << std::endl;
-    for (const auto& N : Ns) {
-        mcSolver.setN(N);
-        auto mcStrategy = std::make_unique<SinglePathMCStrategy>(call, brownianMotion, generator2, marketData);
-        mcSolver.setStrategy(std::move(mcStrategy));
-        std::cout << "N = " << N << ", Price: " << mcSolver.solve() << "\n";
-    }
-
-    auto generator3 = std::make_shared<FaureGenerator>(normal);
-
-    std::cout << "Quasi MC Faure:" << std::endl;
-    for (const auto& N : Ns) {
-        mcSolver.setN(N);
-        auto mcStrategy = std::make_unique<SinglePathMCStrategy>(call, brownianMotion, generator3, marketData);
-        mcSolver.setStrategy(std::move(mcStrategy));
-        std::cout << "N = " << N << ", Price: " << mcSolver.solve() << "\n";
-    }
-
-    return 0;
-
-    */
-
-    /*
-auto mcStrategy = std::make_unique<SinglePathMCStrategy>(eurCall, brownianMotion, generator, marketData);
-mcSolver.setStrategy(std::move(mcStrategy));
-std::cout << "Crude: " << mcSolver.solve() << "\n";
-
-auto generator2 = std::make_shared<FaureGenerator>(normal);
-mcStrategy = std::make_unique<SinglePathMCStrategy>(eurCall, brownianMotion, generator2, marketData);
-mcSolver.setStrategy(std::move(mcStrategy));
-std::cout << "Faure: " << mcSolver.solve() << "\n";
-*/
-
-    /*
-    auto marketData = MarketData::getInstance();
-    marketData->addStock("AAPL", 120.0, 0.2);
-
-    ParameterObject params;
-    params.setParameter("ticker", "AAPL");
-    params.setParameter("T", 1.0);
-    params.setParameter("K1", 100.0);
-    params.setParameter("K2", 120.0);
-
-    DoubleDigitalOptionFactory factory;
-    try {
-        auto option = factory.createCallOption(params);
-    } catch (const std::exception& e) {
-        std::cerr << e.what();
-    }
-    std::cout << "ded";
-
-    */
-
 
 }

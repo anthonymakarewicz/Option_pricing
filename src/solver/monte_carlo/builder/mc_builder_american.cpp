@@ -3,7 +3,7 @@
 namespace OptionPricer {
 
     AmericanMCBuilder::AmericanMCBuilder()
-    : PathDependentMCBuilder(), regressionStrategy_(std::make_shared<LeastSquaresRegression>()),
+    : MCBuilder(), regressionStrategy_(std::make_shared<LeastSquaresRegression>()),
     basisFunctionStrategy_(std::make_shared<MonomialBasisFunction>(3)) {}
 
     AmericanMCBuilder::~AmericanMCBuilder() = default;
@@ -29,10 +29,12 @@ namespace OptionPricer {
     std::unique_ptr<MCPricer> AmericanMCBuilder::build() {
         if (!option_) throw std::logic_error("Option is not set for AmericanMCBuilder.");
         if (!stockModel_) {
-            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(), marketData_);
+            stockModel_ = std::make_shared<GeometricBrownianMotionModel>(option_->getID(),
+                                                                         marketData_,
+                                                                         std::make_shared<PseudoRandomNumberGenerator>(52));
         }
         return std::make_unique<AmericanMCPricer>(option_, marketData_, stockModel_,
-                                                    generator_, basisFunctionStrategy_, regressionStrategy_, steps_);
+                                                  basisFunctionStrategy_, regressionStrategy_);
     }
 
 }

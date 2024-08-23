@@ -7,7 +7,7 @@
 
 namespace OptionPricer {
 
-    class MCSinglePathBuilder final: MCBuilder {
+    class MCSinglePathBuilder final: public MCBuilder {
     public:
         using MCBuilder::MCBuilder;
         ~MCSinglePathBuilder() override;

@@ -1,14 +1,14 @@
 #ifndef MC_BUILDER_LOOKBACK_H
 #define MC_BUILDER_LOOKBACK_H
 
-#include "solver/monte_carlo/builder/base_mc_builder_path_dependent.h"
+#include "solver/monte_carlo/builder/base_mc_builder.h"
 #include "solver/monte_carlo/mc_lookback.h"
 
 namespace OptionPricer {
 
-    class FloatingStrikeLookbackMCBuilder final : public PathDependentMCBuilder {
+    class FloatingStrikeLookbackMCBuilder final : public MCBuilder {
     public:
-        using PathDependentMCBuilder::PathDependentMCBuilder;
+        using MCBuilder::MCBuilder;
         ~FloatingStrikeLookbackMCBuilder() override;
 
         FloatingStrikeLookbackMCBuilder& setOption(std::shared_ptr<Option> option) override;
@@ -18,9 +18,9 @@ namespace OptionPricer {
         std::shared_ptr<FloatingStrikeLookbackOption> option_;
     };
 
-    class FixedStrikeLookbackMCBuilder final : public PathDependentMCBuilder {
+    class FixedStrikeLookbackMCBuilder final : public MCBuilder {
     public:
-        using PathDependentMCBuilder::PathDependentMCBuilder;
+        using MCBuilder::MCBuilder;
         ~FixedStrikeLookbackMCBuilder() override;
 
         FixedStrikeLookbackMCBuilder& setOption(std::shared_ptr<Option> option) override;

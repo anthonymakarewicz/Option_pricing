@@ -1,14 +1,14 @@
 #ifndef MC_BUILDER_BARRIER_H
 #define MC_BUILDER_BARRIER_H
 
-#include "solver/monte_carlo/builder/base_mc_builder_path_dependent.h"
+#include "solver/monte_carlo/builder/base_mc_builder.h"
 #include "solver/monte_carlo/mc_barrier.h"
 
 namespace OptionPricer {
 
-    class KnockInBarrierMCBuilder final: public PathDependentMCBuilder {
+    class KnockInBarrierMCBuilder final: public MCBuilder {
     public:
-        using PathDependentMCBuilder::PathDependentMCBuilder;
+        using MCBuilder::MCBuilder;
         ~KnockInBarrierMCBuilder() override = default;
 
         KnockInBarrierMCBuilder& setOption(std::shared_ptr<Option> option) override;
@@ -18,9 +18,9 @@ namespace OptionPricer {
         std::shared_ptr<KnockInBarrierOption> option_;
     };
 
-    class KnockOutBarrierMCBuilder final: public PathDependentMCBuilder {
+    class KnockOutBarrierMCBuilder final: public MCBuilder {
     public:
-        using PathDependentMCBuilder::PathDependentMCBuilder;
+        using MCBuilder::MCBuilder;
         ~KnockOutBarrierMCBuilder() override = default;
 
         KnockOutBarrierMCBuilder& setOption(std::shared_ptr<Option> option) override;

@@ -1,23 +1,21 @@
 #ifndef MC_LOOKBACK_H
 #define MC_LOOKBACK_H
 
-#include "solver/monte_carlo/base_mc_path_dependent.h"
+#include "solver/monte_carlo/base_mc.h"
 #include "option/path_dependent/lookback_option.h"
 
 namespace OptionPricer {
 
-        class LookbackMCPricer : public PathDependentMCPricer {
+        class LookbackMCPricer : public MCPricer {
         public:
             LookbackMCPricer(std::shared_ptr<LookbackOption> option,
                              std::shared_ptr<IMarketData> marketData,
-                             std::shared_ptr<StockModel> stockModel,
-                             std::shared_ptr<NumberGenerator> generator,
-                             const unsigned int& steps);
+                             std::shared_ptr<StockModel> stockModel);
 
             [[nodiscard]] double calculatePrice(const unsigned long& N) const override;
 
         protected:
-            virtual double computePayoff(const double& S_t, const double& S_min, const double& S_max) const = 0;
+            virtual double computePayoff(const double& S_T, const double& S_min, const double& S_max) const = 0;
             std::shared_ptr<LookbackOption> option_;
     };
 
@@ -25,24 +23,20 @@ namespace OptionPricer {
     public:
         FloatingStrikeLookbackMCPricer(std::shared_ptr<FloatingStrikeLookbackOption> option,
                                        std::shared_ptr<IMarketData> marketData,
-                                       std::shared_ptr<StockModel> stockModel,
-                                       std::shared_ptr<NumberGenerator> generator,
-                                       const unsigned int& steps);
+                                       std::shared_ptr<StockModel> stockModel);
 
     private:
-        double computePayoff(const double& S_t, const double& S_min, const double& S_max) const override;
+        double computePayoff(const double& S_T, const double& S_min, const double& S_max) const override;
     };
 
     class FixedStrikeLookbackMCPricer : public LookbackMCPricer {
     public:
         FixedStrikeLookbackMCPricer(std::shared_ptr<FixedStrikeLookbackOption> option,
                                     std::shared_ptr<IMarketData> marketData,
-                                    std::shared_ptr<StockModel> stockModel,
-                                    std::shared_ptr<NumberGenerator> generator,
-                                    const unsigned int& steps);
+                                    std::shared_ptr<StockModel> stockModel);
 
     private:
-        double computePayoff(const double& S_t, const double& S_min, const double& S_max) const override;
+        double computePayoff(const double& S_T, const double& S_min, const double& S_max) const override;
     };
 
 }

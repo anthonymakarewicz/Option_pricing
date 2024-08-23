@@ -2,11 +2,8 @@
 
 namespace OptionPricer {
 
-    MCPricer::MCPricer(std::shared_ptr<IMarketData> marketData,
-                       std::shared_ptr<StockModel> stockModel,
-                       std::shared_ptr<NumberGenerator> generator)
-    : marketData_(std::move(marketData)), stockModel_(std::move(stockModel)),
-    generator_(std::move(generator)) {}
+    MCPricer::MCPricer(std::shared_ptr<IMarketData> marketData, std::shared_ptr<StockModel> stockModel)
+    : marketData_(std::move(marketData)), stockModel_(std::move(stockModel)) {}
 
     MCPricer::~MCPricer() = default;
 
