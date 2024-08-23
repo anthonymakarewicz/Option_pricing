@@ -15,7 +15,7 @@ The library supports a wide range of option types including vanilla, exotic, and
 - **Factory Methods**: Uses factory methods to ensure that options are always created and managed by `std::shared_ptr`.
 - **Monte Carlo Solvers**: Provides a Monte Carlo solver framework supporting both path-independent and path-dependent options, with capabilities for regression-based methods like LSM (Least Squares Monte Carlo).
 - **Quasi-Random Number Generators**: Includes support for advanced random number generation techniques such as Sobol and Faure sequences.
-
+- **Stock Models**: Provides various Stcok Models including jump diffusion, stochastic volatility and pure jumps models.
 # Installation
 
 ## Prerequisites
@@ -51,87 +51,98 @@ make test
 # Project Structure
 
 ```plaintext
-├── src
-│   ├── market_data
-│   │   ├── interface_market_data.cpp
-│   │   ├── market_data.cpp
-│   │   ├── market_data_observer.cpp
-│   │   └── stock_data.cpp
-│   ├── model
-│   │   ├── base_model.cpp
-│   │   └── gbm_model.cpp
-│   ├── option
-│   │   ├── base_option.cpp
-│   │   ├── interface_option.cpp
-│   │   ├── parameter_object.cpp
-│   │   ├── path_dependent
-│   │   │   ├── american_option.cpp
-│   │   │   ├── asian_option.cpp
-│   │   │   ├── barrier_option.cpp
-│   │   │   ├── base_path_dependent_option.cpp
-│   │   │   ├── factory_american_option.cpp
-│   │   │   ├── factory_asian_option.cpp
-│   │   │   ├── factory_barrier_option.cpp
-│   │   │   ├── factory_lookback_option.cpp
-│   │   │   └── lookback_option.cpp
-│   │   └── single_path
-│   │       ├── base_single_path_option.cpp
-│   │       ├── digital_option.cpp
-│   │       ├── double_digital_option.cpp
-│   │       ├── european_option.cpp
-│   │       ├── factory_digital_option.cpp
-│   │       ├── factory_double_digital_option.cpp
-│   │       └── factory_european_option.cpp
-│   ├── payoff
-│   │   ├── base_payoff.cpp
-│   │   ├── double_strikes
-│   │   │   ├── base_payoff_double_strikes.cpp
-│   │   │   └── payoff_double_digital.cpp
-│   │   ├── payoff_floating_strike_lookback.cpp
-│   │   └── single_strike
-│   │       ├── base_payoff_single_strike.cpp
-│   │       ├── payoff_digital.cpp
-│   │       └── payoff_vanilla.cpp
-│   ├── random
-│   │   ├── distribution
-│   │   │   ├── base_distribution.cpp
-│   │   │   └── standard_normal_distribution.cpp
-│   │   └── number_generator
-│   │       ├── base_generator.cpp
-│   │       ├── base_quasi_random_generator.cpp
-│   │       ├── faure_quasi_random_generator.cpp
-│   │       ├── pseudo_random_generator.cpp
-│   │       └── sobol_quasi_random_generator.cpp
-│   └── solver
-│       ├── base_solver.cpp
-│       └── monte_carlo
-│           ├── base_mc.cpp
-│           ├── base_mc_path_dependent.cpp
-│           ├── basis_function
-│           │   ├── base_basis_function_strategy.cpp
-│           │   ├── chebyshev.cpp
-│           │   ├── laguerre.cpp
-│           │   ├── legendre.cpp
-│           │   └── monomial.cpp
-│           ├── builder
-│           │   ├── base_mc_builder.cpp
-│           │   ├── base_mc_builder_path_dependent.cpp
-│           │   ├── mc_builder_american.cpp
-│           │   ├── mc_builder_asian.cpp
-│           │   ├── mc_builder_barrier.cpp
-│           │   ├── mc_builder_single_path.cpp
-│           │   └── mc_lookback_builder.cpp
-│           ├── mc_american.cpp
-│           ├── mc_asian.cpp
-│           ├── mc_barrier.cpp
-│           ├── mc_lookback.cpp
-│           ├── mc_single_path.cpp
-│           ├── mc_solver.cpp
-│           └── regression
-│               ├── base_regression_strategy.cpp
-│               ├── lasso.cpp
-│               ├── least_squares.cpp
-│               └── ridge.cpp
+src
+├── market_data
+│   ├── interface_market_data.cpp
+│   ├── market_data.cpp
+│   ├── market_data_observer.cpp
+│   └── stock_data.cpp
+├── model
+│   ├── base_model.cpp
+│   ├── discretization
+│   │   ├── base_cir_discretization.cpp
+│   │   ├── explicit_euler_cir_discretization.cpp
+│   │   └── milstein_cir_discretization.cpp
+│   ├── gbm_model.cpp
+│   ├── heston_model.cpp
+│   ├── kou_model.cpp
+│   ├── merton_jump_diffusion_model.cpp
+│   └── variance_gamma_model.cpp
+├── option
+│   ├── base_option.cpp
+│   ├── interface_option.cpp
+│   ├── parameter_object.cpp
+│   ├── path_dependent
+│   │   ├── american_option.cpp
+│   │   ├── asian_option.cpp
+│   │   ├── barrier_option.cpp
+│   │   ├── base_path_dependent_option.cpp
+│   │   ├── factory_american_option.cpp
+│   │   ├── factory_asian_option.cpp
+│   │   ├── factory_barrier_option.cpp
+│   │   ├── factory_lookback_option.cpp
+│   │   └── lookback_option.cpp
+│   └── single_path
+│       ├── base_single_path_option.cpp
+│       ├── digital_option.cpp
+│       ├── double_digital_option.cpp
+│       ├── european_option.cpp
+│       ├── factory_digital_option.cpp
+│       ├── factory_double_digital_option.cpp
+│       └── factory_european_option.cpp
+├── payoff
+│   ├── base_payoff.cpp
+│   ├── double_strikes
+│   │   ├── base_payoff_double_strikes.cpp
+│   │   └── payoff_double_digital.cpp
+│   ├── payoff_floating_strike_lookback.cpp
+│   └── single_strike
+│       ├── base_payoff_single_strike.cpp
+│       ├── payoff_digital.cpp
+│       └── payoff_vanilla.cpp
+├── random
+│   ├── distribution
+│   │   ├── base_distribution.cpp
+│   │   ├── continuous_uniform_distrib.cpp
+│   │   ├── exponential_distr.cpp
+│   │   ├── gamma_distrib.cpp
+│   │   ├── normal_distrib.cpp
+│   │   ├── poisson_distrib.cpp
+│   │   └── standard_normal_distribution.cpp
+│   └── number_generator
+│       ├── base_generator.cpp
+│       ├── base_quasi_random_generator.cpp
+│       ├── faure_quasi_random_generator.cpp
+│       ├── pseudo_random_generator.cpp
+│       └── sobol_quasi_random_generator.cpp
+└── solver
+    ├── base_solver.cpp
+    └── monte_carlo
+        ├── base_mc.cpp
+        ├── basis_function
+        │   ├── base_basis_function_strategy.cpp
+        │   ├── chebyshev.cpp
+        │   ├── laguerre.cpp
+        │   ├── legendre.cpp
+        │   └── monomial.cpp
+        ├── builder
+        │   ├── base_mc_builder.cpp
+        │   ├── mc_builder_american.cpp
+        │   ├── mc_builder_asian.cpp
+        │   ├── mc_builder_barrier.cpp
+        │   ├── mc_builder_single_path.cpp
+        │   └── mc_lookback_builder.cpp
+        ├── mc_american.cpp
+        ├── mc_asian.cpp
+        ├── mc_barrier.cpp
+        ├── mc_lookback.cpp
+        ├── mc_single_path.cpp
+        ├── mc_solver.cpp
+        └── regression
+            ├── base_regression_strategy.cpp
+            ├── lasso.cpp
+            ├── least_squares.cpp
+            └── ridge.cpp
 
 ```
 
@@ -180,15 +191,17 @@ std::shared_ptr<AmericanOption> americanPut = factory.createPutOption(params);
 
 ### 2. Setting Up the Monte Carlo Components
 ```cpp
-int dim = 150;        // Number of time steps
-int numberBases = 5  // Number of basis functions
+int dim = 150;          // Number of time steps
+int numberBases = 5    // Number of basis functions
+double theta = -0.05; // Drift of the Brownian motion
+double nu = 0.5;     // Variance rate of the Gamma process
 
 // Create Quasi Random Number Generator with Sobol sequences
 std::shared_ptr<StandardNormalDistribution> normal = std::make_shared<StandardNormalDistribution>();
 std::shared_ptr<SobolGenerator> generator = std::make_shared<SobolGenerator>(normal, dim);
 
-// Create the Geometric Brownian Motion model
-std::shared_ptr<GeometricBrownianMotionModel> brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
+// Create the VG model
+std::shared_ptr<VarianceGammaModel> brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
 
 // Create basis function and regularized regression for LSM (Least Squares Monte Carlo)
 std::shared_ptr<LaguerreBasisFunction> laguerre = std::make_shared<LaguerreBasisFunction>(numberBases);
