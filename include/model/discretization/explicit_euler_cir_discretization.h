@@ -7,9 +7,9 @@ namespace OptionPricer {
 
     class CIRExplicitEulerDiscretization : public CIRDiscretization {
     public:
-        double apply(const double &v, const double &dt,
-                     const double &kappa, const double &theta,
-                     const double &sigma_v, const double &z) const override;
+        void update(double &V, const double &dt,
+                    const double &kappa, const double &theta,
+                    const double &sigma_v, const double &z) const override;
     };
 
 }

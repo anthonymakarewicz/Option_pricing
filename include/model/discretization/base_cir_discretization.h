@@ -8,9 +8,9 @@ namespace OptionPricer {
     class CIRDiscretization {
     public:
         virtual ~CIRDiscretization();
-        virtual double apply(const double &v, const double &dt,
-                             const double &kappa, const double &theta,
-                             const double &sigma_v, const double &z) const = 0;
+        virtual void update(double &V, const double &dt,
+                           const double &kappa, const double &theta,
+                           const double &sigma_v, const double &z) const = 0;
     };
 
 }

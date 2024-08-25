@@ -40,7 +40,7 @@ namespace OptionPricer {
 
     std::vector<double> HestonModel::simulatePrices(const double& T) const {
         double S = stockData_->getPrice();
-        double v = v0_;
+        double V = v0_;
         const double r = marketData_->getR();
         const double c = stockData_->getCoupon().value_or(0.0);
         const auto steps = getSteps();
@@ -48,27 +48,24 @@ namespace OptionPricer {
         StandardNormalDistribution snd;
 
         std::vector<double> prices(steps);
+        for (int t = 0; t < steps; ++t) {
 
-        // Compute S(1) using v(0)
-        const double z = (*generator_)(snd);
-        prices[0] = S * exp((r - c - 0.5*v) * dt + sqrt(v*dt) * z);
+            // Generate correlated Brownian motions
+            const double z1 = (*generator_)(snd);
+            const double z2 = (*generator_)(snd);
+            const double zV = z1;
+            const double zS = rho_ * z1 + sqrt(1 - rho_*rho_) * z2;
 
-        // Compute S(t+1) using v(t)
-        for (int t = 1; t < steps; ++t) {
-            const double z1 = (*generator_)(snd);  // For the stock price
-            double z2 = (*generator_)(snd);  // For the variance
-            // Apply correlation between the Brownian motions
-            z2 = rho_ * z1 + sqrt(1 - rho_*rho_) * z2;
+            // Update stock price S(t) using V(t-1)
+            const double VMax = std::max(V, 0.0);
+            const double drift = (r - c - 0.5 * VMax) * dt;
+            const double diffusion = sqrt(VMax * dt) * zS;
+            S *= exp(drift + diffusion);
 
             // Apply discretization scheme to the variance process (CIR process)
-            v = varDiscretization_->apply(v, dt, kappa_, theta_, sigma_v_, z2);
+            varDiscretization_->update(V, dt, kappa_, theta_, sigma_v_, zV);
 
-            // Stock price process
-            const double vMax = std::max(v, 0.0);
-            const double drift = (r - c - 0.5*vMax) * dt;
-            const double diffusion = sqrt(vMax*dt) * z1;
-
-            prices[t] = prices[t-1] * exp(drift + diffusion);
+            prices[t] = S;
         }
 
         return prices;

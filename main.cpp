@@ -20,6 +20,7 @@
 #include "random/distribution/standard_normal_distribution.h"
 #include "random/number_generator/sobol_quasi_random_generator.h"
 #include <Eigen/Dense>
+#include <model/bates_model.h>
 #include <model/heston_model.h>
 #include <model/kou_model.h>
 #include <model/merton_jump_diffusion_model.h>
@@ -42,7 +43,7 @@ int main() {
     double S = 100.0;
     double sigma = 0.15;
     double r = 0.0319;
-    int dim = 100;
+    int dim = 1000;
 
     // Heston parameters
     double kappa = 6.21;
@@ -81,6 +82,7 @@ int main() {
     auto merton = std::make_shared<MertonJumpDiffusionModel>(ticker, marketData, prng, lambda, muJ, sigmaJ);
     auto kou = std::make_shared<KouModel>(ticker, marketData, prng, lambda, p, eta1, eta2);
     auto vg = std::make_shared<VarianceGammaModel>(ticker, marketData, prng, sigma, nu, thetaGamma);
+    auto bates = std::make_shared<BatesModel>(ticker, marketData, prng, kappa, theta, sigma_v, rho, v0, lambda, muJ, sigmaJ);
     auto laguerre = std::make_shared<LaguerreBasisFunction>(3);
     auto regression = std::make_shared<LeastSquaresRegression>();
 
@@ -97,10 +99,10 @@ int main() {
     auto europeanCall = factoryEuropean.createCallOption(params);
 
     MCSinglePathBuilder singlePathBuilder;
-    auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(merton).build();
+    auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(heston).build();
 
     MCSolver mcSolver;
-    mcSolver.setN(100000);
+    mcSolver.setN(300000);
     mcSolver.setPricer(std::move(singlePathPricer));
 
     /*
@@ -108,20 +110,28 @@ int main() {
     std::cout << mcSolver.solve() << "\n";
     */
 
+    int N = 30;
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < N; i++) {
         std::cout << "Price at T Merton: " << merton->simulatePriceAtMaturity(T) << std::endl;
     }
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < N; i++) {
+        std::cout << "Price at T Heston: " << heston->simulatePriceAtMaturity(T) << std::endl;
+    }
+
+
+    for (int i = 0; i < N; i++) {
         std::cout << "Price at T Kou: " << kou->simulatePriceAtMaturity(T)<< std::endl;
     }
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < N; i++) {
         std::cout << "Price at T VG: " << vg->simulatePriceAtMaturity(T)<< std::endl;
     }
 
-
+    for (int i = 0; i < N; i++) {
+        std::cout << "Price at T Bates: " << bates->simulatePriceAtMaturity(T)<< std::endl;
+    }
 
     /*
     std::cout << "S = 100, dim = 50, P = ";

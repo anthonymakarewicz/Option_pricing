@@ -102,6 +102,7 @@ add_library(model SHARED
         src/model/merton_jump_diffusion_model.cpp
         src/model/kou_model.cpp
         src/model/variance_gamma_model.cpp
+        src/model/bates_model.cpp
 )
 
 # Create dynamic library for random
