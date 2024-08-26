@@ -4,6 +4,7 @@
 #include "../base_payoff.h"
 
 namespace OptionPricer {
+
     // Abstract base class for PayoffSingleStrike
     class PayoffSingleStrike : public Payoff {
     public:

@@ -147,6 +147,17 @@ add_library(solver SHARED
         src/solver/monte_carlo/basis_function/legendre.cpp
         src/solver/monte_carlo/basis_function/chebyshev.cpp
         src/solver/monte_carlo/basis_function/laguerre.cpp
+        src/solver/finite_difference_method/solver/one_factor/base_fdm_solver.cpp
+        src/solver/finite_difference_method/solver/one_factor/crank_nicolson_fdm_solver.cpp
+        src/solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.cpp
+        src/solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.cpp
+        src/solver/finite_difference_method/pde/one_factor/base_convection_diffusion_pde.cpp
+        src/solver/finite_difference_method/pde/one_factor/black_scholes_pde.cpp
+        src/solver/finite_difference_method/solver/multi_factor/base_fdm_solver.cpp
+        src/solver/finite_difference_method/solver/multi_factor/crank_nicolson_fdm_solver.cpp
+        src/solver/finite_difference_method/solver/multi_factor/euler_explicit_fdm_solver.cpp
+        src/solver/finite_difference_method/solver/multi_factor/euler_implicit_fdm_solver.cpp
+        src/solver/finite_difference_method/pde/multi_factor/base_convection_diffusion_pde.cpp
 )
 
 target_link_libraries(option PUBLIC marketdata payoff)

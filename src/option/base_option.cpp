@@ -83,7 +83,7 @@ namespace OptionPricer {
         return typeName;
     }
 
-    const Payoff & Option::getPayoff() const {
+    const Payoff& Option::getPayoff() const {
         return *payoff_;
     }
 

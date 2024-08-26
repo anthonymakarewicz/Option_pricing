@@ -6,15 +6,13 @@
 
 namespace OptionPricer {
 
-    class EuropeanOptionFactory final: public OptionFactory<EuropeanOption> {
-        // Could potentially make the createSpecificOption specific to each Factory thus returnign
-        // here returning a EuropeanOption, hwoever for createSpecificPayoff it might be ok to define it as pure
-        // virtual inside the OptionFatcory as well as the getType method
-        std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params, const PayoffType& type) override;
+    class EuropeanOptionFactory final: public OptionFactory<EuropeanOption, PayoffSingleStrike> {
+        std::unique_ptr<PayoffSingleStrike> createSpecificPayoff(const ParameterObject& params,
+                                                                 const PayoffType& type) override;
 
         std::shared_ptr<EuropeanOption> createSpecificOption(const ParameterObject& params,
-                                                     std::unique_ptr<Payoff> payoff,
-                                                     const std::shared_ptr<IMarketData>& marketData) override;
+                                                             std::unique_ptr<PayoffSingleStrike> payoff,
+                                                             const std::shared_ptr<IMarketData>& marketData) override;
 
         std::string getType(const PayoffType& type) const override;
 

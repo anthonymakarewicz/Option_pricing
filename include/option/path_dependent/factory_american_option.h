@@ -6,12 +6,12 @@
 
 namespace OptionPricer {
 
-    class AmericanOptionFactory final: public OptionFactory<AmericanOption> {
-        std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params,
+    class AmericanOptionFactory final: public OptionFactory<AmericanOption, PayoffSingleStrike> {
+        std::unique_ptr<PayoffSingleStrike> createSpecificPayoff(const ParameterObject& params,
                                                      const PayoffType& type) override;
 
         std::shared_ptr<AmericanOption> createSpecificOption(const ParameterObject& params,
-                                                             std::unique_ptr<Payoff> payoff,
+                                                             std::unique_ptr<PayoffSingleStrike> payoff,
                                                              const std::shared_ptr<IMarketData>& marketData) override;
 
         std::string getType(const PayoffType& type) const override;

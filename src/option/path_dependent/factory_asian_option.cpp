@@ -5,14 +5,14 @@
 namespace OptionPricer {
 
     // ArithmeticAsianOptionFactory
-    std::unique_ptr<Payoff> ArithmeticAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
+    std::unique_ptr<PayoffSingleStrike> ArithmeticAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
                                                                                const PayoffType& type) {
         return std::make_unique<PayoffVanilla>(type, params.getParameter<double>("K"));
     }
 
     std::shared_ptr<ArithmeticAsianOption> ArithmeticAsianOptionFactory::createSpecificOption(
         const ParameterObject &params,
-        std::unique_ptr<Payoff> payoff,
+        std::unique_ptr<PayoffSingleStrike> payoff,
         const std::shared_ptr<IMarketData>& marketData) {
         return std::shared_ptr<ArithmeticAsianOption>(new ArithmeticAsianOption(
             params.getParameter<std::string>("ticker"),
@@ -27,13 +27,13 @@ namespace OptionPricer {
     }
 
     // GeometricAsianOptionFactory
-    std::unique_ptr<Payoff> GeometricAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
+    std::unique_ptr<PayoffSingleStrike> GeometricAsianOptionFactory::createSpecificPayoff(const ParameterObject &params,
             const PayoffType& type) {
         return std::make_unique<PayoffVanilla>(type, params.getParameter<double>("K"));
     }
 
     std::shared_ptr<GeometricAsianOption> GeometricAsianOptionFactory::createSpecificOption(const ParameterObject &params,
-    std::unique_ptr<Payoff> payoff, const std::shared_ptr<IMarketData>& marketData) {
+    std::unique_ptr<PayoffSingleStrike> payoff, const std::shared_ptr<IMarketData>& marketData) {
         return std::shared_ptr<GeometricAsianOption>(new GeometricAsianOption(
             params.getParameter<std::string>("ticker"),
             std::move(payoff),
