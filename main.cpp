@@ -110,7 +110,7 @@ int main() {
     std::cout << mcSolver.solve() << "\n";
     */
 
-    int N = 30;
+    int N = 50;
 
     for (int i = 0; i < N; i++) {
         std::cout << "Price at T Merton: " << merton->simulatePriceAtMaturity(T) << std::endl;
@@ -119,7 +119,6 @@ int main() {
     for (int i = 0; i < N; i++) {
         std::cout << "Price at T Heston: " << heston->simulatePriceAtMaturity(T) << std::endl;
     }
-
 
     for (int i = 0; i < N; i++) {
         std::cout << "Price at T Kou: " << kou->simulatePriceAtMaturity(T)<< std::endl;

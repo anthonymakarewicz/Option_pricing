@@ -19,7 +19,7 @@ namespace OptionPricer {
             throw std::invalid_argument("eta1 must be between larger than 1.");
         if (eta2_ < 0)
             throw std::invalid_argument("eta2 must be between larger than 0.");
-
+        muJ_ = p_ * (eta1_ / (eta1_-1)) + (1-p_) * (eta2_ / (eta2_+1));
     }
 
     KouModel::~KouModel() = default;
@@ -44,8 +44,8 @@ namespace OptionPricer {
 
         std::vector<double> prices(steps);
         for (int t = 0; t < steps; ++t) {
-            // Drift Part
-            const double drift = (r - c - 0.5 * sigma*sigma) * dt;
+            // Drift Part with risk neutral adjustment
+            const double drift = (r - c - 0.5 * sigma*sigma - lambda_ * (muJ_-1)) * dt;
 
             // Diffusion part: Standard Brownian Motion
             const double z = (*generator_)(snDist);

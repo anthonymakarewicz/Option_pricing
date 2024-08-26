@@ -22,10 +22,11 @@ namespace OptionPricer {
         std::vector<double> simulatePrices(const double& T) const override;
 
     private:
-        double lambda_;  // Jump intensity
-        double p_;       // Probability of upward jump
+        double lambda_;    // Jump intensity
+        double p_;        // Probability of upward jump
         double eta1_;    // Rate of upward jumps
-        double eta2_;    // Rate of downward jumps
+        double eta2_;   // Rate of downward jumps
+        double muJ_;    // Average jump size
     };
 
 }
