@@ -158,6 +158,11 @@ add_library(solver SHARED
         src/solver/finite_difference_method/solver/multi_factor/euler_explicit_fdm_solver.cpp
         src/solver/finite_difference_method/solver/multi_factor/euler_implicit_fdm_solver.cpp
         src/solver/finite_difference_method/pde/multi_factor/base_convection_diffusion_pde.cpp
+        include/solver/finite_difference_method/solver/one_factor/interpolation/linear_interpolation.h
+        include/solver/finite_difference_method/solver/one_factor/interpolation/quadratic_interpolation.h
+        src/solver/finite_difference_method/solver/one_factor/interpolation/base_interpolation_strategy.cpp
+        src/solver/finite_difference_method/solver/one_factor/interpolation/linear_interpolation.cpp
+        src/solver/finite_difference_method/solver/one_factor/interpolation/quadratic_interpolation.cpp
 )
 
 target_link_libraries(option PUBLIC marketdata payoff)

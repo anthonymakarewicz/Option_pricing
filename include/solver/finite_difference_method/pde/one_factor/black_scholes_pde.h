@@ -11,14 +11,14 @@ namespace OptionPricer::PDE::OneFactor {
         BlackScholesPDE(std::shared_ptr<EuropeanOption> option, std::shared_ptr<IMarketData> marketData);
         virtual ~BlackScholesPDE();
 
-        virtual double diffusion(const double& t,const double& x) const;
-        virtual double convection(const double& t,const double& x) const;
-        virtual double reaction(const double& t,const double& x) const;
-        virtual double rightHandSide(const double& t,const double& x) const;
+        double diffusion(const double& t,const double& x) const override;
+        double convection(const double& t,const double& x) const override;
+        double reaction(const double& t,const double& x) const override;
+        double rightHandSide(const double& t,const double& x) const override;
 
-        virtual double boundaryLeft(const double& t,const double& x) const;
-        virtual double boundaryRight(const double& t,const double& x) const;
-        virtual double initialCondition(const double& x) const;
+        double boundaryLeft(const double& t,const double& x) const override;
+        double boundaryRight(const double& t,const double& x) const override;
+        double initialCondition(const double& x) const override;
 
     private:
         std::shared_ptr<EuropeanOption> option_;
