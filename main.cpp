@@ -28,6 +28,7 @@
 #include <model/discretization/milstein_cir_discretization.h>
 #include <solver/finite_difference_method/pde/one_factor/black_scholes_pde.h>
 #include <solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.h>
+#include <solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.h>
 #include <solver/monte_carlo/mc_single_path.h>
 #include <solver/monte_carlo/basis_function/chebyshev.h>
 #include <solver/monte_carlo/basis_function/laguerre.h>
@@ -35,7 +36,7 @@
 #include <solver/monte_carlo/regression/lasso.h>
 #include <solver/monte_carlo/regression/ridge.h>
 
-#include "solver/finite_difference_method/solver/one_factor/interpolation/quadratic_interpolation.h"
+#include "numerical_analysis/interpolation/quadratic_interpolation.h"
 #include "solver/monte_carlo/basis_function/legendre.h"
 
 using namespace OptionPricer;
@@ -112,7 +113,7 @@ int main() {
     mcSolver.setPricer(std::move(singlePathPricer));
 
 
-    std::cout << "Price MC: " << mcSolver.solve() << "\n";
+    //std::cout << "Price MC: " << mcSolver.solve() << "\n";
 
     /*
     int N = 50;
@@ -143,15 +144,19 @@ int main() {
     double tDom = T; // Time period as for the option
     unsigned long N2 = 40;
     auto pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+    auto pde2 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+
     auto quadrInterp = std::make_shared<QuadraticInterpolation>();
     EulerExplicitFDM fdm(xDom, J, tDom, N2, std::move(pde), europeanCall, marketData, quadrInterp);
-
+    EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp);
     auto prices = fdm.solve();
 
     //for (const auto& price : prices)
     //    std::cout << "Price: " << price << std::endl;
 
-    std::cout << "FDM price: " << fdm.calculatePrice() << std::endl;
+    std::cout << "FDM price Explicit: " << fdm.calculatePrice() << std::endl;
+
+    std::cout << "FDM price Implicit: " << fdm2.calculatePrice() << std::endl;
 
     /*
     std::cout << "S = 100, dim = 50, P = ";

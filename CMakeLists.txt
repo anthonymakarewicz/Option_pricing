@@ -91,6 +91,17 @@ add_library(option SHARED
         src/option/path_dependent/factory_lookback_option.cpp
 )
 
+# Create dynamic library for numerical_analysis
+add_library(numerical_analysis SHARED
+        #src/numerical_analysis/linear_algebra/matrix_solver/lu_decomposition.cpp
+        #src/numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.cpp
+        src/numerical_analysis/interpolation/base_interpolation.cpp
+        src/numerical_analysis/interpolation/linear_interpolation.cpp
+        src/numerical_analysis/interpolation/quadratic_interpolation.cpp
+        src/numerical_analysis/linear_algebra/base_matrix_solver.cpp
+        #src/numerical_analysis/linear_algebra/matrix_solver/base_matrix_solver.cpp
+)
+
 # Create dynamic library for model
 add_library(model SHARED
         src/model/gbm_model.cpp
@@ -158,22 +169,17 @@ add_library(solver SHARED
         src/solver/finite_difference_method/solver/multi_factor/euler_explicit_fdm_solver.cpp
         src/solver/finite_difference_method/solver/multi_factor/euler_implicit_fdm_solver.cpp
         src/solver/finite_difference_method/pde/multi_factor/base_convection_diffusion_pde.cpp
-        include/solver/finite_difference_method/solver/one_factor/interpolation/linear_interpolation.h
-        include/solver/finite_difference_method/solver/one_factor/interpolation/quadratic_interpolation.h
-        src/solver/finite_difference_method/solver/one_factor/interpolation/base_interpolation_strategy.cpp
-        src/solver/finite_difference_method/solver/one_factor/interpolation/linear_interpolation.cpp
-        src/solver/finite_difference_method/solver/one_factor/interpolation/quadratic_interpolation.cpp
 )
 
 target_link_libraries(option PUBLIC marketdata payoff)
 target_link_libraries(model PUBLIC option random)
-target_link_libraries(solver PUBLIC option model Boost::random Eigen3::Eigen)
+target_link_libraries(solver PUBLIC option model numerical_analysis Boost::random Eigen3::Eigen)
 
 # Create main executable
 add_executable(Option_pricer main.cpp)
 
 # Link the main executable to our dynamic libraries
-target_link_libraries(Option_pricer PUBLIC marketdata payoff option solver random model)
+target_link_libraries(Option_pricer PUBLIC marketdata payoff option solver random model numerical_analysis)
 
 # Enable testing and add the tests directory
 enable_testing()
