@@ -93,13 +93,13 @@ add_library(option SHARED
 
 # Create dynamic library for numerical_analysis
 add_library(numerical_analysis SHARED
-        #src/numerical_analysis/linear_algebra/matrix_solver/lu_decomposition.cpp
-        #src/numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.cpp
         src/numerical_analysis/interpolation/base_interpolation.cpp
         src/numerical_analysis/interpolation/linear_interpolation.cpp
         src/numerical_analysis/interpolation/quadratic_interpolation.cpp
-        src/numerical_analysis/linear_algebra/base_matrix_solver.cpp
-        #src/numerical_analysis/linear_algebra/matrix_solver/base_matrix_solver.cpp
+        src/numerical_analysis/linear_algebra/matrix_solver/base_matrix_solver.cpp
+        src/numerical_analysis/linear_algebra/matrix_solver/lu_decomposition.cpp
+        src/numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.cpp
+        src/numerical_analysis/linear_algebra/matrix_solver/partial_pivoting_lu_decomposition.cpp
 )
 
 # Create dynamic library for model

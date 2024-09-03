@@ -1,4 +1,6 @@
 #include "solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.h"
+#include "numerical_analysis/linear_algebra/matrix_solver/lu_decomposition.h"
+#include <iostream>
 
 namespace OptionPricer::FDM::OneFactor {
 
@@ -7,9 +9,14 @@ namespace OptionPricer::FDM::OneFactor {
                                        std::unique_ptr<ConvectionDiffusionPDE> pde,
                                        std::shared_ptr<EuropeanOption> option,
                                        std::shared_ptr<IMarketData> marketData,
-                                       std::shared_ptr<Interpolation> interpolation)
+                                       std::shared_ptr<Interpolation> interpolation,
+                                       std::shared_ptr<BaseMatrixSolver> matrixSolver)
     : FDMSolver(xDom, J, tDom, N, std::move(pde), std::move(option), std::move(marketData), std::move(interpolation)) {
-        // Initialize Eigen Sparse Matrix and RHS vector
+        if (!matrixSolver)
+            matrixSolver_ = std::make_shared<LUDecompositionSolver>();
+        else
+            matrixSolver_ = std::move(matrixSolver);
+
         A.resize(J_-2, J_-2);
         b.resize(J_-2);
     }
@@ -29,6 +36,12 @@ namespace OptionPricer::FDM::OneFactor {
             beta = -dx2 - 2.0 * dtSig + dt * dx2 * pde_->reaction(tCurr, xValues[j]);
             gamma = dtSig + dtSig2;
 
+            // Diagonal dominance check
+            if (std::abs(beta) < std::abs(alpha) + std::abs(gamma)) {
+                std::cerr << "Warning: Matrix is not diagonally dominant at row " << j
+                          << ". This may lead to numerical instability." << std::endl;
+            }
+
             if (j > 1) {
                 tripletList.emplace_back(j-1, j-2, alpha);    // Lower diagonal
             }
@@ -45,23 +58,14 @@ namespace OptionPricer::FDM::OneFactor {
                 b[J_-3] -= gamma * newPrices[J_-1];
         }
 
+        // Solve for the matrix system
         A.setFromTriplets(tripletList.begin(), tripletList.end());
+        Eigen::VectorXd solution = matrixSolver_->solve(A, b);
 
-        // Solve the system A * newPrices = b using Eigen's SparseLU solver
-        Eigen::SparseLU<Eigen::SparseMatrix<double>> solver;
-        solver.compute(A);
-        if (solver.info() != Eigen::Success) {
-            throw std::runtime_error("Matrix decomposition failed!");
-        }
-
-        Eigen::VectorXd solution = solver.solve(b);
-        if (solver.info() != Eigen::Success) {
-            throw std::runtime_error("Solving the linear system failed!");
-        }
-
-        // Copy the solution back to newPrices
+        // Copy the solution to the internal prices
         for (unsigned long j = 1; j < (J_-1); ++j) {
             newPrices[j] = solution[j-1];
         }
+
     }
 }

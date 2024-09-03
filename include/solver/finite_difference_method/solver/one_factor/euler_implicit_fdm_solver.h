@@ -8,6 +8,7 @@
 #include "solver/finite_difference_method/solver/one_factor/base_fdm_solver.h"
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
+#include <numerical_analysis/linear_algebra/matrix_solver/base_matrix_solver.h>
 
 namespace OptionPricer::FDM::OneFactor {
 
@@ -20,12 +21,15 @@ namespace OptionPricer::FDM::OneFactor {
                          std::unique_ptr<ConvectionDiffusionPDE> pde,
                          std::shared_ptr<EuropeanOption> option,
                          std::shared_ptr<IMarketData> marketData,
-                         std::shared_ptr<Interpolation> interpolation = nullptr);
+                         std::shared_ptr<Interpolation> interpolation = nullptr,
+                         std::shared_ptr<BaseMatrixSolver> matrixSolver = nullptr);
 
         ~EulerImplicitFDM() override;
 
     private:
         void calculateInnerDomain() override;
+
+        std::shared_ptr<BaseMatrixSolver> matrixSolver_;
         double alpha, beta, gamma;       // Differencing coefficients
         Eigen::SparseMatrix<double> A;  // Coefficient matrix
         Eigen::VectorXd b;             // Right-hand side vector

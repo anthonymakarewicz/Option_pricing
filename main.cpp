@@ -26,6 +26,8 @@
 #include <model/merton_jump_diffusion_model.h>
 #include <model/variance_gamma_model.h>
 #include <model/discretization/milstein_cir_discretization.h>
+#include <numerical_analysis/linear_algebra/matrix_solver/partial_pivoting_lu_decomposition.h>
+#include <numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.h>
 #include <solver/finite_difference_method/pde/one_factor/black_scholes_pde.h>
 #include <solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.h>
 #include <solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.h>
@@ -145,10 +147,12 @@ int main() {
     unsigned long N2 = 40;
     auto pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
     auto pde2 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+    auto thomas = std::make_shared<ThomasAlgorithm>();
+    auto partialPiv = std::make_shared<PartialPivotingLUSolver>();
 
     auto quadrInterp = std::make_shared<QuadraticInterpolation>();
     EulerExplicitFDM fdm(xDom, J, tDom, N2, std::move(pde), europeanCall, marketData, quadrInterp);
-    EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp);
+    EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp, partialPiv);
     auto prices = fdm.solve();
 
     //for (const auto& price : prices)
