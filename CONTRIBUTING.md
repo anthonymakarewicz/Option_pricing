@@ -5,6 +5,11 @@
 This repository follows a structured workflow to ensure code quality, stability, and consistency.
 Below are the key assumptions and guidelines that contributors should follow:
 
+### Code Style
+- Follow the C++ Core Guidelines.
+- Use modern C++ best practices.
+- Ensure all new code is covered by unit and integration tests.
+
 ### Branching Strategy
 
 1. **Main Branch (`main`)**:
@@ -12,36 +17,29 @@ Below are the key assumptions and guidelines that contributors should follow:
     - Direct pushes to the `main` branch are **not allowed**. All changes must be introduced via pull requests (PRs).
     - Before merging into `main`, all PRs must pass the CI/CD pipeline and receive necessary approvals.
 
+
 2. **Development Branch (`dev`)**:
     - The `dev` branch is the primary branch for ongoing development.
     - All feature branches should be created from and merged back into `dev`.
     - Pushing to `dev` also triggers the CI/CD pipeline to ensure that ongoing development does not introduce errors.
+
 
 3. **Feature Branches (`feature/*`)**:
     - Feature branches are used for developing new features and should be created from `dev`.
     - Once a feature is complete and tested, it should be merged back into `dev`.
     - Example: `feature/your-feature-name`.
 
-4. **Release Branches (`release/*`)**:
-    - Release branches are created from `dev` when preparing for a new production release.
-    - After final testing and necessary changes, release branches are merged into both `main` and `dev`.
-    - Example: `release/1.0`.
-
-5. **Hotfix Branches (`hotfix/*`)**:
-    - Hotfix branches are created from `main` to address critical issues found in production.
-    - After fixing the issue, hotfix branches are merged into both `main` and `dev`.
-    - Example: `hotfix/issue-name`.
 
 ### CI/CD Pipeline
 
-1. **Continuous Integration/Continuous Deployment (CI/CD)**:
+1. **Push command and CI/CD**:
     - The CI/CD pipeline is triggered by pushes to any branch except `main`.
-    - The pipeline includes steps such as building the project, running tests, and static code analysis (e.g., using `clang-tidy`).
+    - The pipeline includes steps such as building the project and running the unit tests.
+
 
 2. **Pull Requests and CI/CD**:
     - To merge changes into `main`, you must create a pull request (PR).
-    - The CI/CD pipeline automatically runs for each PR to validate the changes.
-    - Only after the CI/CD pipeline passes and the PR is approved can it be merged into `main`.
+    - A different CI/CD pipeline automatically runs for each PR and runs the integration tests.
 
 ### Workflow Guidelines
 
@@ -72,10 +70,15 @@ Below are the key assumptions and guidelines that contributors should follow:
    - Select `main` as the base branch and your feature branch as the compare branch.
    - Fill in the title and description and click "Create pull request".
 
+
 5. **Merging a Pull Request**:
    - Ensure all CI/CD checks pass and the PR is approved.
    - Merge the PR on GitHub to integrate changes into `main`.
    - Pull changes from origin/main to local main by calling `git pull` inside main.
+
+   
+### Reporting Issues
+If you encounter any issues, please create a new issue on GitHub with a detailed description of the problem.
 
 ## Example workflows
 

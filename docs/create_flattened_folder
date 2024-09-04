@@ -1,2 +1,0 @@
-mkdir flattened_folder
-find folder1 -type f -exec cp {} flattened_folder \;

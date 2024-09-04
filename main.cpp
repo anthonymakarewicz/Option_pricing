@@ -73,7 +73,7 @@ int main() {
     double p = 0.5;
 
     // Variance Gamma parameters
-    double thetaGamma = -0.05;
+    double thetaGamma = -0.005;
     double nu = 0.5;
 
     auto marketData = MarketData::getInstance();
@@ -88,6 +88,7 @@ int main() {
     auto generator = std::make_shared<SobolGenerator>(dim);
     auto prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
     auto geometricBrownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData, generator);
+
     auto heston = std::make_shared<HestonModel>(ticker, marketData, prng, kappa, theta, sigma_v, rho, v0);
     auto merton = std::make_shared<MertonJumpDiffusionModel>(ticker, marketData, prng, lambda, muJ, sigmaJ);
     auto kou = std::make_shared<KouModel>(ticker, marketData, prng, lambda, p, eta1, eta2);
@@ -102,7 +103,7 @@ int main() {
     AmericanMCBuilder builder;
     auto americanPricer = builder.setOption(americanPut)
                                  .setBasisFunctionStrategy(laguerre)
-                                 .setStockPriceModel(heston)
+                                 .setStockPriceModel(vg)
                                  .build();
 
     EuropeanOptionFactory factoryEuropean;
@@ -112,13 +113,13 @@ int main() {
     auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(geometricBrownianMotion).build();
 
     MCSolver mcSolver;
-    mcSolver.setN(300000);
-    mcSolver.setPricer(std::move(singlePathPricer));
+    mcSolver.setN(10000);
+    mcSolver.setPricer(std::move(americanPricer));
 
+/*
+    std::cout << "Price MC: " << mcSolver.solve() << "\n";
+*/
 
-    //std::cout << "Price MC: " << mcSolver.solve() << "\n";
-
-    /*
     int N = 50;
 
     for (int i = 0; i < N; i++) {
@@ -140,8 +141,8 @@ int main() {
     for (int i = 0; i < N; i++) {
         std::cout << "Price at T Bates: " << bates->simulatePriceAtMaturity(T)<< std::endl;
     }
-    */
 
+    /*
     double xDom = 2.5 * K; // Spot goes from [0.0 , 1.0]
     unsigned long J = 200;
     double tDom = T; // Time period as for the option
@@ -156,18 +157,20 @@ int main() {
     EulerExplicitFDM fdm(xDom, J, tDom, N2, std::move(pde), europeanCall, marketData, quadrInterp);
     EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp, thomas);
     CrankNicolsonFDMSolver fdm3(xDom, J, tDom, N2, std::move(pde3), europeanCall, marketData, quadrInterp, thomas);
-
+    */
     //auto prices = fdm.solve();
 
     //for (const auto& price : prices)
     //    std::cout << "Price: " << price << std::endl;
 
+    /*
     std::cout << "FDM price Explicit: " << fdm.calculatePrice() << std::endl;
 
     std::cout << "FDM price Implicit: " << fdm2.calculatePrice() << std::endl;
 
     std::cout << "FDM price CN: " << fdm3.calculatePrice() << std::endl;
 
+    */
     /*
     std::cout << "S = 100, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";

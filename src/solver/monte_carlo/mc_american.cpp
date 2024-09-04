@@ -1,6 +1,7 @@
 #include "solver/monte_carlo/mc_american.h"
 #include "random/number_generator/pseudo_random_generator.h"
 #include <Eigen/Dense>
+#include <model/gbm_model.h>
 
 namespace OptionPricer {
 
@@ -14,8 +15,9 @@ namespace OptionPricer {
     regressionStrategy_(std::move(regressionStrategy)) {}
 
     double AmericanMCPricer::calculatePrice(const unsigned long &N) const {
-        if (std::dynamic_pointer_cast<PseudoRandomNumberGenerator>(stockModel_->getGenerator())) {
-            // Currently not supported for Quasi Random Numbers
+        if (std::dynamic_pointer_cast<PseudoRandomNumberGenerator>(stockModel_->getGenerator())
+            && std::dynamic_pointer_cast<GeometricBrownianMotionModel>(stockModel_)) {
+            // Currently not supported for Quasi Random Numbers and other stock models
             return brownianBridgePrice(N);
         }
         return standardPrice(N);
