@@ -26,23 +26,33 @@
 #include <model/merton_jump_diffusion_model.h>
 #include <model/variance_gamma_model.h>
 #include <model/discretization/milstein_cir_discretization.h>
+#include <numerical_analysis/linear_algebra/matrix_solver/partial_pivoting_lu_decomposition.h>
+#include <numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.h>
+#include <solver/finite_difference_method/pde/one_factor/black_scholes_pde.h>
+#include <solver/finite_difference_method/solver/one_factor/crank_nicolson_fdm_solver.h>
+#include <solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.h>
+#include <solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.h>
 #include <solver/monte_carlo/mc_single_path.h>
-#include <solver/monte_carlo/basis_function/chebyshev.h>
-#include <solver/monte_carlo/basis_function/laguerre.h>
+#include <numerical_analysis/basis_function/chebyshev.h>
+#include <numerical_analysis/basis_function/laguerre.h>
 #include <solver/monte_carlo/builder/mc_builder_single_path.h>
-#include <solver/monte_carlo/regression/lasso.h>
-#include <solver/monte_carlo/regression/ridge.h>
-#include "solver/monte_carlo/basis_function/legendre.h"
+#include <numerical_analysis/regression/lasso.h>
+#include <numerical_analysis/regression/ridge.h>
+
+#include "numerical_analysis/interpolation/quadratic_interpolation.h"
+#include "numerical_analysis/basis_function/legendre.h"
 
 using namespace OptionPricer;
+using namespace PDE::OneFactor;
+using namespace FDM::OneFactor;
 
 int main() {
     std::string ticker = "AAPL";
     double T = 1.0;
     double K = 100.0;
     double S = 100.0;
-    double sigma = 0.15;
-    double r = 0.0319;
+    double sigma = 0.2;
+    double r = 0.05;
     int dim = 1000;
 
     // Heston parameters
@@ -99,17 +109,16 @@ int main() {
     auto europeanCall = factoryEuropean.createCallOption(params);
 
     MCSinglePathBuilder singlePathBuilder;
-    auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(heston).build();
+    auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(geometricBrownianMotion).build();
 
     MCSolver mcSolver;
     mcSolver.setN(300000);
     mcSolver.setPricer(std::move(singlePathPricer));
 
-    /*
-    std::cout << "S = 100, dim = 50, P = ";
-    std::cout << mcSolver.solve() << "\n";
-    */
 
+    //std::cout << "Price MC: " << mcSolver.solve() << "\n";
+
+    /*
     int N = 50;
 
     for (int i = 0; i < N; i++) {
@@ -131,6 +140,33 @@ int main() {
     for (int i = 0; i < N; i++) {
         std::cout << "Price at T Bates: " << bates->simulatePriceAtMaturity(T)<< std::endl;
     }
+    */
+
+    double xDom = 2.5 * K; // Spot goes from [0.0 , 1.0]
+    unsigned long J = 200;
+    double tDom = T; // Time period as for the option
+    unsigned long N2 = 200;
+    auto pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+    auto pde2 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+    auto pde3 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+    auto thomas = std::make_shared<ThomasAlgorithm>();
+    auto partialPiv = std::make_shared<PartialPivotingLUSolver>();
+
+    auto quadrInterp = std::make_shared<QuadraticInterpolation>();
+    EulerExplicitFDM fdm(xDom, J, tDom, N2, std::move(pde), europeanCall, marketData, quadrInterp);
+    EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp, thomas);
+    CrankNicolsonFDMSolver fdm3(xDom, J, tDom, N2, std::move(pde3), europeanCall, marketData, quadrInterp, thomas);
+
+    //auto prices = fdm.solve();
+
+    //for (const auto& price : prices)
+    //    std::cout << "Price: " << price << std::endl;
+
+    std::cout << "FDM price Explicit: " << fdm.calculatePrice() << std::endl;
+
+    std::cout << "FDM price Implicit: " << fdm2.calculatePrice() << std::endl;
+
+    std::cout << "FDM price CN: " << fdm3.calculatePrice() << std::endl;
 
     /*
     std::cout << "S = 100, dim = 50, P = ";

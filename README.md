@@ -120,7 +120,7 @@ src
     └── monte_carlo
         ├── base_mc.cpp
         ├── basis_function
-        │   ├── base_basis_function_strategy.cpp
+        │   ├── base_basis_function.cpp
         │   ├── chebyshev.cpp
         │   ├── laguerre.cpp
         │   ├── legendre.cpp
@@ -139,7 +139,7 @@ src
         ├── mc_single_path.cpp
         ├── mc_solver.cpp
         └── regression
-            ├── base_regression_strategy.cpp
+            ├── base_regression.cpp
             ├── lasso.cpp
             ├── least_squares.cpp
             └── ridge.cpp

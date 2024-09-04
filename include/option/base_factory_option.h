@@ -14,46 +14,50 @@ namespace OptionPricer {
     template <typename T>
     concept OptionTypeConcept = std::is_base_of_v<Option, T>;
 
-    template<OptionTypeConcept OptionType> class OptionFactory {
+    // Define a concept for an Payoff type
+    template <typename T>
+    concept PayoffTypeConcept = std::is_base_of_v<Payoff, T>;
+
+    template<OptionTypeConcept OptionT, PayoffTypeConcept PayoffT> class OptionFactory {
     public:
         virtual ~OptionFactory() = default;
 
         // Non-static create methods as we use virtual methods
-        [[nodiscard]] std::shared_ptr<OptionType> createCallOption(const ParameterObject& params);
-        [[nodiscard]] std::shared_ptr<OptionType> createPutOption(const ParameterObject& params);
+        [[nodiscard]] std::shared_ptr<OptionT> createCallOption(const ParameterObject& params);
+        [[nodiscard]] std::shared_ptr<OptionT> createPutOption(const ParameterObject& params);
 
     protected:
         // Template method pattern
-        std::shared_ptr<OptionType> createOption(const ParameterObject& params, const PayoffType& type);
+        std::shared_ptr<OptionT> createOption(const ParameterObject& params, const PayoffType& type);
 
         // Can be overiden to add extra parameters
         virtual std::string invalidParams(const std::string& option_type) const;
 
         // To be overidden in concrete factories
-        virtual std::unique_ptr<Payoff> createSpecificPayoff(const ParameterObject& params,
-                                                             const PayoffType& type) = 0;
-        virtual std::shared_ptr<OptionType> createSpecificOption(const ParameterObject& params,
-                                                             std::unique_ptr<Payoff> payoff,
-                                                             const std::shared_ptr<IMarketData>& marketData) = 0;
+        virtual std::unique_ptr<PayoffT> createSpecificPayoff(const ParameterObject& params,
+                                                              const PayoffType& type) = 0;
+        virtual std::shared_ptr<OptionT> createSpecificOption(const ParameterObject& params,
+                                                              std::unique_ptr<PayoffT> payoff,
+                                                              const std::shared_ptr<IMarketData>& marketData) = 0;
         virtual std::string getType(const PayoffType& type) const = 0;
     };
 
 
-    template <OptionTypeConcept OptionType>
-    std::shared_ptr<OptionType> OptionFactory<OptionType>::createCallOption(const ParameterObject &params) {
+    template<OptionTypeConcept OptionT, PayoffTypeConcept PayoffT>
+    std::shared_ptr<OptionT> OptionFactory<OptionT, PayoffT>::createCallOption(const ParameterObject &params) {
         return createOption(params, PayoffType::Call);
     }
 
-    template <OptionTypeConcept OptionType>
-    std::shared_ptr<OptionType> OptionFactory<OptionType>::createPutOption(const ParameterObject &params) {
+    template<OptionTypeConcept OptionT, PayoffTypeConcept PayoffT>
+    std::shared_ptr<OptionT> OptionFactory<OptionT, PayoffT>::createPutOption(const ParameterObject &params) {
         return createOption(params, PayoffType::Put);
     }
 
-    template <OptionTypeConcept OptionType>
-    std::shared_ptr<OptionType> OptionFactory<OptionType>::createOption(const ParameterObject &params,
-                                                                        const PayoffType& type) {
+    template<OptionTypeConcept OptionT, PayoffTypeConcept PayoffT>
+    std::shared_ptr<OptionT> OptionFactory<OptionT, PayoffT>::createOption(const ParameterObject &params,
+                                                                           const PayoffType& type) {
         auto marketData = MarketData::getInstance();
-        std::shared_ptr<OptionType> option = nullptr;
+        std::shared_ptr<OptionT> option = nullptr;
 
         try {
             auto payoff = createSpecificPayoff(params, type);
@@ -67,8 +71,8 @@ namespace OptionPricer {
         return option;
     }
 
-    template <OptionTypeConcept OptionType>
-    std::string OptionFactory<OptionType>::invalidParams(const std::string &option_type) const {
+    template<OptionTypeConcept OptionT, PayoffTypeConcept PayoffT>
+    std::string OptionFactory<OptionT, PayoffT>::invalidParams(const std::string &option_type) const {
         return "Invalid parameters for " + option_type + "\n"
                "Expected parameters:\n"
                "  - ticker (string) for ticker symbol\n"

@@ -3,8 +3,8 @@
 
 #include "solver/monte_carlo/builder/base_mc_builder.h"
 #include "solver/monte_carlo/mc_american.h"
-#include "solver/monte_carlo/regression/least_squares.h"
-#include "solver/monte_carlo/basis_function/monomial.h"
+#include "numerical_analysis/regression/least_squares.h"
+#include "numerical_analysis/basis_function/monomial.h"
 
 namespace OptionPricer {
 
@@ -14,15 +14,15 @@ namespace OptionPricer {
         ~AmericanMCBuilder() override;
 
         AmericanMCBuilder& setOption(std::shared_ptr<Option> option) override;
-        AmericanMCBuilder& setRegressionStrategy(std::shared_ptr<RegressionStrategy> regressionStrategy);
-        AmericanMCBuilder& setBasisFunctionStrategy(std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy);
+        AmericanMCBuilder& setRegressionStrategy(std::shared_ptr<Regression> regressionStrategy);
+        AmericanMCBuilder& setBasisFunctionStrategy(std::shared_ptr<BasisFunction> basisFunctionStrategy);
 
         std::unique_ptr<MCPricer> build() override;
 
     private:
         std::shared_ptr<AmericanOption> option_;
-        std::shared_ptr<RegressionStrategy> regressionStrategy_;
-        std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy_;
+        std::shared_ptr<Regression> regressionStrategy_;
+        std::shared_ptr<BasisFunction> basisFunctionStrategy_;
     };
 
 }

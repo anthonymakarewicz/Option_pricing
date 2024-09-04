@@ -1,14 +1,14 @@
 #include "solver/monte_carlo/mc_american.h"
 #include "random/number_generator/pseudo_random_generator.h"
-#include "Eigen/Dense"
+#include <Eigen/Dense>
 
 namespace OptionPricer {
 
     AmericanMCPricer::AmericanMCPricer(std::shared_ptr<AmericanOption> option,
                                        std::shared_ptr<IMarketData> marketData,
                                        std::shared_ptr<StockModel> stockModel,
-                                       std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy,
-                                       std::shared_ptr<RegressionStrategy> regressionStrategy)
+                                       std::shared_ptr<BasisFunction> basisFunctionStrategy,
+                                       std::shared_ptr<Regression> regressionStrategy)
     : MCPricer(std::move(marketData),std::move(stockModel)), option_(std::move(option)),
     basisFunctionStrategy_(std::move(basisFunctionStrategy)),
     regressionStrategy_(std::move(regressionStrategy)) {}
