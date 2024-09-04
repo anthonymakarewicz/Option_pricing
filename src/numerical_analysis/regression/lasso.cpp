@@ -1,4 +1,4 @@
-#include "solver/monte_carlo/regression/lasso.h"
+#include "numerical_analysis/regression/lasso.h"
 
 namespace OptionPricer {
 

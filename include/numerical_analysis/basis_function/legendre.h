@@ -1,13 +1,13 @@
 #ifndef LEGENDRE_H
 #define LEGENDRE_H
 
-#include "solver/monte_carlo/basis_function/base_basis_function_strategy.h"
+#include "numerical_analysis/basis_function/base_basis_function.h"
 
 namespace OptionPricer {
 
-    class LegendreBasisFunction final : public BasisFunctionStrategy {
+    class LegendreBasisFunction final : public BasisFunction {
     public:
-        using BasisFunctionStrategy::BasisFunctionStrategy;
+        using BasisFunction::BasisFunction;
         ~LegendreBasisFunction() override;
 
         [[nodiscard]] Eigen::MatrixXd generate(const Eigen::VectorXd& x) const override;

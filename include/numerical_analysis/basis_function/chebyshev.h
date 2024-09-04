@@ -1,13 +1,13 @@
 #ifndef CHEBYSHEV_H
 #define CHEBYSHEV_H
 
-#include "solver/monte_carlo/basis_function/base_basis_function_strategy.h"
+#include "numerical_analysis/basis_function/base_basis_function.h"
 
 namespace OptionPricer {
 
-    class ChebyshevBasisFunction : public BasisFunctionStrategy {
+    class ChebyshevBasisFunction : public BasisFunction {
     public:
-        using BasisFunctionStrategy::BasisFunctionStrategy;
+        using BasisFunction::BasisFunction;
         ~ChebyshevBasisFunction() override;
 
         [[nodiscard]] Eigen::MatrixXd generate(const Eigen::VectorXd& x) const override;

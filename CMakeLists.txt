@@ -100,6 +100,16 @@ add_library(numerical_analysis SHARED
         src/numerical_analysis/linear_algebra/matrix_solver/lu_decomposition.cpp
         src/numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.cpp
         src/numerical_analysis/linear_algebra/matrix_solver/partial_pivoting_lu_decomposition.cpp
+        src/numerical_analysis/regression/base_regression.cpp
+        src/numerical_analysis/regression/least_squares.cpp
+        src/numerical_analysis/regression/ridge.cpp
+        src/numerical_analysis/regression/lasso.cpp
+        src/numerical_analysis/basis_function/base_basis_function.cpp
+        src/numerical_analysis/basis_function/monomial.cpp
+        src/numerical_analysis/basis_function/legendre.cpp
+        src/numerical_analysis/basis_function/legendre.cpp
+        src/numerical_analysis/basis_function/chebyshev.cpp
+        src/numerical_analysis/basis_function/laguerre.cpp
 )
 
 # Create dynamic library for model
@@ -148,16 +158,6 @@ add_library(solver SHARED
         src/solver/monte_carlo/builder/mc_builder_barrier.cpp
         src/solver/monte_carlo/builder/mc_builder_american.cpp
         src/solver/monte_carlo/builder/mc_lookback_builder.cpp
-        src/solver/monte_carlo/regression/base_regression_strategy.cpp
-        src/solver/monte_carlo/regression/least_squares.cpp
-        src/solver/monte_carlo/regression/ridge.cpp
-        src/solver/monte_carlo/regression/lasso.cpp
-        src/solver/monte_carlo/basis_function/base_basis_function_strategy.cpp
-        src/solver/monte_carlo/basis_function/monomial.cpp
-        src/solver/monte_carlo/basis_function/legendre.cpp
-        src/solver/monte_carlo/basis_function/legendre.cpp
-        src/solver/monte_carlo/basis_function/chebyshev.cpp
-        src/solver/monte_carlo/basis_function/laguerre.cpp
         src/solver/finite_difference_method/solver/one_factor/base_fdm_solver.cpp
         src/solver/finite_difference_method/solver/one_factor/crank_nicolson_fdm_solver.cpp
         src/solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.cpp

@@ -1,4 +1,4 @@
-#include "solver/monte_carlo/basis_function/laguerre.h"
+#include "numerical_analysis/basis_function/laguerre.h"
 
 namespace OptionPricer {
 

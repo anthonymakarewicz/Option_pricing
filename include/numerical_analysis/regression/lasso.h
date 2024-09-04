@@ -1,7 +1,7 @@
 #ifndef LASSO_H
 #define LASSO_H
 
-#include "solver/monte_carlo/regression/least_squares.h"
+#include "numerical_analysis/regression/least_squares.h"
 
 namespace OptionPricer {
 

@@ -1,13 +1,13 @@
 #ifndef LAGUERRE_H
 #define LAGUERRE_H
 
-#include "solver/monte_carlo/basis_function/base_basis_function_strategy.h"
+#include "numerical_analysis/basis_function/base_basis_function.h"
 
 namespace OptionPricer {
 
-    class LaguerreBasisFunction final : public BasisFunctionStrategy {
+    class LaguerreBasisFunction final : public BasisFunction {
     public:
-        using BasisFunctionStrategy::BasisFunctionStrategy;
+        using BasisFunction::BasisFunction;
         ~LaguerreBasisFunction() override;
 
         [[nodiscard]] Eigen::MatrixXd generate(const Eigen::VectorXd& x) const override;

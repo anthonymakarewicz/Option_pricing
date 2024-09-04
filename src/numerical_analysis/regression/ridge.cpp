@@ -1,4 +1,4 @@
-#include "solver/monte_carlo/regression/ridge.h"
+#include "numerical_analysis/regression/ridge.h"
 
 namespace OptionPricer {
 

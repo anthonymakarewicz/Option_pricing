@@ -16,12 +16,12 @@ namespace OptionPricer {
         return *this;
     }
 
-    AmericanMCBuilder& AmericanMCBuilder::setRegressionStrategy(std::shared_ptr<RegressionStrategy> regressionStrategy) {
+    AmericanMCBuilder& AmericanMCBuilder::setRegressionStrategy(std::shared_ptr<Regression> regressionStrategy) {
         regressionStrategy_ = std::move(regressionStrategy);
         return *this;
     }
 
-    AmericanMCBuilder& AmericanMCBuilder::setBasisFunctionStrategy(std::shared_ptr<BasisFunctionStrategy> basisFunctionStrategy) {
+    AmericanMCBuilder& AmericanMCBuilder::setBasisFunctionStrategy(std::shared_ptr<BasisFunction> basisFunctionStrategy) {
         basisFunctionStrategy_ = std::move(basisFunctionStrategy);
         return *this;
     }

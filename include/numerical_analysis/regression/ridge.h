@@ -1,7 +1,7 @@
 #ifndef RIDGE_H
 #define RIDGE_H
 
-#include "solver/monte_carlo/regression/least_squares.h"
+#include "numerical_analysis/regression/least_squares.h"
 
 namespace OptionPricer {
 

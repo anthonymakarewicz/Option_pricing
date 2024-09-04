@@ -1,4 +1,4 @@
-#include "solver/monte_carlo/basis_function/legendre.h"
+#include "numerical_analysis/basis_function/legendre.h"
 
 namespace OptionPricer {
 

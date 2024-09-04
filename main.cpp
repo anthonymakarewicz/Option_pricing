@@ -33,14 +33,14 @@
 #include <solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.h>
 #include <solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.h>
 #include <solver/monte_carlo/mc_single_path.h>
-#include <solver/monte_carlo/basis_function/chebyshev.h>
-#include <solver/monte_carlo/basis_function/laguerre.h>
+#include <numerical_analysis/basis_function/chebyshev.h>
+#include <numerical_analysis/basis_function/laguerre.h>
 #include <solver/monte_carlo/builder/mc_builder_single_path.h>
-#include <solver/monte_carlo/regression/lasso.h>
-#include <solver/monte_carlo/regression/ridge.h>
+#include <numerical_analysis/regression/lasso.h>
+#include <numerical_analysis/regression/ridge.h>
 
 #include "numerical_analysis/interpolation/quadratic_interpolation.h"
-#include "solver/monte_carlo/basis_function/legendre.h"
+#include "numerical_analysis/basis_function/legendre.h"
 
 using namespace OptionPricer;
 using namespace PDE::OneFactor;

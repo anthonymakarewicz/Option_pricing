@@ -1,4 +1,4 @@
-#include "solver/monte_carlo/basis_function/chebyshev.h"
+#include "numerical_analysis/basis_function/chebyshev.h"
 
 namespace OptionPricer {
 

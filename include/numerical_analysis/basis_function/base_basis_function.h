@@ -5,10 +5,10 @@
 
 namespace OptionPricer {
 
-    class BasisFunctionStrategy {
+    class BasisFunction {
     public:
-        explicit BasisFunctionStrategy(const unsigned int& numberBasis);
-        virtual ~BasisFunctionStrategy();
+        explicit BasisFunction(const unsigned int& numberBasis);
+        virtual ~BasisFunction();
 
         [[nodiscard]] virtual Eigen::MatrixXd generate(const Eigen::VectorXd& x) const = 0;
 
