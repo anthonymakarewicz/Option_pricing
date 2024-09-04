@@ -3,6 +3,7 @@
 
 #include "option/single_path/european_option.h"
 #include "option/base_factory_option.h"
+#include "payoff/single_strike/base_payoff_single_strike.h"
 
 namespace OptionPricer {
 
