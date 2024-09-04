@@ -1,12 +1,29 @@
 # Option Pricing Library
 
-## Overview
+[![Build Status](https://travis-ci.org/anthonymakarewicz/Option_pricing.svg?branch=main)](https://travis-ci.org/anthonymakarewicz/Option_pricing)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 
-The Option Pricer project is a C++ library designed to model and price various financial options.
-It complies with SOLID principles, leverages modern C++ features up to C++20 and is built on various design patterns to improve the maintainability and extensibility of the project.
-The library supports pricing for both vanilla European options and more exotic, path-dependent options, using multiple pricing methods, including Monte Carlo simulations and Finite Difference Methods (FDM).
+## Overview
+The **Option Pricer** is a C++ library designed to model and price various financial options, such as European, American, and exotic path-dependent options (e.g., Asian, Barrier).
+It is optimized for financial institutions, quantitative analysts, and researchers who need fast, flexible, and accurate option pricing methods.
+
+This library complies with **SOLID** principles and leverages modern C++ features (up to C++20).
+It incorporates various design patterns to ensure maintainability and extensibility.
+The library supports multiple pricing methods, including **Monte Carlo simulations** and **Finite Difference Methods (FDM)**, giving users the flexibility to select the most appropriate solver for their needs.
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Modules](#modules)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Tests](#tests)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Modules
+
+The library is divided into several modules to improve maintainability and flexibility. Each module is responsible for handling a specific aspect of the option pricing process. Below are the key modules:
+
 
 - **`Option`**: Defines various option types, including both single-path options (e.g., European, Digital) and path-dependent options (e.g., Asian, Barrier). Provides factory methods for option creation and parameter management.
 
@@ -37,13 +54,17 @@ For a detailed overview of the project structure, [see the full structure here](
 - C++20 or higher
 - CMake 3.10 or higher
 - A compatible C++ compiler (e.g., g++, clang++)
+- **Dependencies**:
+    - [Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page): (version 3.3.7+)
+    - [Boost Random](https://www.boost.org/doc/libs/1_76_0/doc/html/boost_random.html): (version 1.70.0+)
+    - [Google Test (GTest)](https://github.com/google/googletest): (version 1.10.0+)
+    - [Google Mock](https://github.com/google/googletest/tree/main/googlemock)
 
-### Dependencies
-- [Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page):  C++ template library for linear algebra.
-- [Boost Random](https://www.boost.org/doc/libs/1_76_0/doc/html/boost_random.html): Part of the C++ Boost libraries for random number generation and probability distributions.
-- [Google Test (GTest)](https://github.com/google/googletest): A popular C++ testing framework.
-- [Google Mock](https://github.com/google/googletest/tree/main/googlemock): A library for writing and using C++ mock classes.
+You can install Eigen and Boost through [vcpkg](https://github.com/microsoft/vcpkg):
 
+```bash
+vcpkg install eigen3 boost-random gtest
+```
 
 ### Build Instructions
 1. Clone the repository:
@@ -85,8 +106,6 @@ double K = 100.0;           // Strike price
 double S = 100.0;          // Current stock price
 double sigma = 0.15;      // Volatility
 double r = 0.03;         // Risk-free interest rate
-int dim = 52;           // Number of time steps
-double lambda = 1;     // Regularization parameter for Lasso regression
 
 // Initialize market data
 auto marketData = MarketData::getInstance();
@@ -99,12 +118,10 @@ params.setParameter("ticker", ticker);
 params.setParameter("T", T);
 params.setParameter("K", K);
 
-// Create a European call option using factory
+// Create a European call and American Put using the factory method
 EuropeanOptionFactory europeanFactory;
-std::shared_ptr<Option> europeanCall = europeanFactory.createCallOption(params);
-
-// Create American put option using factory
 AmericanOptionFactory factory;
+std::shared_ptr<Option> europeanCall = europeanFactory.createCallOption(params);
 std::shared_ptr<AmericanOption> americanPut = factory.createPutOption(params);
 ```
 
@@ -114,9 +131,9 @@ std::shared_ptr<AmericanOption> americanPut = factory.createPutOption(params);
 using namespace PDE::OneFactor;
 using namespace FDM::OneFactor;
 
-double xDom = 2.0 * K;      // Stock price range [0.0 , 2*K]
-double tDom = T;           // Time period as for the option
-unsigned long J = 200;    // Number of steps for the stock price
+double xDom = 2.0 * K;     // Stock price range [0.0 , 2*K]
+double tDom = T;          // Time period as for the option
+unsigned long J = 200;   // Number of steps for the stock price
 unsigned long N = 200;  // Number of time steps 
 
 // Configurations
@@ -127,12 +144,7 @@ std::shared_ptr<MatrixSolver> thomas = std::make_shared<ThomasAlgorithm>();
 std::shared_ptr<ConvectionDiffusionPDE> pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
 CrankNicolsonFDMSolver fdm(xDom, J, tDom, N, std::move(pde), europeanCall, marketData, quadrInterp, thomas);
 
-// Vector of solutions
-std::vector<double> prices = fdm.solve();
-
-// Interpolated price
 double price = fdm.calculatePrice();
-
 std::cout << "Price for an European call with FDM: " << price << "\n";
 ```
 
@@ -145,7 +157,7 @@ double theta = -0.005;  // Drift of the Brownian motion
 double nu = 0.5;       // Variance rate of the Gamma process
 
 // Configurations
-std::shared_ptr<SobolGenerator> auto prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
+std::shared_ptr<SobolGenerator> prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
 std::shared_ptr<VarianceGammaModel> brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
 std::shared_ptr<LaguerreBasisFunction> laguerre = std::make_shared<LaguerreBasisFunction>(numberBases);
 
@@ -158,20 +170,45 @@ std::unique_ptr<MCPricer> americanPricer = builder.setOption(americanPut)
                                                   
 // Set up the Monte Carlo solver
 MCSolver mcSolver;
-mcSolver.setN(N);  // Set the number of simulations
+mcSolver.setN(N); 
 mcSolver.setPricer(std::move(americanPricer));   
 
 double price = mcSolver.solve()
 std::cout << "Price for an American Put with MC: " << price << "\n";                                       
 ```
 
-## Testing
-For more detailed information on unit and integration tests, [see the full testing instructions here.](tests/README.md)
+## Tests
+This project includes both unit and integration tests to ensure robustness.
+
+### Running Tests
+
+Once the project is built, you can run all tests using CTest:
+
+```sh
+ctest --output-on-failure
+```
+Alternatively, you can run specific tests:
+- **Run only Unit Tests**:
+```sh
+ctest -R UnitTests --output-on-failure
+```
+- **Run only Integration Tests**:
+```sh
+ctest -R IntegrationTests --output-on-failure
+```
+
+For detailed information on how to run specific tests, or instructions for adding new tests [see the full testing instructions here.](tests/README.md)
 
 ## Contributing
 
-Contributions are welcome! 
+Contributions are welcome! If you find any issues or want to improve the library, please fork the repository and submit a pull request.
+
+### Guidelines:
+- Follow the C++ Core Guidelines.
+- Ensure new features or bug fixes are covered by unit tests.
+- Create a new issue on GitHub for bug reports, feature requests, or discussions.
+
 For more detailed information on the C++ and Git guidelines, [see the full contribution directives here.](tests/README.md)
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. [See the LICENSE file for details.](LICENSE.txt)

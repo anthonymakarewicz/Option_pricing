@@ -1,9 +1,12 @@
 # Testing the Option Pricing Library
 
-This directory contains all the test files and configurations for the Option Pricer project. The tests are organized to ensure modularity, clarity, and ease of maintenance.
+This directory contains all test files and configurations for the Option Pricer project. The tests ensure that the library remains robust and free of regressions as new features are added or existing functionality is updated.
 
-Please note that currently only the skeleton of the tests has been implemented but can be easily extended to add new tests.
+- **Unit tests**: Validate the behavior of individual components and modules.
+- **Integration tests**: Ensure that modules work together as expected.
 
+Please note that the basic structure for the tests has been implemented. 
+Contributors are encouraged to add specific tests for new modules or enhance the existing tests to ensure full coverage.
 ## Directory Structure
 ```plaintext
 tests
@@ -35,10 +38,6 @@ tests
         └── mock_classes.h
 ```
 
-## Dependencies
-
-- [Google Test (GTest)](https://github.com/google/googletest): A popular C++ testing framework.
-- [Google Mock](https://github.com/google/googletest/tree/main/googlemock): A library for writing and using C++ mock classes.
 
 ## Building and Running Tests
 
@@ -114,13 +113,18 @@ cd build
 ## Adding New Tests
 
 ### Create a new test file:
-Add your test file in the appropriate directory.
-For example, to add unit tests for a new module, place the file in the `unit` directory.
-For integration tests, place the file in the `integration` directory
+Add your new test file in the appropriate directory:
+- For unit tests: Add the file to the `unit` directory.
+- For integration tests: Add the file to the `integration` directory.
 
-### Include the test in CMake:
-Edit the `CMakeLists.txt` file to include your new test file in the `add_executable` and `target_link_libraries` sections.
-
+### Modify CMakeLists.txt
+Make sure to include the new test file in the respective `CMakeLists.txt`:
+- For **unit tests**, add the new test file in the `add_executable` and `target_link_libraries` sections of the `unit/CMakeLists.txt`:
+   ```cmake
+   add_executable(Unit_tests ${CMAKE_CURRENT_SOURCE_DIR}/../test_main.cpp
+       # Other test files...
+       option/test_new_option.cpp)
+   target_link_libraries(Unit_tests marketdata payoff option GTest::GTest GTest::Main GTest::gmock_main)
 ### Write Test Cases:
 Use GTest and Google Mock to write your test cases. Refer to the [GTest documentation](https://github.com/google/googletest/blob/main/googletest/docs/primer.md) for more details.
 
