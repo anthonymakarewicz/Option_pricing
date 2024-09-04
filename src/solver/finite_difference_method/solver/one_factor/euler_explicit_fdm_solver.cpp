@@ -8,10 +8,14 @@ namespace OptionPricer::FDM::OneFactor {
                                        std::shared_ptr<EuropeanOption> option,
                                        std::shared_ptr<IMarketData> marketData,
                                        std::shared_ptr<Interpolation> interpolation)
-    : FDMSolver(xDom, J, tDom, N, std::move(pde), std::move(option), std::move(marketData), std::move(interpolation)) {
-    }
+    : FDMSolver(xDom, J, tDom, N, std::move(pde), std::move(option), std::move(marketData), std::move(interpolation)) {}
 
     EulerExplicitFDM::~EulerExplicitFDM() = default;
+
+    void EulerExplicitFDM::calculateBoundaryConditions() {
+        newPrices.front() = pde_->boundaryLeft(tPrev, xValues.front());
+        newPrices.back() = pde_->boundaryRight(tPrev, xValues.back());
+    }
 
     void EulerExplicitFDM::calculateInnerDomain() {
         for (unsigned long j = 1; j < (J_-1); j++) {

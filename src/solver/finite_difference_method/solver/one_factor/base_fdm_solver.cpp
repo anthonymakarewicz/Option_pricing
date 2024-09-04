@@ -45,11 +45,6 @@ namespace OptionPricer::FDM::OneFactor {
         }
     }
 
-    void FDMSolver::calculateBoundaryConditions() {
-        newPrices.front() = pde_->boundaryLeft(tPrev, xValues.front()) ;
-        newPrices.back() = pde_->boundaryRight(tPrev, xValues.back()) ;
-    }
-
     std::vector<double> FDMSolver::solve() {
         while(tCurr < tDom_) {
             tCurr = tPrev + dt;

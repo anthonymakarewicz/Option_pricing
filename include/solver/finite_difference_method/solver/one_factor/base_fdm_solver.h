@@ -24,9 +24,9 @@ namespace OptionPricer::FDM::OneFactor {
         // Invariant parts
         void calculateStepSizes();
         void calculateInitialConditions ();
-        void calculateBoundaryConditions();
 
         // Variant part
+        virtual void calculateBoundaryConditions() = 0;
         virtual void calculateInnerDomain() = 0;
 
         // Space discretisation

@@ -22,14 +22,15 @@ namespace OptionPricer::FDM::OneFactor {
                          std::shared_ptr<EuropeanOption> option,
                          std::shared_ptr<IMarketData> marketData,
                          std::shared_ptr<Interpolation> interpolation = nullptr,
-                         std::shared_ptr<BaseMatrixSolver> matrixSolver = nullptr);
+                         std::shared_ptr<MatrixSolver> matrixSolver = nullptr);
 
         ~EulerImplicitFDM() override;
 
     private:
+        void calculateBoundaryConditions() override;
         void calculateInnerDomain() override;
 
-        std::shared_ptr<BaseMatrixSolver> matrixSolver_;
+        std::shared_ptr<MatrixSolver> matrixSolver_;
         double alpha, beta, gamma;       // Differencing coefficients
         Eigen::SparseMatrix<double> A;  // Coefficient matrix
         Eigen::VectorXd b;             // Right-hand side vector

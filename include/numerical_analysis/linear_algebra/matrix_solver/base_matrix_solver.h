@@ -6,9 +6,9 @@
 
 namespace OptionPricer {
 
-    class BaseMatrixSolver {
+    class MatrixSolver {
     public:
-        virtual ~BaseMatrixSolver();
+        virtual ~MatrixSolver();
 
         // Pure virtual method for solving a linear system Ax = b
         virtual Eigen::VectorXd solve(const Eigen::SparseMatrix<double>& A,

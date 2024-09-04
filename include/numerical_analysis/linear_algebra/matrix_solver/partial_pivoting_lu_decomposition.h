@@ -5,7 +5,7 @@
 
 namespace OptionPricer {
 
-    class PartialPivotingLUSolver : public BaseMatrixSolver {
+    class PartialPivotingLUSolver : public MatrixSolver {
     public:
         Eigen::VectorXd solve(const Eigen::SparseMatrix<double>& A,
                               const Eigen::VectorXd& b) const override;

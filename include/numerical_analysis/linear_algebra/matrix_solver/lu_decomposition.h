@@ -5,7 +5,7 @@
 
 namespace OptionPricer {
 
-    class LUDecompositionSolver final : public BaseMatrixSolver {
+    class LUDecompositionSolver final : public MatrixSolver {
     public:
         Eigen::VectorXd solve(const Eigen::SparseMatrix<double>& A,
                               const Eigen::VectorXd& b) const override;

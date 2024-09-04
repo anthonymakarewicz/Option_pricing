@@ -5,7 +5,7 @@
 
 namespace OptionPricer {
 
-    class ThomasAlgorithm final : public BaseMatrixSolver {
+    class ThomasAlgorithm final : public MatrixSolver {
     public:
         Eigen::VectorXd solve(const Eigen::SparseMatrix<double>& A,
                               const Eigen::VectorXd& b) const override;

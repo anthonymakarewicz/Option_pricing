@@ -29,6 +29,7 @@
 #include <numerical_analysis/linear_algebra/matrix_solver/partial_pivoting_lu_decomposition.h>
 #include <numerical_analysis/linear_algebra/matrix_solver/thomas_algorithm.h>
 #include <solver/finite_difference_method/pde/one_factor/black_scholes_pde.h>
+#include <solver/finite_difference_method/solver/one_factor/crank_nicolson_fdm_solver.h>
 #include <solver/finite_difference_method/solver/one_factor/euler_explicit_fdm_solver.h>
 #include <solver/finite_difference_method/solver/one_factor/euler_implicit_fdm_solver.h>
 #include <solver/monte_carlo/mc_single_path.h>
@@ -141,19 +142,22 @@ int main() {
     }
     */
 
-    double xDom = 2.0 * K; // Spot goes from [0.0 , 1.0]
-    unsigned long J = 40;
+    double xDom = 2.5 * K; // Spot goes from [0.0 , 1.0]
+    unsigned long J = 200;
     double tDom = T; // Time period as for the option
-    unsigned long N2 = 40;
+    unsigned long N2 = 200;
     auto pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
     auto pde2 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+    auto pde3 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
     auto thomas = std::make_shared<ThomasAlgorithm>();
     auto partialPiv = std::make_shared<PartialPivotingLUSolver>();
 
     auto quadrInterp = std::make_shared<QuadraticInterpolation>();
     EulerExplicitFDM fdm(xDom, J, tDom, N2, std::move(pde), europeanCall, marketData, quadrInterp);
-    EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp, partialPiv);
-    auto prices = fdm.solve();
+    EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp, thomas);
+    CrankNicolsonFDMSolver fdm3(xDom, J, tDom, N2, std::move(pde3), europeanCall, marketData, quadrInterp, thomas);
+
+    //auto prices = fdm.solve();
 
     //for (const auto& price : prices)
     //    std::cout << "Price: " << price << std::endl;
@@ -161,6 +165,8 @@ int main() {
     std::cout << "FDM price Explicit: " << fdm.calculatePrice() << std::endl;
 
     std::cout << "FDM price Implicit: " << fdm2.calculatePrice() << std::endl;
+
+    std::cout << "FDM price CN: " << fdm3.calculatePrice() << std::endl;
 
     /*
     std::cout << "S = 100, dim = 50, P = ";

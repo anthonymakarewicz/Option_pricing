@@ -2,6 +2,6 @@
 
 namespace OptionPricer {
 
-    BaseMatrixSolver::~BaseMatrixSolver() = default;
+    MatrixSolver::~MatrixSolver() = default;
 
 }

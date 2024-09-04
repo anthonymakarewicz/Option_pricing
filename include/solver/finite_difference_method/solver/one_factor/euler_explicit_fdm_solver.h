@@ -23,7 +23,9 @@ namespace OptionPricer::FDM::OneFactor {
         ~EulerExplicitFDM() override;
 
     private:
+        void calculateBoundaryConditions() override;
         void calculateInnerDomain() override;
+
         double alpha, beta, gamma; // Differencing coefficients
     };
 
