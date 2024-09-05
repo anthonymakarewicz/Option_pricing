@@ -92,7 +92,7 @@ int main() {
     auto heston = std::make_shared<HestonModel>(ticker, marketData, prng, kappa, theta, sigma_v, rho, v0);
     auto merton = std::make_shared<MertonJumpDiffusionModel>(ticker, marketData, prng, lambda, muJ, sigmaJ);
     auto kou = std::make_shared<KouModel>(ticker, marketData, prng, lambda, p, eta1, eta2);
-    auto vg = std::make_shared<VarianceGammaModel>(ticker, marketData, prng, sigma, nu, thetaGamma);
+    auto vg = std::make_shared<VarianceGammaModel>(ticker, marketData, prng, nu, thetaGamma);
     auto bates = std::make_shared<BatesModel>(ticker, marketData, prng, kappa, theta, sigma_v, rho, v0, lambda, muJ, sigmaJ);
     auto laguerre = std::make_shared<LaguerreBasisFunction>(3);
     auto regression = std::make_shared<LeastSquaresRegression>();

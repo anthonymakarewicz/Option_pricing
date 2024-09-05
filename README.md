@@ -1,6 +1,7 @@
 # Option Pricing Library
 
-[![Build Status](https://travis-ci.org/anthonymakarewicz/Option_pricing.svg?branch=main)](https://travis-ci.org/anthonymakarewicz/Option_pricing)
+![Push CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/push_ci.yml/badge.svg?branch=feature/*)
+![Pull Request CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/pr_ci.yml/badge.svg?branch=main)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 
 ## Overview
@@ -137,12 +138,13 @@ unsigned long J = 200;   // Number of steps for the stock price
 unsigned long N = 200;  // Number of time steps 
 
 // Configurations
-std::shared_ptr<Interpolation> quadrInterp = std::make_shared<QuadraticInterpolation>();
-std::shared_ptr<MatrixSolver> thomas = std::make_shared<ThomasAlgorithm>();
+auto quadrInterp = std::make_shared<QuadraticInterpolation>();
+auto thomas = std::make_shared<ThomasAlgorithm>();
 
 // Set up the Crank Nicolson solver
-std::shared_ptr<ConvectionDiffusionPDE> pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
-CrankNicolsonFDMSolver fdm(xDom, J, tDom, N, std::move(pde), europeanCall, marketData, quadrInterp, thomas);
+auto pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+CrankNicolsonFDMSolver fdm(xDom, J, tDom, N, std::move(pde),
+                           europeanCall, marketData, quadrInterp, thomas);
 
 double price = fdm.calculatePrice();
 std::cout << "Price for an European call with FDM: " << price << "\n";
@@ -152,20 +154,20 @@ std::cout << "Price for an European call with FDM: " << price << "\n";
 ```cpp
 unsigned long N = 1000000  // Number of simulations
 int dim = 150;            // Number of time steps
-int numberBases = 5      // Number of basis functions
+int nBases = 5           // Number of basis functions
 double theta = -0.005;  // Drift of the Brownian motion
 double nu = 0.5;       // Variance rate of the Gamma process
 
 // Configurations
-std::shared_ptr<SobolGenerator> prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
-std::shared_ptr<VarianceGammaModel> brownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData);
-std::shared_ptr<LaguerreBasisFunction> laguerre = std::make_shared<LaguerreBasisFunction>(numberBases);
+auto prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
+auto vg = std::make_shared<VarianceGammaModel>(ticker, marketData, nu, theta);
+auto laguerre = std::make_shared<LaguerreBasisFunction>(nBases);
 
 // Create Monte Carlo pricer through the American builder
 AmericanMCBuilder americanBuilder;
 std::unique_ptr<MCPricer> americanPricer = builder.setOption(americanPut)
+                                                  .setStockPriceModel(vg)
                                                   .setBasisFunctionStrategy(laguerre)
-                                                  .setNumberGenerator(prng)
                                                   .build();
                                                   
 // Set up the Monte Carlo solver

@@ -42,33 +42,7 @@ jobs:
         run: |
           cmake --build build --target Unit_tests Integration_tests
 
-    #  - name: Analyze code with clang-tidy
-    #    run: |
-    #      cd build
-    #      find ../src ../tests -name '*.cpp' | xargs clang-tidy -p .
-
-        #- name: Check code formatting with clang-format
-        #  run: |
-        #find . -name '*.cpp' -o -name '*.h' | xargs clang-format -i
-      #    cd build
-      #    make clang-format-check
-
       - name: Run all Tests
         run: |
           cd build
           ctest --output-on-failure
-
-    #  - name: Generate code coverage
-    #    run: |
-    #                cd build
-    #          lcov --capture --directory . --output-file coverage.info
-    #          lcov --remove coverage.info '/usr/*' --output-file coverage.info
-    #          lcov --list coverage.info
-    #
-
-    #  - name: Upload code coverage results
-    #    if: always()
-    #    uses: actions/upload-artifact@v2
-    #    with:
-    #      name: coverage-results
-    #      path: build/coverage.info

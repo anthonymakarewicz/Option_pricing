@@ -10,15 +10,16 @@ namespace OptionPricer {
     VarianceGammaModel::VarianceGammaModel(const std::string &ticker,
                                            std::shared_ptr<IMarketData> marketData,
                                            std::shared_ptr<NumberGenerator> generator,
-                                           const double &sigma, const double &nu, const double &theta)
+                                           const double &nu, const double &theta)
         : StockModel(ticker, std::move(marketData), std::move(generator)),
-          sigma_(sigma), nu_(nu), theta_(theta) {
-        if (sigma_ <= 0.0 || nu_ <= 0.0) {
-            throw std::invalid_argument("Sigma and nu must be positive");
+          nu_(nu), theta_(theta) {
+        if (nu_ <= 0.0) {
+            throw std::invalid_argument("nu must be positive");
         }
 
         // Calculate the omega correction term that makes the actualized stock price a martingale
-        omega_ = (1.0 / nu_) * std::log(1.0 - theta_*nu_ - 0.5 * sigma_*sigma_ * nu_);
+        const double sigma = stockData_->getSigma();
+        omega_ = (1.0 / nu_) * std::log(1.0 - theta_*nu_ - 0.5 * sigma*sigma * nu_);
     }
 
     VarianceGammaModel::~VarianceGammaModel() = default;
@@ -29,6 +30,7 @@ namespace OptionPricer {
 
     std::vector<double> VarianceGammaModel::simulatePrices(const double &T) const {
         double S = stockData_->getPrice();
+        const double sigma = stockData_->getSigma();
         const double r = marketData_->getR();
         const double c = stockData_->getCoupon().value_or(0.0);
         const auto steps = getSteps();
@@ -43,7 +45,7 @@ namespace OptionPricer {
             const double z = (*generator_)(snDist);  // Normal distributed increment
 
             const double drift = (r - c + omega_) * dt;
-            const double VG = theta_ * g + sigma_ * std::sqrt(g) * z;
+            const double VG = theta_ * g + sigma * std::sqrt(g) * z;
 
             S *= std::exp(drift + VG);
             prices[t] = S;

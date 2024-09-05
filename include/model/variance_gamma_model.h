@@ -10,7 +10,7 @@ namespace OptionPricer {
         VarianceGammaModel(const std::string& ticker,
                            std::shared_ptr<IMarketData> marketData,
                            std::shared_ptr<NumberGenerator> generator,
-                           const double& sigma, const double& nu, const double& theta);
+                           const double& nu, const double& theta);
 
         ~VarianceGammaModel() override;
 
@@ -18,7 +18,6 @@ namespace OptionPricer {
         [[nodiscard]] std::vector<double> simulatePrices(const double& T) const override;
 
     private:
-        double sigma_; // Volatility parameter
         double nu_;    // Variance rate of the Gamma process
         double theta_; // Drift of the Brownian motion
         double omega_; // Drift correction term
