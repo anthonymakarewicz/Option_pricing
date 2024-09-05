@@ -211,7 +211,7 @@ Contributions are welcome! If you find any issues or want to improve the library
 - Ensure new features or bug fixes are covered by unit tests.
 - Create a new issue on GitHub for bug reports, feature requests, or discussions.
 
-For more detailed information on the C++ and Git guidelines, [see the full contribution directives here.](tests/README.md)
+For more detailed information on the C++ and Git guidelines, [see the full contribution directives here.](CONTRIBUTING.md)
 
 ## License
 This project is licensed under the MIT License. [See the LICENSE file for details.](LICENSE.txt)
