@@ -3,6 +3,7 @@
 ![Push CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/push_ci.yml/badge.svg?branch=feature/*)
 ![Pull Request CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/pr_ci.yml/badge.svg?branch=main)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
+![GitHub last commit](https://img.shields.io/github/last-commit/anthonymakarewicz/Option_pricing)
 
 ## Overview
 The **Option Pricer** is a C++ library designed to model and price various financial options, such as European, American, and exotic path-dependent options (e.g., Asian, Barrier).
