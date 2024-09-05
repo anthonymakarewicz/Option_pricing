@@ -108,6 +108,7 @@ int main() {
 
     EuropeanOptionFactory factoryEuropean;
     auto europeanCall = factoryEuropean.createCallOption(params);
+    auto europeanPut = factoryEuropean.createPutOption(params);
 
     MCSinglePathBuilder singlePathBuilder;
     auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(geometricBrownianMotion).build();
@@ -142,35 +143,46 @@ int main() {
         std::cout << "Price at T Bates: " << bates->simulatePriceAtMaturity(T)<< std::endl;
     }
 
-    /*
+
     double xDom = 2.5 * K; // Spot goes from [0.0 , 1.0]
-    unsigned long J = 200;
+    unsigned long J = 40;
     double tDom = T; // Time period as for the option
-    unsigned long N2 = 200;
+    unsigned long N2 = 40;
     auto pde = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
     auto pde2 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
     auto pde3 = std::make_unique<BlackScholesPDE>(europeanCall, marketData);
+
     auto thomas = std::make_shared<ThomasAlgorithm>();
     auto partialPiv = std::make_shared<PartialPivotingLUSolver>();
-
     auto quadrInterp = std::make_shared<QuadraticInterpolation>();
+
     EulerExplicitFDM fdm(xDom, J, tDom, N2, std::move(pde), europeanCall, marketData, quadrInterp);
     EulerImplicitFDM fdm2(xDom, J, tDom, N2, std::move(pde2), europeanCall, marketData, quadrInterp, thomas);
     CrankNicolsonFDMSolver fdm3(xDom, J, tDom, N2, std::move(pde3), europeanCall, marketData, quadrInterp, thomas);
-    */
+
     //auto prices = fdm.solve();
 
     //for (const auto& price : prices)
     //    std::cout << "Price: " << price << std::endl;
 
-    /*
+
     std::cout << "FDM price Explicit: " << fdm.calculatePrice() << std::endl;
-
     std::cout << "FDM price Implicit: " << fdm2.calculatePrice() << std::endl;
-
     std::cout << "FDM price CN: " << fdm3.calculatePrice() << std::endl;
 
-    */
+
+    auto pde4 = std::make_unique<BlackScholesPDE>(europeanPut, marketData);
+    auto pde5 = std::make_unique<BlackScholesPDE>(europeanPut, marketData);
+    auto pde6 = std::make_unique<BlackScholesPDE>(europeanPut, marketData);
+
+    EulerExplicitFDM fdm4(xDom, J, tDom, N2, std::move(pde4), europeanCall, marketData, quadrInterp);
+    EulerImplicitFDM fdm5(xDom, J, tDom, N2, std::move(pde5), europeanCall, marketData, quadrInterp, thomas);
+    CrankNicolsonFDMSolver fdm6(xDom, J, tDom, N2, std::move(pde6), europeanCall, marketData, quadrInterp, thomas);
+
+    std::cout << "FDM price Explicit: " << fdm4.calculatePrice() << std::endl;
+    std::cout << "FDM price Implicit: " << fdm5.calculatePrice() << std::endl;
+    std::cout << "FDM price CN: " << fdm6.calculatePrice() << std::endl;
+
     /*
     std::cout << "S = 100, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";
