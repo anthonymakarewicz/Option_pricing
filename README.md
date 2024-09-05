@@ -1,7 +1,7 @@
 # Option Pricing Library
 
-![Push CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/push_ci.yml/badge.svg?branch=feature/*)
-![Pull Request CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/pr_ci.yml/badge.svg?branch=main)
+[![Push CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/push_ci.yml/badge.svg)](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/push_ci.yml)
+[![Pull Request CI](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/pr_ci.yml/badge.svg)](https://github.com/anthonymakarewicz/Option_pricing/actions/workflows/pr_ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 ![GitHub last commit](https://img.shields.io/github/last-commit/anthonymakarewicz/Option_pricing)
 
