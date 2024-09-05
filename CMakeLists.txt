@@ -169,6 +169,7 @@ add_library(solver SHARED
         src/solver/finite_difference_method/solver/multi_factor/euler_explicit_fdm_solver.cpp
         src/solver/finite_difference_method/solver/multi_factor/euler_implicit_fdm_solver.cpp
         src/solver/finite_difference_method/pde/multi_factor/base_convection_diffusion_pde.cpp
+        src/solver/tree/binomial_tree.cpp
 )
 
 target_link_libraries(option PUBLIC marketdata payoff)
