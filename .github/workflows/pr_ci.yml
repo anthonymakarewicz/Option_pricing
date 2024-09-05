@@ -15,16 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Cache CMake files
-        uses: actions/cache@v3
-        with:
-          path: |
-            build/CMakeFiles
-            build/CMakeCache.txt
-            build/compile_commands.json
-          key: ${{ runner.os }}-cmake-build-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-cmake-build-
+      #- name: Cache CMake files
+      #  uses: actions/cache@v3
+      #  with:
+      #    path: |
+      #      build/CMakeFiles
+      #      build/CMakeCache.txt
+      #      build/compile_commands.json
+      #    key: ${{ runner.os }}-cmake-build-${{ github.sha }}
+      #    restore-keys: |
+      #      ${{ runner.os }}-cmake-build-
 
       - name: Set up CMake
         uses: jwlawson/actions-setup-cmake@v2
