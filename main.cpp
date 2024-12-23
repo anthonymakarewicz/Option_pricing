@@ -38,9 +38,11 @@
 #include <solver/monte_carlo/builder/mc_builder_single_path.h>
 #include <numerical_analysis/regression/lasso.h>
 #include <numerical_analysis/regression/ridge.h>
+#include <solver/monte_carlo/builder/mc_builder_asian.h>
 
 #include "numerical_analysis/interpolation/quadratic_interpolation.h"
 #include "numerical_analysis/basis_function/legendre.h"
+
 
 using namespace OptionPricer;
 using namespace PDE::OneFactor;
@@ -87,7 +89,8 @@ int main() {
 
     auto generator = std::make_shared<SobolGenerator>(dim);
     auto prng = std::make_shared<PseudoRandomNumberGenerator>(dim);
-    auto geometricBrownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData, generator);
+    auto geometricBrownianMotion = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData, prng);
+    auto geometricBrownianMotion2 = std::make_shared<GeometricBrownianMotionModel>(ticker, marketData, generator);
 
     auto heston = std::make_shared<HestonModel>(ticker, marketData, prng, kappa, theta, sigma_v, rho, v0);
     auto merton = std::make_shared<MertonJumpDiffusionModel>(ticker, marketData, prng, lambda, muJ, sigmaJ);
@@ -110,17 +113,24 @@ int main() {
     auto europeanCall = factoryEuropean.createCallOption(params);
     auto europeanPut = factoryEuropean.createPutOption(params);
 
-    MCSinglePathBuilder singlePathBuilder;
-    auto singlePathPricer = singlePathBuilder.setOption(europeanCall).setStockPriceModel(geometricBrownianMotion).build();
+    ArithmeticAsianOptionFactory factoryAsian;
+    auto asianOption = factoryAsian.createCallOption(params);
+    auto asianOption2 = factoryAsian.createCallOption(params);
+
+    ArithmeticAsianMCBuilder asianBuilder;
+    auto asianPricer = asianBuilder.setOption(asianOption).setStockPriceModel(geometricBrownianMotion).build();
+    auto asianPricer2 = asianBuilder.setOption(asianOption).setStockPriceModel(geometricBrownianMotion2).build();
 
     MCSolver mcSolver;
-    mcSolver.setN(10000);
-    mcSolver.setPricer(std::move(americanPricer));
+    mcSolver.setN(100000);
+    mcSolver.setPricer(std::move(asianPricer));
 
-/*
-    std::cout << "Price MC: " << mcSolver.solve() << "\n";
-*/
+    std::cout << "Price MC PRNG: " << mcSolver.solve() << "\n";
 
+    mcSolver.setPricer(std::move(asianPricer2));
+
+    std::cout << "Price MC QRNG: " << mcSolver.solve() << "\n";
+    /*
     int N = 50;
 
     for (int i = 0; i < N; i++) {
@@ -142,9 +152,10 @@ int main() {
     for (int i = 0; i < N; i++) {
         std::cout << "Price at T Bates: " << bates->simulatePriceAtMaturity(T)<< std::endl;
     }
+    */
+/*
 
-
-    double xDom = 2.5 * K; // Spot goes from [0.0 , 1.0]
+    //double xDom = 2.5 * K; // Spot goes from [0.0 , 1.0]
     unsigned long J = 40;
     double tDom = T; // Time period as for the option
     unsigned long N2 = 40;
@@ -182,7 +193,7 @@ int main() {
     std::cout << "FDM price Explicit: " << fdm4.calculatePrice() << std::endl;
     std::cout << "FDM price Implicit: " << fdm5.calculatePrice() << std::endl;
     std::cout << "FDM price CN: " << fdm6.calculatePrice() << std::endl;
-
+*/
     /*
     std::cout << "S = 100, dim = 50, P = ";
     std::cout << mcSolver.solve() << "\n";

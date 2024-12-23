@@ -9,8 +9,6 @@
 The **Option Pricer** is a C++ library designed to model and price various financial options, such as European, American, and exotic path-dependent options (e.g., Asian, Barrier).
 It is optimized for financial institutions, quantitative analysts, and researchers who need fast, flexible, and accurate option pricing methods.
 
-This library complies with **SOLID** principles and leverages modern C++ features (up to C++20).
-It incorporates various design patterns to ensure maintainability and extensibility.
 The library supports multiple pricing methods, including **Monte Carlo simulations** and **Finite Difference Methods (FDM)**, giving users the flexibility to select the most appropriate solver for their needs.
 
 ## Table of Contents
@@ -71,7 +69,7 @@ vcpkg install eigen3 boost-random gtest
 ### Build Instructions
 1. Clone the repository:
 ```
-git clone https://github.com/anthonymakarewicz/option_pricer.git
+git clone https://github.com/anthonymakarewicz/option-pricer.git option_pricer
 cd option_pricer
 ```
 
@@ -122,9 +120,9 @@ params.setParameter("K", K);
 
 // Create a European call and American Put using the factory method
 EuropeanOptionFactory europeanFactory;
-AmericanOptionFactory factory;
+AmericanOptionFactory americanFactory;
 std::shared_ptr<Option> europeanCall = europeanFactory.createCallOption(params);
-std::shared_ptr<AmericanOption> americanPut = factory.createPutOption(params);
+std::shared_ptr<AmericanOption> americanPut = americanFactory.createPutOption(params);
 ```
 
 ### 2. Pricing an European call option with Finite Difference Method

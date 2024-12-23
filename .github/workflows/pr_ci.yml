@@ -1,6 +1,6 @@
 name: Pull Request CI
 
-on: # On what action this workflow will be triggered
+on:
   pull_request:
     branches:
       - main
@@ -8,26 +8,26 @@ on: # On what action this workflow will be triggered
 
 jobs:
   build:
-    name: Build & Run All Tests # Give the build job an appropriate name
+    name: Build & Run All Tests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # to use node20 instead of node12 and node 16 which are deprecated
+        uses: actions/checkout@v4
 
-      - name: Cache CMake files
-        uses: actions/cache@v3
-        with:
-          path: |
-            build/CMakeFiles
-            build/CMakeCache.txt
-            build/compile_commands.json
-          key: ${{ runner.os }}-cmake-build-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-cmake-build-
+      #- name: Cache CMake files
+      #  uses: actions/cache@v3
+      #  with:
+      #    path: |
+      #      build/CMakeFiles
+      #      build/CMakeCache.txt
+      #      build/compile_commands.json
+      #    key: ${{ runner.os }}-cmake-build-${{ github.sha }}
+      #    restore-keys: |
+      #      ${{ runner.os }}-cmake-build-
 
       - name: Set up CMake
-        uses: jwlawson/actions-setup-cmake@v2 # Use the latest major version for stability
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: '3.26.3'
 
