@@ -175,6 +175,7 @@ add_library(solver SHARED
 target_link_libraries(option PUBLIC marketdata payoff)
 target_link_libraries(model PUBLIC option random)
 target_link_libraries(solver PUBLIC option model numerical_analysis Boost::random Eigen3::Eigen)
+target_link_libraries(numerical_analysis PUBLIC Eigen3::Eigen)
 
 # Create main executable
 add_executable(Option_pricer main.cpp)
